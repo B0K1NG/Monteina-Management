@@ -18,14 +18,14 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/confirm" element={<ConfirmEmail />} />
         <Route path="/dashboard" element={
-          <ProtectedRoute role="admin">
+          <ProtectedRoute roles={['admin']}>
             <Dashboard />
           </ProtectedRoute>
         } />
         <Route
           path="/profile"
           element={
-            <ProtectedRoute role="client">
+            <ProtectedRoute roles={['admin', 'client']}>
               <Profile />
             </ProtectedRoute>
           }
