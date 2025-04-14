@@ -10,18 +10,18 @@
 - [x] Test basic frontend ↔ backend connection
 
 ## 🔐 Authentication (User System)
-- [ ] Create register + login forms (React)
-- [ ] Set up `/auth/register` and `/auth/login` endpoints
-- [ ] Use JWT for authentication
-- [ ] Store token in localStorage or cookies
-- [ ] Create middleware to protect backend routes
-- [ ] Add user role handling (`client` / `admin`)
+- [x] Create register + login forms (React)
+- [x] Set up `/auth/register` and `/auth/login` endpoints
+- [x] Use JWT for authentication
+- [x] Store token in localStorage or cookies
+- [x] Create middleware to protect backend routes
+- [x] Add user role handling (`client` / `admin`)
 
 ## 🏠 Pages & Navigation
 - [ ] Build basic `Home` page
 - [ ] Add `Navbar` with route links
 - [ ] Configure React Router
-- [ ] Add `NotFound` / 404 page
+- [x] Add `NotFound` / 404 page
 
 ## 👤 User Dashboard
 - [ ] Create `/profile` page (show bookings, invoices)
