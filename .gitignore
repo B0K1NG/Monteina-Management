@@ -20,6 +20,12 @@ dist-ssr
 # Environment variables
 .env
 
+# Logs
+logs
+
+# Migrations
+migration.sql
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
