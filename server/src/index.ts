@@ -49,14 +49,14 @@ app.post('/auth/register', async (req, res) => {
     await sendConfirmationEmail(email, token);
 
     logger.info(`User registered successfully: ${email}`);
-    res.status(201).json({ message: 'Registracija sėkminga' });
+    res.status(201).json({ message: 'Registration successful.' });
   } catch (error) {
     if (error instanceof Error) {
       logger.error(`Registration failed for email: ${email} - ${error.message}`);
     } else {
       logger.error(`Registration failed for email: ${email} - Unknown error`);
     }
-    res.status(400).json({ error: 'Kažkas nutiko, bandykite dar kartą.' });
+    res.status(400).json({ error: 'Something went wrong, please try again.' });
   }
 });
 
@@ -65,11 +65,11 @@ app.post('/auth/login', async (req, res) => {
 
   const user = await prisma.user.findUnique({ where: { email } });
   if (!user || !(await bcrypt.compare(password, user.password))) {
-    return void res.status(401).json({ error: 'Neteisingi duomenys.' });
+    return void res.status(401).json({ error: 'Invalid credentials.' });
   }
 
   if (!user.confirmed) {
-    return void res.status(403).json({ error: 'Prašome patvirtinti savo el. pašto adresą.' });
+    return void res.status(403).json({ error: 'Please confirm your email address.' });
   }
 
   const token = jwt.sign(
@@ -81,10 +81,74 @@ app.post('/auth/login', async (req, res) => {
   res.json({ token, id: user.id, role: user.role });
 });
 
+app.post('/auth/resend-confirmation', async (req: Request, res: Response): Promise<void> => {
+  const { email } = req.body;
+
+  try {
+    const user = await prisma.user.findUnique({ where: { email } });
+    if (!user) {
+      res.status(404).json({ error: 'Invalid request.' });
+      return;
+    }
+
+    if (user.confirmed) {
+      res.status(400).json({ error: 'Email address already confirmed.' });
+      return;
+    }
+
+    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET!, { expiresIn: '1h' });
+    await sendConfirmationEmail(email, token);
+
+    res.json({ message: 'Confirmation email resent.' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Failed to resend confirmation email.' });
+  }
+});
+
+app.get('/auth/confirm', async (req: Request, res: Response): Promise<void> => {
+  const { token } = req.query;
+
+  try {
+    if (!token) {
+      res.status(400).json({ error: 'Invalid request.' });
+      return;
+    }
+
+    const decoded = jwt.verify(token as string, process.env.JWT_SECRET!);
+    if (typeof decoded !== 'object' || !('id' in decoded)) {
+      res.status(400).json({ error: 'Invalid request.' });
+      return;
+    }
+
+    const user = await prisma.user.findUnique({ where: { id: (decoded as any).id } });
+
+    if (!user) {
+      res.status(404).json({ error: 'Invalid request.' });
+      return;
+    }
+
+    if (user.confirmed) {
+      res.status(400).json({ error: 'Invalid request.' });
+      return;
+    }
+
+    await prisma.user.update({
+      where: { id: (decoded as any).id },
+      data: { confirmed: true },
+    });
+
+    res.json({ message: 'Email confirmed successfully!' });
+  } catch (error) {
+    logger.error(`Error confirming email: ${error instanceof Error ? error.message : 'Unknown error'}`);
+    res.status(400).json({ error: 'Invalid request.' });
+  }
+});
+
 app.get('/profile', authenticateToken, async (req, res): Promise<void> => {
   const user = await prisma.user.findUnique({ where: { id: req.user.id } });
   if (!user) {
-    res.status(404).json({ error: 'Vartotojas nerastas.' });
+    res.status(404).json({ error: 'Invalid request.' });
     return;
   }
 
@@ -110,9 +174,9 @@ app.get('/auth/confirm', async (req, res) => {
       where: { id: decoded.id },
       data: { confirmed: true },
     });
-    res.json({ message: 'El. pašto adresas patvirtintas sėkmingai!' });
+    res.json({ message: 'Email address confirmed successfully!' });
   } catch (error) {
-    res.status(400).json({ error: 'Nepavyko patvirtinti el. pašto adreso.' });
+    res.status(400).json({ error: 'Failed to confirm email address.' });
   }
 });
 
