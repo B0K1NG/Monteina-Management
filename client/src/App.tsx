@@ -6,23 +6,22 @@ import ProtectedRoute from './components/ProtectedRoute';
 import Dashboard from './features/admin/Dashboard';
 import Profile from './pages/Profile';
 import Home from './pages/Home';
+import NavBar from './components/NavBar';
 import NotFound from './pages/NotFound';
+import "./scss/main.scss";
 
 function App() {
   const isAuthenticated = !!localStorage.getItem('token');
 
   return (
     <Router>
+      <NavBar />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route
-          path="/register"
-          element={isAuthenticated ? <Navigate to="/" /> : <Register />}
-        />
-        <Route
-          path="/login"
-          element={isAuthenticated ? <Navigate to="/" /> : <Login />}
-        />
+        <Route path="/register" 
+        element={isAuthenticated ? <Navigate to="/" /> : <Register />}/>
+        <Route path="/login" 
+        element={isAuthenticated ? <Navigate to="/" /> : <Login />}/>
         <Route path="/confirm" element={<ConfirmEmail />} />
         <Route path="/dashboard" element={
           <ProtectedRoute roles={['admin']}>
@@ -30,8 +29,7 @@ function App() {
           </ProtectedRoute>
         } />
         <Route
-          path="/profile"
-          element={
+          path="/profile" element={
             <ProtectedRoute roles={['admin', 'client']}>
               <Profile />
             </ProtectedRoute>
