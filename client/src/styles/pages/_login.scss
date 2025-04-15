@@ -1,19 +1,18 @@
-.register-container {
+.login-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-color: #f9f9f9;
   color: #333;
 
-  .register-title {
+  .login-title {
     font-size: 2rem;
     font-weight: bold;
     margin-bottom: 1rem;
   }
 
-  .register-form {
+  .login-form {
     display: flex;
     flex-direction: column;
     gap: 1rem;
@@ -21,27 +20,27 @@
     max-width: 400px;
   }
 
-  .register-input {
+  .login-input {
     padding: 0.75rem;
     border: 1px solid #ccc;
     border-radius: 5px;
     font-size: 1rem;
   }
 
-  .register-error {
+  .login-error {
     color: red;
     font-size: 0.875rem;
   }
 
-  .register-button {
+  .login-button {
     padding: 0.75rem;
-    background-color: #28a745;
+    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 5px;
     cursor: pointer;
     &:hover {
-      background-color: #218838;
+      background-color: #0056b3;
     }
   }
 }

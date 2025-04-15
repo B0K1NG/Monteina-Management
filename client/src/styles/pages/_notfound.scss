@@ -3,7 +3,6 @@
   align-items: center;
   justify-content: center;
   min-height: 100vh;
-  background-color: #f9f9f9;
   color: #333;
 
   .notfound-content {
@@ -19,6 +18,12 @@
   .notfound-subtitle {
     font-size: 1.5rem;
     font-weight: bold;
+    margin-top: 1rem;
+  }
+
+  .notfound-image img {
+    width: 500px;
+    height: auto;
     margin-top: 1rem;
   }
 

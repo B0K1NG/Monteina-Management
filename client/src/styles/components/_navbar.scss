@@ -1,11 +1,10 @@
-@use "../base/variables" as *;
+@use "../utilities/variables" as *;
 
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
-  background-color: $primary-color;
   color: white;
 
   .navbar-logo img {

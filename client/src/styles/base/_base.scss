@@ -1,0 +1,18 @@
+@use "../utilities/variables" as *;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: $font-family;
+  color: $text-color;
+  background: url('../assets/background-tire-marks.png') no-repeat center center;
+  background-size: cover;
+}
+
+.dashboard-container {
+  background: none;
+}

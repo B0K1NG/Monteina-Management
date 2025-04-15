@@ -1,6 +1,11 @@
-@use "base/variables";
-@use "base/reset";
+@use "./base/base";
+
+@use "./utilities/variables";
+@use "./utilities/mixins";
+@use "./utilities/media";
+
 @use "components/navbar";
+
 @use "pages/home";
 @use "pages/profile";
 @use "pages/register";
@@ -8,3 +13,4 @@
 @use "pages/confirmemail";
 @use "pages/dashboard";
 @use "pages/notfound";
+@use "pages/services";
