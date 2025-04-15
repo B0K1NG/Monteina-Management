@@ -1,4 +1,5 @@
 import "../scss/components/_navbar.scss";
+import { Link } from "react-router-dom";
 
 export default function NavBar() {
     const token = localStorage.getItem("token");
@@ -12,7 +13,9 @@ export default function NavBar() {
     return (
         <nav className="navbar">
             <div className="navbar-logo">
-                <img src="logo-monteina.png" alt="Monteina Logotipas" />
+                <Link to="/">
+                    <img src="logo-monteina.png" alt="Monteina Logotipas" />
+                </Link>
             </div>
             <ul className="navbar-links">
                 <li><a href="/services">Paslaugos</a></li>
