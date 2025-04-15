@@ -1,18 +1,18 @@
 import { Link } from 'react-router-dom';
-import "../scss/pages/_notfound.scss";
+import '../../public/not-found-icon.png';
 
 export default function NotFound() {
   return (
     <div className="notfound-container">
       <div className="notfound-content">
-        <h1 className="notfound-title">404</h1>
-        <p className="notfound-subtitle">Page Not Found</p>
-        <p className="notfound-description">
-          The page you're looking for doesn't exist or has been moved.
-        </p>
+        <h1 className="notfound-title">Ups! Čia nieko nėra.</h1>
+        <p className="notfound-subtitle">Atrodo, pasukote ne tuo keliu – šitas puslapis pasiklydo.</p>
         <Link to="/" className="notfound-button">
-          Go Back Home
+          Grįžkite į pagrindinį puslapį ir tęskite kelionę.
         </Link>
+      </div>
+      <div className="notfound-image">
+        <img src="/not-found-icon.png" alt="404 Illustration" />
       </div>
     </div>
   );
