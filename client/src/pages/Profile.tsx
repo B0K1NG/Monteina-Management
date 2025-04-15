@@ -1,5 +1,3 @@
-import "../scss/pages/_profile.scss";
-
 export default function Profile() {
   return (
     <div className="profile-container">

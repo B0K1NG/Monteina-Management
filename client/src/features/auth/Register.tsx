@@ -3,7 +3,6 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from '../../api/axios';
 import { useNavigate } from 'react-router-dom';
-import "../../scss/pages/_register.scss";
 
 const schema = z.object({
   firstName: z.string().min(1, 'Vardas yra privalomas'),

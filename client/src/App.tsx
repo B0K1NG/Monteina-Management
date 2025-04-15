@@ -8,7 +8,7 @@ import Profile from './pages/Profile';
 import Home from './pages/Home';
 import NavBar from './components/NavBar';
 import NotFound from './pages/NotFound';
-import "./scss/main.scss";
+import Services from './pages/Services';
 
 function App() {
   const isAuthenticated = !!localStorage.getItem('token');
@@ -35,6 +35,7 @@ function App() {
             </ProtectedRoute>
           }
         />
+        <Route path="/services" element={<Services />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
     </Router>

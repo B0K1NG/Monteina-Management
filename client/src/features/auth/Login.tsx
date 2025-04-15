@@ -3,7 +3,6 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from '../../api/axios';
 import { useNavigate } from 'react-router-dom';
-import "../../scss/pages/_login.scss";
 
 const schema = z.object({
   email: z.string().email(),

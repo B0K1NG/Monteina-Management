@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import axios from '../../api/axios';
-import "../../scss/pages/_confirmemail.scss";
 
 export default function ConfirmEmail() {
   const [searchParams] = useSearchParams();

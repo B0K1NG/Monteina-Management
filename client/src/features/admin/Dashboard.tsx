@@ -1,5 +1,3 @@
-import "../../scss/pages/_dashboard.scss";
-
 export default function Dashboard() {
   return (
     <div className="dashboard-container">
