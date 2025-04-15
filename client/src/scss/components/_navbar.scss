@@ -1,0 +1,40 @@
+@use "../base/variables" as *;
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background-color: $primary-color;
+  color: white;
+
+  .navbar-logo img {
+    height: 50px;
+  }
+
+  .navbar-links {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+
+    a {
+      text-decoration: none;
+      color: white;
+      &:hover {
+        text-decoration: underline;
+      }
+    }
+
+    .btn-logout {
+      background-color: red;
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 5px;
+      cursor: pointer;
+      &:hover {
+        background-color: darkred;
+      }
+    }
+  }
+}

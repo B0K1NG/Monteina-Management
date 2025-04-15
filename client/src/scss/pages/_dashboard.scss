@@ -1,0 +1,48 @@
+.dashboard-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f9f9f9;
+  color: #333;
+
+  .dashboard-title {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+
+  .dashboard-description {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+  }
+
+  .dashboard-actions {
+    display: flex;
+    gap: 1rem;
+
+    .dashboard-button {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+
+      &.manage-users {
+        background-color: #007bff;
+        color: white;
+        &:hover {
+          background-color: #0056b3;
+        }
+      }
+
+      &.manage-bookings {
+        background-color: #28a745;
+        color: white;
+        &:hover {
+          background-color: #218838;
+        }
+      }
+    }
+  }
+}

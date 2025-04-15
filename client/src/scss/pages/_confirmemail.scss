@@ -1,0 +1,36 @@
+.confirmemail-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f9f9f9;
+  color: #333;
+
+  .confirmemail-content {
+    text-align: center;
+  }
+
+  .confirmemail-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+  }
+
+  .confirmemail-button {
+    padding: 0.75rem 1.5rem;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    &:hover {
+      background-color: #0056b3;
+    }
+  }
+
+  .confirmemail-message {
+    margin-top: 1rem;
+    font-size: 0.875rem;
+    color: #555;
+  }
+}

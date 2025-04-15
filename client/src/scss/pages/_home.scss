@@ -1,0 +1,116 @@
+@use "../base/variables" as *;
+@use "sass:color";
+
+
+.home-container {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: linear-gradient(to bottom, #333, #111);
+  color: white;
+
+  .home-header {
+    text-align: center;
+    padding: 2rem;
+
+    .home-title {
+      font-size: 3rem;
+      font-weight: bold;
+    }
+
+    .home-subtitle {
+      font-size: 1.5rem;
+      margin-top: 1rem;
+    }
+
+    .home-buttons {
+      margin-top: 2rem;
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+
+      .btn-primary {
+        background-color: $primary-color;
+        color: white;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        &:hover {
+            background-color: color.adjust($primary-color, $lightness: -10%);
+        }
+      }
+
+      .btn-secondary {
+        background-color: $secondary-color;
+        color: $text-color;
+        padding: 0.75rem 1.5rem;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        &:hover {
+            background-color: color.adjust($secondary-color, $lightness: 10%);
+        }
+      }
+    }
+  }
+
+  .how-it-works {
+    padding: 2rem;
+
+    .section-title {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .steps-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+
+      .step {
+        text-align: center;
+        max-width: 300px;
+
+        .step-icon {
+          font-size: 2rem;
+          margin-bottom: 1rem;
+        }
+
+        .step-title {
+          font-size: 1.25rem;
+          font-weight: bold;
+        }
+
+        .step-description {
+          font-size: 1rem;
+          margin-top: 0.5rem;
+        }
+      }
+    }
+  }
+
+  .home-footer {
+    text-align: center;
+    padding: 1rem;
+    background-color: #222;
+
+    .footer-title {
+      font-size: 1.25rem;
+      margin-bottom: 1rem;
+    }
+
+    .footer-benefits {
+      display: flex;
+      justify-content: center;
+      gap: 1rem;
+
+      .benefit {
+        font-size: 1rem;
+      }
+    }
+  }
+}
