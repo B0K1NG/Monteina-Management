@@ -18,10 +18,11 @@
 - [x] Add user role handling (`client` / `admin`)
 
 ## 🏠 Pages & Navigation
-- [ ] Build basic `Home` page
-- [ ] Add `Navbar` with route links
-- [ ] Configure React Router
+- [x] Build basic `Home` page
+- [x] Add `Navbar` with route links
+- [x] Configure React Router
 - [x] Add `NotFound` / 404 page
+- [ ] Check All of the configuration before continuing
 
 ## 👤 User Dashboard
 - [ ] Create `/profile` page (show bookings, invoices)
