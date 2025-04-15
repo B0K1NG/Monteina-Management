@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useSearchParams, useNavigate } from 'react-router-dom';
 import axios from '../../api/axios';
+import "../../scss/pages/_confirmemail.scss";
 
 export default function ConfirmEmail() {
   const [searchParams] = useSearchParams();
@@ -44,18 +45,15 @@ export default function ConfirmEmail() {
   };
 
   return (
-    <div className="fixed inset-0 flex items-center justify-center bg-gray-100 text-gray-800 px-4">
-      <div className="text-center">
-        <h1 className="text-2xl font-semibold mb-4">{statusMessage}</h1>
+    <div className="confirmemail-container">
+      <div className="confirmemail-content">
+        <h1 className="confirmemail-title">{statusMessage}</h1>
         {statusMessage.includes('Nepavyko') && (
           <div>
-            <button
-              onClick={handleResendConfirmation}
-              className="mt-4 px-6 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition"
-            >
+            <button onClick={handleResendConfirmation} className="confirmemail-button">
               Siųsti patvirtinimo laišką dar kartą
             </button>
-            {resendMessage && <p className="mt-2 text-sm text-gray-600">{resendMessage}</p>}
+            {resendMessage && <p className="confirmemail-message">{resendMessage}</p>}
           </div>
         )}
       </div>
