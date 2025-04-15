@@ -1,43 +1,46 @@
-import { Link } from 'react-router-dom';
-
 export default function Home() {
-  const token = localStorage.getItem('token');
-
-  const handleSignOut = () => {
-    localStorage.removeItem('token');
-    localStorage.removeItem('role');
-    window.location.reload();
-  };
-
   return (
-    <div className="fixed inset-0 flex flex-col items-center justify-center bg-gray-100 text-gray-800 px-4 z-50">
-      <h1 className="text-4xl font-bold mb-6 text-center">
-        Welcome to Monteina Management
-      </h1>
-
-      {token ? (
-        <button
-          onClick={handleSignOut}
-          className="px-4 py-2 bg-red-500 text-white rounded-lg shadow hover:bg-red-600 transition"
-        >
-          Sign Out
-        </button>
-      ) : (
-        <div className="flex space-x-4">
-          <Link
-            to="/login"
-            className="px-4 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition"
-          >
-            Log In
-          </Link>
-          <Link
-            to="/register"
-            className="px-4 py-2 bg-green-500 text-white rounded-lg shadow hover:bg-green-600 transition"
-          >
-            Register
-          </Link>
+    <div className="home-container">
+      <header className="home-header">
+        <h1 className="home-title">MONTEINA</h1>
+        <p className="home-subtitle">Kur tikslumas susitinka su patikimumu</p>
+        <div className="home-buttons">
+          <button className="btn-primary">Užsakyti Paslaugą</button>
+          <button className="btn-secondary">Sužinoti Daugiau</button>
         </div>
-      )}
+      </header>
+
+      <section className="how-it-works">
+        <h2 className="section-title">Kaip tai veikia</h2>
+        <div className="steps-container">
+          <div className="step">
+            <div className="step-icon">🚗</div>
+            <h3 className="step-title">Pasirinkite laiką</h3>
+            <p className="step-description">Išsirinkite jums tinkamą datą ir laiką mūsų sistemoje.</p>
+          </div>
+          <div className="step">
+            <div className="step-icon">💶</div>
+            <h3 className="step-title">Sumokėkite avansą</h3>
+            <p className="step-description">Rezervacijai patvirtinti užtenka simbolinio avanso.</p>
+          </div>
+          <div className="step">
+            <div className="step-icon">📅</div>
+            <h3 className="step-title">Atvykite į servisą</h3>
+            <p className="step-description">Atvykite laiku – viskuo pasirūpinsime.</p>
+          </div>
+        </div>
+      </section>
+
+      <footer className="home-footer">
+        <p className="footer-title">Kodėl verta rinktis mus</p>
+        <div className="footer-benefits">
+          <div className="benefit">✅ Greita ir patogu</div>
+          <div className="benefit">✅ Profesionalūs meistrai</div>
+          <div className="benefit">✅ Geriausios kainos</div>
+          <div className="benefit">✅ Tavo patogumui – internetu</div>
+        </div>
+      </footer>
     </div>
   );
 }
+
