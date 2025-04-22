@@ -1,6 +1,8 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
+import { NavLink } from "react-router-dom";
 
 export default function NavBar() {
+    const [menuOpen, setMenuOpen] = useState(false);
     const token = localStorage.getItem("token");
 
     const handleSignOut = () => {
@@ -9,26 +11,35 @@ export default function NavBar() {
         window.location.reload();
     };
 
+    const handleLinkClick = () => {
+        setMenuOpen(false);
+    };
+
     return (
         <nav className="navbar">
             <div className="navbar-logo">
-                <Link to="/">
-                    <img src="logo-monteina.png" alt="Monteina Logotipas" />
-                </Link>
+                <NavLink to="/">
+                    <img src="../src/assets/logo_monteina.png" alt="Monteina Logotipas" />
+                </NavLink>
             </div>
-            <ul className="navbar-links">
-                <li><a href="/services">Paslaugos</a></li>
+            <div className={`hamburger ${menuOpen ? 'active' : ''}`} onClick={() => setMenuOpen(!menuOpen)}>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+            <ul className={`navbar-links ${menuOpen ? 'active' : ''}`}>
+                <li><NavLink to="/services" className={({ isActive }) => isActive ? "active" : ""} onClick={handleLinkClick}>Paslaugos</NavLink></li>
                 {token ? (
                     <>
-                        <li><a href="/calendar">Kalendorius</a></li>
-                        <li><a href="/profile">Valdymo skydelis</a></li>
+                        <li><NavLink to="/calendar" className={({ isActive }) => isActive ? "active" : ""} onClick={handleLinkClick}>Kalendorius</NavLink></li>
+                        <li><NavLink to="/profile" className={({ isActive }) => isActive ? "active" : ""} onClick={handleLinkClick}>Valdymo skydelis</NavLink></li>
                         <li><button onClick={handleSignOut} className="btn-logout">Atsijungti</button></li>
                     </>
                 ) : (
                     <>
-                        <li><a href="/faq">D.U.K.</a></li>
-                        <li><a href="/login">Prisijungti</a></li>
-                        <li><a href="/register">Sukurti paskyrą</a></li>
+                        <li><NavLink to="/faq" className={({ isActive }) => isActive ? "active" : ""} onClick={handleLinkClick}>D.U.K.</NavLink></li>
+                        <li><NavLink to="/login" className={({ isActive }) => isActive ? "active" : ""} onClick={handleLinkClick}>Prisijungti</NavLink></li>
+                        <li><NavLink to="/register" className={({ isActive }) => isActive ? "active" : ""} onClick={handleLinkClick}>Sukurti paskyrą</NavLink></li>
                     </>
                 )}
             </ul>
