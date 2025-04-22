@@ -9,10 +9,9 @@
 body {
   font-family: $font-family;
   color: $text-color;
-  background: url('../assets/background-tire-marks.png') no-repeat center center;
-  background-size: cover;
+  background:
+    linear-gradient(90deg, #132D3E 0%, #2C3536 47%, #BCBDB4 84%);
 }
-
 .dashboard-container {
   background: none;
 }

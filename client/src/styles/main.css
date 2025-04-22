@@ -5,10 +5,9 @@
 }
 
 body {
-  font-family: "Arial", sans-serif;
+  font-family: "Poppins", sans-serif;
   color: #333;
-  background: url("../assets/background-tire-marks.png") no-repeat center center;
-  background-size: cover;
+  background: linear-gradient(90deg, #132D3E 0%, #2C3536 47%, #BCBDB4 84%);
 }
 
 .dashboard-container {
@@ -22,33 +21,125 @@ body {
   padding: 1rem;
   color: white;
 }
-.navbar .navbar-logo img {
-  height: 50px;
-}
-.navbar .navbar-links {
-  list-style: none;
-  display: flex;
-  gap: 1rem;
-}
-.navbar .navbar-links a {
-  text-decoration: none;
-  color: white;
-}
-.navbar .navbar-links a:hover {
-  text-decoration: underline;
-}
-.navbar .navbar-links .btn-logout {
-  background-color: red;
-  color: white;
-  border: none;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  cursor: pointer;
-}
-.navbar .navbar-links .btn-logout:hover {
-  background-color: darkred;
+
+.navbar-logo img {
+  height: 7rem;
+  width: auto;
 }
 
+.navbar-links {
+  list-style: none;
+  display: none;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  position: absolute;
+  top: 80px;
+  right: 0;
+  left: 20px;
+  background-color: #232626;
+  border-radius: 5px;
+  max-width: 90%;
+  width: auto;
+  padding: 0;
+  transform: scale(0.9);
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  margin-top: 2rem;
+  opacity: 0;
+}
+
+.navbar-links.active {
+  display: flex;
+  opacity: 1;
+}
+
+.navbar-links a,
+.navbar-links button {
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  font-size: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  box-sizing: border-box;
+}
+
+.navbar-links li a:hover,
+.navbar-links li button:hover {
+  color: #3A7EF9;
+}
+
+.navbar-links a.active,
+.navbar-links button.active {
+  color: #3A7EF9;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.hamburger div {
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  transition: transform 0.3s ease;
+}
+
+.hamburger.active {
+  transform: rotate(90deg);
+}
+
+.hamburger.active div:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.hamburger.active div:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active div:nth-child(3) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+@media (min-width: 768px) {
+  .navbar {
+    padding: 0 2rem;
+    z-index: 1000;
+  }
+  .navbar-logo {
+    margin: auto 1rem;
+  }
+  .navbar-logo img {
+    height: 10rem;
+    width: auto;
+  }
+  .navbar-links a,
+  .navbar-links button {
+    font-size: 1.2rem;
+    font-weight: 600;
+  }
+  .navbar-links {
+    display: flex;
+    flex-direction: row;
+    gap: 1rem;
+    position: static;
+    background: none;
+    transform: none;
+    opacity: 1;
+  }
+  .hamburger {
+    display: none;
+  }
+}
 .home-container {
   min-height: 100vh;
   display: flex;
