@@ -31,7 +31,7 @@ export default function Home() {
         </div>
       </section>
 
-      <footer className="home-footer">
+      <div className="home-footer">
         <p className="footer-title">Kodėl verta rinktis mus</p>
         <div className="footer-benefits">
           <div className="benefit">✅ Greita ir patogu</div>
@@ -39,7 +39,7 @@ export default function Home() {
           <div className="benefit">✅ Geriausios kainos</div>
           <div className="benefit">✅ Tavo patogumui – internetu</div>
         </div>
-      </footer>
+      </div>
     </div>
   );
 }
