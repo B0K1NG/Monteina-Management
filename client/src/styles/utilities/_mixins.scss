@@ -1,9 +1,204 @@
-@mixin flex-center {
+@use "./variables" as vars;
+
+@mixin flex-center($direction: row, $gap: vars.$gap-small) {
   display: flex;
-  justify-content: center;
+  flex-direction: $direction;
   align-items: center;
+  justify-content: center;
+  gap: $gap;
+}
+
+@mixin flex-left($direction: row, $gap: vars.$gap-small) {
+  display: flex;
+  flex-direction: $direction;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: $gap;
 }
 
 @mixin transition($properties, $duration: 0.3s, $ease: ease) {
   transition: $properties $duration $ease;
+}
+
+@mixin button-style($bg-color, $text-color, $border-radius) {
+  background-color: $bg-color;
+  color: $text-color;
+  border: none;
+  border-radius: $border-radius;
+  cursor: pointer;
+  text-align: center;
+}
+
+@mixin hover-effect($hover-color) {
+  position: relative;
+  overflow: hidden;
+  border: 2px solid vars.$white-color;
+  background-color: transparent;
+  color: vars.$white-color;
+  transition: color 0.3s ease;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $hover-color;
+    z-index: -1;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 0.5s ease;
+  }
+
+  &:hover {
+    color: vars.$white-color;
+
+    &::before {
+      transform: scaleX(1);
+    }
+  }
+}
+
+@mixin navbar-link-style($font-size, $hover-color, $active-color) {
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  font-size: $font-size;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  padding: 0.5rem 1rem;
+  box-sizing: border-box;
+
+  &:hover {
+    color: $hover-color;
+  }
+
+  &.active {
+    color: $active-color;
+  }
+}
+
+@mixin hamburger-style($bar-width, $bar-height, $gap) {
+  display: flex;
+  flex-direction: column;
+  gap: $gap;
+  cursor: pointer;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+
+  div {
+    width: $bar-width;
+    height: $bar-height;
+    background-color: white;
+    transition: transform 0.3s ease;
+  }
+
+  &.active {
+    transform: rotate(90deg);
+
+    div:nth-child(1) {
+      transform: translateY($gap) rotate(45deg);
+    }
+
+    div:nth-child(2) {
+      opacity: 0;
+    }
+
+    div:nth-child(3) {
+      transform: translateY(-$gap) rotate(-45deg);
+    }
+  }
+}
+
+@mixin button-hover-effect($hover-bg-color) {
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: $hover-bg-color;
+    z-index: -1;
+    transform-origin: left;
+    transform: scaleX(0);
+    transition: transform 0.5s ease;
+  }
+
+  &:hover::before {
+    transform: scaleX(1);
+  }
+}
+
+@mixin input-style($bg-color, $border-color, $font-size, $border-radius) {
+  padding: vars.$login-padding;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  font-size: $font-size;
+  background: $bg-color;
+  color: white;
+}
+
+@mixin button-style-login($bg-color, $font-size, $border-radius, $hover-bg-color) {
+  padding: vars.$login-padding;
+  background-color: $bg-color;
+  color: white;
+  border: 1px solid vars.$login-input-border;
+  border-radius: $border-radius;
+  font-size: $font-size;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $hover-bg-color;
+  }
+}
+
+@mixin register-input-style($bg-color, $border-color, $font-size, $border-radius) {
+  padding: vars.$register-padding;
+  border: 1px solid $border-color;
+  border-radius: $border-radius;
+  font-size: $font-size;
+  background: $bg-color;
+  color: white;
+}
+
+@mixin register-button-style($bg-color, $font-size, $border-radius, $hover-bg-color) {
+  padding: vars.$register-padding;
+  background-color: $bg-color;
+  color: white;
+  border: 1px solid vars.$register-input-border;
+  border-radius: $border-radius;
+  font-size: $font-size;
+  cursor: pointer;
+
+  &:hover {
+    background-color: $hover-bg-color;
+  }
+}
+
+@mixin flex-center-column {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-center-column-align-none {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+@mixin flex-center-row($gap: $login-gap) {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: $gap;
 }

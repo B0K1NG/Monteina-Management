@@ -7,3 +7,88 @@ $font-family: 'Poppins', sans-serif;
 $navbar-bg-color: #232626;
 $hover-color: #3A7EF9;
 $active-color: #3A7EF9;
+
+// Colors
+$primary-bg-color: #232626;
+$primary-btn-bg: #1F201F;
+$secondary-btn-hover: #3A7EF9;
+$white-color: #FFFFFF;
+
+// Font sizes
+$font-size-title: 2rem;
+$font-size-subtitle: 1rem;
+$font-size-section-title: 1.5rem;
+$font-size-step-title: 1.25rem;
+$font-size-step-description: 1rem;
+
+// Spacing
+$padding-section: 1rem;
+$gap-small: 0.5rem;
+$gap-medium: 1rem;
+$gap-large: 2rem;
+
+// Border radius
+$border-radius-small: 10px;
+$border-radius-large: 20px;
+
+// Navbar-specific variables
+$navbar-height: 7rem;
+$navbar-bg-color: #232626;
+$navbar-link-font-size: 1rem;
+$navbar-link-hover-color: $hover-color;
+$navbar-link-active-color: $active-color;
+$hamburger-bar-width: 25px;
+$hamburger-bar-height: 3px;
+$hamburger-gap: 5px;
+
+// NotFound-specific variables
+$notfound-title-font-size: 2.3rem;
+$notfound-subtitle-font-size: 1.25rem;
+$notfound-button-padding: 0.5rem 1rem;
+$notfound-button-border-radius: 20px;
+$notfound-button-hover-bg: $hover-color;
+
+// Login-specific variables
+$login-bg-gradient: linear-gradient(90deg, #132D3E 0%, #2C3536 47%, #BCBDB4 84%);
+$login-text-color: #C6C6C6;
+$login-title-color: #FFFFFF;
+$login-input-bg: #1F201F;
+$login-input-border: #605E5E;
+$login-button-bg: #1F201F;
+$login-button-hover-bg: #333;
+$login-link-color: #3A7EF9;
+
+// Font sizes
+$login-title-font-size: 1.5rem;
+$login-input-font-size: 0.875rem;
+$login-button-font-size: 0.875rem;
+$login-link-font-size: 0.875rem;
+
+// Spacing
+$login-padding: 0.75rem;
+$login-gap: 1rem;
+$login-border-radius: 5px;
+$login-button-border-radius: 69px;
+
+// Image sizes
+$login-icon-width: 30px;
+$login-icon-height: 30px;
+$login-separator-width: 100px;
+$login-separator-height: 2px;
+
+// Register-specific variables
+$register-bg-gradient: linear-gradient(90deg, #132D3E 0%, #2C3536 47%, #BCBDB4 84%);
+$register-text-color: #FFFFFF;
+$register-title-font-size: 1.5rem;
+$register-input-bg: #1F201F;
+$register-input-border: #605E5E;
+$register-input-font-size: 0.875rem;
+$register-button-bg: #1F201F;
+$register-button-hover-bg: #333;
+$register-button-border-radius: 69px;
+$register-gap: 1rem;
+$register-padding: 0.75rem;
+$register-icon-size: 30px;
+$register-blur-bg-color: rgba(0, 0, 0, 0.24);
+$register-info-title-font-size: 1rem;
+$register-info-text-font-size: 0.85rem;
