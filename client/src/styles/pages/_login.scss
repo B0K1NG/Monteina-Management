@@ -1,46 +1,230 @@
+@use "../utilities/variables" as vars;
+@use "../utilities/mixins" as mixins;
+
 .login-container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  color: #333;
+  @include mixins.flex-center-column;
+  background: vars.$login-bg-gradient;
+  color: vars.$login-text-color;
 
-  .login-title {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-  }
-
-  .login-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
+  .login-left {
     width: 100%;
-    max-width: 400px;
+    text-align: center;
+
+    .login-title {
+      font-size: vars.$login-title-font-size;
+      margin-bottom: vars.$login-gap;
+      color: vars.$login-title-color;
+    }
+
+    .login-form {
+      @include mixins.flex-center-column-align-none;
+      gap: vars.$login-gap;
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+
+      .login-input {
+        @include mixins.input-style(vars.$login-input-bg, vars.$login-input-border, vars.$login-input-font-size, vars.$login-border-radius);
+      }
+
+      .password-container {
+        position: relative;
+
+        .login-input {
+          width: 100%;
+          padding-right: 2.5rem;
+        }
+
+        .eye-icon {
+          position: absolute;
+          top: 50%;
+          right: 0.75rem;
+          transform: translateY(-50%);
+          width: auto;
+          height: auto;
+          cursor: pointer;
+          transition: transform 0.2s ease;
+        }
+      }
+
+      .login-button {
+        @include mixins.button-style-login(vars.$login-button-bg, vars.$login-button-font-size, vars.$login-button-border-radius, vars.$login-button-hover-bg);
+      }
+    }
+
+    .login-social {
+      margin-top: vars.$login-gap;
+      text-align: center;
+
+      .separator {
+        @include mixins.flex-center-row(0.5rem);
+        margin-bottom: vars.$login-gap;
+
+        img {
+          width: vars.$login-separator-width;
+          height: vars.$login-separator-height;
+        }
+
+        span {
+          font-size: vars.$login-link-font-size;
+          color: vars.$login-title-color;
+        }
+      }
+
+      .social-icons {
+        @include mixins.flex-center-row(0.5rem);
+
+        img {
+          width: vars.$login-icon-width;
+          height: vars.$login-icon-height;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .login-register {
+      margin-top: vars.$login-gap;
+      font-size: vars.$login-link-font-size;
+
+      a {
+        color: vars.$login-link-color;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
   }
 
-  .login-input {
-    padding: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-  }
+  .login-right {
+    margin-top: vars.$login-gap;
 
-  .login-error {
-    color: red;
-    font-size: 0.875rem;
+    img {
+      width: 100%;
+      max-width: 300px;
+      height: auto;
+    }
   }
+}
 
-  .login-button {
-    padding: 0.75rem;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    &:hover {
-      background-color: #0056b3;
+// Media Queries
+@media (min-width: 768px) {
+  .login-container {
+    flex-direction: row;
+    justify-content: space-between;
+
+    .login-left {
+      flex: 1;
+      padding: vars.$login-gap;
+
+      .login-title {
+        font-size: 2rem;
+      }
+
+      .login-form {
+        max-width: 350px;
+
+        .login-input {
+          font-size: 1rem;
+        }
+
+        .password-container .eye-icon {
+          width: auto;
+          height: auto;
+        }
+
+        .login-button {
+          font-size: 1rem;
+        }
+      }
+
+      .login-social {
+        .social-icons img {
+          width: 35px;
+          height: 35px;
+        }
+      }
+
+      .login-register {
+        font-size: 1rem;
+      }
+    }
+
+    .login-right {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 80%;
+        max-width: 400px;
+      }
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .login-container {
+    flex-direction: row;
+    justify-content: space-between;
+
+    .login-left {
+      flex: 1;
+      padding: 2rem;
+
+      .login-title {
+        font-size: 2.5rem;
+        font-weight: 400;
+      }
+
+      .login-form {
+        max-width: 400px;
+
+        .login-input {
+          font-size: 1.125rem;
+        }
+
+        .password-container {
+          .eye-icon {
+            height: auto;
+          }
+        }
+
+        .login-button {
+          font-size: 1.125rem;
+        }
+      }
+
+      .login-social {
+        margin-top: 1.5rem;
+
+        span {
+          font-size: 1rem;
+        }
+
+        .social-icons img {
+          width: 40px;
+          height: 40px;
+        }
+      }
+
+      .login-register {
+        font-size: 1.125rem;
+      }
+    }
+
+    .login-right {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+
+      img {
+        width: 100%;
+        max-width: 500px;
+      }
     }
   }
 }
