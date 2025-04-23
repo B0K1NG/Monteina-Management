@@ -1,49 +1,68 @@
+@use "../utilities/variables" as *;
+@use "../utilities/mixins" as *;
+
 .notfound-container {
   display: flex;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  color: #333;
+  flex-direction: column;
+  padding: $padding-section;
+  color: $white-color;
 
   .notfound-content {
-    text-align: center;
+    text-align: left;
   }
 
   .notfound-title {
-    font-size: 4rem;
-    font-weight: bold;
-    color: #007bff;
+    font-size: $notfound-title-font-size;
+    font-weight: 400;
+    color: $white-color;
   }
 
   .notfound-subtitle {
-    font-size: 1.5rem;
-    font-weight: bold;
-    margin-top: 1rem;
+    font-size: $notfound-subtitle-font-size;
+    font-weight: 400;
+    margin-top: $gap-small;
+    max-width: 800px;
+    width: 100%;
   }
 
   .notfound-image img {
-    width: 500px;
+    width: 100%;
+    max-width: 200px;
     height: auto;
-    margin-top: 1rem;
-  }
-
-  .notfound-description {
-    font-size: 1rem;
-    margin-top: 0.5rem;
-    color: #555;
+    margin-top: $gap-medium;
   }
 
   .notfound-button {
     display: inline-block;
-    margin-top: 1.5rem;
-    padding: 0.75rem 1.5rem;
-    background-color: #007bff;
-    color: white;
-    border: none;
-    border-radius: 5px;
+    margin-top: $gap-large;
+    padding: $notfound-button-padding;
+    border: 2px solid $white-color;
+    color: $white-color;
+    border-radius: $notfound-button-border-radius;
     text-decoration: none;
-    &:hover {
-      background-color: #0056b3;
-    }
+    @include button-hover-effect($notfound-button-hover-bg);
+    max-width: 250px;
+    width: 100%;
+  }
+}
+
+@media (min-width: 768px) {
+  .notfound-container {
+    flex-direction: row;
+    padding: $gap-large;
+  }
+
+  .notfound-title {
+    font-size: 3rem !important;
+  }
+
+  .notfound-image img {
+    max-width: 400px !important;
+  }
+
+  .notfound-button {
+    padding: 0.75rem 1.5rem;
   }
 }
