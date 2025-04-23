@@ -14,33 +14,58 @@ export default function Home() {
         <h2 className="section-title">Kaip tai veikia</h2>
         <div className="steps-container">
           <div className="step">
-            <div className="step-icon">🚗</div>
-            <h3 className="step-title">Pasirinkite laiką</h3>
-            <p className="step-description">Išsirinkite jums tinkamą datą ir laiką mūsų sistemoje.</p>
+            <img src="/src/assets/icons/car_icon.png" alt="Car Icon" className="step-icon" />
+            <div className="step-content">
+              <h3 className="step-title">Pasirinkite laiką</h3>
+              <p className="step-description">
+                Išsirinkite jums tinkamą datą ir laiką mūsų sistemoje.
+              </p>
+            </div>
           </div>
+
           <div className="step">
-            <div className="step-icon">💶</div>
-            <h3 className="step-title">Sumokėkite avansą</h3>
-            <p className="step-description">Rezervacijai patvirtinti užtenka simbolinio avanso.</p>
+            <img src="/src/assets/icons/euro_icon.png" alt="Euro Icon" className="step-icon" />
+            <div className="step-content">
+              <h3 className="step-title">Sumokėkite avansą</h3>
+              <p className="step-description">
+                Rezervacijai patvirtinti užtenka simbolinio avanso.
+              </p>
+            </div>
           </div>
+
           <div className="step">
-            <div className="step-icon">📅</div>
-            <h3 className="step-title">Atvykite į servisą</h3>
-            <p className="step-description">Atvykite laiku – viskuo pasirūpinsime.</p>
+            <img src="/src/assets/icons/calendar_icon.png" alt="Calendar Icon" className="step-icon" />
+            <div className="step-content">
+              <h3 className="step-title">Atvykite į servisą</h3>
+              <p className="step-description">
+                Atvykite laiku – viskuo pasirūpinsime.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
-      <div className="home-footer">
+      <footer className="home-footer">
         <p className="footer-title">Kodėl verta rinktis mus</p>
         <div className="footer-benefits">
-          <div className="benefit">✅ Greita ir patogu</div>
-          <div className="benefit">✅ Profesionalūs meistrai</div>
-          <div className="benefit">✅ Geriausios kainos</div>
-          <div className="benefit">✅ Tavo patogumui – internetu</div>
+          <div className="benefit">
+            <img src="/src/assets/icons/check_mark_icon.png" alt="Checkmark Icon" />
+            <span>Greita ir patogu</span>
+          </div>
+          <div className="benefit">
+            <img src="/src/assets/icons/like_icon.png" alt="Like Icon" />
+            <span>Profesionalūs meistrai</span>
+          </div>
+          <div className="benefit">
+            <img src="/src/assets/icons/bill_icon.png" alt="Invoice Icon" />
+            <span>Geriausios kainos</span>
+          </div>
+          <div className="benefit">
+            <img src="/src/assets/icons/wifi_icon.png" alt="Internet Icon" />
+            <span>Tavo patogumui – internetu</span>
+          </div>
         </div>
-      </div>
+      </footer>
     </div>
   );
 }
-
