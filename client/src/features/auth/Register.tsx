@@ -1,8 +1,10 @@
+import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import axios from '../../api/axios';
 import { useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 const schema = z.object({
   firstName: z.string().min(1, 'Vardas yra privalomas'),
@@ -16,6 +18,7 @@ export default function Register() {
     resolver: zodResolver(schema),
   });
   const navigate = useNavigate();
+  const [showPassword, setShowPassword] = useState(false);
 
   const onSubmit = async (data: any) => {
     try {
@@ -30,18 +33,65 @@ export default function Register() {
 
   return (
     <div className="register-container">
-      <h1 className="register-title">Register</h1>
-      <form onSubmit={handleSubmit(onSubmit)} className="register-form">
-        <input {...register('firstName')} type="text" placeholder="First Name" className="register-input" />
-        <p className="register-error">{errors.firstName?.message}</p>
-        <input {...register('lastName')} type="text" placeholder="Last Name" className="register-input" />
-        <p className="register-error">{errors.lastName?.message}</p>
-        <input {...register('email')} type="email" placeholder="Email" className="register-input" />
-        <p className="register-error">{errors.email?.message}</p>
-        <input {...register('password')} type="password" placeholder="Password" className="register-input" />
-        <p className="register-error">{errors.password?.message}</p>
-        <button type="submit" className="register-button">Register</button>
-      </form>
+      <div className="register-left">
+        <h1 className="register-title">Sukurti Paskyrą</h1>
+        <form onSubmit={handleSubmit(onSubmit)} className="register-form">
+          <input {...register('firstName')} type="text" placeholder="Vardas ir Pavardė" className="register-input" />
+          <p className="register-error">{errors.firstName?.message}</p>
+          <input {...register('email')} type="email" placeholder="El. paštas" className="register-input" />
+          <p className="register-error">{errors.email?.message}</p>
+          <div className="password-container">
+            <input
+              {...register('password')}
+              type={showPassword ? 'text' : 'password'}
+              placeholder="Slaptažodis"
+              className="register-input"
+            />
+            <img
+              src={showPassword ? "/src/assets/icons/view.png" : "/src/assets/icons/hide.png"}
+              alt={showPassword ? "Hide Password" : "Show Password"}
+              className="eye-icon"
+              onClick={() => setShowPassword(!showPassword)}
+            />
+          </div>
+          <p className="register-error">{errors.password?.message}</p>
+          <button type="submit" className="register-button">Sukurti Paskyrą</button>
+        </form>
+        <div className="register-social">
+          <div className="separator">
+            <img src="/src/assets/icons/Separator.png" alt="Separator Line" />
+            <span>Arba prisijunkite su</span>
+            <img src="/src/assets/icons/Separator.png" alt="Separator Line" />
+          </div>
+          <div className="social-icons">
+            <img src="/src/assets/icons/gmail_logo.png" alt="Gmail" />
+            <img src="/src/assets/icons/facebook_logo.png" alt="Facebook" />
+            <img src="/src/assets/icons/apple_logo.png" alt="Apple" />
+          </div>
+        </div>
+        <p className="login-register">
+          Jau turite paskyrą? <Link to="/login">Prisijungti</Link>
+        </p>
+      </div>
+      <div className="register-right">
+        <div className="blur-background"></div>
+        <div className="info-text">
+          <h2>Tavo kelionė prasideda nuo tinkamų padangų.</h2>
+          <p>Rinkis kokybę ir pasiruošk kiekvienam posūkiui – tiek mieste, tiek trasoje.</p>
+        </div>
+        <div className="reviewers">
+          <img src="/src/assets/icons/Reviewers.png" alt="Reviewers" className="reviewers-image" />
+          <div className="reviewers-info">
+            <div className="stars">
+              {[...Array(5)].map((_, i) => (
+                <img key={i} src="/src/assets/icons/star.png" alt="Star" />
+              ))}
+              <span>5.0</span>
+            </div>
+            <p>Daugiau nei 40 atsiliepimų</p>
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

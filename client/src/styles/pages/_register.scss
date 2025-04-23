@@ -1,46 +1,373 @@
+@use "../utilities/variables" as vars;
+@use "../utilities/mixins" as mixins;
+
 .register-container {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  min-height: 100vh;
-  color: #333;
+  background: vars.$register-bg-gradient;
+  color: vars.$register-text-color;
 
-  .register-title {
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
+  .register-left {
+    text-align: center;
+
+    .register-title {
+      font-size: vars.$register-title-font-size;
+      font-weight: 400;
+      margin-bottom: vars.$register-gap;
+    }
+
+    .register-form {
+      @include mixins.flex-center-column-align-none;
+      gap: vars.$register-gap;
+      width: 100%;
+      max-width: 300px;
+      margin: 0 auto;
+
+      .register-input {
+        @include mixins.register-input-style(vars.$register-input-bg, vars.$register-input-border, vars.$register-input-font-size, vars.$register-button-border-radius);
+      }
+
+      .password-container {
+        position: relative;
+
+        .register-input {
+          width: 100%;
+          padding-right: 2.5rem;
+        }
+
+        .eye-icon {
+          position: absolute;
+          top: 50%;
+          right: 0.75rem;
+          transform: translateY(-50%);
+          width: auto;
+          height: auto;
+          cursor: pointer;
+          transition: transform 0.2s ease;
+        }
+      }
+
+      .register-button {
+        @include mixins.register-button-style(vars.$register-button-bg, vars.$register-input-font-size, vars.$register-button-border-radius, vars.$register-button-hover-bg);
+      }
+    }
+
+    .register-social {
+      margin-top: vars.$register-gap;
+      text-align: center;
+
+      .separator {
+        @include mixins.flex-center-row(0.5rem);
+        margin-bottom: vars.$register-gap;
+
+        img {
+          width: vars.$register-icon-size;
+          height: 2px;
+        }
+
+        span {
+          font-size: vars.$register-input-font-size;
+          color: vars.$register-text-color;
+        }
+      }
+
+      .social-icons {
+        @include mixins.flex-center-row(0.5rem);
+
+        img {
+          width: vars.$register-icon-size;
+          height: vars.$register-icon-size;
+          cursor: pointer;
+        }
+      }
+    }
+
+    .login-register {
+      margin-top: vars.$register-gap;
+      font-size: vars.$register-input-font-size;
+
+      a {
+        color: vars.$register-text-color;
+        text-decoration: none;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+    }
   }
 
-  .register-form {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    width: 100%;
-    max-width: 400px;
-  }
+  .register-right {
+    margin-top: vars.$register-gap;
+    text-align: center;
+    position: relative;
 
-  .register-input {
-    padding: 0.75rem;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    font-size: 1rem;
-  }
+    .blur-background {
+      display: none;
+      position: absolute;
+      top: -100px;
+      left: 0;
+      right: 0;
+      bottom: -100px;
+      background-color: vars.$register-blur-bg-color;
+      z-index: 0;
+      border-radius: 40px;
+    }
 
-  .register-error {
-    color: red;
-    font-size: 0.875rem;
-  }
+    .info-text {
+      margin-bottom: vars.$register-gap;
+      z-index: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
 
-  .register-button {
-    padding: 0.75rem;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    &:hover {
-      background-color: #218838;
+      h2 {
+        font-size: vars.$register-info-title-font-size;
+        font-weight: 400;
+        margin-bottom: 0.5rem;
+        text-align: center;
+      }
+
+      p {
+        font-size: vars.$register-info-text-font-size;
+        line-height: 1.5;
+        text-align: center;
+      }
+    }
+
+    .reviewers {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: vars.$register-gap;
+      margin-top: vars.$register-gap;
+      z-index: 1;
+
+      .reviewers-image {
+        max-width: 100px;
+        height: auto;
+      }
+
+      .reviewers-info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        .stars {
+          display: flex;
+          align-items: center;
+          gap: 0.5rem;
+
+          img {
+            width: 20px;
+            height: 20px;
+          }
+
+          span {
+            font-size: vars.$register-info-title-font-size;
+            font-weight: bold;
+          }
+        }
+
+        p {
+          margin-top: 0.5rem;
+          font-size: vars.$register-input-font-size;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+// Media Queries
+@media (min-width: 768px) {
+  .register-container {
+    flex-direction: row;
+    justify-content: space-between;
+
+    .register-left {
+      flex: 1;
+      padding: vars.$register-gap;
+
+      .register-title {
+        font-size: 2rem;
+      }
+
+      .register-form {
+        max-width: 350px;
+
+        .register-input {
+          font-size: 1rem;
+        }
+
+        .password-container .eye-icon {
+          width: auto;
+          height: auto;
+        }
+
+        .register-button {
+          font-size: 1rem;
+        }
+      }
+
+      .login-register {
+        font-size: 1rem;
+      }
+
+      .register-social {
+        .social-icons img {
+          width: 35px;
+          height: 35px;
+        }
+      }
+    }
+
+    .register-right {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+      align-items: center;
+      padding: 2rem;
+      position: relative;
+      margin-right: 1rem;
+
+      .blur-background {
+        display: block;
+      }
+
+      .info-text {
+        h2 {
+          font-size: 2rem;
+        }
+
+        p {
+          font-size: 1.125rem;
+        }
+      }
+
+      .reviewers {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        gap: 2rem;
+
+        img {
+          flex-shrink: 0;
+          width: 40%;
+          max-width: 250px;
+          height: auto;
+        }
+
+        .stars {
+          display: flex;
+          flex-direction: row;
+          align-items: flex-start;
+
+          img {
+            width: 25px;
+            height: 25px;
+          }
+
+          p {
+            margin-top: 0.5rem;
+            font-size: 1rem;
+            text-align: left;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .register-container {
+    flex-direction: row;
+    justify-content: space-between;
+
+    .register-left {
+      flex: 1;
+      padding-top: 2rem;
+      padding-bottom: 0rem;
+
+      .register-title {
+        font-size: 2.5rem;
+      }
+
+      .login-register {
+        font-size: 1.125rem;
+      }
+
+      .register-form {
+        max-width: 400px;
+
+        .register-input {
+          font-size: 1.125rem;
+        }
+
+        .password-container {
+          .eye-icon {
+            height: auto;
+          }
+        }
+
+        .register-button {
+          font-size: 1.125rem;
+        }
+      }
+
+      .register-social {
+        margin-top: 1.5rem;
+
+        span {
+          font-size: 1rem;
+        }
+
+        .social-icons img {
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+
+    .register-right {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 2rem;
+      position: relative;
+      max-width: 499px;
+      margin-right: 8rem;
+
+      .blur-background {
+        bottom: -80px;
+      }
+
+      .info-text {
+        h2 {
+          font-size: 2.5rem;
+          margin-bottom: 1rem;
+        }
+
+        p {
+          font-size: 1.25rem;
+          margin-bottom: 1.5rem;
+        }
+      }
+
+      .reviewers {
+        .stars img {
+          width: 30px;
+          height: 30px;
+        }
+
+        .stars span {
+          font-size: 1.5rem;
+        }
+      }
     }
   }
 }
