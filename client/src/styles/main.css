@@ -151,8 +151,8 @@ body {
   text-align: center;
 }
 .home-container .home-header .home-title {
-  font-size: 2rem;
-  font-weight: bold;
+  font-size: 3rem;
+  font-weight: 400;
 }
 .home-container .home-header .home-subtitle {
   font-size: 1rem;
@@ -356,11 +356,18 @@ body {
     font-size: 1rem;
     text-align: left;
   }
+  .home-container .home-footer .footer-benefits {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+  }
   .home-container .home-footer .footer-benefits .benefit img {
     width: 40px;
   }
   .home-container .home-footer .footer-benefits .benefit span {
-    font-size: 1.35rem;
+    font-size: 1.5rem;
   }
 }
 .profile-container {
@@ -421,7 +428,7 @@ body {
 .register-container .register-left .register-form .register-input {
   padding: 0.75rem;
   border: 1px solid #605E5E;
-  border-radius: 69px;
+  border-radius: 5px;
   font-size: 0.875rem;
   background: #1F201F;
   color: white;
@@ -467,7 +474,7 @@ body {
   margin-bottom: 1rem;
 }
 .register-container .register-left .register-social .separator img {
-  width: 30px;
+  width: 100px;
   height: 2px;
 }
 .register-container .register-left .register-social .separator span {
@@ -488,9 +495,10 @@ body {
 .register-container .register-left .login-register {
   margin-top: 1rem;
   font-size: 0.875rem;
+  color: #C6C6C6;
 }
 .register-container .register-left .login-register a {
-  color: #FFFFFF;
+  color: #3A7EF9;
   text-decoration: none;
 }
 .register-container .register-left .login-register a:hover {
@@ -1066,51 +1074,601 @@ body {
     padding: 0.75rem 1.5rem;
   }
 }
-.services-container {
-  min-height: 100vh;
-  background: url("../../assets/background-tire-marks.png") no-repeat center center;
-  background-size: cover;
-  color: white;
+.services-page {
+  padding: 1rem;
+  color: #FFFFFF;
+  text-align: center;
+}
+.services-page .services-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 400;
+}
+.services-page .services-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.services-page .service-card {
+  background-color: rgba(35, 38, 38, 0.8);
+  padding: 1rem;
+  border-radius: 8px;
+}
+.services-page .service-card .service-name {
+  font-size: 1.25rem;
+  margin-bottom: 0.5rem;
+  font-weight: 400;
+}
+.services-page .service-card .service-description {
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+}
+.services-page .service-card .service-price {
+  font-size: 1rem;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+.services-page .service-card .service-button {
+  background-color: #3A7EF9;
+  color: #fff;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+}
+.services-page .service-icon {
+  height: 40px;
+  width: auto;
+}
+
+/* Styling for the notice section in the Services page */
+.services-notice {
+  margin-top: 2rem;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  color: #495057;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.services-notice p {
+  margin: 0.5rem 0;
+}
+
+@media (min-width: 768px) {
+  .services-page .services-title {
+    font-size: 2rem;
+    text-align: left;
+  }
+  .services-page .services-grid {
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.5rem;
+  }
+  .services-page .service-card {
+    flex: 0 1 calc(50% - 1rem);
+  }
+  .service-icon {
+    max-width: 200px;
+  }
+}
+@media (min-width: 1024px) {
+  .services-page .services-title {
+    font-size: 2.5rem;
+    margin-left: 2.6rem;
+  }
+  .services-page .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2rem;
+    margin: 0 auto;
+    background-color: rgba(35, 38, 38, 0.8);
+    border: 1px solid rgba(35, 38, 38, 0.8);
+    border-radius: 30px;
+  }
+  .services-page .service-card {
+    background: none;
+  }
+  .services-page .service-card .service-name {
+    font-size: 1.5rem;
+  }
+  .services-page .service-card .service-description {
+    font-size: 1rem;
+  }
+  .services-page .service-card .service-price {
+    font-size: 1.25rem;
+  }
+  .services-page .service-card .booking-button {
+    font-size: 1.1rem;
+  }
+}
+.booking-page {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 1rem;
+  color: #fff;
+}
+.booking-page .calendar-section,
+.booking-page .booking-section {
+  padding: 1rem;
+  border-radius: 0.75rem;
+}
+.booking-page .calendar-title {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  font-weight: 400;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.booking-page .calendar-header {
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+.booking-page .calendar-header .month-label {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+.booking-page .week-days-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.booking-page .week-days-wrapper .arrow-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+.booking-page .week-days-wrapper .arrow-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+.booking-page .week-days-wrapper .week-days {
+  display: flex;
+  gap: 0.5rem;
+}
+.booking-page .week-days-wrapper .week-days .day-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  padding: 2rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background-color 0.2s ease;
 }
-
-.services-title {
-  font-size: 3rem;
+.booking-page .week-days-wrapper .week-days .day-circle:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.booking-page .week-days-wrapper .week-days .day-circle.selected {
+  background-color: rgba(255, 255, 255, 0.28);
+  border: none;
+}
+.booking-page .week-days-wrapper .week-days .day-circle.disabled {
+  color: #777;
+  text-decoration: line-through;
+  pointer-events: none;
+}
+.booking-page .week-days-wrapper .week-days .day-circle .day-name {
+  font-size: 0.75rem;
+  text-transform: lowercase;
+}
+.booking-page .week-days-wrapper .week-days .day-circle .day-number {
+  font-size: 0.9rem;
   font-weight: bold;
+}
+.booking-page .time-slots {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.5rem;
   margin-bottom: 1rem;
 }
-
-.services-description {
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
+.booking-page .time-slots .time-slot {
+  background-color: rgba(35, 38, 38, 0.8);
+  border-radius: 6px;
+  padding: 0.5rem 0;
   text-align: center;
+  font-size: 0.9rem;
+  cursor: pointer;
 }
-
-.services-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: center;
-}
-
-.service-item {
-  background: rgba(0, 0, 0, 0.7);
-  padding: 1rem;
-  border-radius: 8px;
-  text-align: center;
-  max-width: 300px;
-}
-
-.service-title {
-  font-size: 1.5rem;
+.booking-page .time-slots .time-slot.selected {
+  background-color: rgba(255, 255, 255, 0.28);
   font-weight: bold;
+  border: none;
+}
+.booking-page .time-slots .time-slot.selected {
+  background-color: rgba(255, 255, 255, 0.28);
+  font-weight: bold;
+  border: none;
+}
+.booking-page .time-slots.empty {
+  display: flex !important;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  text-align: center;
+  color: #ccc;
+  font-size: 1rem;
+  width: 100%;
+  padding: 1rem;
+}
+.booking-page .confirm-button {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: rgba(35, 38, 38, 0.8);
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: 6px;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.booking-page .confirm-button:hover {
+  background-color: #00acc1;
+}
+.booking-page .confirm-button:disabled {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: none;
+  cursor: not-allowed;
+}
+.booking-page .car-section-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.booking-page .car-count-box {
+  background-color: rgba(35, 38, 38, 0.8);
+  padding: 1rem;
+  border-radius: 0.75rem;
+}
+.booking-page .car-count-box h2 {
+  margin: 0 0 0.75rem;
+  font-size: 1.2rem;
+  font-weight: 400;
+}
+.booking-page .car-count-box .car-count-selector {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: rgba(35, 38, 38, 0.7);
+  border: 1px solid #fff;
+  border-radius: 3px;
+  padding: 0.5rem;
+}
+.booking-page .car-count-box .car-count-selector button {
+  background: none;
+  border: none;
+  color: #fff;
+  font-size: 1.25rem;
+  cursor: pointer;
+  padding: 0.25rem 0.75rem;
+}
+.booking-page .car-count-box .car-count-selector span {
+  font-size: 1.25rem;
+  font-weight: bold;
+  width: 2rem;
+  text-align: center;
+}
+.booking-page .car-service-box {
+  padding: 1rem;
+  border-radius: 0.75rem;
+}
+.booking-page .car-service-box label {
+  display: block;
   margin-bottom: 0.5rem;
+  font-size: 1rem;
+}
+.booking-page .car-service-box select {
+  width: 100%;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 4px;
+  background-color: rgba(35, 38, 38, 0.8);
+  color: #fff;
+  margin-bottom: 0.75rem;
+}
+.booking-page .car-service-box .optional-service {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+}
+.booking-page .car-service-box .optional-service input {
+  transform: scale(1.2);
+  accent-color: #1a73e8;
 }
 
-.service-description {
+@media (min-width: 768px) and (max-width: 1023px) {
+  .booking-page {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 0 5%;
+  }
+  .calendar-section {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .calendar-section .calendar-title,
+  .calendar-section .calendar-header,
+  .calendar-section .week-days-wrapper,
+  .calendar-section .time-slots,
+  .calendar-section .confirm-button {
+    align-self: center;
+  }
+  .calendar-section .calendar-header .month-label {
+    font-size: 1.2rem !important;
+  }
+  .calendar-section .calendar-title {
+    font-size: 2rem !important;
+    margin-bottom: 1.5rem !important;
+  }
+  .confirm-button {
+    width: 200px !important;
+  }
+  .week-days-wrapper {
+    gap: 1rem;
+  }
+  .week-days-wrapper .arrow-btn {
+    font-size: 1.5rem;
+  }
+  .week-days-wrapper .week-days {
+    gap: 1rem;
+  }
+  .week-days-wrapper .week-days .day-circle {
+    width: 45px;
+    height: 45px;
+  }
+  .week-days-wrapper .week-days .day-circle .day-number {
+    font-size: 1.2rem !important;
+  }
+  .time-slots {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr) !important;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+  }
+  .time-slots .time-slot {
+    width: 52px;
+    padding: 2rem;
+    text-align: center;
+  }
+  .time-slots.empty {
+    text-align: center;
+    color: #ccc;
+    font-size: 1rem;
+    padding: 1rem;
+  }
+  .time-slots.empty .empty {
+    font-size: 2rem;
+  }
+  .booking-section {
+    flex: 2;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  select {
+    max-width: 100% !important;
+  }
+  .car-section-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+  }
+  .car-section-wrapper .car-count-box {
+    grid-column: span 2;
+  }
+}
+@media (min-width: 1024px) {
+  .booking-page {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 8%;
+    -moz-column-gap: 3rem;
+         column-gap: 3rem;
+  }
+  .day-number {
+    font-size: 1.3rem !important;
+  }
+  .calendar-section {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 0;
+  }
+  .calendar-header,
+  .week-days-wrapper,
+  .time-slots {
+    align-self: center;
+  }
+  .calendar-header .month-label {
+    font-size: 1.4rem !important;
+  }
+  .confirm-button {
+    width: 200px !important;
+    align-self: left;
+    font-size: 1rem !important;
+  }
+  .calendar-title {
+    margin-left: -5rem !important;
+    font-size: 2.5rem !important;
+    margin-bottom: 2rem !important;
+  }
+  .week-days-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+  }
+  .week-days-wrapper .arrow-btn {
+    font-size: 1.8rem !important;
+  }
+  .week-days-wrapper .week-days {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+  .week-days-wrapper .week-days .day-circle {
+    width: 50px !important;
+    height: 50px !important;
+  }
+  .time-slots {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr) !important;
+    justify-content: center;
+    gap: 0.75rem;
+    padding-top: 1rem;
+    max-width: calc(312px + 3.75rem);
+  }
+  .time-slots .time-slot {
+    width: 69px;
+    padding: 0.5rem;
+    text-align: center;
+  }
+  .time-slots.empty {
+    text-align: center;
+    color: #ccc;
+    font-size: 1rem;
+    padding: 1rem;
+  }
+  .time-slots.empty .empty {
+    font-size: 2rem;
+  }
+  .booking-section {
+    max-width: 400px;
+    width: 700px;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 0;
+  }
+  .car-service-box select {
+    max-width: 100% !important;
+    font-size: 1rem !important;
+  }
+  .car-service-box label {
+    font-size: 1.2rem !important;
+  }
+}
+.faq-container {
+  padding: 2rem;
+  color: #fff;
+  text-align: center;
+}
+.faq-container .faq-title {
+  font-size: 2rem;
+  margin-bottom: 1.5rem;
+  font-weight: 400;
+}
+.faq-container .faq-subtitle {
+  font-size: 1.15rem;
+  font-weight: 400;
+  margin: 0 auto 1.5rem;
+  max-width: 600px;
+}
+.faq-container .faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+}
+.faq-container .faq-list .faq-item {
+  padding: 1rem;
+  background: #232626;
+  border-radius: 15px;
+  margin-bottom: 1rem;
+}
+.faq-container .faq-list .faq-item .faq-question {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: none;
+  border: none;
+  color: #FFFFFF;
   font-size: 1rem;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+.faq-container .faq-list .faq-item .faq-question:hover {
+  color: #3A7EF9;
+}
+.faq-container .faq-list .faq-item .faq-answer {
+  margin: 1rem 0 0;
+  font-size: 0.8rem;
+  color: #ccc;
+}
+
+@media (min-width: 768px) {
+  .faq-container {
+    padding: 2rem;
+  }
+  .faq-container .faq-title {
+    font-size: 2.25rem;
+  }
+  .faq-container .faq-subtitle {
+    font-size: 1.2rem;
+  }
+  .faq-container .faq-list .faq-item .faq-answer {
+    font-size: 0.9rem;
+  }
+  .faq-container .faq-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem 2rem;
+  }
+  .faq-container .faq-list .faq-item:nth-child(n+5) {
+    grid-column: 2;
+  }
+}
+@media (min-width: 1024px) {
+  .faq-container {
+    padding: 2rem 8%;
+  }
+  .faq-container .faq-title {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+  .faq-container .faq-subtitle {
+    width: 40%;
+    max-width: 800px;
+    margin-bottom: 2rem;
+    font-size: 1.3rem;
+  }
+  .faq-container .faq-list {
+    gap: 1.5rem 3rem;
+    max-width: 1000px;
+    margin: 0 auto;
+  }
+  .faq-container .faq-list .faq-item {
+    padding: 1.25rem;
+    border-radius: 15px;
+  }
+  .faq-container .faq-list .faq-item .faq-question {
+    font-size: 1.3rem;
+  }
+  .faq-container .faq-list .faq-item .faq-answer {
+    font-size: 1rem;
+    margin-top: 1rem;
+  }
 }/*# sourceMappingURL=main.css.map */
