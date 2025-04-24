@@ -1,0 +1,395 @@
+@use "../utilities/variables" as vars;
+@use "../utilities/mixins" as mixins;
+
+
+.booking-page {
+  display: flex;
+  flex-direction: column;
+  gap: vars.$calendar-gap;
+  padding: vars.$calendar-padding;
+  color: #fff;
+
+  .calendar-section,
+  .booking-section {
+    @include mixins.calendar-section-style;
+  }
+
+  .calendar-title {
+    @include mixins.calendar-title-style;
+  }
+
+  .calendar-header {
+    @include mixins.calendar-header-style;
+  }
+
+  .week-days-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+
+    .arrow-btn {
+      background: none;
+      border: none;
+      color: #fff;
+      font-size: 1.2rem;
+      cursor: pointer;
+
+      &:disabled {
+        opacity: 0.3;
+        cursor: not-allowed;
+      }
+    }
+
+    .week-days {
+      display: flex;
+      gap: 0.5rem;
+
+      .day-circle {
+        @include mixins.day-circle-style;
+
+        .day-name {
+          font-size: 0.75rem;
+          text-transform: lowercase;
+        }
+
+        .day-number {
+          font-size: 0.9rem;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  .time-slots {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+
+    .time-slot {
+      @include mixins.time-slot-style;
+
+      &.selected {
+        background-color: vars.$day-circle-selected-bg;
+        font-weight: bold;
+        border: none;
+      }
+    }
+
+    &.empty {
+      display: flex !important;
+      justify-content: center;
+      align-items: center;
+      width: 100%;
+      text-align: center;
+      color: #ccc;
+      font-size: 1rem;
+      width: 100%;
+      padding: 1rem;
+    }
+  }
+
+  .confirm-button {
+    @include mixins.confirm-button-style;
+  }
+
+  .car-section-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: vars.$calendar-gap;
+  }
+
+  .car-count-box {
+    background-color: rgba(35, 38, 38, 0.8);
+    padding: 1rem;
+    border-radius: vars.$calendar-border-radius;
+
+    h2 {
+      margin: 0 0 0.75rem;
+      font-size: 1.2rem;
+      font-weight: 400;
+    }
+
+    .car-count-selector {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba(35, 38, 38, 0.7);
+      border: 1px solid #fff;
+      border-radius: 3px;
+      padding: 0.5rem;
+
+      button {
+        background: none;
+        border: none;
+        color: #fff;
+        font-size: 1.25rem;
+        cursor: pointer;
+        padding: 0.25rem 0.75rem;
+      }
+
+      span {
+        font-size: 1.25rem;
+        font-weight: bold;
+        width: 2rem;
+        text-align: center;
+      }
+    }
+  }
+
+  .car-service-box {
+    padding: 1rem;
+    border-radius: vars.$calendar-border-radius;
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+    }
+
+    select {
+      width: 100%;
+      padding: 0.5rem;
+      border: none;
+      border-radius: 4px;
+      background-color: rgba(35, 38, 38, 0.8);
+      color: #fff;
+      margin-bottom: 0.75rem;
+    }
+
+    .optional-service {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.9rem;
+
+      input {
+        transform: scale(1.2);
+        accent-color: #1a73e8;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .booking-page {
+    display: flex;
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 2rem;
+    padding: 0 5%;
+  }
+
+  .calendar-section {
+    flex: 3;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    .calendar-title,
+    .calendar-header,
+    .week-days-wrapper,
+    .time-slots,
+    .confirm-button {
+      align-self: center;
+    }
+
+    .calendar-header {
+      .month-label {
+        font-size: 1.2rem !important;
+      }
+    }
+
+    .calendar-title {
+      font-size: 2rem !important;
+      margin-bottom: 1.5rem !important;
+    }
+  }
+
+  .confirm-button {
+    width: 200px !important;
+  }
+
+  .week-days-wrapper {
+    gap: 1rem;
+
+    .arrow-btn {
+      font-size: 1.5rem;
+    }
+
+    .week-days {
+      gap: 1rem;
+
+      .day-circle {
+        width: 45px;
+        height: 45px;
+
+        .day-number {
+          font-size: 1.2rem !important;
+        }
+      }
+    }
+  }
+
+  .time-slots {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr) !important;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1.5rem;
+
+    .time-slot {
+      width: 52px;
+      padding: 2rem;
+      text-align: center;
+    }
+    &.empty {
+      text-align: center;
+      color: #ccc;
+      font-size: 1rem;
+      padding: 1rem;
+
+      .empty {
+        font-size: 2rem;
+      }
+  }
+}
+
+  .booking-section {
+    flex: 2;
+    max-width: 320px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  select {
+    max-width: 100% !important;
+  }
+
+  .car-section-wrapper {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+
+    .car-count-box {
+      grid-column: span 2;
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .booking-page {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 0 8%;
+    column-gap: 3rem;
+  }
+
+  .day-number {
+    font-size: 1.3rem !important;
+  }
+
+  .calendar-section {
+    flex: 0 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-left: 0;
+  }
+
+  .calendar-header,
+  .week-days-wrapper,
+  .time-slots {
+    align-self: center;
+  }
+
+  .calendar-header {
+    .month-label {
+      font-size: 1.4rem !important;
+    }
+  }
+
+  .confirm-button {
+    width: 200px !important;
+    align-self: left;
+    font-size: 1rem !important;
+  }
+
+  .calendar-title {
+    margin-left: -5rem !important;
+    font-size: 2.5rem !important;
+    margin-bottom: 2rem !important;
+  }
+
+  .week-days-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+
+    .arrow-btn {
+      font-size: 1.8rem !important;
+    }
+
+    .week-days {
+      display: flex;
+      justify-content: center;
+      gap: 0.75rem;
+
+      .day-circle {
+        width: 50px !important;
+        height: 50px !important;
+      }
+    }
+  }
+
+  .time-slots {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr) !important;
+    justify-content: center;
+    gap: 0.75rem;
+    padding-top: 1rem;
+    max-width: calc(6 * 52px + 5 * 0.75rem);
+
+    .time-slot {
+      width: 69px;
+      padding: 0.5rem;
+      text-align: center;
+    }
+
+    &.empty {
+      text-align: center;
+      color: #ccc;
+      font-size: 1rem;
+      padding: 1rem;
+
+      .empty {
+        font-size: 2rem;
+      }
+    }
+  }
+
+  .booking-section {
+    max-width: 400px;
+    width: 700px;
+    flex-direction: column;
+    align-items: flex-start;
+    margin-right: 0;
+  }
+
+  .car-service-box {
+    select {
+      max-width: 100% !important;
+      font-size: 1rem !important;
+    }
+
+    label {
+      font-size: 1.2rem !important;
+    }
+  }
+}
