@@ -9,6 +9,11 @@ import Home from './pages/Home';
 import NavBar from './components/NavBar';
 import NotFound from './pages/NotFound';
 import Services from './pages/Services';
+import Calendar from './pages/Calendar';
+import Footer from './components/Footer';
+import FAQ from './pages/FAQ';
+
+import './styles/main.scss';
 
 function App() {
   const isAuthenticated = !!localStorage.getItem('token');
@@ -37,7 +42,13 @@ function App() {
         />
         <Route path="/services" element={<Services />} />
         <Route path="*" element={<NotFound />} />
+        <Route path="/calendar" element={<Calendar />} />
+        <Route path="*" element={<NotFound />} />
+        <Route path="*" element={<NotFound />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="*" element={<NotFound />} />
       </Routes>
+      <Footer />
     </Router>
   );
 }
