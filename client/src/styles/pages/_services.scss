@@ -1,48 +1,127 @@
-.services-container {
-  min-height: 100vh;
-  background: url('../../assets/background-tire-marks.png') no-repeat center center;
-  background-size: cover;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 2rem;
-}
+@use "../utilities/variables" as vars;
+@use "../utilities/mixins" as mixins;
 
-.services-title {
-  font-size: 3rem;
-  font-weight: bold;
-  margin-bottom: 1rem;
-}
-
-.services-description {
-  font-size: 1.5rem;
-  margin-bottom: 2rem;
+.services-page {
+  padding: vars.$services-padding;
+  color: vars.$white-color;
   text-align: center;
+
+  .services-title {
+    @include mixins.service-title-style(vars.$services-title-font-size, vars.$services-title-margin-bottom, vars.$services-title-font-weight);
+  }
+
+  .services-grid {
+    display: flex;
+    flex-direction: column;
+    gap: vars.$gap-medium;
+  }
+
+  .service-card {
+    @include mixins.service-card-style(vars.$services-card-bg-color, vars.$services-card-padding, vars.$services-card-border-radius);
+
+    .service-name {
+      font-size: vars.$services-name-font-size;
+      margin-bottom: vars.$services-name-margin-bottom;
+      font-weight: vars.$services-name-font-weight;
+    }
+
+    .service-description {
+      font-size: vars.$services-description-font-size;
+      margin-bottom: vars.$services-description-margin-bottom;
+    }
+
+    .service-price {
+      font-size: vars.$services-price-font-size;
+      font-weight: vars.$services-price-font-weight;
+      margin-bottom: vars.$services-price-margin-bottom;
+    }
+
+    .service-button {
+      @include mixins.service-button-style(vars.$services-button-bg-color, vars.$services-button-color, vars.$services-button-padding, vars.$services-button-border-radius, vars.$services-button-font-size);
+    }
+  }
+
+  .service-icon {
+    height: 40px;
+    width: auto;
+  }
 }
 
-.services-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: center;
-}
-
-.service-item {
-  background: rgba(0, 0, 0, 0.7);
+/* Styling for the notice section in the Services page */
+.services-notice {
+  margin-top: 2rem;
   padding: 1rem;
-  border-radius: 8px;
-  text-align: center;
-  max-width: 300px;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 0.5rem;
+  color: #495057;
+  font-size: 0.9rem;
+  line-height: 1.5;
 }
 
-.service-title {
-  font-size: 1.5rem;
-  font-weight: bold;
-  margin-bottom: 0.5rem;
+.services-notice p {
+  margin: 0.5rem 0;
 }
 
-.service-description {
-  font-size: 1rem;
+@media (min-width: 768px) {
+  .services-page {
+    .services-title {
+      font-size: 2rem;
+      text-align: left;
+    }
+
+    .services-grid {
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+
+    .service-card {
+      flex: 0 1 calc(50% - 1rem);
+    }
+  }
+
+  .service-icon {
+    max-width: 200px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .services-page {
+    .services-title {
+      font-size: 2.5rem;
+      margin-left: 2.6rem;
+    }
+
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+      margin: 0 auto;
+      background-color: vars.$services-card-bg-color;
+      border: 1px solid vars.$services-card-bg-color;
+      border-radius: 30px;
+    }
+
+    .service-card {
+      background: none;
+
+      .service-name {
+        font-size: 1.5rem;
+      }
+
+      .service-description {
+        font-size: 1rem;
+      }
+
+      .service-price {
+        font-size: 1.25rem;
+      }
+
+      .booking-button {
+        font-size: 1.1rem;
+      }
+    }
+  }
 }
