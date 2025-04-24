@@ -161,7 +161,7 @@ app.get('/admin', authenticateToken, authorizeRole('admin'), async (req, res) =>
 });
 
 app.get('/client', authenticateToken, authorizeRole('client'), async (req, res) => {
-  const bookings = await prisma.booking.findMany({ where: { userId: req.user.id } });
+  const bookings = await prisma.booking.findMany({ where: { user_id: req.user.id } });
   res.json({ bookings });
 });
 
@@ -177,6 +177,15 @@ app.get('/auth/confirm', async (req, res) => {
     res.json({ message: 'Email address confirmed successfully!' });
   } catch (error) {
     res.status(400).json({ error: 'Failed to confirm email address.' });
+  }
+});
+
+app.get('/api/services', async (req, res) => {
+  try {
+    const services = await prisma.service.findMany();
+    res.json(services);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch services.' });
   }
 });
 
