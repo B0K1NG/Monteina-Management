@@ -26,6 +26,9 @@ logs
 # Migrations
 migration.sql
 
+# Seeds
+seed.ts
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
