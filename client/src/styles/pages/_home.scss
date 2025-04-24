@@ -14,7 +14,7 @@
 
     .home-title {
       font-size: $font-size-title;
-      font-weight: bold;
+      font-weight: 400;
     }
 
     .home-subtitle {
@@ -220,12 +220,14 @@
 
     .home-footer {
       .footer-benefits {
+        @include flex-center(row, $gap-medium);
+
         .benefit img {
           width: 40px;
         }
 
         .benefit span {
-          font-size: 1.35rem;
+          font-size: 1.5rem;
         }
       }
     }

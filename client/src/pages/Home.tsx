@@ -1,12 +1,35 @@
+import { useNavigate } from 'react-router-dom';
+
 export default function Home() {
+
+  const navigate = useNavigate();
+
+  const handleBookingClick = () => {
+    const isAuthenticated = !!localStorage.getItem('token');
+    if (isAuthenticated) {
+      navigate('/calendar');
+    } else {
+      navigate('/login');
+    };
+  };
+
+  const handleMoreClick = () => {
+    const isAuthenticated = !!localStorage.getItem('token');
+    if (isAuthenticated) {
+      navigate('/services');
+    } else {
+      navigate('/login');
+    };
+  };
+
   return (
     <div className="home-container">
       <header className="home-header">
         <h1 className="home-title">MONTEINA</h1>
         <p className="home-subtitle">Kur tikslumas susitinka su patikimumu</p>
         <div className="home-buttons">
-          <button className="btn-primary">Užsakyti Paslaugą</button>
-          <button className="btn-secondary">Sužinoti Daugiau</button>
+          <button onClick={handleBookingClick} className="btn-primary">Užsakyti Paslaugą</button>
+          <button onClick={handleMoreClick} className="btn-secondary">Sužinoti Daugiau</button>
         </div>
       </header>
 
