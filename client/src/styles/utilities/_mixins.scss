@@ -202,3 +202,116 @@
   justify-content: center;
   gap: $gap;
 }
+
+@mixin service-card-style($bg-color, $padding, $border-radius) {
+  background-color: $bg-color;
+  padding: $padding;
+  border-radius: $border-radius;
+}
+
+@mixin service-title-style($font-size, $margin-bottom, $font-weight) {
+  font-size: $font-size;
+  margin-bottom: $margin-bottom;
+  font-weight: $font-weight;
+}
+
+@mixin service-button-style($bg-color, $color, $padding, $border-radius, $font-size) {
+  background-color: $bg-color;
+  color: $color;
+  padding: $padding;
+  border-radius: $border-radius;
+  font-size: $font-size;
+  border: none;
+  cursor: pointer;
+}
+
+@mixin calendar-section-style {
+  padding: vars.$calendar-padding;
+  border-radius: vars.$calendar-border-radius;
+}
+
+@mixin calendar-title-style {
+  @include service-title-style(
+    vars.$calendar-title-font-size,
+    vars.$calendar-title-margin-bottom,
+    vars.$calendar-title-font-weight
+  );
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+@mixin calendar-header-style {
+  text-align: center;
+  margin-bottom: 0.5rem;
+
+  .month-label {
+    font-size: vars.$calendar-header-font-size;
+    font-weight: vars.$calendar-header-font-weight;
+    margin-bottom: vars.$calendar-header-margin-bottom;
+  }
+}
+
+@mixin day-circle-style {
+  width: vars.$day-circle-size;
+  height: vars.$day-circle-size;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: background-color 0.2s ease;
+
+  &:hover {
+    background-color: vars.$day-circle-hover-bg;
+  }
+
+  &.selected {
+    background-color: vars.$day-circle-selected-bg;
+    border: none;
+  }
+
+  &.disabled {
+    color: #777;
+    text-decoration: line-through;
+    pointer-events: none;
+  }
+}
+
+@mixin time-slot-style {
+  background-color: vars.$time-slot-bg;
+  border-radius: vars.$time-slot-border-radius;
+  padding: 0.5rem 0;
+  text-align: center;
+  font-size: vars.$time-slot-font-size;
+  cursor: pointer;
+
+  &.selected {
+    background-color: vars.$day-circle-selected-bg;
+    font-weight: bold;
+    border: none;
+  }
+}
+
+@mixin confirm-button-style {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: vars.$confirm-button-bg;
+  color: #fff;
+  border: 1px solid #fff;
+  border-radius: vars.$time-slot-border-radius;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s;
+
+  &:hover {
+    background-color: vars.$confirm-button-hover-bg;
+  }
+
+  &:disabled {
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    cursor: not-allowed;
+  }
+}

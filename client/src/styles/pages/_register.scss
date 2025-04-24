@@ -50,7 +50,7 @@
       }
 
       .register-button {
-        @include mixins.register-button-style(vars.$register-button-bg, vars.$register-input-font-size, vars.$register-button-border-radius, vars.$register-button-hover-bg);
+        @include mixins.register-button-style(vars.$register-button-bg, vars.$register-input-font-size, vars.$login-button-border-radius, vars.$register-button-hover-bg);
       }
     }
 
@@ -63,8 +63,8 @@
         margin-bottom: vars.$register-gap;
 
         img {
-          width: vars.$register-icon-size;
-          height: 2px;
+          width: vars.$login-separator-width;
+          height: vars.$login-separator-height;
         }
 
         span {
@@ -87,9 +87,10 @@
     .login-register {
       margin-top: vars.$register-gap;
       font-size: vars.$register-input-font-size;
+      color: #C6C6C6;
 
       a {
-        color: vars.$register-text-color;
+        color: vars.$login-link-color;
         text-decoration: none;
 
         &:hover {
@@ -181,7 +182,6 @@
   }
 }
 
-// Media Queries
 @media (min-width: 768px) {
   .register-container {
     flex-direction: row;
