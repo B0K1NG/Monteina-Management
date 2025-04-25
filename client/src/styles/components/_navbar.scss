@@ -1,5 +1,5 @@
-@import '../utilities/_variables';
-@import '../utilities/_mixins';
+@use '../utilities/variables' as *;
+@use '../utilities/_mixins' as *;
 
 .navbar {
   display: flex;
