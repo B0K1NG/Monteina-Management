@@ -80,42 +80,6 @@
       }
     }
   }
-
-  .home-footer {
-    background-color: $primary-bg-color;
-    padding: $padding-section;
-    border-radius: $border-radius-small;
-    text-align: center;
-    margin-top: $gap-medium;
-
-    .footer-title {
-      font-size: $font-size-section-title;
-      margin-bottom: $gap-medium;
-      font-weight: 400;
-      text-align: left;
-    }
-
-    .footer-benefits {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: $gap-medium;
-
-      .benefit {
-        @include flex-center(row);
-
-        margin: 1rem;
-
-        img {
-          width: 30px;
-          height: auto;
-        }
-
-        span {
-          font-size: $font-size-subtitle;
-        }
-      }
-    }
-  }
 }
 
 @media (min-width: 768px) {
@@ -135,23 +99,6 @@
     .how-it-works {
       grid-column: 2 / 3;
       grid-row: 1 / 2;
-    }
-
-    .home-footer {
-      grid-column: 1 / 3;
-      grid-row: 2 / 3;
-
-      .footer-benefits {
-        @include flex-left(row, $gap-medium);
-
-        .benefit img {
-          width: 35px;
-        }
-
-        .benefit span {
-          font-size: $font-size-step-description;
-        }
-      }
     }
   }
 }
@@ -212,20 +159,6 @@
               text-align: left;
             }
           }
-        }
-      }
-    }
-
-    .home-footer {
-      .footer-benefits {
-        @include flex-center(row, $gap-medium);
-
-        .benefit img {
-          width: 40px;
-        }
-
-        .benefit span {
-          font-size: 1.5rem;
         }
       }
     }
