@@ -1,0 +1,126 @@
+// Dropdown styles
+.dropdown {
+  position: relative;
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.6rem;
+
+  &-header {
+    background-image: url('../../assets/icons/down-chevron.png'); // Path to the icon
+    background-color: rgba(35, 38, 38, 0.8);
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center; // Position the icon
+    background-size: 12px 12px; // Adjust the size of the icon
+    color: #ccc; // Added placeholder color styling
+    padding: 0.5rem;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    padding-right: 1.5rem; // Add space for the arrow
+
+  }
+
+  &-list {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: rgba(35, 38, 38, 1);
+    border-radius: 4px;
+    margin-top: 0.25rem;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+    margin-top: 0.4rem;
+  }
+
+  &-item {
+    padding: 0.5rem;
+    color: #fff;
+    cursor: pointer;
+    transition: background-color 0.2s;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    &.selected {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+  }
+
+  &-disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+}
+
+/* Add styling for the dropdown search input to match the dropdown list items */
+.dropdown-search {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background-color: #fff;
+  color: #333;
+  border-bottom: 1px solid #ccc;
+}
+
+/* Ensure the input matches the dropdown list items */
+.dropdown-search:hover,
+.dropdown-search:focus {
+  background-color: #f9f9f9;
+}
+
+/* Add spacing between the search input and the list */
+.dropdown-list-wrapper {
+  padding-top: 5px;
+}
+
+// Tablet styles
+@media (min-width: 768px) {
+
+    .dropdown {
+
+    &-header {
+      font-size: 0.9rem;
+      padding: 0.75rem;
+      margin-bottom: 0rem;
+    }
+
+    &-list {
+      font-size: 0.9rem;
+      margin-top: 0.9rem;
+    }
+
+    &-item {
+      padding: 0.75rem;
+    }
+  }
+}
+
+  // PC styles
+  @media (min-width: 1024px) {
+
+    .dropdown {
+
+    &-header {
+      font-size: 1rem;
+      padding: 0.8rem 0.3rem;
+    }
+
+    &-list {
+      margin-left: -3rem;
+      width: 300px;
+    }
+
+    &-item {
+      padding: 1rem;
+    }
+  }
+}
