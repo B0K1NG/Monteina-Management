@@ -67,28 +67,6 @@ export default function Home() {
           </div>
         </div>
       </section>
-
-      <footer className="home-footer">
-        <p className="footer-title">Kodėl verta rinktis mus</p>
-        <div className="footer-benefits">
-          <div className="benefit">
-            <img src="/src/assets/icons/check_mark_icon.png" alt="Checkmark Icon" />
-            <span>Greita ir patogu</span>
-          </div>
-          <div className="benefit">
-            <img src="/src/assets/icons/like_icon.png" alt="Like Icon" />
-            <span>Profesionalūs meistrai</span>
-          </div>
-          <div className="benefit">
-            <img src="/src/assets/icons/bill_icon.png" alt="Invoice Icon" />
-            <span>Geriausios kainos</span>
-          </div>
-          <div className="benefit">
-            <img src="/src/assets/icons/wifi_icon.png" alt="Internet Icon" />
-            <span>Tavo patogumui – internetu</span>
-          </div>
-        </div>
-      </footer>
     </div>
   );
 }
