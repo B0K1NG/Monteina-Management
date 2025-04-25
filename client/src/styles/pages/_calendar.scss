@@ -1,7 +1,6 @@
 @use "../utilities/variables" as vars;
 @use "../utilities/mixins" as mixins;
 
-
 .booking-page {
   display: flex;
   flex-direction: column;
@@ -86,9 +85,12 @@
       text-align: center;
       color: #ccc;
       font-size: 1rem;
-      width: 100%;
       padding: 1rem;
     }
+  }
+
+  .service-options-choice {
+    background-color: #232626;
   }
 
   .confirm-button {
@@ -140,23 +142,13 @@
   }
 
   .car-service-box {
-    padding: 1rem;
     border-radius: vars.$calendar-border-radius;
 
     label {
       display: block;
       margin-bottom: 0.5rem;
       font-size: 1rem;
-    }
-
-    select {
-      width: 100%;
-      padding: 0.5rem;
-      border: none;
-      border-radius: 4px;
-      background-color: rgba(35, 38, 38, 0.8);
-      color: #fff;
-      margin-bottom: 0.75rem;
+      color: #ccc;
     }
 
     .optional-service {
@@ -171,115 +163,226 @@
       }
     }
   }
+
+  .service-valves-optional {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1rem;
+  }
+
+  .service-valves-optional label {
+    display: flex;
+    align-items: center;
+    border: 2px solid #ccc;
+    background-color: #232626;
+    padding: 0.8rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+    margin-bottom: 0rem;
+  }
+
+  .service-valves-optional input[type="checkbox"] {
+    appearance: none;
+    width: 16px;
+    height: 16px;
+    margin-left: 1rem;
+    border: 1px solid #fff;
+    background: none;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  input[type="checkbox"]:checked {
+    background: none;
+  }
+  
+  input[type="checkbox"]:checked::after {
+    content: '✔';
+    color: #fff;
+    font-size: 12px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  .booking-section {
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+
+    .car-service-title {
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .car-service-box-information-box {
+      background-color: rgba(35, 38, 38, 0.8);
+      padding: 0.5rem;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+    }
+
+    .car-service-box-information {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+  }
 }
 
+// Tablet: 768px–1023px
 @media (min-width: 768px) and (max-width: 1023px) {
   .booking-page {
     display: flex;
     flex-direction: row;
     align-items: flex-start;
-    gap: 2rem;
     padding: 0 5%;
-  }
 
-  .calendar-section {
-    flex: 3;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
+    .calendar-section {
+      flex: 3;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 50px;
 
-    .calendar-title,
-    .calendar-header,
-    .week-days-wrapper,
-    .time-slots,
-    .confirm-button {
-      align-self: center;
-    }
-
-    .calendar-header {
-      .month-label {
-        font-size: 1.2rem !important;
+      .calendar-title,
+      .calendar-header,
+      .week-days-wrapper,
+      .time-slots,
+      .confirm-button {
+        align-self: center;
       }
-    }
 
-    .calendar-title {
-      font-size: 2rem !important;
-      margin-bottom: 1.5rem !important;
-    }
-  }
-
-  .confirm-button {
-    width: 200px !important;
-  }
-
-  .week-days-wrapper {
-    gap: 1rem;
-
-    .arrow-btn {
-      font-size: 1.5rem;
-    }
-
-    .week-days {
-      gap: 1rem;
-
-      .day-circle {
-        width: 45px;
-        height: 45px;
-
-        .day-number {
+      .calendar-header {
+        .month-label {
           font-size: 1.2rem !important;
         }
       }
-    }
-  }
 
-  .time-slots {
-    display: grid;
-    grid-template-columns: repeat(6, 1fr) !important;
-    justify-content: center;
-    gap: 0.75rem;
-    margin-bottom: 1.5rem;
-
-    .time-slot {
-      width: 52px;
-      padding: 2rem;
-      text-align: center;
-    }
-    &.empty {
-      text-align: center;
-      color: #ccc;
-      font-size: 1rem;
-      padding: 1rem;
-
-      .empty {
-        font-size: 2rem;
+      .calendar-title {
+        font-size: 2rem !important;
+        margin-bottom: 1.5rem !important;
       }
-  }
-}
+    }
 
-  .booking-section {
-    flex: 2;
-    max-width: 320px;
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-  }
+    .confirm-button {
+      width: 200px !important;
+    }
 
-  select {
-    max-width: 100% !important;
-  }
+    .week-days-wrapper {
+      gap: 0rem;
 
-  .car-section-wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 1rem;
+      .arrow-btn {
+        font-size: 1.5rem;
+      }
 
-    .car-count-box {
-      grid-column: span 2;
+      .week-days {
+        gap: 1rem;
+
+        .day-circle {
+          width: 45px;
+          height: 45px;
+
+          .day-number {
+            font-size: 1.2rem !important;
+          }
+        }
+      }
+    }
+
+    .car-service-box-information-box {
+      width: 300px;
+    }
+
+    .time-slots {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr) !important;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+
+      .time-slot {
+        width: 80px;
+        text-align: center;
+      }
+
+      &.empty {
+        text-align: center;
+        color: #ccc;
+        font-size: 1rem;
+        padding: 1rem;
+
+        .empty {
+          font-size: 2rem;
+        }
+      }
+    }
+
+    .booking-section {
+      flex: 2;
+      max-width: 320px;
+      padding-left: 3rem;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .car-section-wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+
+      .car-count-box {
+        grid-column: span 2;
+      }
+    }
+
+    .car-service-box {
+      .service-options {
+        display: grid !important;
+        grid-template-columns: 1fr auto;
+        align-items: center;
+        gap: vars.$calendar-gap;
+        width: 300px;
+      }
+      .service-options-choice {
+        justify-self: start;
+        border-radius: 4px;
+        
+        .dropdown {
+          width: 145px;
+          border-radius: none;
+          
+          &-header {
+            font-size: 0.9rem;
+            padding: 0.8rem 0.45rem;
+          }
+        }
+      }
+      .service-valves-optional {
+        margin-top: 0;
+        margin-right: 2rem;
+      }
+    }
+  
+    .service-valves-optional label {
+      width: 125px;
+      height: auto;
+      font-size: 0.9rem;
+    }
+  
+    .service-valves-optional input[type="checkbox"] {
+      width: 30px;
+      height: 20px;
     }
   }
 }
 
+// Desktop: 1024px+
 @media (min-width: 1024px) {
   .booking-page {
     display: flex;
@@ -292,6 +395,10 @@
 
   .day-number {
     font-size: 1.3rem !important;
+  }
+
+  .car-service-box-information-box {
+    width: 450px;
   }
 
   .calendar-section {
@@ -375,11 +482,13 @@
   }
 
   .booking-section {
-    max-width: 400px;
-    width: 700px;
+    max-width: 450px;
+    width: 100%;
+    padding: 0rem !important;
     flex-direction: column;
     align-items: flex-start;
     margin-right: 0;
+    margin-top: 6rem !important;
   }
 
   .car-service-box {
@@ -388,8 +497,50 @@
       font-size: 1rem !important;
     }
 
-    label {
-      font-size: 1.2rem !important;
+    .service-valves-optional label {
+      padding: 0.8rem 0.7rem;
+      width: 190px;
+      justify-content: space-between;
+      font-size: 1rem;
     }
+
+    .car-service-box-information {
+      padding: 1rem;
+      max-width: 800px;
+      width: 430px;
+    }
+
+    .service-options {
+      display: flex !important;
+      justify-content: center;
+      align-items: center;
+
+      gap: vars.$calendar-gap;
+      width: 100%; // Match the width of the boxes above
+      max-width: 450px; // Ensure it doesn't exceed the width of the boxes
+    }
+    .service-options-choice {
+      justify-self: start;
+      border-radius: 10px;
+
+      .dropdown {
+        width: 190px;
+        border-radius: none;
+        
+        &-header {
+          font-size: 1rem;
+        }
+      }
+    }
+    .service-valves-optional {
+      justify-self: end;
+      margin-top: 0rem;
+      width: 190px; 
+    }
+  }
+  
+  .car-service-title {
+    text-align: left !important;
+    padding-left: 0.9rem !important;
   }
 }
