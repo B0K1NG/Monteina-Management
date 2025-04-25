@@ -516,8 +516,8 @@
       align-items: center;
 
       gap: vars.$calendar-gap;
-      width: 100%; // Match the width of the boxes above
-      max-width: 450px; // Ensure it doesn't exceed the width of the boxes
+      width: 100%;
+      max-width: 450px;
     }
     .service-options-choice {
       justify-self: start;
