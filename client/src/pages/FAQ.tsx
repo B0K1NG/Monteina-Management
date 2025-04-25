@@ -15,7 +15,7 @@ const FAQ = () => {
     { question: ' Ar nurodyta kaina taikoma visiems ratų kiekiams?', answer: 'Pateiktos kainos taikomos darbui su 1 ratu. Esant kitokiam ratų skaičiui, kaina gali keistis. Avansas nėra grąžinamas.' },
 
     { question: 'Ar reikia atvykti tiksliai nurodytu laiku?', answer: 'Taip, siekiant užtikrinti sklandų darbą ir kitų klientų laikų laikymąsi, prašome atvykti tiksliai rezervuotu laiku.' },
-    { question: 'Ar galiu pakeisti ar atšaukti rezervaciją?', answer: 'Taip, prisijungę prie savo paskyros galėsite valdyti rezervacijas – keisti laiką ar atšaukti paslaugą, jei liko pakankamai laiko iki rezervacijos. Avansas nėra grąžinamas.'},
+    { question: 'Ar galiu pakeisti ar atšaukti rezervaciją?', answer: 'Galite tik atšaukti savo vizitą, koreguoti vizito galimybės nėra. Avansas nėra grąžinamas.'},
     { question: 'Kaip žinoti, ar mano rezervacija patvirtinta?', answer: ' Patvirtinimą gausite el. paštu po avanso apmokėjimo. Taip pat galite matyti savo rezervacijas naudotojo paskyroje.' },
     { question: 'Ar galiu atsiskaityti vietoje?', answer: ' Dalis sumos apmokama iš anksto kaip avansas, o likusi suma gali būti sumokėta vietoje po paslaugos suteikimo.' },
     
