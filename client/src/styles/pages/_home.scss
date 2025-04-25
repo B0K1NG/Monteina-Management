@@ -71,7 +71,8 @@
 
         .step-title {
           font-size: $font-size-step-title;
-          font-weight: bold;
+          font-weight: 400;
+          margin-bottom: 0.3rem;
         }
 
         .step-description {
@@ -133,6 +134,11 @@
     .how-it-works {
       padding: 2rem;
       border-radius: 15px;
+      margin-top: 5rem !important;
+
+      .section-title {
+        font-size: 1.9rem !important;
+      }
 
       .steps-container {
         .step {
@@ -149,13 +155,13 @@
             width: 230px;
 
             .step-title {
-              font-size: $font-size-step-title;
+              font-size: 1.5rem;
               margin-bottom: $gap-small;
               text-align: left;
             }
 
             .step-description {
-              font-size: $font-size-step-description;
+              font-size: 1rem;
               text-align: left;
             }
           }
