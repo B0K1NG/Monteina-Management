@@ -17,6 +17,7 @@
   }
 
   .service-card {
+    text-align: left;
     @include mixins.service-card-style(vars.$services-card-bg-color, vars.$services-card-padding, vars.$services-card-border-radius);
 
     .service-name {
@@ -34,33 +35,28 @@
       font-size: vars.$services-price-font-size;
       font-weight: vars.$services-price-font-weight;
       margin-bottom: vars.$services-price-margin-bottom;
+      margin-top: vars.$services-price-margin-bottom;
     }
 
     .service-button {
-      @include mixins.service-button-style(vars.$services-button-bg-color, vars.$services-button-color, vars.$services-button-padding, vars.$services-button-border-radius, vars.$services-button-font-size);
+      background-color: transparent;
+      color: vars.$services-button-color;
+      font-size: vars.$services-button-font-size;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease-in-out;
+
+      &:hover {
+        color: vars.$hover-color;
+      }
     }
   }
 
   .service-icon {
     height: 40px;
     width: auto;
+    margin-bottom: 1rem;
   }
-}
-
-/* Styling for the notice section in the Services page */
-.services-notice {
-  margin-top: 2rem;
-  padding: 1rem;
-  background-color: #f8f9fa;
-  border: 1px solid #dee2e6;
-  border-radius: 0.5rem;
-  color: #495057;
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
-
-.services-notice p {
-  margin: 0.5rem 0;
 }
 
 @media (min-width: 768px) {
@@ -78,7 +74,7 @@
     }
 
     .service-card {
-      flex: 0 1 calc(50% - 1rem);
+      flex: 0 1 calc(45% - 1rem);
     }
   }
 
@@ -99,14 +95,10 @@
       grid-template-columns: repeat(3, 1fr);
       gap: 2rem;
       margin: 0 auto;
-      background-color: vars.$services-card-bg-color;
-      border: 1px solid vars.$services-card-bg-color;
       border-radius: 30px;
     }
 
     .service-card {
-      background: none;
-
       .service-name {
         font-size: 1.5rem;
       }

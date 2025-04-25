@@ -58,15 +58,13 @@ export default function Services() {
             <h2 className="service-name">{service.name}</h2>
             <p className="service-description">{service.description}</p>
             <p className="service-price">
-              €{service.price_min} - €{service.price_max}
+              {service.price_min} - {service.price_max} €
             </p>
-            <button onClick={handleBookingClick} className='service-button'>Rezervuoti laiką</button>
+            <button onClick={handleBookingClick} className='service-button'>
+              <span className="button-text">Rezervuoti laiką</span> <span className="arrow-right">→</span>
+            </button>
           </div>
         ))}
-      </div>
-      <div className="services-notice">
-        <p>*Jei reikalingas ventilio keitimas, taikomas papildomas 5 € mokestis.</p>
-        <p>*Pateiktos kainos taikomos darbui su 1 ratu. Esant kitokiam ratų skaičiui, kaina gali keistis.</p>
       </div>
     </div>
   );
