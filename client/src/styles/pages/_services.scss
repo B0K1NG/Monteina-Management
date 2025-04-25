@@ -17,7 +17,7 @@
   }
 
   .service-card {
-    text-align: left;
+    text-align: center;
     @include mixins.service-card-style(vars.$services-card-bg-color, vars.$services-card-padding, vars.$services-card-border-radius);
 
     .service-name {
