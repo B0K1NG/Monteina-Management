@@ -10,12 +10,12 @@ const FAQ = () => {
 
   const faqs = [
     { question: 'Kaip rezervuoti montavimo paslaugą?', answer: 'Išsirinkite paslaugą, pasirinkite jums patogų laiką kalendoriuje ir patvirtinkite rezervaciją atlikdami avansinį mokėjimą.' },
-    { question: 'Ar galima vienu metu užsakyti paslaugas keliems automobiliams?', answer: 'Taip! Rezervacijos metu galite nurodyti automobilių skaičių ir kiekvienam iš jų pasirinkti skirtingas paslaugas.' },
-    { question: 'Kiek kainuoja montavimo paslaugos?', answer: 'Paslaugų kainos nurodytos paslaugų puslapyje. Galutinė kaina priklauso nuo pasirinktų paslaugų bei automobilių skaičiaus – visa tai matysite suvestinėje prieš apmokėjimą.' },
-    { question: ' Ar galiu pakeisti ar atšaukti rezervaciją?', answer: 'Taip, prisijungę prie savo paskyros galėsite valdyti rezervacijas – keisti laiką ar atšaukti paslaugą, jei liko pakankamai laiko iki rezervacijos.' },
+    { question: 'Ar paslaugos kaina apima ventilio keitimą?', answer: 'Jei reikalingas ventilio keitimas, taikomas papildomas 5 € mokestis.' },
+    { question: 'Kokius automobilius aptarnaujate?', answer: 'Aptarnaujami tik lengvieji automobiliai ir džipai.' },
+    { question: ' Ar nurodyta kaina taikoma visiems ratų kiekiams?', answer: 'Pateiktos kainos taikomos darbui su 1 ratu. Esant kitokiam ratų skaičiui, kaina gali keistis. Avansas nėra grąžinamas.' },
 
     { question: 'Ar reikia atvykti tiksliai nurodytu laiku?', answer: 'Taip, siekiant užtikrinti sklandų darbą ir kitų klientų laikų laikymąsi, prašome atvykti tiksliai rezervuotu laiku.' },
-    { question: 'Ar man reikia pasiruošti automobiliui prieš atvykstant?', answer: 'Ne, viskuo pasirūpins mūsų meistrai. Svarbu, kad automobilis būtų švarus ir pasiekiamas, jei reikia prieigos prie ratų ar padangų.' },
+    { question: 'Ar galiu pakeisti ar atšaukti rezervaciją?', answer: 'Taip, prisijungę prie savo paskyros galėsite valdyti rezervacijas – keisti laiką ar atšaukti paslaugą, jei liko pakankamai laiko iki rezervacijos. Avansas nėra grąžinamas.'},
     { question: 'Kaip žinoti, ar mano rezervacija patvirtinta?', answer: ' Patvirtinimą gausite el. paštu po avanso apmokėjimo. Taip pat galite matyti savo rezervacijas naudotojo paskyroje.' },
     { question: 'Ar galiu atsiskaityti vietoje?', answer: ' Dalis sumos apmokama iš anksto kaip avansas, o likusi suma gali būti sumokėta vietoje po paslaugos suteikimo.' },
     
