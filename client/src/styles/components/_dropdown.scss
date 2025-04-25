@@ -31,7 +31,7 @@
     background-color: rgba(35, 38, 38, 1);
     border-radius: 4px;
     margin-top: 0.25rem;
-    max-height: 200px;
+    max-height: 110px;
     overflow-y: auto;
     z-index: 1000;
     margin-top: 0.4rem;
@@ -94,6 +94,7 @@
     &-list {
       font-size: 0.9rem;
       margin-top: 0.9rem;
+      max-height: 200px;
     }
 
     &-item {
