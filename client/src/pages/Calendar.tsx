@@ -1,17 +1,28 @@
+import axios from '../api/axios';
+import Dropdown from '../components/Dropdown';
+
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from '../api/axios';
+import { getAllMakes, getModelsForMake } from '../api/vehicles';
+
 import '../styles/pages/_calendar.scss';
 
 const availableTimes = [
   '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',
   '12:00', '12:30', '13:00', '13:30', '14:00', '14:30',
   '15:00', '15:30', '16:00', '16:30', '17:00', '17:30',
-  '18:00', '18:30', '19:00', '19:30'
+  '18:00', '18:30', '19:00', '19:30',
 ];
 
+const tireSizes = [...Array(16)].map((_, i) => `R${i + 10}`);
+
 const getWeekDays = (startDate: Date) => {
-  const days = [];
+  const days: {
+    fullDate: string;
+    dayNumber: number;
+    dayName: string;
+    isPast: boolean;
+  }[] = [];
   const today = new Date();
   for (let i = -1; i < 6; i++) {
     const date = new Date(startDate);
@@ -29,41 +40,81 @@ const getWeekDays = (startDate: Date) => {
 export default function BookingCalendar() {
   const [selectedDate, setSelectedDate] = useState('');
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
-  const [carCount, setCarCount] = useState(1);
-  const [selectedServices, setSelectedServices] = useState<{ [key: string]: string | boolean }>({});
+  const [carDetails, setCarDetails] = useState({
+    make: '',
+    model: '',
+    year: '',
+    tireSize: '',
+  });
+  const [valveChange, setValveChange] = useState(false);
+  const [selectedService, setSelectedService] = useState('');
   const [services, setServices] = useState<{ id: number; name: string }[]>([]);
+  const [carMakes, setCarMakes] = useState<string[]>([]);
+  const [carModels, setCarModels] = useState<{ [key: string]: string[] }>({});
+  const [selectedMake, setSelectedMake] = useState('');
   const [weekStart, setWeekStart] = useState(new Date());
   const navigate = useNavigate();
 
-  const weekDays = getWeekDays(weekStart);
-
   useEffect(() => {
-    const today = new Date();
-    setSelectedDate(today.toISOString().split('T')[0]);
-  }, []);
-
-  useEffect(() => {
-    const fetchServices = async () => {
+    const fetchMakes = async () => {
       try {
-        const response = await axios.get('/api/services');
-        setServices(response.data);
+        const makes = await getAllMakes();
+        setCarMakes(makes.map((make: any) => make.Make_Name));
       } catch (error) {
-        console.error('Failed to fetch services:', error);
+        console.error('Error fetching makes:', error);
       }
     };
-    fetchServices();
+
+    fetchMakes();
   }, []);
 
-  const handleServiceChange = (carIndex: number, service: string) => {
-    setSelectedServices(prev => ({ ...prev, [carIndex]: service }));
-  };
+  useEffect(() => {
+    if (!selectedMake) return;
+
+    const fetchModels = async () => {
+      if (carModels[selectedMake]) return;
+      try {
+        const models = await getModelsForMake(selectedMake);
+        setCarModels((prev) => ({
+          ...prev,
+          [selectedMake]: models.map((model: any) => model.Model_Name),
+        }));
+      } catch (error) {
+        console.error('Error fetching models:', error);
+      }
+    };
+
+    fetchModels();
+  }, [selectedMake, carModels]);
+
+  useEffect(() => {
+    setSelectedDate(new Date().toISOString().split('T')[0]);
+  }, []);
+
+  useEffect(() => {
+    axios
+      .get('/api/services')
+      .then((r) => setServices(r.data))
+      .catch(console.error);
+  }, []);
+
+  useEffect(() => {
+    setSelectedTime(null);
+  }, [selectedDate]);
+
+  const handleCarDetailChange = (
+    field: keyof typeof carDetails,
+    value: string
+  ) => setCarDetails((prev) => ({ ...prev, [field]: value }));
 
   const isBookingValid =
     selectedDate &&
     selectedTime &&
-    [...Array(carCount)].every((_, index) =>
-      typeof selectedServices[index] === 'string' && selectedServices[index] !== ''
-    );
+    carDetails.make &&
+    carDetails.model &&
+    carDetails.year &&
+    carDetails.tireSize &&
+    selectedService;
 
   const handleConfirm = () => {
     if (isBookingValid) navigate('/');
@@ -71,32 +122,23 @@ export default function BookingCalendar() {
 
   const getFilteredTimes = () => {
     const today = new Date().toISOString().split('T')[0];
-    if (!selectedDate) return availableTimes;
-    if (selectedDate !== today) return availableTimes;
+    if (!selectedDate || selectedDate !== today) return availableTimes;
 
     const now = new Date();
-    const currentTime = now.getHours() * 60 + now.getMinutes();
-
-    return availableTimes.filter(time => {
+    const currentMinutes = now.getHours() * 60 + now.getMinutes();
+    return availableTimes.filter((time) => {
       const [h, m] = time.split(':').map(Number);
-      return h * 60 + m > currentTime;
+      return h * 60 + m > currentMinutes;
     });
   };
 
   const times = getFilteredTimes();
+  const weekDays = getWeekDays(weekStart);
 
   return (
     <div className="booking-page">
       <section className="calendar-section">
-        <h2 className='calendar-title'>Pasirinkite laiką ir paslaugą</h2>
-        <input
-          type="date"
-          value={selectedDate}
-          min={new Date().toISOString().split('T')[0]}
-          onChange={(e) => setSelectedDate(e.target.value)}
-          style={{ display: 'none' }}
-        />
-
+        <h2 className="calendar-title">Pasirinkite laiką ir paslaugą</h2>
         <div className="calendar-header">
           <div className="month-label">
             {new Date(weekStart).toLocaleDateString('lt-LT', {
@@ -112,7 +154,8 @@ export default function BookingCalendar() {
             onClick={() => {
               const prev = new Date(weekStart);
               prev.setDate(prev.getDate() - 7);
-              if (prev >= new Date(new Date().setHours(0, 0, 0, 0))) setWeekStart(prev);
+              if (prev >= new Date(new Date().setHours(0, 0, 0, 0)))
+                setWeekStart(prev);
             }}
             disabled={weekStart <= new Date(new Date().setHours(0, 0, 0, 0))}
           >
@@ -123,13 +166,10 @@ export default function BookingCalendar() {
             {weekDays.map((day) => (
               <div
                 key={day.fullDate}
-                className={`day-circle ${selectedDate === day.fullDate ? 'selected' : ''} ${day.isPast ? 'disabled' : ''}`}
-                onClick={() => {
-                    if (!day.isPast) {
-                      setSelectedDate(day.fullDate);
-                      setSelectedTime(null);
-                    }
-                  }}
+                className={`day-circle ${
+                  selectedDate === day.fullDate ? 'selected' : ''
+                } ${day.isPast ? 'disabled' : ''}`}
+                onClick={() => !day.isPast && setSelectedDate(day.fullDate)}
               >
                 <div className="day-name">{day.dayName}</div>
                 <div className="day-number">{day.dayNumber}</div>
@@ -151,10 +191,12 @@ export default function BookingCalendar() {
 
         <div className={`time-slots ${times.length === 0 ? 'empty' : ''}`}>
           {times.length > 0 ? (
-            times.map(time => (
+            times.map((time) => (
               <div
                 key={time}
-                className={`time-slot ${selectedTime === time ? 'selected' : ''}`}
+                className={`time-slot ${
+                  selectedTime === time ? 'selected' : ''
+                }`}
                 onClick={() => setSelectedTime(time)}
               >
                 {time}
@@ -175,44 +217,78 @@ export default function BookingCalendar() {
       </section>
 
       <section className="booking-section">
-        <div className="car-section-wrapper">
-          <div className="car-count-box">
-            <h2>Automobilių kiekis</h2>
-            <div className="car-count-selector">
-              <button onClick={() => setCarCount(c => Math.max(1, c - 1))}>-</button>
-              <span>{carCount}</span>
-              <button onClick={() => setCarCount(c => c + 1)}>+</button>
+        <div className="car-service-box">
+          <div className='car-service-box-information-box'>
+            <h3 className="car-service-title">Automobilio duomenys</h3>
+            <div className="car-service-box-information">
+              <Dropdown
+                options={carMakes.map((m) => ({ value: m, label: m }))}
+                value={carDetails.make}
+                onChange={(value) => {
+                  handleCarDetailChange('make', value);
+                  setSelectedMake(value);
+                }}
+                placeholder="Gamintojas"
+                className="dropdown-make"
+                searchable={true}
+              />
+
+              <Dropdown
+                options={(carModels[carDetails.make] || []).map((m) => ({
+                  value: m,
+                  label: m,
+                }))}
+                value={carDetails.model}
+                onChange={(value) => handleCarDetailChange('model', value)}
+                placeholder="Modelis"
+                className="dropdown-model"
+                disabled={carDetails.make === ''}
+                searchable={true}
+              />
+
+              <Dropdown
+                options={Array.from({ length: 30 }, (_, i) => {
+                  const y = new Date().getFullYear() - i;
+                  return { value: String(y), label: String(y) };
+                })}
+                value={carDetails.year}
+                onChange={(value) => handleCarDetailChange('year', value)}
+                placeholder="Pagaminimo metai"
+                className="dropdown-year"
+              />
+
+              <Dropdown
+                options={tireSizes.map((sz) => ({ value: sz, label: sz }))}
+                value={carDetails.tireSize}
+                onChange={(value) => handleCarDetailChange('tireSize', value)}
+                placeholder="Ratų išmatavimai"
+                className="dropdown-tire-size"
+              />
             </div>
           </div>
 
-          {[...Array(carCount)].map((_, index) => (
-            <div key={index} className="car-service-box">
-              <label>Automobilis {index + 1}</label>
-              <select
-                value={typeof selectedServices[index] === 'string' ? selectedServices[index] : ''}
-                onChange={(e) => handleServiceChange(index, e.target.value)}
-              >
-                <option value="">Pasirinkite paslaugą</option>
-                {services.map(service => (
-                  <option key={service.id} value={service.name}>{service.name}</option>
-                ))}
-              </select>
+          <div className="service-options">
+            <div className="service-options-choice">
+              <Dropdown
+                options={services.map((s) => ({ value: s.name, label: s.name }))}
+                value={selectedService}
+                onChange={(value) => setSelectedService(value)}
+                placeholder="Pasirinkite paslaugą"
+                className="dropdown-service"
+              />
+            </div>
 
-              <div className="optional-service">
+            <div className="service-valves-optional">
+              <label>
+                Ventilių keitimas
                 <input
                   type="checkbox"
-                  checked={!!selectedServices[`ventiliu-${index}`]}
-                  onChange={(e) =>
-                    setSelectedServices(prev => ({
-                      ...prev,
-                      [`ventiliu-${index}`]: e.target.checked,
-                    }))
-                  }
-                />
-                <span>Reikalingas ventilių keitimas</span>
-              </div>
+                  checked={valveChange}
+                  onChange={(e) => setValveChange(e.target.checked)}
+                />{' '}
+              </label>
             </div>
-          ))}
+          </div>
         </div>
       </section>
     </div>
