@@ -117,8 +117,18 @@ export default function BookingCalendar() {
     selectedService;
 
   const handleConfirm = () => {
-    if (isBookingValid) navigate('/');
-  };
+    if (isBookingValid) {
+      navigate('/checkout', {
+      state: {
+        date: selectedDate,
+        time: selectedTime,
+        car: carDetails,
+        service: selectedService,
+        valve: valveChange,
+      },
+    });
+  }
+};
 
   const getFilteredTimes = () => {
     const today = new Date().toISOString().split('T')[0];
