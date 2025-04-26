@@ -1,13 +1,16 @@
 import express from 'express';
-import { Request, Response, NextFunction } from 'express';
-import cors from 'cors';
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import logger from './utils/logger';
+import checkoutRoutes from './routes/checkout';
+import cors from 'cors';
+
+import { Request, Response, NextFunction } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { sendConfirmationEmail } from './utils/mailer';
 import { authenticateToken, authorizeRole } from './middleware/auth';
-import logger from './utils/logger';
+import { generateToken } from './middleware/auth';
 
 dotenv.config();
 
@@ -28,6 +31,8 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use('/api/checkout', checkoutRoutes);
+
 // Sample route
 app.get('/', (req, res) => {
   res.send('API is working');
@@ -35,7 +40,6 @@ app.get('/', (req, res) => {
 
 app.post('/auth/register', async (req, res) => {
   const { email, password } = req.body;
-  logger.info(`Registration attempt for email: ${email}`);
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
@@ -44,42 +48,45 @@ app.post('/auth/register', async (req, res) => {
       data: { email, password: hashedPassword },
     });
 
-    const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET!, { expiresIn: '1h' });
+    const token = generateToken(user);
 
     await sendConfirmationEmail(email, token);
 
-    logger.info(`User registered successfully: ${email}`);
     res.status(201).json({ message: 'Registration successful.' });
   } catch (error) {
-    if (error instanceof Error) {
-      logger.error(`Registration failed for email: ${email} - ${error.message}`);
-    } else {
-      logger.error(`Registration failed for email: ${email} - Unknown error`);
-    }
     res.status(400).json({ error: 'Something went wrong, please try again.' });
   }
 });
 
-app.post('/auth/login', async (req, res) => {
-  const { email, password } = req.body;
+app.post(
+  '/auth/login',
+  async (req: Request, res: Response, next: NextFunction): Promise<void> => {
+    try {
+      const { email, password } = req.body;
 
-  const user = await prisma.user.findUnique({ where: { email } });
-  if (!user || !(await bcrypt.compare(password, user.password))) {
-    return void res.status(401).json({ error: 'Invalid credentials.' });
+      const user = await prisma.user.findUnique({ where: { email } });
+      if (!user) {
+        res.status(401).json({ error: 'Invalid credentials.' });
+        return;
+      }
+      const valid = await bcrypt.compare(password, user.password);
+      if (!valid) {
+        res.status(401).json({ error: 'Invalid credentials.' });
+        return;
+      }
+
+      if (!user.confirmed) {
+        res.status(403).json({ error: 'Please confirm your email address.' });
+        return;
+      }
+
+      const token = generateToken(user);
+      res.json({ token, id: user.id, role: user.role });
+    } catch (err) {
+      next(err);
+    }
   }
-
-  if (!user.confirmed) {
-    return void res.status(403).json({ error: 'Please confirm your email address.' });
-  }
-
-  const token = jwt.sign(
-    { id: user.id, role: user.role },
-    process.env.JWT_SECRET!,
-    { expiresIn: '1h' }
-  );
-
-  res.json({ token, id: user.id, role: user.role });
-});
+);
 
 app.post('/auth/resend-confirmation', async (req: Request, res: Response): Promise<void> => {
   const { email } = req.body;
