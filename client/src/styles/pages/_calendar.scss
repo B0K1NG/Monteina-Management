@@ -89,9 +89,72 @@
     }
   }
 
-  .service-options-choice {
-    background-color: #232626;
+  .service-options {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    
+    .top-options {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      .service-options-choice,
+      .service-tire-quantity {
+        background-color: #232626;
+        border-radius: 4px;
+      }
+    }
+
+    .bottom-option {
+      display: flex;
+      justify-content: center;
+
+      .service-valves-optional {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-top: 1rem;
+      }
+    
+      .service-valves-optional label {
+        display: flex;
+        align-items: center;
+        border: 2px solid #ccc;
+        background-color: #232626;
+        padding: 0.8rem 0.5rem;
+        border-radius: 4px;
+        font-size: 0.8rem;
+        margin-bottom: 0rem;
+      }
+    
+      .service-valves-optional input[type="checkbox"] {
+        appearance: none;
+        width: 16px;
+        height: 16px;
+        margin-left: 1rem;
+        border: 1px solid #fff;
+        background: none;
+        cursor: pointer;
+        position: relative;
+      }
+      
+      input[type="checkbox"]:checked {
+        background: none;
+      }
+      
+      input[type="checkbox"]:checked::after {
+        content: '✔';
+        color: #fff;
+        font-size: 12px;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+      }
+    }
   }
+  
 
   .confirm-button {
     @include mixins.confirm-button-style;
@@ -162,49 +225,6 @@
         accent-color: #1a73e8;
       }
     }
-  }
-
-  .service-valves-optional {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 1rem;
-  }
-
-  .service-valves-optional label {
-    display: flex;
-    align-items: center;
-    border: 2px solid #ccc;
-    background-color: #232626;
-    padding: 0.8rem 0.5rem;
-    border-radius: 4px;
-    font-size: 0.8rem;
-    margin-bottom: 0rem;
-  }
-
-  .service-valves-optional input[type="checkbox"] {
-    appearance: none;
-    width: 16px;
-    height: 16px;
-    margin-left: 1rem;
-    border: 1px solid #fff;
-    background: none;
-    cursor: pointer;
-    position: relative;
-  }
-  
-  input[type="checkbox"]:checked {
-    background: none;
-  }
-  
-  input[type="checkbox"]:checked::after {
-    content: '✔';
-    color: #fff;
-    font-size: 12px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
   }
 
   .booking-section {
@@ -343,11 +363,51 @@
 
     .car-service-box {
       .service-options {
-        display: grid !important;
-        grid-template-columns: 1fr auto;
+        display: grid;
+        grid-template-columns: auto 120px;
+        margin-left: 2.3rem;
+        column-gap: 1rem;
+        row-gap: 1rem;
+        justify-content: center;
         align-items: center;
-        gap: vars.$calendar-gap;
-        width: 300px;
+      
+
+        .top-options {
+          display: contents;
+        }
+
+        .service-options-choice {
+          grid-column: 1;
+        }
+
+        .service-tire-quantity {
+          grid-column: 2;
+        }
+
+        .bottom-option {
+          grid-column: 1 / span 2;
+          display: flex;
+          justify-content: center;
+
+          .service-valves-optional {
+            width: 180px;
+            max-width: 100%;
+          }
+        }
+      
+        .service-valves-optional label {
+          width: 200px;
+          padding: 0.8rem 1rem;
+          height: auto;
+          font-size: 0.9rem;
+          gap: 1rem;
+        }
+      
+        .service-valves-optional input[type="checkbox"] {
+          width: 25px;
+          height: 23px;
+        }
+        }
       }
       .service-options-choice {
         justify-self: start;
@@ -363,22 +423,7 @@
           }
         }
       }
-      .service-valves-optional {
-        margin-top: 0;
-        margin-right: 2rem;
-      }
-    }
-  
-    .service-valves-optional label {
-      width: 125px;
-      height: auto;
-      font-size: 0.9rem;
-    }
-  
-    .service-valves-optional input[type="checkbox"] {
-      width: 30px;
-      height: 20px;
-    }
+      
   }
 }
 
@@ -511,13 +556,27 @@
     }
 
     .service-options {
-      display: flex !important;
+      display: grid !important;
+      grid-template-columns: 200px 200px;
+      grid-template-rows: auto auto;
       justify-content: center;
       align-items: center;
+      column-gap: none;
+      row-gap: vars.$calendar-gap;
 
-      gap: vars.$calendar-gap;
-      width: 100%;
-      max-width: 450px;
+      .top-options {
+        grid-column: 1 / span 2;
+        max-width: 410px;
+        display: contents;
+      }
+      .service-options-choice { grid-column: 1; }
+      .service-tire-quantity   { grid-column: 2; }
+
+      .bottom-option {
+        grid-column: 1 / span 2;
+        display: flex;
+        justify-content: center;
+      }
     }
     .service-options-choice {
       justify-self: start;
