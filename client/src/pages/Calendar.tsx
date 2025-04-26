@@ -15,6 +15,7 @@ const availableTimes = [
 ];
 
 const tireSizes = [...Array(16)].map((_, i) => `R${i + 10}`);
+const tireQuantity = [...Array(100)].map((_, i) => `${i + 1} vnt.`);
 
 const getWeekDays = (startDate: Date) => {
   const days: {
@@ -45,10 +46,11 @@ export default function BookingCalendar() {
     model: '',
     year: '',
     tireSize: '',
+    tireQuantity: '',
   });
   const [valveChange, setValveChange] = useState(false);
   const [selectedService, setSelectedService] = useState('');
-  const [services, setServices] = useState<{ id: number; name: string }[]>([]);
+  const [services, setServices] = useState<{ id: number; name: string; price_min: number; price_max: number }[]>([]);
   const [carMakes, setCarMakes] = useState<string[]>([]);
   const [carModels, setCarModels] = useState<{ [key: string]: string[] }>({});
   const [selectedMake, setSelectedMake] = useState('');
@@ -114,21 +116,28 @@ export default function BookingCalendar() {
     carDetails.model &&
     carDetails.year &&
     carDetails.tireSize &&
+    carDetails.tireQuantity &&
     selectedService;
 
   const handleConfirm = () => {
     if (isBookingValid) {
-      navigate('/checkout', {
-      state: {
+      const bookingDetails = {
         date: selectedDate,
         time: selectedTime,
-        car: carDetails,
-        service: selectedService,
-        valve: valveChange,
-      },
-    });
-  }
-};
+        carDetails,
+        selectedService: {
+          name: selectedService,
+          price_min: services.find((s) => s.name === selectedService)?.price_min || 0,
+          price_max: services.find((s) => s.name === selectedService)?.price_max || 0,
+        },
+        valveChange,
+        tireQuantity: parseInt(carDetails.tireQuantity, 10),
+      };
+      console.log('Booking Details:', bookingDetails);
+      localStorage.setItem('bookingDetails', JSON.stringify(bookingDetails));
+      navigate('/checkout');
+    }
+  };
 
   const getFilteredTimes = () => {
     const today = new Date().toISOString().split('T')[0];
@@ -278,27 +287,46 @@ export default function BookingCalendar() {
           </div>
 
           <div className="service-options">
-            <div className="service-options-choice">
-              <Dropdown
-                options={services.map((s) => ({ value: s.name, label: s.name }))}
-                value={selectedService}
-                onChange={(value) => setSelectedService(value)}
-                placeholder="Pasirinkite paslaugą"
-                className="dropdown-service"
-              />
-            </div>
+            <div className="top-options">
+              <div className="service-options-choice">
+                {/* Pasirinkite paslaugą */}
+                <Dropdown
+                  options={services.map((s) => ({ value: s.name, label: s.name }))}
+                  value={selectedService}
+                  onChange={(value) => setSelectedService(value)}
+                  placeholder="Pasirinkite paslaugą"
+                  className="dropdown-service"
+                />
+              </div>
 
-            <div className="service-valves-optional">
-              <label>
-                Ventilių keitimas
-                <input
-                  type="checkbox"
-                  checked={valveChange}
-                  onChange={(e) => setValveChange(e.target.checked)}
-                />{' '}
-              </label>
-            </div>
+              <div className="service-tire-quantity">
+                {/* Ratų kiekis */}
+                <Dropdown
+                  options={tireQuantity.map((qty) => ({ value: qty, label: qty }))}
+                  value={carDetails.tireQuantity}
+                  onChange={(value) => handleCarDetailChange('tireQuantity', value)}
+                  placeholder="Ratų kiekis"
+                  className="dropdown-tire-quantity"
+                />
+              </div>
+              </div>
+
+              <div className='bottom-option'>
+              <div className="service-valves-optional">
+                {/* Ventilių keitimas */}
+                <label>
+                  Ventilių keitimas
+                  <input
+                    type="checkbox"
+                    checked={valveChange}
+                    onChange={(e) => setValveChange(e.target.checked)}
+                  />
+                </label>
+              </div>
+              </div>
+              
           </div>
+
         </div>
       </section>
     </div>
