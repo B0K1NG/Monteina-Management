@@ -1229,8 +1229,64 @@ body {
   font-size: 1rem;
   padding: 1rem;
 }
-.booking-page .service-options-choice {
+.booking-page .service-options {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+}
+.booking-page .service-options .top-options {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.booking-page .service-options .top-options .service-options-choice,
+.booking-page .service-options .top-options .service-tire-quantity {
   background-color: #232626;
+  border-radius: 4px;
+}
+.booking-page .service-options .bottom-option {
+  display: flex;
+  justify-content: center;
+}
+.booking-page .service-options .bottom-option .service-valves-optional {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+}
+.booking-page .service-options .bottom-option .service-valves-optional label {
+  display: flex;
+  align-items: center;
+  border: 2px solid #ccc;
+  background-color: #232626;
+  padding: 0.8rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  margin-bottom: 0rem;
+}
+.booking-page .service-options .bottom-option .service-valves-optional input[type=checkbox] {
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  width: 16px;
+  height: 16px;
+  margin-left: 1rem;
+  border: 1px solid #fff;
+  background: none;
+  cursor: pointer;
+  position: relative;
+}
+.booking-page .service-options .bottom-option input[type=checkbox]:checked {
+  background: none;
+}
+.booking-page .service-options .bottom-option input[type=checkbox]:checked::after {
+  content: "✔";
+  color: #fff;
+  font-size: 12px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .booking-page .confirm-button {
   width: 100%;
@@ -1307,46 +1363,6 @@ body {
 .booking-page .car-service-box .optional-service input {
   transform: scale(1.2);
   accent-color: #1a73e8;
-}
-.booking-page .service-valves-optional {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 1rem;
-}
-.booking-page .service-valves-optional label {
-  display: flex;
-  align-items: center;
-  border: 2px solid #ccc;
-  background-color: #232626;
-  padding: 0.8rem 0.5rem;
-  border-radius: 4px;
-  font-size: 0.8rem;
-  margin-bottom: 0rem;
-}
-.booking-page .service-valves-optional input[type=checkbox] {
-  -webkit-appearance: none;
-     -moz-appearance: none;
-          appearance: none;
-  width: 16px;
-  height: 16px;
-  margin-left: 1rem;
-  border: 1px solid #fff;
-  background: none;
-  cursor: pointer;
-  position: relative;
-}
-.booking-page input[type=checkbox]:checked {
-  background: none;
-}
-.booking-page input[type=checkbox]:checked::after {
-  content: "✔";
-  color: #fff;
-  font-size: 12px;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
 }
 .booking-page .booking-section {
   padding: 20px;
@@ -1458,36 +1474,55 @@ body {
     grid-column: span 2;
   }
   .booking-page .car-service-box .service-options {
-    display: grid !important;
-    grid-template-columns: 1fr auto;
+    display: grid;
+    grid-template-columns: auto 120px;
+    margin-left: 2.3rem;
+    -moz-column-gap: 1rem;
+         column-gap: 1rem;
+    row-gap: 1rem;
+    justify-content: center;
     align-items: center;
-    gap: 1rem;
-    width: 300px;
   }
-  .booking-page .car-service-box .service-options-choice {
+  .booking-page .car-service-box .service-options .top-options {
+    display: contents;
+  }
+  .booking-page .car-service-box .service-options .service-options-choice {
+    grid-column: 1;
+  }
+  .booking-page .car-service-box .service-options .service-tire-quantity {
+    grid-column: 2;
+  }
+  .booking-page .car-service-box .service-options .bottom-option {
+    grid-column: 1/span 2;
+    display: flex;
+    justify-content: center;
+  }
+  .booking-page .car-service-box .service-options .bottom-option .service-valves-optional {
+    width: 180px;
+    max-width: 100%;
+  }
+  .booking-page .car-service-box .service-options .service-valves-optional label {
+    width: 200px;
+    padding: 0.8rem 1rem;
+    height: auto;
+    font-size: 0.9rem;
+    gap: 1rem;
+  }
+  .booking-page .car-service-box .service-options .service-valves-optional input[type=checkbox] {
+    width: 25px;
+    height: 23px;
+  }
+  .booking-page .service-options-choice {
     justify-self: start;
     border-radius: 4px;
   }
-  .booking-page .car-service-box .service-options-choice .dropdown {
+  .booking-page .service-options-choice .dropdown {
     width: 145px;
     border-radius: none;
   }
-  .booking-page .car-service-box .service-options-choice .dropdown-header {
+  .booking-page .service-options-choice .dropdown-header {
     font-size: 0.9rem;
     padding: 0.8rem 0.45rem;
-  }
-  .booking-page .car-service-box .service-valves-optional {
-    margin-top: 0;
-    margin-right: 2rem;
-  }
-  .booking-page .service-valves-optional label {
-    width: 125px;
-    height: auto;
-    font-size: 0.9rem;
-  }
-  .booking-page .service-valves-optional input[type=checkbox] {
-    width: 30px;
-    height: 20px;
   }
 }
 @media (min-width: 1024px) {
@@ -1588,7 +1623,7 @@ body {
     padding: 0.8rem 0.7rem;
     width: 190px;
     justify-content: space-between;
-    font-size: 1rem;
+    font-size: 1rem !important;
   }
   .car-service-box .car-service-box-information {
     padding: 1rem;
@@ -1596,12 +1631,30 @@ body {
     width: 430px;
   }
   .car-service-box .service-options {
-    display: flex !important;
+    display: grid !important;
+    grid-template-columns: 200px 200px;
+    grid-template-rows: auto auto;
     justify-content: center;
     align-items: center;
-    gap: 1rem;
-    width: 100%;
-    max-width: 450px;
+    -moz-column-gap: none;
+         column-gap: none;
+    row-gap: 1rem;
+  }
+  .car-service-box .service-options .top-options {
+    grid-column: 1/span 2;
+    max-width: 410px;
+    display: contents;
+  }
+  .car-service-box .service-options .service-options-choice {
+    grid-column: 1;
+  }
+  .car-service-box .service-options .service-tire-quantity {
+    grid-column: 2;
+  }
+  .car-service-box .service-options .bottom-option {
+    grid-column: 1/span 2;
+    display: flex;
+    justify-content: center;
   }
   .car-service-box .service-options-choice {
     justify-self: start;
