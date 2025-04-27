@@ -113,15 +113,14 @@
       }
     }
 
-    .bottom-option {
+    .bottom-options {
       display: flex;
-      justify-content: center;
+      margin-top: 1rem;
+      gap: 1rem;
 
-      .service-valves-optional {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin-top: 1rem;
+      .repair-options {
+        background-color: #232626;
+        border-radius: 4px;
       }
     
       .service-valves-optional label {
@@ -129,7 +128,7 @@
         align-items: center;
         border: 2px solid #ccc;
         background-color: #232626;
-        padding: 0.8rem 0.5rem;
+        padding: 0.45rem 0.5rem;
         border-radius: 4px;
         font-size: 0.8rem;
         margin-bottom: 0rem;
@@ -391,7 +390,7 @@
           grid-column: 2;
         }
 
-        .bottom-option {
+        .bottom-options {
           grid-column: 1 / span 2;
           display: flex;
           justify-content: center;
@@ -403,7 +402,6 @@
         }
       
         .service-valves-optional label {
-          width: 200px;
           padding: 0.8rem 1rem;
           height: auto;
           font-size: 0.9rem;
@@ -549,8 +547,20 @@
       font-size: 1rem !important;
     }
 
+    .repair-options {
+
+      .dropdown {
+        width: 190px;
+        border-radius: none;
+        
+        &-header {
+          padding: 0.8rem 0.7rem;
+        }
+      }
+    }
+
     .service-valves-optional label {
-      padding: 0.8rem 0.7rem;
+      padding: 0.8rem 0.7rem !important;
       width: 190px;
       justify-content: space-between;
       font-size: 1rem !important;
@@ -569,7 +579,7 @@
       justify-content: center;
       align-items: center;
       column-gap: none;
-      row-gap: vars.$calendar-gap;
+      row-gap: 0rem;
 
       .top-options {
         grid-column: 1 / span 2;
@@ -579,7 +589,7 @@
       .service-options-choice { grid-column: 1; }
       .service-tire-quantity   { grid-column: 2; }
 
-      .bottom-option {
+      .bottom-options {
         grid-column: 1 / span 2;
         display: flex;
         justify-content: center;

@@ -331,6 +331,8 @@ export default function BookingCalendar() {
                 />
               </div>
             </div>
+            
+            <div className="bottom-options">
             {selectedService === 'Padangos remontas' && (
               <div className="repair-options">
                 <Dropdown
@@ -341,12 +343,11 @@ export default function BookingCalendar() {
                   ]}
                   value={repairOption || ''}
                   onChange={setRepairOption}
-                  placeholder="Pasirinkite remonto tipą"
+                  placeholder="Remonto tipas"
                   className="dropdown-repair"
                 />
               </div>
             )}
-            <div className="bottom-option">
               <div className="service-valves-optional">
                 <label>
                   Ventilių keitimas
