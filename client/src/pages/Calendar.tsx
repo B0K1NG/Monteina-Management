@@ -24,7 +24,7 @@ const getWeekDays = (startDate: Date) => {
     dayName: string;
     isPast: boolean;
   }[] = [];
-  const today = new Date();
+  const today = new Date().setHours(0, 0, 0, 0);
   for (let i = -1; i < 6; i++) {
     const date = new Date(startDate);
     date.setDate(startDate.getDate() + i);
@@ -32,7 +32,7 @@ const getWeekDays = (startDate: Date) => {
       fullDate: date.toISOString().split('T')[0],
       dayNumber: date.getDate(),
       dayName: date.toLocaleDateString('lt-LT', { weekday: 'short' }),
-      isPast: date.getTime() < today.setHours(0, 0, 0, 0),
+      isPast: date.getTime() < today,
     });
   }
   return days;
@@ -50,43 +50,33 @@ export default function BookingCalendar() {
   });
   const [valveChange, setValveChange] = useState(false);
   const [selectedService, setSelectedService] = useState('');
-  const [services, setServices] = useState<{ id: number; name: string; price_min: number; price_max: number }[]>([]);
+  const [services, setServices] = useState<
+    { id: number; name: string; price_min: number; price_max: number }[]
+  >([]);
   const [carMakes, setCarMakes] = useState<string[]>([]);
   const [carModels, setCarModels] = useState<{ [key: string]: string[] }>({});
   const [selectedMake, setSelectedMake] = useState('');
   const [weekStart, setWeekStart] = useState(new Date());
+  const [bookedTimes, setBookedTimes] = useState<string[]>([]);
   const navigate = useNavigate();
 
   useEffect(() => {
-    const fetchMakes = async () => {
-      try {
-        const makes = await getAllMakes();
-        setCarMakes(makes.map((make: any) => make.Make_Name));
-      } catch (error) {
-        console.error('Error fetching makes:', error);
-      }
-    };
-
-    fetchMakes();
+    getAllMakes()
+      .then(makes => setCarMakes(makes.map((m: any) => m.Make_Name)))
+      .catch(console.error);
   }, []);
 
   useEffect(() => {
     if (!selectedMake) return;
-
-    const fetchModels = async () => {
-      if (carModels[selectedMake]) return;
-      try {
-        const models = await getModelsForMake(selectedMake);
-        setCarModels((prev) => ({
+    if (carModels[selectedMake]) return;
+    getModelsForMake(selectedMake)
+      .then(models =>
+        setCarModels(prev => ({
           ...prev,
-          [selectedMake]: models.map((model: any) => model.Model_Name),
-        }));
-      } catch (error) {
-        console.error('Error fetching models:', error);
-      }
-    };
-
-    fetchModels();
+          [selectedMake]: models.map((m: any) => m.Model_Name),
+        }))
+      )
+      .catch(console.error);
   }, [selectedMake, carModels]);
 
   useEffect(() => {
@@ -94,9 +84,8 @@ export default function BookingCalendar() {
   }, []);
 
   useEffect(() => {
-    axios
-      .get('/api/services')
-      .then((r) => setServices(r.data))
+    axios.get('/api/services')
+      .then(r => setServices(r.data))
       .catch(console.error);
   }, []);
 
@@ -104,10 +93,36 @@ export default function BookingCalendar() {
     setSelectedTime(null);
   }, [selectedDate]);
 
+  interface BookingData {
+    booking_time: string;
+    _count: { booking_time: number };
+  }
+
+  useEffect(() => {
+    if (!selectedDate) return;
+
+    axios.get<BookingData[]>('/api/checkout/bookings', {
+      params: { date: selectedDate },
+    })
+    .then(({ data }) => {
+      const counts = data.reduce<Record<string, number>>((acc, { booking_time, _count }) => {
+        acc[booking_time] = _count.booking_time;
+        return acc;
+      }, {});
+      const fullyBooked = Object.entries(counts)
+        .filter(([_, cnt]) => cnt >= 2)
+        .map(([time]) => time);
+      setBookedTimes(fullyBooked);
+    })
+    .catch(console.error);
+  }, [selectedDate]);
+
   const handleCarDetailChange = (
     field: keyof typeof carDetails,
     value: string
-  ) => setCarDetails((prev) => ({ ...prev, [field]: value }));
+  ) => {
+    setCarDetails(prev => ({ ...prev, [field]: value }));
+  };
 
   const isBookingValid =
     selectedDate &&
@@ -120,35 +135,38 @@ export default function BookingCalendar() {
     selectedService;
 
   const handleConfirm = () => {
-    if (isBookingValid) {
-      const bookingDetails = {
-        date: selectedDate,
-        time: selectedTime,
-        carDetails,
-        selectedService: {
-          name: selectedService,
-          price_min: services.find((s) => s.name === selectedService)?.price_min || 0,
-          price_max: services.find((s) => s.name === selectedService)?.price_max || 0,
-        },
-        valveChange,
-        tireQuantity: parseInt(carDetails.tireQuantity, 10),
-      };
-      console.log('Booking Details:', bookingDetails);
-      localStorage.setItem('bookingDetails', JSON.stringify(bookingDetails));
-      navigate('/checkout');
-    }
+    if (!isBookingValid) return;
+    const details = {
+      date: selectedDate,
+      time: selectedTime!,
+      carDetails,
+      selectedService: {
+        name: selectedService,
+        price_min: services.find(s => s.name === selectedService)?.price_min || 0,
+        price_max: services.find(s => s.name === selectedService)?.price_max || 0,
+      },
+      valveChange,
+      tireQuantity: parseInt(carDetails.tireQuantity, 10),
+    };
+    localStorage.setItem('bookingDetails', JSON.stringify(details));
+    navigate('/checkout');
   };
 
   const getFilteredTimes = () => {
-    const today = new Date().toISOString().split('T')[0];
-    if (!selectedDate || selectedDate !== today) return availableTimes;
+    let times = [...availableTimes];
+    const todayStr = new Date().toISOString().split('T')[0];
 
-    const now = new Date();
-    const currentMinutes = now.getHours() * 60 + now.getMinutes();
-    return availableTimes.filter((time) => {
-      const [h, m] = time.split(':').map(Number);
-      return h * 60 + m > currentMinutes;
-    });
+    if (selectedDate === todayStr) {
+      const now = new Date();
+      const currentMin = now.getHours() * 60 + now.getMinutes();
+
+      times = times.filter(time => {
+        const [h, m] = time.split(':').map(Number);
+        return h * 60 + m > currentMin;
+      });
+    }
+
+    return times;
   };
 
   const times = getFilteredTimes();
@@ -173,8 +191,9 @@ export default function BookingCalendar() {
             onClick={() => {
               const prev = new Date(weekStart);
               prev.setDate(prev.getDate() - 7);
-              if (prev >= new Date(new Date().setHours(0, 0, 0, 0)))
+              if (prev >= new Date(new Date().setHours(0, 0, 0, 0))) {
                 setWeekStart(prev);
+              }
             }}
             disabled={weekStart <= new Date(new Date().setHours(0, 0, 0, 0))}
           >
@@ -182,7 +201,7 @@ export default function BookingCalendar() {
           </button>
 
           <div className="week-days">
-            {weekDays.map((day) => (
+            {weekDays.map(day => (
               <div
                 key={day.fullDate}
                 className={`day-circle ${
@@ -210,13 +229,15 @@ export default function BookingCalendar() {
 
         <div className={`time-slots ${times.length === 0 ? 'empty' : ''}`}>
           {times.length > 0 ? (
-            times.map((time) => (
+            times.map(time => (
               <div
                 key={time}
                 className={`time-slot ${
                   selectedTime === time ? 'selected' : ''
-                }`}
-                onClick={() => setSelectedTime(time)}
+                } ${bookedTimes.includes(time) ? 'disabled' : ''}`}
+                onClick={() =>
+                  !bookedTimes.includes(time) && setSelectedTime(time)
+                }
               >
                 {time}
               </div>
@@ -237,49 +258,46 @@ export default function BookingCalendar() {
 
       <section className="booking-section">
         <div className="car-service-box">
-          <div className='car-service-box-information-box'>
+          <div className="car-service-box-information-box">
             <h3 className="car-service-title">Automobilio duomenys</h3>
             <div className="car-service-box-information">
               <Dropdown
-                options={carMakes.map((m) => ({ value: m, label: m }))}
+                options={carMakes.map(m => ({ value: m, label: m }))}
                 value={carDetails.make}
-                onChange={(value) => {
-                  handleCarDetailChange('make', value);
-                  setSelectedMake(value);
+                onChange={v => {
+                  handleCarDetailChange('make', v);
+                  setSelectedMake(v);
                 }}
                 placeholder="Gamintojas"
                 className="dropdown-make"
-                searchable={true}
+                searchable
               />
-
               <Dropdown
-                options={(carModels[carDetails.make] || []).map((m) => ({
+                options={(carModels[carDetails.make] || []).map(m => ({
                   value: m,
                   label: m,
                 }))}
                 value={carDetails.model}
-                onChange={(value) => handleCarDetailChange('model', value)}
+                onChange={v => handleCarDetailChange('model', v)}
                 placeholder="Modelis"
                 className="dropdown-model"
-                disabled={carDetails.make === ''}
-                searchable={true}
+                disabled={!carDetails.make}
+                searchable
               />
-
               <Dropdown
                 options={Array.from({ length: 30 }, (_, i) => {
                   const y = new Date().getFullYear() - i;
                   return { value: String(y), label: String(y) };
                 })}
                 value={carDetails.year}
-                onChange={(value) => handleCarDetailChange('year', value)}
+                onChange={v => handleCarDetailChange('year', v)}
                 placeholder="Pagaminimo metai"
                 className="dropdown-year"
               />
-
               <Dropdown
-                options={tireSizes.map((sz) => ({ value: sz, label: sz }))}
+                options={tireSizes.map(sz => ({ value: sz, label: sz }))}
                 value={carDetails.tireSize}
-                onChange={(value) => handleCarDetailChange('tireSize', value)}
+                onChange={v => handleCarDetailChange('tireSize', v)}
                 placeholder="Ratų išmatavimai"
                 className="dropdown-tire-size"
               />
@@ -289,44 +307,37 @@ export default function BookingCalendar() {
           <div className="service-options">
             <div className="top-options">
               <div className="service-options-choice">
-                {/* Pasirinkite paslaugą */}
                 <Dropdown
-                  options={services.map((s) => ({ value: s.name, label: s.name }))}
+                  options={services.map(s => ({ value: s.name, label: s.name }))}
                   value={selectedService}
-                  onChange={(value) => setSelectedService(value)}
+                  onChange={setSelectedService}
                   placeholder="Pasirinkite paslaugą"
                   className="dropdown-service"
                 />
               </div>
-
               <div className="service-tire-quantity">
-                {/* Ratų kiekis */}
                 <Dropdown
-                  options={tireQuantity.map((qty) => ({ value: qty, label: qty }))}
+                  options={tireQuantity.map(q => ({ value: q, label: q }))}
                   value={carDetails.tireQuantity}
-                  onChange={(value) => handleCarDetailChange('tireQuantity', value)}
+                  onChange={v => handleCarDetailChange('tireQuantity', v)}
                   placeholder="Ratų kiekis"
                   className="dropdown-tire-quantity"
                 />
               </div>
-              </div>
-
-              <div className='bottom-option'>
+            </div>
+            <div className="bottom-option">
               <div className="service-valves-optional">
-                {/* Ventilių keitimas */}
                 <label>
                   Ventilių keitimas
                   <input
                     type="checkbox"
                     checked={valveChange}
-                    onChange={(e) => setValveChange(e.target.checked)}
+                    onChange={e => setValveChange(e.target.checked)}
                   />
                 </label>
               </div>
-              </div>
-              
+            </div>
           </div>
-
         </div>
       </section>
     </div>

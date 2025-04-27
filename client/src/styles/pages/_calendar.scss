@@ -8,6 +8,13 @@
   padding: vars.$calendar-padding;
   color: #fff;
 
+  
+  .time-slot.disabled {
+    text-decoration: line-through;
+    pointer-events: none;
+    color: #777;
+  }
+
   .calendar-section,
   .booking-section {
     @include mixins.calendar-section-style;
@@ -603,3 +610,4 @@
     padding-left: 0.9rem !important;
   }
 }
+
