@@ -112,15 +112,16 @@ export default function Checkout() {
     <div className="checkout-page">
       <div className="checkout-container">
         <div className="checkout-details">
-          <h2>Užsakymo suvestinė</h2>
-          <div className="detail-item">
-            <span>Data</span>
-            <span>{date}</span>
-          </div>
-          <div className="detail-item">
-            <span>Laikas</span>
-            <span>{time}</span>
-          </div>
+        <button
+            className="checkout-back-button"
+            onClick={() => {
+              localStorage.removeItem('bookingDetails');
+              navigate('/calendar');
+            }}
+          >
+            Atgal
+          </button>
+          <h2 className="checkout-header">Užsakymo suvestinė</h2>
           <div className="detail-item">
             <span>Automobilis</span>
             <span>{carDetails.make} {carDetails.model}</span>
@@ -136,7 +137,12 @@ export default function Checkout() {
         </div>
 
         <div className="checkout-summary">
-          <h2>Santrauka</h2>
+        <div className="checkout-date">
+            <span>{time}</span>
+            <span>{date}</span>
+          </div>
+          <hr className="separation-line" />
+        <h2 className="checkout-subheader">Santrauka</h2>
           <div className="summary-item">
             <span>Užsakymo numeris</span>
             <span>{serviceId}</span>
@@ -161,6 +167,7 @@ export default function Checkout() {
               <span>{valvePrice} €</span>
             </div>
           )}
+          <hr className="separation-line" />
           <div className="summary-item">
             <span>Užsakymo suma</span>
             <span>{totalAmount} €</span>
@@ -173,19 +180,15 @@ export default function Checkout() {
             <span>Likusi suma po avanso</span>
             <span>{remaining} €</span>
           </div>
+          <hr className="separation-line" />
           <button className="pay-button" onClick={handlePayment}>
             Apmokėti
           </button>
-          <button
-            className="back-button"
-            onClick={() => {
-              localStorage.removeItem('bookingDetails');
-              navigate('/calendar');
-            }}
-          >
-            Grįžti
-          </button>
         </div>
+      </div>
+      <div className="checkout-terms">
+          <p>Paspaudę "Apmokėti" sutinkate su mūsų <a href="/terms">paslaugų teikimo sąlygomis.</a></p>
+          <p>Automobiliai kurių varžtų nebus įmanoma atsukti nebus aptarnaujami</p>
       </div>
     </div>
   );
