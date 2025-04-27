@@ -1120,6 +1120,11 @@ body {
   padding: 1rem;
   color: #fff;
 }
+.booking-page .time-slot.disabled {
+  text-decoration: line-through;
+  pointer-events: none;
+  color: #777;
+}
 .booking-page .calendar-section,
 .booking-page .booking-section {
   padding: 1rem;
