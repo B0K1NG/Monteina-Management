@@ -1249,27 +1249,26 @@ body {
   background-color: #232626;
   border-radius: 4px;
 }
-.booking-page .service-options .bottom-option {
+.booking-page .service-options .bottom-options {
   display: flex;
-  justify-content: center;
-}
-.booking-page .service-options .bottom-option .service-valves-optional {
-  display: flex;
-  align-items: center;
-  justify-content: center;
   margin-top: 1rem;
+  gap: 1rem;
 }
-.booking-page .service-options .bottom-option .service-valves-optional label {
+.booking-page .service-options .bottom-options .repair-options {
+  background-color: #232626;
+  border-radius: 4px;
+}
+.booking-page .service-options .bottom-options .service-valves-optional label {
   display: flex;
   align-items: center;
   border: 2px solid #ccc;
   background-color: #232626;
-  padding: 0.8rem 0.5rem;
+  padding: 0.45rem 0.5rem;
   border-radius: 4px;
   font-size: 0.8rem;
   margin-bottom: 0rem;
 }
-.booking-page .service-options .bottom-option .service-valves-optional input[type=checkbox] {
+.booking-page .service-options .bottom-options .service-valves-optional input[type=checkbox] {
   -webkit-appearance: none;
      -moz-appearance: none;
           appearance: none;
@@ -1281,10 +1280,10 @@ body {
   cursor: pointer;
   position: relative;
 }
-.booking-page .service-options .bottom-option input[type=checkbox]:checked {
+.booking-page .service-options .bottom-options input[type=checkbox]:checked {
   background: none;
 }
-.booking-page .service-options .bottom-option input[type=checkbox]:checked::after {
+.booking-page .service-options .bottom-options input[type=checkbox]:checked::after {
   content: "✔";
   color: #fff;
   font-size: 12px;
@@ -1497,17 +1496,16 @@ body {
   .booking-page .car-service-box .service-options .service-tire-quantity {
     grid-column: 2;
   }
-  .booking-page .car-service-box .service-options .bottom-option {
+  .booking-page .car-service-box .service-options .bottom-options {
     grid-column: 1/span 2;
     display: flex;
     justify-content: center;
   }
-  .booking-page .car-service-box .service-options .bottom-option .service-valves-optional {
+  .booking-page .car-service-box .service-options .bottom-options .service-valves-optional {
     width: 180px;
     max-width: 100%;
   }
   .booking-page .car-service-box .service-options .service-valves-optional label {
-    width: 200px;
     padding: 0.8rem 1rem;
     height: auto;
     font-size: 0.9rem;
@@ -1624,8 +1622,15 @@ body {
     max-width: 100% !important;
     font-size: 1rem !important;
   }
-  .car-service-box .service-valves-optional label {
+  .car-service-box .repair-options .dropdown {
+    width: 190px;
+    border-radius: none;
+  }
+  .car-service-box .repair-options .dropdown-header {
     padding: 0.8rem 0.7rem;
+  }
+  .car-service-box .service-valves-optional label {
+    padding: 0.8rem 0.7rem !important;
     width: 190px;
     justify-content: space-between;
     font-size: 1rem !important;
@@ -1643,7 +1648,7 @@ body {
     align-items: center;
     -moz-column-gap: none;
          column-gap: none;
-    row-gap: 1rem;
+    row-gap: 0rem;
   }
   .car-service-box .service-options .top-options {
     grid-column: 1/span 2;
@@ -1656,7 +1661,7 @@ body {
   .car-service-box .service-options .service-tire-quantity {
     grid-column: 2;
   }
-  .car-service-box .service-options .bottom-option {
+  .car-service-box .service-options .bottom-options {
     grid-column: 1/span 2;
     display: flex;
     justify-content: center;
@@ -1785,4 +1790,126 @@ body {
     font-size: 1rem;
     margin-top: 1rem;
   }
+}
+.checkout-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #FFFFFF;
+  cursor: default;
+}
+.checkout-page .checkout-header,
+.checkout-page .checkout-subheader,
+.checkout-page .detail-item,
+.checkout-page .summary-item,
+.checkout-page .checkout-date,
+.checkout-page .checkout-terms,
+.checkout-page .pay-button,
+.checkout-page .separation-line {
+  margin-bottom: 1rem;
+}
+.checkout-page .checkout-header,
+.checkout-page .detail-item,
+.checkout-page .checkout-summary,
+.checkout-page .checkout-terms {
+  text-align: center;
+}
+.checkout-page .detail-item,
+.checkout-page .summary-item,
+.checkout-page .checkout-terms {
+  font-size: 0.8rem;
+}
+.checkout-page .checkout-back-button,
+.checkout-page .pay-button {
+  font-size: 0.85rem;
+}
+.checkout-page .checkout-header,
+.checkout-page .checkout-subheader,
+.checkout-page .checkout-date {
+  font-size: 0.9rem;
+}
+.checkout-page .detail-item span:nth-of-type(1),
+.checkout-page .summary-item span:nth-of-type(1) {
+  margin-right: 0.4rem;
+}
+.checkout-page .checkout-back-button,
+.checkout-page .detail-item,
+.checkout-page .pay-button {
+  border-radius: 5px;
+}
+.checkout-page hr,
+.checkout-page .pay-button {
+  background-color: rgba(188, 189, 180, 0.5);
+  border: 1px solid #fff;
+}
+.checkout-page hr {
+  width: 100%;
+  height: 2px;
+}
+.checkout-page .checkout-details {
+  margin-bottom: 2rem;
+}
+.checkout-page .checkout-details .checkout-back-button {
+  margin-bottom: 2rem;
+  padding: 0.4rem 1.3rem;
+  background-color: #1a73e8;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+.checkout-page .checkout-details .detail-item {
+  border: 1px solid #fff;
+  padding: 0.4rem 0.5rem;
+  cursor: default;
+}
+.checkout-page .checkout-summary .checkout-date {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.3rem;
+  font-weight: 600;
+}
+.checkout-page .checkout-summary .checkout-date span:nth-of-type(1) {
+  margin-right: 0.4rem;
+}
+.checkout-page .checkout-summary .pay-button {
+  padding: 0.4rem 1.7rem;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+.checkout-page .checkout-summary .pay-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1a73e8;
+  z-index: -1;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.5s ease;
+}
+.checkout-page .checkout-summary .pay-button:hover::before {
+  transform: scaleX(1);
+}
+.checkout-page .checkout-terms {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 70%;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+.checkout-page .checkout-terms a {
+  color: #1a73e8;
+  text-decoration: underline;
+  text-underline-offset: 0.4rem;
 }/*# sourceMappingURL=main.css.map */
