@@ -168,7 +168,7 @@ app.get('/admin', authenticateToken, authorizeRole('admin'), async (req, res) =>
 });
 
 app.get('/client', authenticateToken, authorizeRole('client'), async (req, res) => {
-  const bookings = await prisma.booking.findMany({ where: { user_id: req.user.id } });
+  const bookings = await prisma.checkout.findMany({ where: { userId: req.user.id } });
   res.json({ bookings });
 });
 
