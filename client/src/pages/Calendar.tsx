@@ -40,6 +40,7 @@ const getWeekDays = (startDate: Date) => {
 
 export default function BookingCalendar() {
   const [selectedDate, setSelectedDate] = useState('');
+  const [repairOption, setRepairOption] = useState<string | null>(null);
   const [selectedTime, setSelectedTime] = useState<string | null>(null);
   const [carDetails, setCarDetails] = useState({
     make: '',
@@ -91,6 +92,7 @@ export default function BookingCalendar() {
 
   useEffect(() => {
     setSelectedTime(null);
+    setRepairOption(null);
   }, [selectedDate]);
 
   interface BookingData {
@@ -132,10 +134,13 @@ export default function BookingCalendar() {
     carDetails.year &&
     carDetails.tireSize &&
     carDetails.tireQuantity &&
-    selectedService;
+    selectedService &&
+    (selectedService !== 'Padangos remontas' || Boolean(repairOption));
 
   const handleConfirm = () => {
-    if (!isBookingValid) return;
+    if (!isBookingValid ||
+      (selectedService === 'Padangos remontas' && !repairOption)
+  ) return;
     const details = {
       date: selectedDate,
       time: selectedTime!,
@@ -147,6 +152,7 @@ export default function BookingCalendar() {
       },
       valveChange,
       tireQuantity: parseInt(carDetails.tireQuantity, 10),
+      repairOption,
     };
     localStorage.setItem('bookingDetails', JSON.stringify(details));
     navigate('/checkout');
@@ -325,6 +331,21 @@ export default function BookingCalendar() {
                 />
               </div>
             </div>
+            {selectedService === 'Padangos remontas' && (
+              <div className="repair-options">
+                <Dropdown
+                  options={[
+                    { value: 'ventiliu-keitimas', label: 'Ventilių keitimas' },
+                    { value: 'siulo-iverimas', label: 'Siūlo įvėrimas' },
+                    { value: 'lopas',           label: 'Lopo dėjimas' },
+                  ]}
+                  value={repairOption || ''}
+                  onChange={setRepairOption}
+                  placeholder="Pasirinkite remonto tipą"
+                  className="dropdown-repair"
+                />
+              </div>
+            )}
             <div className="bottom-option">
               <div className="service-valves-optional">
                 <label>

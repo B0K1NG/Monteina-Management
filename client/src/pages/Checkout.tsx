@@ -24,6 +24,7 @@ type BookingDetails = {
   };
   valveChange: boolean;
   tireQuantity: number;
+  repairOption?: 'ventiliu-keitimas' | 'siulo-iverimas' | 'lopas';
 };
 
 export default function Checkout() {
@@ -51,17 +52,24 @@ export default function Checkout() {
     selectedService,
     valveChange,
     tireQuantity,
+    repairOption,
   } = bookingDetails;
 
-  const mainServicePrice = carDetails.tireSize.startsWith('R18')
-    ? selectedService.price_max
-    : selectedService.price_min;
-
-  const valvePrice    = valveChange ? 5 : 0;
+  const mainServicePrice =
+  selectedService.name === 'Padangos remontas'
+    ? (repairOption === 'lopas'
+        ? selectedService.price_max
+        : selectedService.price_min)
+    : (carDetails.tireSize.startsWith('R18')
+        ? selectedService.price_max
+        : selectedService.price_min); 
+  
+  const groupRepairCount = repairOption ? Math.ceil(tireQuantity / 4) : tireQuantity;
+  const valvePrice = valveChange ? 5 : 0;
   const advanceAmount = 5;
-  const totalAmount   = mainServicePrice * tireQuantity + valvePrice;
-  const remaining     = totalAmount - advanceAmount;
-  const serviceId     = `MONT${new Date().toISOString().slice(0,10).replace(/-/g,'')}-001`;
+  const totalAmount = repairOption ? mainServicePrice * groupRepairCount + valvePrice : mainServicePrice * tireQuantity + valvePrice;
+  const remaining  = totalAmount - advanceAmount;
+  const serviceId  = `MONT${new Date().toISOString().slice(0,10).replace(/-/g,'')}-001`;
 
   const handlePayment = async () => {
     const token   = localStorage.getItem('token')!;
@@ -80,6 +88,7 @@ export default function Checkout() {
       selectedService,
       valveChange,
       tireQuantity,
+      repairOption,
       serviceId,
       totalAmount,
       advanceAmount,
@@ -136,6 +145,16 @@ export default function Checkout() {
             <span>Paslauga</span>
             <span>{selectedService.name} — {mainServicePrice} €</span>
           </div>
+          {selectedService.name === 'Padangos remontas' && repairOption && (
+          <div className="summary-item">
+            <span>Remonto tipas</span>
+            <span>{
+              repairOption === 'ventiliu-keitimas' ? 'Ventilių keitimas'
+            : repairOption === 'siulo-iverimas'  ? 'Siūlo įvėrimas'
+                                                : 'Lopo dėjimas'
+            }</span>
+          </div>
+        )}
           {valveChange && (
             <div className="summary-item">
               <span>Ventilių keitimas</span>
