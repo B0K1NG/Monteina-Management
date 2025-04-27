@@ -14,6 +14,7 @@ model User {
   password String
   role     String  @default("client")
   confirmed  Boolean  @default(false)
+  bookings Booking[]
 }
 
 model Service {
@@ -23,4 +24,45 @@ model Service {
   price_min      Float
   price_max      Float
   duration_minutes Int
+  bookingServices BookingService[]
+}
+
+model Booking {
+  id              Int      @id @default(autoincrement())
+  user_id         Int
+  booking_date    DateTime
+  booking_time    DateTime
+  vehicle_count   Int
+  total_price     Float
+  user            User     @relation(fields: [user_id], references: [id])
+  bookingServices BookingService[]
+}
+
+model BookingService {
+  id             Int      @id @default(autoincrement())
+  booking_id     Int
+  service_id     Int
+  vehicle_number Int
+  price          Float
+
+  booking        Booking  @relation(fields: [booking_id], references: [id])
+  service        Service  @relation(fields: [service_id], references: [id])
+}
+
+model Checkout {
+  id             Int      @id @default(autoincrement())
+  userId         Int
+  carBrand       String
+  carModel       String
+  tireSize       String
+  serviceName    String
+  valveChange    Boolean
+  tireQuantity   Int
+  serviceId      String
+  totalAmount    Float
+  advanceAmount  Float
+  remainingAmount Float
+  bookingDate    DateTime
+  bookingTime    String
+  createdAt      DateTime @default(now())
 }
