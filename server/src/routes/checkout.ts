@@ -38,6 +38,7 @@ router.post(
         where: {
           bookingDate: slotDate,
           bookingTime,
+          status: { not: 'canceled' },
         },
       });
 
@@ -61,6 +62,7 @@ router.post(
           totalAmount,
           advanceAmount,
           remainingAmount,
+          status: 'active',
         },
       });
 
@@ -71,36 +73,68 @@ router.post(
   }
 );
 
-router.get('/bookings', async (req, res, next) => {
+router.get('/bookings', async (req, res) => {
+  const { date } = req.query;
   try {
-    const raw = req.query.date;
-    if (!raw) {
-      res.status(400).json({ error: 'Date is required (format: YYYY-MM-DD)' });
-      return;
-    }
-
-    const dateString = Array.isArray(raw) ? raw[0] : raw;
-    if (typeof dateString !== 'string') {
-      res.status(400).json({ error: 'Date must be a string' });
-      return;
-    }
-
-    const slotDate = new Date(dateString);
-
-    const grouped = await prisma.checkout.groupBy({
+    const bookings = await prisma.checkout.groupBy({
       by: ['bookingTime'],
-      where: { bookingDate: slotDate },
-      _count: { bookingTime: true },
+      where: {
+        bookingDate: new Date(date as string),
+        status: { not: 'canceled' },
+      },
+      _count: {
+        bookingTime: true,
+      },
     });
+    res.json(bookings);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch bookings.' });
+  }
+});
 
-    const bookings = grouped.map(r => ({
-      booking_time: r.bookingTime,
-      _count: { booking_time: r._count.bookingTime },
-    }));
+router.get('/active', async (req, res) => {
+  try {
+    const activeBookings = await prisma.checkout.findMany({
+      where: { status: 'active' },
+    });
+    res.json(activeBookings);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch active bookings.' });
+  }
+});
 
-    res.status(200).json(bookings);
-  } catch (err) {
-    next(err);
+router.get('/done', async (req, res) => {
+  try {
+    const doneBookings = await prisma.checkout.findMany({
+      where: { status: 'done' },
+    });
+    res.json(doneBookings);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch done bookings.' });
+  }
+});
+
+router.get('/canceled', async (req, res) => {
+  try {
+    const canceledBookings = await prisma.checkout.findMany({
+      where: { status: 'canceled' },
+    });
+    res.json(canceledBookings);
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to fetch canceled bookings.' });
+  }
+});
+
+router.patch('/cancel/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    await prisma.checkout.update({
+      where: { id: parseInt(id) },
+      data: { status: 'canceled' },
+    });
+    res.json({ message: 'Booking canceled successfully.' });
+  } catch (error) {
+    res.status(500).json({ error: 'Failed to cancel booking.' });
   }
 });
 

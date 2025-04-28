@@ -96,8 +96,8 @@ export default function BookingCalendar() {
   }, [selectedDate]);
 
   interface BookingData {
-    booking_time: string;
-    _count: { booking_time: number };
+    bookingTime: string;
+    _count: { bookingTime: number };
   }
 
   useEffect(() => {
@@ -107,8 +107,8 @@ export default function BookingCalendar() {
       params: { date: selectedDate },
     })
     .then(({ data }) => {
-      const counts = data.reduce<Record<string, number>>((acc, { booking_time, _count }) => {
-        acc[booking_time] = _count.booking_time;
+      const counts = data.reduce<Record<string, number>>((acc, { bookingTime, _count }) => {
+        acc[bookingTime] = _count.bookingTime;
         return acc;
       }, {});
       const fullyBooked = Object.entries(counts)
