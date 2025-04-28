@@ -6,15 +6,15 @@
 
 @use "components/navbar";
 
-@use "pages/home";
-@use "pages/profile";
-@use "pages/register";
-@use "pages/login";
-@use "pages/confirmemail";
-@use "pages/dashboard";
-@use "pages/notfound";
-@use "pages/services";
-@use "pages/calendar";
-@use "pages/faq";
-@use "pages/checkout";
-@use "pages/confirmation";
+@use "client_pages/home";
+@use "client_pages/profile";
+@use "client_pages/register";
+@use "client_pages/login";
+@use "client_pages/confirmemail";
+@use "client_pages/dashboard";
+@use "client_pages/notfound";
+@use "client_pages/services";
+@use "client_pages/calendar";
+@use "client_pages/faq";
+@use "client_pages/checkout";
+@use "client_pages/confirmation";
