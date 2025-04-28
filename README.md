@@ -7,3 +7,5 @@ npm run dev
 ## 🛠 Backend (Node + Express + Prisma)
 cd server
 npm run dev
+
+npm install node-cron
