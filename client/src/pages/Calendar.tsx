@@ -5,7 +5,7 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { getAllMakes, getModelsForMake } from '../api/vehicles';
 
-import '../styles/clientPages/_calendar.scss';
+import '../styles/client_pages/_calendar.scss';
 
 const availableTimes = [
   '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',

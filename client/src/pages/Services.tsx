@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import axios from '../api/axios';
-import '../styles/clientPages/_services.scss';
+import '../styles/client_pages/_services.scss';
 import { useNavigate } from 'react-router-dom';
 
 export default function Services() {
