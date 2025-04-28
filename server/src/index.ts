@@ -4,6 +4,7 @@ import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import logger from './utils/logger';
 import checkoutRoutes from './routes/checkout';
+import profileRoutes from './routes/profile';
 import cors from 'cors';
 
 import { Request, Response, NextFunction } from 'express';
@@ -23,6 +24,7 @@ app.use(cors({
 }));
 
 app.use(express.json());
+app.use('/api/profile', profileRoutes);
 
 app.use((req, res, next) => {
   if (req.user) {
