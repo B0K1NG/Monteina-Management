@@ -1,32 +1,227 @@
 .profile-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background-color: #f9f9f9;
-  color: #333;
+  gap: 2rem;
+  padding: 2rem;
+  color: #fff;
 
   .profile-title {
-    font-size: 2rem;
-    font-weight: bold;
+    flex: 1;
+
+  }
+  .profile-left,
+  .profile-center,
+  .profile-right {
+    flex: 1;
+    background: rgba(35, 38, 38, 0.8);
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .section-title {
+    font-size: 1.5rem;
     margin-bottom: 1rem;
   }
 
-  .profile-description {
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
-  }
+  .info-item,
+  .visit-item,
+  .upcoming-visit-item {
+    margin-bottom: 1rem;
 
-  .profile-button {
-    padding: 0.75rem 1.5rem;
-    background-color: #1a73e8;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    &:hover {
-      background-color: #1558b0;
+    label {
+      font-weight: bold;
+      display: block;
+      margin-bottom: 0.5rem;
+    }
+
+    .info-value {
+      border: 1px solid #fff;
+      background: transparent;
+      padding: 0.5rem;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+    }
+
+    .password-container {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+
+      img {
+        width: 20px;
+        height: 20px;
+      }
+
+      .change-password-button {
+        background: #007bff;
+        color: #fff;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+    }
+
+    .view-invoice-button,
+    .cancel-visit-button {
+      background: #007bff;
+      color: #fff;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
     }
   }
 }
+
+.password-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+  }
+
+  .modal-content h2 {
+    margin-bottom: 20px;
+  }
+
+  .modal-content input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+
+  .modal-content button {
+    margin: 5px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .modal-content button.close-modal-button {
+    background: #f44336;
+    color: #fff;
+  }
+
+  .modal-content button:not(.close-modal-button) {
+    background: #4caf50;
+    color: #fff;
+  }
+
+  .cancel-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+  }
+
+  .modal-content h2 {
+    margin-bottom: 10px;
+  }
+
+  .modal-content p {
+    margin-bottom: 20px;
+  }
+
+  .modal-buttons {
+    display: flex;
+    justify-content: space-between;
+  }
+
+  .modal-buttons .cancel-button {
+    background: #f44336;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .modal-buttons .confirm-button {
+    background: #4caf50;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+
+  .invoice-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+  }
+
+  .modal-content {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+  }
+
+  .modal-content h2 {
+    margin-bottom: 20px;
+  }
+
+  .modal-content p {
+    margin-bottom: 10px;
+  }
+
+  .modal-content button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    background: #007bff;
+    color: #fff;
+    cursor: pointer;
+  }
+
+  .modal-content button.close-modal-button {
+    background: #f44336;
+  }
