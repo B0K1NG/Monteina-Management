@@ -85,6 +85,7 @@ export default function Checkout() {
 
     const payload = {
       paymentStatus: 'success',
+      // paymentStatus: 'not-success',
       userId,
       bookingDate: date,
       bookingTime: time,
@@ -105,7 +106,7 @@ export default function Checkout() {
       if (res.status === 200) {
         localStorage.removeItem('bookingDetails');
         navigate('/confirmation', {
-          state: { success: true, serviceId, totalAmount }
+          state: { success: true, serviceId, totalAmount, advanceAmount, bookingDate: date, bookingTime: time },
         });
       } else {
         console.error('Payment failed:', res.data);
