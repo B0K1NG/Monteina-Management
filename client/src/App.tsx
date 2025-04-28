@@ -13,7 +13,7 @@ import Calendar from './pages/Calendar';
 import Footer from './components/Footer';
 import FAQ from './pages/FAQ';
 import Checkout from './pages/Checkout';
-import ThankYou from './pages/ThankYou'
+import ThankYou from './pages/Confirmation'
 
 import './styles/main.scss';
 
@@ -51,7 +51,7 @@ function App() {
         <Route path="*" element={<NotFound />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="*" element={<NotFound />} />
-        <Route path="/thank-you" element={<ThankYou />} />
+        <Route path="/confirmation" element={<ThankYou />} />
         <Route path="*" element={<NotFound />} />
       </Routes>
       <Footer />

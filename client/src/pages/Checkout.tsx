@@ -99,7 +99,7 @@ export default function Checkout() {
       const res = await axios.post('/api/checkout', payload);
       if (res.status === 200) {
         localStorage.removeItem('bookingDetails');
-        navigate('/thank-you', { state: { serviceId, totalAmount } });
+        navigate('/confirmation', { state: { serviceId, totalAmount } });
       } else {
         console.error('Payment failed:', res.data);
       }
