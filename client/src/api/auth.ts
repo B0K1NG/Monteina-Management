@@ -8,7 +8,7 @@ export const fetchUserInfo = async () => {
 
 export const changePassword = async (currentPassword: string, newPassword: string) => {
   try {
-    const response = await axios.patch('/profile/change-password', {
+    const response = await axios.patch('/api/profile/change-password', {
       currentPassword,
       newPassword,
     });

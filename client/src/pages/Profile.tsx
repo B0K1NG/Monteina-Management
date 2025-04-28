@@ -91,6 +91,10 @@ export default function Profile() {
       setCurrentPassword('');
       setNewPassword('');
       setConfirmPassword('');
+
+      setTimeout(() => {
+        handleClosePasswordModal();
+      }, 3000);
     } catch (error) {
       setMessage('Failed to change password. Please try again.');
     }

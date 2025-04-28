@@ -66,11 +66,9 @@ router.patch(
       });
 
       res.json({ message: 'Password updated successfully.' });
-      return;
     } catch (error) {
       console.error('Error changing password:', error);
       res.status(500).json({ error: 'Failed to change password.' });
-      return;
     }
   }
 );
