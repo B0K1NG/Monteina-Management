@@ -1,227 +1,231 @@
-.profile-container {
-  display: flex;
-  gap: 2rem;
-  padding: 2rem;
-  color: #fff;
+@use "../utilities/variables" as vars;
+@use "../utilities/mixins" as mixins;
 
-  .profile-title {
-    flex: 1;
+.profile-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: vars.$text-color-main;
+    cursor: default;
+    text-align: center;
 
-  }
-  .profile-left,
-  .profile-center,
-  .profile-right {
-    flex: 1;
-    background: rgba(35, 38, 38, 0.8);
-    padding: 1.5rem;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-
-  .section-title {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-  }
-
-  .info-item,
-  .visit-item,
-  .upcoming-visit-item {
-    margin-bottom: 1rem;
-
-    label {
-      font-weight: bold;
-      display: block;
-      margin-bottom: 0.5rem;
+    .profile-title {
+      font-size: 1.2rem;
     }
 
-    .info-value {
-      border: 1px solid #fff;
-      background: transparent;
-      padding: 0.5rem;
-      border: 1px solid #ddd;
-      border-radius: 4px;
-    }
+    .profile-container {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        max-width: 350px;
+        box-sizing: border-box;
+        padding: 1rem;
 
-    .password-container {
-      display: flex;
-      align-items: center;
-      gap: 1rem;
+        .profile-left,
+        .profile-center,
+        .profile-right {
+          display: flex;
+          flex-direction: column;
+          background-color: rgba(35, 38, 38, 0.8);
+          margin-bottom: 1rem;
+        }
 
-      img {
-        width: 20px;
-        height: 20px;
-      }
+        .cancel-booking-button,
+        .view-invoice-button,
+        .info-value,
+        .info-value-phone,
+        .profile-left,
+        .profile-center,
+        .profile-right {
+          border-radius: 5px;
+        }
 
-      .change-password-button {
-        background: #007bff;
-        color: #fff;
-        border: none;
-        padding: 0.5rem 1rem;
-        border-radius: 4px;
-        cursor: pointer;
-      }
-    }
+        .section-title {
+          font-size: 1rem;
+          margin: 1rem auto;
+        }
 
-    .view-invoice-button,
-    .cancel-visit-button {
-      background: #007bff;
-      color: #fff;
-      border: none;
-      padding: 0.5rem 1rem;
-      border-radius: 4px;
-      cursor: pointer;
-    }
+        .info-item {
+          flex-direction: column;
+          gap: 0.5rem;
+          align-self: center;
+          
+          .info-value,
+          .info-value-phone {
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            max-width: 300px;
+            padding: 0.4rem 1.7rem; 
+          }
+
+          .info-value-phone {
+            text-decoration: underline;
+            text-decoration-color: rgba(255, 255, 255, 0.2);
+            text-underline-offset: 0.2rem;
+          }
+        }
+
+        .visit-item,
+        .booking-item{
+          justify-content: space-between;
+        }
+
+        .info-item,
+        .visit-item,
+        .booking-item,
+        .modal-buttons,
+        .password-modal,
+        .cancel-modal,
+        .invoice-modal {
+          display: flex;
+        }
+
+        .info-item,
+        .visit-item,
+        .booking-item {
+          font-size: 0.8rem;
+          margin: 0.6rem 0.7rem;
+        }
+
+        .change-password-button,
+        .cancel-booking-button,
+        .view-invoice-button,
+        .modal-buttons .cancel-button,
+        .confirm-password-change-button {
+          background: transparent;
+        }
+
+        .change-password-button,
+        .modal-buttons .confirm-button,
+        .modal-content button.close-modal-button,
+        .modal-content button {
+          border: none;
+        }
+
+        .change-password-button,
+        .cancel-booking-button,
+        .view-invoice-button,
+        .modal-buttons .cancel-button,
+        .modal-content button,
+        .modal-buttons .confirm-button,
+        .modal-content button.close-modal-button
+        {
+          cursor: pointer;
+        }
+
+        .change-password-button {
+          color: #C7C0C0;
+          transition: all 0.3s ease-in-out;
+          
+          &:hover {
+            color: vars.$hover-color;
+          }
+        }
+
+        .view-invoice-button {
+          font-size: 0.7rem;
+        }
+        
+        .cancel-booking-button,
+        .view-invoice-button {
+          margin-top: -0.3rem;
+          border: 2px solid rgba(188, 189, 180, 0.5);;
+          color: #fff;
+          padding: 0.4rem 0.5rem;
+        }
+
+        .modal-buttons {
+          justify-content: flex-end;
+        }
+
+        .modal-buttons .cancel-button,
+        .confirm-password-change-button,
+        .modal-content {
+          color: #000000;
+        }
+
+        .modal-buttons .cancel-button,
+        .confirm-password-change-button {
+          border: 1px solid #BEBEBE;
+        }
+
+        .modal-buttons .cancel-button,
+        .modal-content button {
+          padding: 10px 20px;
+        }
+
+        .modal-buttons .cancel-button,
+        .modal-buttons .confirm-button,
+        .modal-content button.close-modal-button,
+        .modal-content button,
+        .modal-content input {
+          border-radius: 4px;
+        }
+
+
+        .modal-buttons .cancel-button,
+        .confirm-password-change-button,
+        .cancel-booking-button,
+        .view-invoice-button
+         {
+          @include mixins.button-hover-effect(vars.$primary-color);
+        }
+      
+        .modal-buttons .confirm-button,
+        .modal-content button.close-modal-button {
+          background: #F06A68 !important;
+          color: #fff;
+        }
+
+        .modal-buttons .confirm-button {
+          padding: 0rem 0.6rem;
+        }
+
+        .modal-content button {
+          margin-top: 20px;
+          margin: 5px;
+        }
+
+        .password-modal,
+        .cancel-modal,
+        .invoice-modal {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: rgba(0, 0, 0, 0.5);
+          justify-content: center;
+          align-items: center;
+          z-index: 1000;
+        }
+
+        .password-modal {
+
+          .modal-content input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+          }
+        }
+
+        .modal-content {
+          background: #fff;
+          padding: 20px;
+          border-radius: 8px;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+          width: 90%;
+          max-width: 400px;
+        }
+
+        .modal-content h2 {
+          margin-bottom: 20px;
+        }
+      
+        .modal-content p {
+          margin-bottom: 10px;
+        }
   }
 }
-
-.password-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-
-  .modal-content {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 90%;
-    max-width: 400px;
-    text-align: center;
-  }
-
-  .modal-content h2 {
-    margin-bottom: 20px;
-  }
-
-  .modal-content input {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-  }
-
-  .modal-content button {
-    margin: 5px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  .modal-content button.close-modal-button {
-    background: #f44336;
-    color: #fff;
-  }
-
-  .modal-content button:not(.close-modal-button) {
-    background: #4caf50;
-    color: #fff;
-  }
-
-  .cancel-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-
-  .modal-content {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 90%;
-    max-width: 400px;
-    text-align: center;
-  }
-
-  .modal-content h2 {
-    margin-bottom: 10px;
-  }
-
-  .modal-content p {
-    margin-bottom: 20px;
-  }
-
-  .modal-buttons {
-    display: flex;
-    justify-content: space-between;
-  }
-
-  .modal-buttons .cancel-button {
-    background: #f44336;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  .modal-buttons .confirm-button {
-    background: #4caf50;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-  }
-
-  .invoice-modal {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-  }
-
-  .modal-content {
-    background: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    width: 90%;
-    max-width: 400px;
-    text-align: center;
-  }
-
-  .modal-content h2 {
-    margin-bottom: 20px;
-  }
-
-  .modal-content p {
-    margin-bottom: 10px;
-  }
-
-  .modal-content button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    background: #007bff;
-    color: #fff;
-    cursor: pointer;
-  }
-
-  .modal-content button.close-modal-button {
-    background: #f44336;
-  }

@@ -81,13 +81,13 @@ export default function Profile() {
 
   const handleChangePassword = async () => {
     if (newPassword !== confirmPassword) {
-      setMessage('New passwords do not match.');
+      setMessage('Nauji slaptažodžiai nesutampa.');
       return;
     }
 
     try {
       await changePassword(currentPassword, newPassword);
-      setMessage('Password changed successfully.');
+      setMessage('Slaptažodis sėkmingai pakeistas!');
       setCurrentPassword('');
       setNewPassword('');
       setConfirmPassword('');
@@ -96,7 +96,7 @@ export default function Profile() {
         handleClosePasswordModal();
       }, 3000);
     } catch (error) {
-      setMessage('Failed to change password. Please try again.');
+      setMessage('Nepavyko pakeisti slaptažodžio. Susisiekite su administracija.');
     }
   };
 
@@ -140,7 +140,9 @@ export default function Profile() {
   };
 
   return (
-    <div className="profile-container">
+    <div className="profile-page">
+      <h1 className="profile-title">Sveiki, {userInfo.firstName}!</h1>
+      <div className="profile-container">
       {/* Left Section: User Information */}
       <div className="profile-left">
         <h2 className="section-title">Vartotojo informacija</h2>
@@ -153,8 +155,8 @@ export default function Profile() {
           <div className="info-value">{userInfo.email}</div>
         </div>
         <div className="info-item">
-          <label>Telefono numeris</label>
-          <div className="info-value">{userInfo.phoneNumber}</div>
+          <label>Tel. Nr.</label>
+          <div className="info-value-phone">{userInfo.phoneNumber}</div>
         </div>
         <div className="info-item">
           <label>Slaptažodis</label>
@@ -175,7 +177,7 @@ export default function Profile() {
                 className="view-invoice-button"
                 onClick={() => handleOpenInvoiceModal(visit)}
               >
-                Peržiūrėti sąskaitą
+                Peržiūrėti
               </button>
             </div>
           ))
@@ -197,7 +199,7 @@ export default function Profile() {
                 className="cancel-booking-button"
                 onClick={() => handleOpenCancelModal(booking.id)}
               >
-                Atšaukti vizitą
+                Atšaukti
               </button>
             </div>
           ))
@@ -228,8 +230,10 @@ export default function Profile() {
               value={confirmPassword}
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
-            <button onClick={handleChangePassword}>Atnaujinti slaptažodį</button>
+            <div className="modal-buttons">
             <button className="close-modal-button" onClick={handleClosePasswordModal}>Uždaryti</button>
+            <button className="confirm-password-change-button" onClick={handleChangePassword}>Atnaujinti slaptažodį</button>
+            </div>
             {message && <p>{message}</p>}
           </div>
         </div>
@@ -241,8 +245,8 @@ export default function Profile() {
             <h2>Atšaukti vizitą</h2>
             <p>Ar jūs esate įsitikinęs, kad norite atšaukti savo vizitą? (Avansas nėra grąžinamas)</p>
             <div className="modal-buttons">
-              <button className="cancel-button" onClick={handleCloseCancelModal}>Grįžti</button>
-              <button className="confirm-button" onClick={handleConfirmCancel}>Atšaukti</button>
+              <button className="cancel-button" onClick={handleCloseCancelModal}>Uždaryti</button>
+              <button className="confirm-button" onClick={handleConfirmCancel}>Atšaukti vizitą</button>
             </div>
           </div>
         </div>
@@ -259,6 +263,7 @@ export default function Profile() {
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 }
