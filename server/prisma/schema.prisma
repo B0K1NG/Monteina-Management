@@ -42,4 +42,5 @@ model Checkout {
   bookingDate    DateTime
   bookingTime    String
   createdAt      DateTime @default(now())
+  status          String   @default("active")
 }
