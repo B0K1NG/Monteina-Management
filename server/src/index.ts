@@ -5,8 +5,11 @@ import jwt from 'jsonwebtoken';
 import logger from './utils/logger';
 import checkoutRoutes from './routes/checkout';
 import profileRoutes from './routes/profile';
-import cors from 'cors';
 
+import cors from 'cors';
+import cron from 'node-cron';
+
+import { updateBookingStatuses } from './utils/updateBookingStatuses';
 import { Request, Response, NextFunction } from 'express';
 import { PrismaClient } from '@prisma/client';
 import { sendConfirmationEmail } from './utils/mailer';
@@ -22,6 +25,11 @@ app.use(cors({
   origin: 'http://localhost:5173',
   credentials: true,
 }));
+
+cron.schedule('*/30 * * * *', async () => {
+  console.log('Running scheduled task: Updating booking statuses...');
+  await updateBookingStatuses();
+});
 
 app.use(express.json());
 app.use('/api/profile', profileRoutes);
