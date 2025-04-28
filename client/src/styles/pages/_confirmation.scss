@@ -1,0 +1,167 @@
+@use "../utilities/variables" as vars;
+@use "../utilities/mixins" as mixins;
+
+.confirmation-page {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: vars.$text-color-main;
+    cursor: default;
+    text-align: center;
+    margin-top: 5rem;
+
+    .confirmation-container {
+        display: flex;
+        flex-direction: column;
+        align-items: stretch;
+        width: 100%;
+        max-width: 300px;
+        box-sizing: border-box;
+        padding: 1rem;
+        background-color: rgba(35, 38, 38, 0.8);
+        border-radius: 5px;
+
+        .confirmation-title {
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .confirmation-detail {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.8rem;
+        }
+
+        .confirmation-button,
+        .confirmation-message {
+            font-size: 0.85rem; 
+        }
+
+        .confirmation-message {
+            align-self: center;
+            max-width: 200px;
+        }
+
+        .confirmation-detail,
+        .confirmation-image,
+        .confirmation-message,
+        .separation-line {
+            margin-bottom: 1rem;
+        }
+
+        .confirmation-image {
+            align-self: center;
+            width: 40px;
+            height: auto;
+        }
+
+        hr,
+        .confirmation-button {
+          background-color: rgba(188, 189, 180, 0.5);
+        }
+
+        hr {
+            width: 100%;
+            height: 2px;
+          }
+
+        .confirmation-button {
+            border: 2px solid rgba(188, 189, 180, 0.5);;
+            width: auto;
+            align-self: center;
+            background: transparent;
+            color: #fff;
+            cursor: pointer;
+            padding: 0.4rem 1.7rem; 
+            border-radius: 5px;
+            @include mixins.button-hover-effect(vars.$primary-color);
+        }
+    }
+}
+
+@media (min-width: 768px) {
+    .confirmation-page {
+        margin-top: 9rem;
+
+        .confirmation-container {
+            max-width: 500px;
+
+            .confirmation-image {
+                width: 60px;
+            }
+
+            .confirmation-title {
+                font-size: 1.5rem;
+            }
+    
+            .confirmation-detail {
+                font-size: 1rem;
+            }
+    
+            .confirmation-button,
+            .confirmation-message {
+                font-size: 0.9rem; 
+            }
+
+            .confirmation-button {
+                padding: 0.4rem 2.5rem;
+            }
+
+            .confirmation-message {
+                max-width: 800px;
+            }
+        }
+    }
+}
+
+@media (min-width: 1024px) {
+    .confirmation-page {
+        margin-top: 0rem;
+
+        &.confirmation-page--failure {
+            margin-top: 6rem;
+          }
+
+        .confirmation-container {
+            max-width: 430px;
+            padding: 3rem 1rem;
+
+            .confirmation-title {
+                font-size: 1.8rem;
+                margin-bottom: 0.3rem;
+            }
+    
+            .confirmation-detail {
+                font-size: 1rem;
+            }
+    
+            .confirmation-button {
+                font-size: 0.9rem; 
+            }
+
+            .confirmation-message {
+                font-size: 1rem;
+            }
+
+            .separation-line {
+                margin-bottom: 2rem;
+            }
+
+            .separation-line,
+            .confirmation-button {
+                margin-top: 1rem;
+            }
+
+            .confirmation-image,
+            .confirmation-message,
+            .confirmation-detail {
+                margin-bottom: 1rem;
+            }
+
+            .confirmation-button {
+                padding: 0.4rem 5rem;
+            }
+        }
+    }
+}
