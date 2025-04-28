@@ -315,32 +315,77 @@ body {
 }
 .profile-container {
   display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
-  background-color: #f9f9f9;
-  color: #333;
+  gap: 2rem;
+  padding: 2rem;
 }
-.profile-container .profile-title {
-  font-size: 2rem;
-  font-weight: bold;
+.profile-container .profile-left,
+.profile-container .profile-center,
+.profile-container .profile-right {
+  flex: 1;
+  background: #f9f9f9;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+.profile-container .section-title {
+  font-size: 1.5rem;
   margin-bottom: 1rem;
 }
-.profile-container .profile-description {
-  font-size: 1.25rem;
-  margin-bottom: 2rem;
+.profile-container .info-item,
+.profile-container .visit-item,
+.profile-container .upcoming-visit-item {
+  margin-bottom: 1rem;
 }
-.profile-container .profile-button {
-  padding: 0.75rem 1.5rem;
-  background-color: #1a73e8;
-  color: white;
+.profile-container .info-item label,
+.profile-container .visit-item label,
+.profile-container .upcoming-visit-item label {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 0.5rem;
+}
+.profile-container .info-item .info-value,
+.profile-container .visit-item .info-value,
+.profile-container .upcoming-visit-item .info-value {
+  background: #fff;
+  padding: 0.5rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+.profile-container .info-item .password-container,
+.profile-container .visit-item .password-container,
+.profile-container .upcoming-visit-item .password-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.profile-container .info-item .password-container img,
+.profile-container .visit-item .password-container img,
+.profile-container .upcoming-visit-item .password-container img {
+  width: 20px;
+  height: 20px;
+}
+.profile-container .info-item .password-container .change-password-button,
+.profile-container .visit-item .password-container .change-password-button,
+.profile-container .upcoming-visit-item .password-container .change-password-button {
+  background: #007bff;
+  color: #fff;
   border: none;
-  border-radius: 5px;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
   cursor: pointer;
 }
-.profile-container .profile-button:hover {
-  background-color: #1558b0;
+.profile-container .info-item .view-invoice-button,
+.profile-container .info-item .cancel-visit-button,
+.profile-container .visit-item .view-invoice-button,
+.profile-container .visit-item .cancel-visit-button,
+.profile-container .upcoming-visit-item .view-invoice-button,
+.profile-container .upcoming-visit-item .cancel-visit-button {
+  background: #007bff;
+  color: #fff;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
 }
 
 .register-container {
@@ -2002,5 +2047,159 @@ body {
   }
   .checkout-page .pay-button {
     width: 300px !important;
+  }
+}
+.confirmation-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: #FFFFFF;
+  cursor: default;
+  text-align: center;
+  margin-top: 5rem;
+}
+.confirmation-page .confirmation-container {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 100%;
+  max-width: 300px;
+  box-sizing: border-box;
+  padding: 1rem;
+  background-color: rgba(35, 38, 38, 0.8);
+  border-radius: 5px;
+}
+.confirmation-page .confirmation-container .confirmation-title {
+  font-size: 0.9rem;
+  margin-bottom: 0.2rem;
+}
+.confirmation-page .confirmation-container .confirmation-detail {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+}
+.confirmation-page .confirmation-container .confirmation-button,
+.confirmation-page .confirmation-container .confirmation-message {
+  font-size: 0.85rem;
+}
+.confirmation-page .confirmation-container .confirmation-message {
+  align-self: center;
+  max-width: 200px;
+}
+.confirmation-page .confirmation-container .confirmation-detail,
+.confirmation-page .confirmation-container .confirmation-image,
+.confirmation-page .confirmation-container .confirmation-message,
+.confirmation-page .confirmation-container .separation-line {
+  margin-bottom: 1rem;
+}
+.confirmation-page .confirmation-container .confirmation-image {
+  align-self: center;
+  width: 40px;
+  height: auto;
+}
+.confirmation-page .confirmation-container hr,
+.confirmation-page .confirmation-container .confirmation-button {
+  background-color: rgba(188, 189, 180, 0.5);
+}
+.confirmation-page .confirmation-container hr {
+  width: 100%;
+  height: 2px;
+}
+.confirmation-page .confirmation-container .confirmation-button {
+  border: 2px solid rgba(188, 189, 180, 0.5);
+  width: auto;
+  align-self: center;
+  background: transparent;
+  color: #fff;
+  cursor: pointer;
+  padding: 0.4rem 1.7rem;
+  border-radius: 5px;
+  position: relative;
+  overflow: hidden;
+  z-index: 1;
+}
+.confirmation-page .confirmation-container .confirmation-button::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: #1a73e8;
+  z-index: -1;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 0.5s ease;
+}
+.confirmation-page .confirmation-container .confirmation-button:hover::before {
+  transform: scaleX(1);
+}
+
+@media (min-width: 768px) {
+  .confirmation-page {
+    margin-top: 9rem;
+  }
+  .confirmation-page .confirmation-container {
+    max-width: 500px;
+  }
+  .confirmation-page .confirmation-container .confirmation-image {
+    width: 60px;
+  }
+  .confirmation-page .confirmation-container .confirmation-title {
+    font-size: 1.5rem;
+  }
+  .confirmation-page .confirmation-container .confirmation-detail {
+    font-size: 1rem;
+  }
+  .confirmation-page .confirmation-container .confirmation-button,
+  .confirmation-page .confirmation-container .confirmation-message {
+    font-size: 0.9rem;
+  }
+  .confirmation-page .confirmation-container .confirmation-button {
+    padding: 0.4rem 2.5rem;
+  }
+  .confirmation-page .confirmation-container .confirmation-message {
+    max-width: 800px;
+  }
+}
+@media (min-width: 1024px) {
+  .confirmation-page {
+    margin-top: 0rem;
+  }
+  .confirmation-page.confirmation-page--failure {
+    margin-top: 6rem;
+  }
+  .confirmation-page .confirmation-container {
+    max-width: 430px;
+    padding: 3rem 1rem;
+  }
+  .confirmation-page .confirmation-container .confirmation-title {
+    font-size: 1.8rem;
+    margin-bottom: 0.3rem;
+  }
+  .confirmation-page .confirmation-container .confirmation-detail {
+    font-size: 1rem;
+  }
+  .confirmation-page .confirmation-container .confirmation-button {
+    font-size: 0.9rem;
+  }
+  .confirmation-page .confirmation-container .confirmation-message {
+    font-size: 1rem;
+  }
+  .confirmation-page .confirmation-container .separation-line {
+    margin-bottom: 2rem;
+  }
+  .confirmation-page .confirmation-container .separation-line,
+  .confirmation-page .confirmation-container .confirmation-button {
+    margin-top: 1rem;
+  }
+  .confirmation-page .confirmation-container .confirmation-image,
+  .confirmation-page .confirmation-container .confirmation-message,
+  .confirmation-page .confirmation-container .confirmation-detail {
+    margin-bottom: 1rem;
+  }
+  .confirmation-page .confirmation-container .confirmation-button {
+    padding: 0.4rem 5rem;
   }
 }/*# sourceMappingURL=main.css.map */
