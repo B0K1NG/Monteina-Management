@@ -1,7 +1,5 @@
-// server/src/routes/checkout.ts
-
 import { Router, Request, Response, NextFunction } from 'express';
-import { PrismaClient }                          from '@prisma/client';
+import { PrismaClient } from '@prisma/client';
 
 const router = Router();
 const prisma = new PrismaClient();
@@ -15,6 +13,7 @@ router.post(
   ): Promise<void> => {
     try {
       const {
+        paymentStatus,
         userId,
         bookingDate,
         bookingTime,
@@ -27,6 +26,11 @@ router.post(
         advanceAmount,
         remainingAmount,
       } = req.body;
+
+      if (paymentStatus !== 'success') {
+        res.status(400).json({ error: 'Payment failed' });
+        return;
+      }
 
       const slotDate = new Date(bookingDate);
 
@@ -45,12 +49,12 @@ router.post(
       const newCheckout = await prisma.checkout.create({
         data: {
           userId,
-          bookingDate:    slotDate,
+          bookingDate: slotDate,
           bookingTime,
-          carBrand:       carDetails.make,
-          carModel:       carDetails.model,
-          tireSize:       carDetails.tireSize,
-          serviceName:    selectedService.name,
+          carBrand: carDetails.make,
+          carModel: carDetails.model,
+          tireSize: carDetails.tireSize,
+          serviceName: selectedService.name,
           valveChange,
           tireQuantity,
           serviceId,

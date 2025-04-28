@@ -56,31 +56,35 @@ export default function Checkout() {
   } = bookingDetails;
 
   const mainServicePrice =
-  selectedService.name === 'Padangos remontas'
-    ? (repairOption === 'lopas'
-        ? selectedService.price_max
-        : selectedService.price_min)
-    : (carDetails.tireSize.startsWith('R18')
-        ? selectedService.price_max
-        : selectedService.price_min); 
-  
+    selectedService.name === 'Padangos remontas'
+      ? (repairOption === 'lopas'
+          ? selectedService.price_max
+          : selectedService.price_min)
+      : (carDetails.tireSize.startsWith('R18')
+          ? selectedService.price_max
+          : selectedService.price_min);
+          
   const groupRepairCount = repairOption ? Math.ceil(tireQuantity / 4) : tireQuantity;
   const valvePrice = valveChange ? 5 : 0;
   const advanceAmount = 5;
-  const totalAmount = repairOption ? mainServicePrice * groupRepairCount + valvePrice : mainServicePrice * tireQuantity + valvePrice;
-  const remaining  = totalAmount - advanceAmount;
-  const serviceId  = `MONT${new Date().toISOString().slice(0,10).replace(/-/g,'')}-001`;
+  const totalAmount =
+    (repairOption
+      ? mainServicePrice * groupRepairCount + valvePrice
+      : mainServicePrice * tireQuantity + valvePrice);
+  const remaining = totalAmount - advanceAmount;
+  const serviceId = `MONT${new Date().toISOString().slice(0, 10).replace(/-/g, '')}-001`;
 
   const handlePayment = async () => {
-    const token   = localStorage.getItem('token')!;
+    const token = localStorage.getItem('token')!;
     const decoded = jwtDecode<MyJwtPayload>(token);
-    const userId  = decoded?.id;
+    const userId = decoded?.id;
     if (!userId) {
       console.error('User ID not found in token');
-      return;
+      return navigate('/confirmation', { state: { success: false } });
     }
 
     const payload = {
+      paymentStatus: 'success',
       userId,
       bookingDate: date,
       bookingTime: time,
@@ -97,14 +101,19 @@ export default function Checkout() {
 
     try {
       const res = await axios.post('/api/checkout', payload);
+
       if (res.status === 200) {
         localStorage.removeItem('bookingDetails');
-        navigate('/confirmation', { state: { serviceId, totalAmount } });
+        navigate('/confirmation', {
+          state: { success: true, serviceId, totalAmount }
+        });
       } else {
         console.error('Payment failed:', res.data);
+        navigate('/confirmation', { state: { success: false } });
       }
     } catch (err) {
       console.error('Error during payment:', err);
+      navigate('/confirmation', { state: { success: false } });
     }
   };
 
@@ -112,7 +121,7 @@ export default function Checkout() {
     <div className="checkout-page">
       <div className="checkout-container">
         <div className="checkout-details">
-        <button
+          <button
             className="checkout-back-button"
             onClick={() => {
               localStorage.removeItem('bookingDetails');
@@ -137,12 +146,12 @@ export default function Checkout() {
         </div>
 
         <div className="checkout-summary">
-        <div className="checkout-date">
+          <div className="checkout-date">
             <span>{time}</span>
             <span>{date}</span>
           </div>
           <hr className="separation-line" />
-        <h2 className="checkout-subheader">Santrauka</h2>
+          <h2 className="checkout-subheader">Santrauka</h2>
           <div className="summary-item">
             <span>Užsakymo numeris</span>
             <span>{serviceId}</span>
@@ -152,15 +161,15 @@ export default function Checkout() {
             <span>{mainServicePrice} €</span>
           </div>
           {selectedService.name === 'Padangos remontas' && repairOption && (
-          <div className="summary-item">
-            <span>Remonto tipas</span>
-            <span>{
-              repairOption === 'ventiliu-keitimas' ? 'Ventilių keitimas'
-            : repairOption === 'siulo-iverimas'  ? 'Siūlo įvėrimas'
-                                                : 'Lopo dėjimas'
-            }</span>
-          </div>
-        )}
+            <div className="summary-item">
+              <span>Remonto tipas</span>
+              <span>{
+                repairOption === 'ventiliu-keitimas' ? 'Ventilių keitimas'
+                : repairOption === 'siulo-iverimas'  ? 'Siūlo įvėrimas'
+                                                  : 'Lopo dėjimas'
+              }</span>
+            </div>
+          )}
           {valveChange && (
             <div className="summary-item">
               <span>Ventilių keitimo kaina</span>
@@ -185,9 +194,13 @@ export default function Checkout() {
             Apmokėti
           </button>
           <div className="checkout-terms">
-          <p>Paspaudę "Apmokėti" sutinkate su mūsų <a href="/terms">paslaugų teikimo sąlygomis.</a></p>
-          <p>Automobiliai kurių varžtų nebus įmanoma atsukti nebus aptarnaujami</p>
-      </div>
+            <p>
+              Paspaudę "Apmokėti" sutinkate su mūsų <a href="/terms">paslaugų teikimo sąlygomis.</a>
+            </p>
+            <p>
+              Automobiliai kurių varžtų nebus įmanoma atsukti nebus aptarnaujami
+            </p>
+          </div>
         </div>
       </div>
     </div>
