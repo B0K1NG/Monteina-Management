@@ -148,8 +148,8 @@ export default function Checkout() {
             <span>{serviceId}</span>
           </div>
           <div className="summary-item">
-            <span>Paslauga</span>
-            <span>{selectedService.name} — {mainServicePrice} €</span>
+            <span>{selectedService.name}</span>
+            <span>{mainServicePrice} €</span>
           </div>
           {selectedService.name === 'Padangos remontas' && repairOption && (
           <div className="summary-item">
@@ -163,7 +163,7 @@ export default function Checkout() {
         )}
           {valveChange && (
             <div className="summary-item">
-              <span>Ventilių keitimas</span>
+              <span>Ventilių keitimo kaina</span>
               <span>{valvePrice} €</span>
             </div>
           )}
@@ -184,11 +184,11 @@ export default function Checkout() {
           <button className="pay-button" onClick={handlePayment}>
             Apmokėti
           </button>
-        </div>
-      </div>
-      <div className="checkout-terms">
+          <div className="checkout-terms">
           <p>Paspaudę "Apmokėti" sutinkate su mūsų <a href="/terms">paslaugų teikimo sąlygomis.</a></p>
           <p>Automobiliai kurių varžtų nebus įmanoma atsukti nebus aptarnaujami</p>
+      </div>
+        </div>
       </div>
     </div>
   );

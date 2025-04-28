@@ -2,130 +2,232 @@
 @use "../utilities/mixins" as mixins;
 
 .checkout-page {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: vars.$text-color-main;
+  cursor: default;
+
+  .checkout-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+    padding: 1rem;
+  }
+
+  .checkout-header,
+  .checkout-subheader,
+  .detail-item,
+  .summary-item,
+  .checkout-date,
+  .checkout-terms,
+  .pay-button,
+  .separation-line {
+    margin-bottom: 1rem;
+  }
+
+  .checkout-header,
+  .checkout-subheader,
+  .checkout-summary,
+  .checkout-terms {
+    text-align: center;
+  }
+
+  .detail-item,
+  .summary-item,
+  .checkout-terms { 
+    font-size: 0.8rem; 
+}
+  .checkout-back-button,
+  .pay-button { 
+    font-size: 0.85rem; 
+    padding: 0.4rem 1.7rem; 
+}
+  .checkout-header,
+  .checkout-subheader,
+  .checkout-date { 
+    font-size: 0.9rem;
+}
+
+  .detail-item,
+  .summary-item,
+  .checkout-date {
+    display: flex;
+    justify-content: space-between;
+    
+    span:nth-of-type(1) {
+        margin-right: 0.4rem;
+    }
+  }
+
+  .checkout-back-button,
+  .detail-item,
+  .pay-button,
+  .checkout-summary {
+    border-radius: 5px;
+}
+
+  hr,
+  .pay-button {
+    background-color: rgba(188, 189, 180, 0.5);
+  }
+
+  hr {
+    width: 100%;
+    height: 2px;
+  }
+
+  .checkout-details {
+
+    .checkout-back-button {
+        margin-bottom: 2rem;
+        background-color: vars.$primary-color;
+        color: #fff;
+        border: none;
+        cursor: pointer;
+        width: auto;
+    }
+
+    .detail-item {
+        width: 100%;
+        border: 1px solid #fff;
+        padding: 0.4rem 0.5rem;
+        cursor: default;
+    }
+  }
+
+  .checkout-summary {
+    display: flex;
+    flex-direction: column;
+    background-color: rgba(35, 38, 38, 0.8);
+    padding: 1rem;
+
+    .checkout-date {
+        flex-direction: column;
+        align-items: center;
+        gap: 0.3rem;
+        font-weight: 600;
+    }
+
+    .pay-button {
+        border: 2px solid rgba(188, 189, 180, 0.5);;
+        width: auto;
+        align-self: center;
+        background: transparent;
+        color: #fff;
+        cursor: pointer;
+        @include mixins.button-hover-effect(vars.$primary-color);
+    }
+  }
+
+  .checkout-terms {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    color: vars.$text-color-main;
-    cursor: default;
+    gap: 1rem;
 
-    .checkout-header,
-    .checkout-subheader,
-    .detail-item,
-    .summary-item,
-    .checkout-date,
-    .checkout-terms,
-    .pay-button,
-    .separation-line
-        {
-            margin-bottom: 1rem;;
+    a {
+      color: vars.$primary-color;
+      text-decoration: underline;
+      text-underline-offset: 0.4rem;
     }
+  }
+}
 
-    .checkout-header,
-    .detail-item,
-    .checkout-summary,
-    .checkout-terms {
-        text-align: center;
-    }
+@media (min-width: 768px) {
+    .checkout-page {
 
-    .detail-item,
-    .summary-item,
-    .checkout-terms {
-        font-size: 0.8rem;
-    }
-
-    .checkout-back-button,
-    .pay-button {
-        font-size: 0.85rem;
-    }
-
-    .checkout-header,
-    .checkout-subheader,
-    .checkout-date {
-        font-size: 0.9rem;
-    }
-
-    .detail-item,
-    .summary-item {
-        span:nth-of-type(1) {
-            margin-right: 0.4rem;
-        }
-    }
-
-    .checkout-back-button,
-    .detail-item,
-    .pay-button {
-        border-radius: 5px;
-    }
-
-
-    hr,
-    .pay-button {
-        background-color: rgba(188, 189, 180, 0.5);
-        border: 1px solid #fff;
-    }
-
-    hr {
-        width: 100%;
-        height: 2px;
-    }
-
-
-    .checkout-details {
-        margin-bottom: 2rem;
-
-        .checkout-back-button {
+        .detail-item {
             margin-bottom: 2rem;
-            padding: 0.4rem 1.3rem;
-            background-color: vars.$primary-color;
-            color: #fff;
-            border: none;
-            cursor: pointer;
+        }
+
+        .detail-item,
+        .summary-item,
+        .checkout-terms { 
+            font-size: 0.9rem; 
+        }
+        .checkout-back-button,
+        .pay-button { 
+            font-size: 1rem; 
+            padding: 0.4rem 2.5rem; 
+        }
+        .checkout-header,
+        .checkout-subheader,
+        .checkout-date { 
+            font-size: 1.2rem;
+        }
+        
+        .checkout-container {
+            max-width: 700px;
+          }
+    }
+}
+
+@media (min-width: 1024px) {
+    .checkout-page {
+        align-items: flex-start;
+
+        .summary-item { 
+            font-size: 1rem; 
         }
 
         .detail-item {
-            border: 1px solid #fff;
-            padding: 0.4rem 0.5rem;
-            cursor: default;
+            font-size: 1.2rem;
+            padding: 0.7rem 1rem !important;
         }
-    }
 
-    .checkout-summary {
+        .checkout-terms {
+            width: 300px;
+            margin: 0 auto;
+        }
+
+        .checkout-back-button,
+        .pay-button { 
+            font-size: 1.1rem; 
+            padding: 0.4rem 3rem; 
+        }
+
+        .checkout-header,
+        .checkout-subheader {
+            text-align: left;
+        }
+
+        .checkout-header {
+            font-size: 2rem;
+        }
+
         .checkout-date {
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            align-items: center;
-            gap: 0.3rem;
-            font-weight: 600;
+            font-size: 2rem;
 
-            span:nth-of-type(1) {
-                margin-right: 0.4rem;
+            span:nth-of-type(2) {
+                font-size: 1rem;
             }
         }
 
-        .pay-button {
-            padding: 0.4rem 1.7rem;
-            background: transparent;
-            color: #fff;
-            cursor: pointer;
-            @include mixins.button-hover-effect(vars.$primary-color);
+        .checkout-container {
+            flex-direction: row;
+            justify-content: space-between;
+            align-items: flex-start;
+            max-width: 1800px;
+            padding: 1rem 10rem;
+            gap: 2rem;
         }
-    }
 
-    .checkout-terms {
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        width: 70%;
-        gap: 1rem;
-        margin-top: 1rem;
+        .checkout-details {
+            width: 350px;
+        }
 
-        a {
-            color: vars.$primary-color;
-            text-decoration: underline;
-            text-underline-offset: 0.4rem;
+        .checkout-summary {
+            width: 400px;
+        }
+
+        .pay-button {
+            width: 300px !important;
         }
     }
 }
