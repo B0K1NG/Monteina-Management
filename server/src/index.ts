@@ -39,13 +39,13 @@ app.get('/', (req, res) => {
 });
 
 app.post('/auth/register', async (req, res) => {
-  const { email, password } = req.body;
+  const { email, password, firstName, lastName, phoneNumber } = req.body;
 
   const hashedPassword = await bcrypt.hash(password, 10);
 
   try {
     const user = await prisma.user.create({
-      data: { email, password: hashedPassword },
+      data: { email, password: hashedPassword, firstName, lastName, phoneNumber },
     });
 
     const token = generateToken(user);
@@ -153,13 +153,27 @@ app.get('/auth/confirm', async (req: Request, res: Response): Promise<void> => {
 });
 
 app.get('/profile', authenticateToken, async (req, res): Promise<void> => {
-  const user = await prisma.user.findUnique({ where: { id: req.user.id } });
-  if (!user) {
-    res.status(404).json({ error: 'Invalid request.' });
-    return;
-  }
+  try {
+    const user = await prisma.user.findUnique({
+      where: { id: req.user.id },
+      select: {
+        firstName: true,
+        lastName: true,
+        email: true,
+        phoneNumber: true,
+      },
+    });
 
-  res.json({ user });
+    if (!user) {
+      res.status(404).json({ error: 'User not found.' });
+      return;
+    }
+
+    res.json({ user });
+  } catch (error) {
+    console.error('Error fetching user profile:', error);
+    res.status(500).json({ error: 'Failed to fetch user profile.' });
+  }
 });
 
 app.get('/admin', authenticateToken, authorizeRole('admin'), async (req, res) => {
