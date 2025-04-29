@@ -95,14 +95,38 @@ router.get('/bookings', async (req, res) => {
 router.get('/all-bookings', async (req, res) => {
   try {
     const bookings = await prisma.checkout.findMany({
-      where: {
-        status: { not: 'canceled' },
+      select: {
+        id: true,
+        bookingDate: true,
+        bookingTime: true,
+        userId: true,
+        serviceName: true,
+        status: true,
+        serviceId: true,
       },
       orderBy: {
         bookingDate: 'asc',
       },
     });
-    res.json(bookings);
+
+    const userIds = bookings.map((booking) => booking.userId);
+    const users = await prisma.user.findMany({
+      where: { id: { in: userIds } },
+      select: { id: true, firstName: true, lastName: true },
+    });
+
+    const userMap: Record<number, string> = users.reduce((acc: Record<number, string>, user) => {
+      acc[user.id] = `${user.firstName || ''} ${user.lastName || ''}`.trim();
+      return acc;
+    }, {} as Record<number, string>);
+
+    const formattedBookings = bookings.map((booking) => ({
+      ...booking,
+      userName: userMap[booking.userId] || 'Unknown',
+      bookingDate: booking.bookingDate.toISOString().split('T')[0],
+    }));
+
+    res.json(formattedBookings);
   } catch (error) {
     console.error('Error in GET /api/checkout/all-bookings:', error);
     res.status(500).json({ error: 'Failed to fetch all bookings.' });
@@ -152,6 +176,66 @@ router.patch('/cancel/:id', async (req, res) => {
     res.json({ message: 'Booking canceled successfully.' });
   } catch (error) {
     res.status(500).json({ error: 'Failed to cancel booking.' });
+  }
+});
+
+router.patch('/:id', async (req: Request, res: Response, next: NextFunction): Promise<any> => {
+  const { id } = req.params;
+  const { bookingDate, bookingTime, serviceId, status } = req.body;
+
+  try {
+    const existingBooking = await prisma.checkout.findUnique({
+      where: { id: parseInt(id) },
+    });
+
+    if (!existingBooking) {
+      return res.status(404).json({ error: 'Booking not found.' });
+    }
+
+    if (
+      (bookingDate && bookingDate !== existingBooking.bookingDate.toISOString().split('T')[0]) ||
+      (bookingTime && bookingTime !== existingBooking.bookingTime)
+    ) {
+      const existingCount = await prisma.checkout.count({
+        where: {
+          bookingDate: new Date(existingBooking.bookingDate),
+          bookingTime: existingBooking.bookingTime,
+          status: { not: 'canceled' },
+        },
+      });
+
+      if (existingCount <= 2) {
+      }
+    }
+
+    if (bookingDate && bookingTime) {
+      const count = await prisma.checkout.count({
+        where: {
+          bookingDate: new Date(bookingDate),
+          bookingTime,
+          status: { not: 'canceled' },
+        },
+      });
+
+      if (count >= 2) {
+        return res.status(400).json({ error: 'Selected time slot is already fully booked.' });
+      }
+    }
+
+    const updatedBooking = await prisma.checkout.update({
+      where: { id: parseInt(id) },
+      data: {
+        bookingDate: bookingDate ? new Date(bookingDate) : undefined,
+        bookingTime: bookingTime || undefined,
+        serviceId: serviceId || undefined,
+        status: status || undefined,
+      },
+    });
+
+    res.json(updatedBooking);
+  } catch (error) {
+    console.error('Error updating booking:', error);
+    res.status(500).json({ error: 'Failed to update booking.' });
   }
 });
 

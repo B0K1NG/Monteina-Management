@@ -96,25 +96,26 @@ export default function BookingCalendar() {
     setRepairOption(null);
   }, [selectedDate]);
 
-  interface BookingData {
-    bookingTime: string;
-    _count: { bookingTime: number };
-  }
+  const normalizeTime = (time: string) => {
+    const [hours, minutes] = time.split(':');
+    return `${hours.padStart(2, '0')}:${minutes}`;
+  };
 
   useEffect(() => {
     if (!selectedDate) return;
 
-    axios.get('/api/checkout/bookings', {
-        params: { date: selectedDate },
+    axios.get('/api/checkout/bookings', { params: { date: selectedDate } })
+    .then(({ data }) => {
+      console.log("Booking data:", data);
+      const fullyBooked = data
+      .filter((entry: any) => entry.status !== 'canceled' && entry._count?.bookingTime >= 2)
+        .map((entry: any) => normalizeTime(entry.bookingTime));
+      setBookedTimes(fullyBooked);
     })
-    .then(({ data }: { data: BookingData[] }) => {
-        const fullyBooked = data
-            .filter(({ _count }: BookingData) => _count.bookingTime >= 2) // Block time slots with 2 or more bookings
-            .map(({ bookingTime }: BookingData) => bookingTime);
-        setBookedTimes(fullyBooked);
-    })
-    .catch(console.error);
-  }, [selectedDate]);
+    .catch((error) => {
+      console.error('Failed to fetch bookings:', error);
+    });
+}, [selectedDate]);
 
   const handleCarDetailChange = (
     field: keyof typeof carDetails,
@@ -179,6 +180,11 @@ export default function BookingCalendar() {
   const times = getFilteredTimes();
   const weekDays = getWeekDays(weekStart);
 
+  const isTimeSlotBooked = (time: string): boolean => {
+    if (!selectedDate || !bookedTimes.length) return false;
+    return bookedTimes.includes(time);
+  };
+
   return (
     <div className="booking-page">
       <section className="calendar-section">
@@ -241,9 +247,9 @@ export default function BookingCalendar() {
                 key={time}
                 className={`time-slot ${
                   selectedTime === time ? 'selected' : ''
-                } ${bookedTimes.includes(time) ? 'disabled' : ''}`}
+                } ${isTimeSlotBooked(time) ? 'disabled' : ''}`}
                 onClick={() =>
-                  !bookedTimes.includes(time) && setSelectedTime(time)
+                  !isTimeSlotBooked(time) && setSelectedTime(time)
                 }
               >
                 {time}
