@@ -1,4 +1,4 @@
-export default function Dashboard() {
+export default function AdminDashboard() {
   return (
     <div className="dashboard-container">
       <h1 className="dashboard-title">Admin Dashboard</h1>

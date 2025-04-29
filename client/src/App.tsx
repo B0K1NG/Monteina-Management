@@ -3,7 +3,6 @@ import Register from './features/auth/Register';
 import Login from './features/auth/Login';
 import ConfirmEmail from './features/auth/ConfirmEmail';
 import ProtectedRoute from './components/ProtectedRoute';
-import Dashboard from './features/admin/Dashboard';
 import Profile from './pages/Profile';
 import Home from './pages/Home';
 import NavBar from './components/NavBar';
@@ -15,45 +14,86 @@ import FAQ from './pages/FAQ';
 import Checkout from './pages/Checkout';
 import Confirmation from './pages/Confirmation'
 
+import AdminNavBar from './components/AdminNavBar';
+import ManageOrders from './features/admin/pages/ManageOrders';
+import ManageServices from './features/admin/pages/ManageServices';
+import AdminDashboard from './features/admin/pages/AdminDashboard';
+import ManageUsers from './features/admin/pages/ManageUsers';
+
 import './styles/main.scss';
 
 function App() {
   const isAuthenticated = !!localStorage.getItem('token');
+  const userRole = localStorage.getItem('role');
+
+  const Nav = userRole === 'admin' ? AdminNavBar : NavBar;
+  const AdminRoutes = (
+    <>
+      <Route 
+        path="/admin/orders"
+        element={
+          <ProtectedRoute roles={['admin']}>
+            <ManageOrders />
+          </ProtectedRoute>
+        }
+      />
+      <Route 
+        path="/admin/services"
+        element={
+          <ProtectedRoute roles={['admin']}>
+            <ManageServices />
+          </ProtectedRoute>
+        }
+      />
+      <Route 
+        path="/admin/users"
+        element={
+          <ProtectedRoute roles={['admin']}>
+            <ManageUsers />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/dashboard"
+        element={
+          <ProtectedRoute roles={['admin']}>
+            <AdminDashboard />
+          </ProtectedRoute>
+        }
+      />
+    </>
+  );
 
   return (
     <Router>
-      <NavBar />
+      <Nav />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/services" element={<Services />} />
+        <Route path="/calendar" element={<Calendar />} />
+        <Route path="/faq" element={<FAQ />} />
+        <Route path="/checkout" element={<Checkout />} />
+        <Route path="/confirmation" element={<Confirmation />} />
+        
+        <Route
+          path="/profile" element={
+            <ProtectedRoute roles={['client', 'admin']}>
+              <Profile />
+            </ProtectedRoute>
+          }
+        />
+
         <Route path="/register" 
         element={isAuthenticated ? <Navigate to="/" /> : <Register />}/>
         <Route path="/login" 
         element={isAuthenticated ? <Navigate to="/" /> : <Login />}/>
         <Route path="/confirm" element={<ConfirmEmail />} />
-        <Route path="/dashboard" element={
-          <ProtectedRoute roles={['admin']}>
-            <Dashboard />
-          </ProtectedRoute>
-        } />
-        <Route
-          path="/profile" element={
-            <ProtectedRoute roles={['admin', 'client']}>
-              <Profile />
-            </ProtectedRoute>
-          }
-        />
-        <Route path="/services" element={<Services />} />
-        <Route path="*" element={<NotFound />} />
-        <Route path="/calendar" element={<Calendar />} />
-        <Route path="*" element={<NotFound />} />
-        <Route path="*" element={<NotFound />} />
-        <Route path="/faq" element={<FAQ />} />
-        <Route path="*" element={<NotFound />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="*" element={<NotFound />} />
-        <Route path="/confirmation" element={<Confirmation />} />
-        <Route path="*" element={<NotFound />} />
+        
+        {userRole === "admin" && AdminRoutes}
+
+        <Route path="*" element={<NotFound />}></Route>
       </Routes>
+
       <Footer />
     </Router>
   );
