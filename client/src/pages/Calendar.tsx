@@ -1,5 +1,6 @@
 import axios from '../api/axios';
 import Dropdown from '../components/Dropdown';
+import { toast } from 'react-toastify';
 
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
@@ -134,25 +135,29 @@ export default function BookingCalendar() {
     (selectedService !== 'Padangos remontas' || Boolean(repairOption));
 
   const handleConfirm = () => {
-    if (!isBookingValid ||
-      (selectedService === 'Padangos remontas' && !repairOption)
-  ) return;
+    if (!isBookingValid || (selectedService === 'Padangos remontas' && !repairOption)) {
+        toast.error('Prašome užpildyti visus laukus prieš patvirtinant paslaugą.');
+        return;
+    }
+
     const details = {
-      date: selectedDate,
-      time: selectedTime!,
-      carDetails,
-      selectedService: {
-        name: selectedService,
-        price_min: services.find(s => s.name === selectedService)?.price_min || 0,
-        price_max: services.find(s => s.name === selectedService)?.price_max || 0,
-      },
-      valveChange,
-      tireQuantity: parseInt(carDetails.tireQuantity, 10),
-      repairOption,
+        date: selectedDate,
+        time: selectedTime!,
+        carDetails,
+        selectedService: {
+            name: selectedService,
+            price_min: services.find(s => s.name === selectedService)?.price_min || 0,
+            price_max: services.find(s => s.name === selectedService)?.price_max || 0,
+        },
+        valveChange,
+        tireQuantity: parseInt(carDetails.tireQuantity, 10),
+        repairOption,
     };
+
     localStorage.setItem('bookingDetails', JSON.stringify(details));
+    toast.success('Paslauga sėkmingai patvirtinta!');
     navigate('/checkout');
-  };
+};
 
   const getFilteredTimes = () => {
     let times = [...availableTimes];
