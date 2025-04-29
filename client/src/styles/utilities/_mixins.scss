@@ -16,6 +16,57 @@
   gap: $gap;
 }
 
+@mixin modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+@mixin modal-content {
+  background: #fff;
+  color: #000000;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 400px;
+  text-align: left;
+
+  h2 {
+    margin-bottom: vars.$gap-md;
+  }
+  p {
+    margin-bottom: vars.$gap-sm;
+  }
+  input {
+    width: 100%;
+    padding: 0.6rem;
+    margin-bottom: vars.$gap-sm;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+  }
+}
+
+@mixin modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  align-self: flex-end;
+  gap: vars.$gap-sm;
+  margin-top: vars.$gap-md;
+  color: #000000;
+  transition: color 0.3s ease-in-out;
+  padding: 0.5rem 1rem;
+  background: transparent;
+  border: 2px solid rgba(188, 189, 180, 0.5);
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+
 @mixin transition($properties, $duration: 0.3s, $ease: ease) {
   transition: $properties $duration $ease;
 }
