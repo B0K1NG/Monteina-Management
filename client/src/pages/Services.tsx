@@ -17,16 +17,16 @@ export default function Services() {
 
   useEffect(() => {
     const fetchServices = async () => {
-      try {
-        const response = await axios.get('/api/services');
-        setServices(response.data);
-      } catch (error) {
-        console.error('Failed to fetch services:', error);
-      }
+        try {
+            const response = await axios.get('/api/services');
+            setServices(response.data);
+        } catch (error) {
+            console.error('Failed to fetch services:', error);
+        }
     };
 
     fetchServices();
-  }, []);
+}, []);
 
   const handleBookingClick = () => {
     const isAuthenticated = !!localStorage.getItem('token');
