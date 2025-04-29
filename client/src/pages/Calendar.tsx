@@ -103,18 +103,14 @@ export default function BookingCalendar() {
   useEffect(() => {
     if (!selectedDate) return;
 
-    axios.get<BookingData[]>('/api/checkout/bookings', {
-      params: { date: selectedDate },
+    axios.get('/api/checkout/bookings', {
+        params: { date: selectedDate },
     })
-    .then(({ data }) => {
-      const counts = data.reduce<Record<string, number>>((acc, { bookingTime, _count }) => {
-        acc[bookingTime] = _count.bookingTime;
-        return acc;
-      }, {});
-      const fullyBooked = Object.entries(counts)
-        .filter(([_, cnt]) => cnt >= 2)
-        .map(([time]) => time);
-      setBookedTimes(fullyBooked);
+    .then(({ data }: { data: BookingData[] }) => {
+        const fullyBooked = data
+            .filter(({ _count }: BookingData) => _count.bookingTime >= 2) // Block time slots with 2 or more bookings
+            .map(({ bookingTime }: BookingData) => bookingTime);
+        setBookedTimes(fullyBooked);
     })
     .catch(console.error);
   }, [selectedDate]);
