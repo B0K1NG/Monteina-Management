@@ -220,5 +220,16 @@ app.get('/api/services', async (req, res) => {
   }
 });
 
+app.get('/api/users', async (req, res) => {
+  try {
+      const users = await prisma.user.findMany({
+          select: { id: true, firstName: true, lastName: true },
+      });
+      res.json(users);
+  } catch (error) {
+      res.status(500).json({ error: 'Failed to fetch users.' });
+  }
+});
+
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
