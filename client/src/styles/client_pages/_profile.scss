@@ -1,231 +1,299 @@
 @use "../utilities/variables" as vars;
-@use "../utilities/mixins" as mixins;
+@use "../utilities/mixins"  as mixins;
 
-.profile-page {
+$break-md: 768px;
+$break-lg: 1024px;
+
+.btn {
+  display: inline-block;
+  font-size: vars.$text-small;
+  padding: 0.4rem 0.8rem;
+  border-radius: vars.$panel-radius;
+  cursor: pointer;
+  text-align: center;
+  transition: background 0.2s ease, color 0.2s ease;
+}
+
+.btn--primary {
+  background-color: #48ac85;
+  border: none;
+  color: #fff;
+}
+
+.btn--secondary {
+  background: transparent;
+  border: 2px solid rgba(188, 189, 180, 0.5);
+  color: #fff;
+  @include mixins.button-hover-effect(vars.$primary-color);
+}
+
+.btn--danger {
+  background-color: #F06A68;
+  border: none;
+  color: #fff;
+}
+
+.modal {
+  &-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
     display: flex;
-    flex-direction: column;
-    justify-content: center;
     align-items: center;
-    color: vars.$text-color-main;
-    cursor: default;
-    text-align: center;
+    justify-content: center;
+    z-index: 1000;
+  }
 
-    .profile-title {
-      font-size: 1.2rem;
+  &-content {
+    background: #fff;
+    color: #000000;
+    padding: 1.5rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    width: 90%;
+    max-width: 400px;
+    text-align: left;
+
+    h2 {
+      margin-bottom: vars.$gap-md;
+    }
+    p {
+      margin-bottom: vars.$gap-sm;
+    }
+    input {
+      width: 100%;
+      padding: 0.6rem;
+      margin-bottom: vars.$gap-sm;
+      border: 1px solid #ccc;
+      border-radius: 4px;
     }
 
-    .profile-container {
-        display: flex;
-        flex-direction: column;
-        align-items: stretch;
-        width: 100%;
-        max-width: 350px;
-        box-sizing: border-box;
-        padding: 1rem;
+    .modal-buttons {
+      display: flex;
+      justify-content: flex-end;
+      gap: vars.$gap-sm;
+      margin-top: vars.$gap-md;
 
-        .profile-left,
-        .profile-center,
-        .profile-right {
-          display: flex;
-          flex-direction: column;
-          background-color: rgba(35, 38, 38, 0.8);
-          margin-bottom: 1rem;
-        }
+      .close-modal-button,
+      .cancel-button {
+      color: #000000;
+      transition: color 0.3s ease-iun-out;
+      }
 
-        .cancel-booking-button,
-        .view-invoice-button,
-        .info-value,
-        .info-value-phone,
-        .profile-left,
-        .profile-center,
-        .profile-right {
-          border-radius: 5px;
-        }
-
-        .section-title {
-          font-size: 1rem;
-          margin: 1rem auto;
-        }
-
-        .info-item {
-          flex-direction: column;
-          gap: 0.5rem;
-          align-self: center;
-          
-          .info-value,
-          .info-value-phone {
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            max-width: 300px;
-            padding: 0.4rem 1.7rem; 
-          }
-
-          .info-value-phone {
-            text-decoration: underline;
-            text-decoration-color: rgba(255, 255, 255, 0.2);
-            text-underline-offset: 0.2rem;
-          }
-        }
-
-        .visit-item,
-        .booking-item{
-          justify-content: space-between;
-        }
-
-        .info-item,
-        .visit-item,
-        .booking-item,
-        .modal-buttons,
-        .password-modal,
-        .cancel-modal,
-        .invoice-modal {
-          display: flex;
-        }
-
-        .info-item,
-        .visit-item,
-        .booking-item {
-          font-size: 0.8rem;
-          margin: 0.6rem 0.7rem;
-        }
-
-        .change-password-button,
-        .cancel-booking-button,
-        .view-invoice-button,
-        .modal-buttons .cancel-button,
-        .confirm-password-change-button {
-          background: transparent;
-        }
-
-        .change-password-button,
-        .modal-buttons .confirm-button,
-        .modal-content button.close-modal-button,
-        .modal-content button {
-          border: none;
-        }
-
-        .change-password-button,
-        .cancel-booking-button,
-        .view-invoice-button,
-        .modal-buttons .cancel-button,
-        .modal-content button,
-        .modal-buttons .confirm-button,
-        .modal-content button.close-modal-button
-        {
-          cursor: pointer;
-        }
-
-        .change-password-button {
-          color: #C7C0C0;
-          transition: all 0.3s ease-in-out;
-          
-          &:hover {
-            color: vars.$hover-color;
-          }
-        }
-
-        .view-invoice-button {
-          font-size: 0.7rem;
-        }
-        
-        .cancel-booking-button,
-        .view-invoice-button {
-          margin-top: -0.3rem;
-          border: 2px solid rgba(188, 189, 180, 0.5);;
-          color: #fff;
-          padding: 0.4rem 0.5rem;
-        }
-
-        .modal-buttons {
-          justify-content: flex-end;
-        }
-
-        .modal-buttons .cancel-button,
-        .confirm-password-change-button,
-        .modal-content {
-          color: #000000;
-        }
-
-        .modal-buttons .cancel-button,
-        .confirm-password-change-button {
-          border: 1px solid #BEBEBE;
-        }
-
-        .modal-buttons .cancel-button,
-        .modal-content button {
-          padding: 10px 20px;
-        }
-
-        .modal-buttons .cancel-button,
-        .modal-buttons .confirm-button,
-        .modal-content button.close-modal-button,
-        .modal-content button,
-        .modal-content input {
-          border-radius: 4px;
-        }
-
-
-        .modal-buttons .cancel-button,
-        .confirm-password-change-button,
-        .cancel-booking-button,
-        .view-invoice-button
-         {
-          @include mixins.button-hover-effect(vars.$primary-color);
-        }
+      .close-modal-button:hover,
+      .cancel-button:hover {
+        color: white;
+      }
       
-        .modal-buttons .confirm-button,
-        .modal-content button.close-modal-button {
-          background: #F06A68 !important;
-          color: #fff;
-        }
 
-        .modal-buttons .confirm-button {
-          padding: 0rem 0.6rem;
-        }
+      .btn {
+        padding: 0.5rem 1rem;
+      }
+    }
+  }
+}
 
-        .modal-content button {
-          margin-top: 20px;
-          margin: 5px;
-        }
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: vars.$text-color;
+  text-align: center;
 
-        .password-modal,
-        .cancel-modal,
-        .invoice-modal {
-          position: fixed;
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          background: rgba(0, 0, 0, 0.5);
-          justify-content: center;
-          align-items: center;
-          z-index: 1000;
-        }
+  .profile-title {
+    font-size: 1.2rem;
+    margin-bottom: vars.$gap-md;
+  }
+}
 
-        .password-modal {
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 350px;
+  padding: vars.$panel-padding;
+  box-sizing: border-box;
+  gap: vars.$gap-md;
 
-          .modal-content input {
-            width: 100%;
-            padding: 10px;
-            margin-bottom: 10px;
-            border: 1px solid #ccc;
-          }
-        }
+  .panel {
+    background-color: vars.$panel-bg;
+    border-radius: vars.$panel-radius;
+    padding: calc(vars.$panel-padding / 2);
+    display: flex;
+    flex-direction: column;
+  }
+}
 
-        .modal-content {
-          background: #fff;
-          padding: 20px;
-          border-radius: 8px;
-          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-          width: 90%;
-          max-width: 400px;
-        }
+.profile-left,
+.profile-center,
+.profile-right {
+  @extend .panel;
+}
 
-        .modal-content h2 {
-          margin-bottom: 20px;
-        }
-      
-        .modal-content p {
-          margin-bottom: 10px;
-        }
+.profile-left {
+  text-align: left;
+
+  .section-title {
+    font-size: 1.2rem;
+    margin-bottom: vars.$gap-lg;
+  }
+  .info-item {
+    display: flex;
+    flex-direction: column;
+    gap: vars.$gap-sm;
+    margin-bottom: vars.$gap-md;
+
+    label { font-weight: bold; }
+
+    .info-value,
+    .info-value-phone {
+      padding: 0.4rem 1.7rem;
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: vars.$panel-radius;
+    }
+
+    &--password {
+    display: grid;
+    grid-template-rows: auto auto;
+    grid-template-columns: 1fr auto;
+    grid-template-areas:
+      "label  label"
+      "value  button";
+    column-gap: vars.$gap-md;
+    row-gap: vars.$gap-sm;
+    align-items: center;
+
+    > label                     { grid-area: label;  }
+    .info-value                { grid-area: value;  }
+    .change-password-button { 
+      grid-area:  button;
+      align-self: center; 
+    }
+  }
+  }
+
+  .change-password-button {
+    @extend .btn;
+    @extend .btn--secondary;
+    border: none;
+    background: transparent;
+    padding: 0;
+    color: #C7C0C0;
+    &:hover { color: vars.$hover-color; }
+  }
+}
+
+.profile-center {
+  .section-title {
+    font-size: 1rem;
+    margin-bottom: vars.$gap-sm;
+    text-align: left;
+  }
+
+  .visit-item {
+    display: grid;
+    grid-template-columns: 1fr 1fr auto;
+    grid-template-rows: repeat(2, auto);
+    grid-template-areas:
+      "dateLabel totalLabel button"
+      "date      total      button";
+    column-gap: vars.$gap-md;
+    row-gap: vars.$gap-xs;
+    align-items: start;
+    font-size: vars.$text-small;
+    margin: vars.$gap-sm 0;
+
+    &__date  { grid-area: date; }
+    &__total { grid-area: total; }
+
+    &__btn {
+      @extend .btn;
+      @extend .btn--secondary;
+      grid-area: button;
+      justify-self: end;
+      align-self: center;
+    }
+  }
+
+  .visit-item--header {
+    @extend .visit-item;
+    grid-template-rows: auto;
+    text-align: start;
+    grid-template-areas: "dateLabel totalLabel button";
+    align-items: center;
+    font-weight: bold;
+    opacity: 0.8;
+
+
+    & .visit-item__date  { grid-area: dateLabel;   justify-self: flex-start; }
+    & .visit-item__total { grid-area: totalLabel; justify-self: flex-start;}
+    & .visit-item__btn   { @extend .btn; margin:0; padding:0; border:none; background:none; }
+  }
+}
+
+.profile-right {
+  .section-title {
+    font-size: 1rem;
+    margin-bottom: vars.$gap-sm;
+    text-align: left;
+  }
+
+  .booking-item {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    grid-template-rows: repeat(2, auto);
+    grid-template-areas:
+      "date    button"
+      "time    button";
+    column-gap: vars.$gap-md;
+    row-gap: vars.$gap-xs;
+    align-items: center;
+    font-size: vars.$text-small;
+    margin: vars.$gap-sm 0;
+
+    &__date   { grid-area: date; font-weight: bold; }
+    &__time   { grid-area: time; }
+    &__cancel {
+      @extend .btn;
+      @extend .btn--secondary;
+      grid-area: button;
+      justify-self: end;
+    }
+  }
+}
+
+@media (min-width: $break-md) {
+  .profile-page { align-items: flex-start; }
+  .profile-title {
+    font-size: 1.4rem;
+    text-align: left;
+    margin-left: vars.$gap-md;
+  }
+  .profile-container {
+    flex-direction: row;
+    gap: vars.$gap-lg;
+    max-width: 100%;
+    .panel { flex: 1; max-width: 300px; }
+    .panel .section-title { font-size: 1.2rem; }
+    .visit-item,
+    .booking-item { font-size: 0.9rem; }
+  }
+}
+
+@media (min-width: $break-lg) {
+  .profile-container {
+    gap: 5rem;
+    .panel {
+      max-width: none;
+      .section-title { font-size: 1.5rem; }
+    }
+    .visit-item,
+    .booking-item { font-size: 1.2rem; }
+    .visit-item__btn,
+    .booking-item__cancel { font-size: 1rem; }
+
+    .booking-item {
+      &__date   { font-size: 1.5rem; }
+    }
   }
 }

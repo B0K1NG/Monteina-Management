@@ -6,20 +6,23 @@ import { cancelBooking } from "../api/booking";
 import { changePassword } from "../api/auth";
 
 export default function Profile() {
-
   const [currentPassword, setCurrentPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState('');
-  const [message, setMessage] = useState('');
-  const [previousVisits, setPreviousVisits] = useState<{ bookingDate: string; totalAmount: number }[]>([]);
-  const [activeBookings, setActiveBookings] = useState<{ id: number; bookingDate: string; bookingTime: string; serviceName: string }[]>([]);
+  const [confirmPassword, setConfirmPassword] = useState("");
+  const [message, setMessage] = useState("");
+  const [previousVisits, setPreviousVisits] = useState<
+    { bookingDate: string; totalAmount: number }[]
+  >([]);
+  const [activeBookings, setActiveBookings] = useState<
+    { id: number; bookingDate: string; bookingTime: string; serviceName: string }[]
+  >([]);
   const [userInfo, setUserInfo] = useState({
     firstName: "",
     lastName: "",
     email: "",
     phoneNumber: "",
-    password: "********",
   });
+
   const [isPasswordModalOpen, setIsPasswordModalOpen] = useState(false);
   const [isCancelModalOpen, setIsCancelModalOpen] = useState(false);
   const [selectedBookingId, setSelectedBookingId] = useState<number | null>(null);
@@ -27,189 +30,175 @@ export default function Profile() {
   const [selectedInvoice, setSelectedInvoice] = useState<any>(null);
 
   useEffect(() => {
-    const getUserInfo = async () => {
+    async function loadData() {
       try {
-        const user = await fetchUserInfo();
-        console.log('Fetched User Info:', user);
+        const [user, visits, bookings] = await Promise.all([
+          fetchUserInfo(),
+          fetchPreviousVisits(),
+          fetchActiveBookings(),
+        ]);
         setUserInfo({
           firstName: user.firstName,
           lastName: user.lastName,
           email: user.email,
           phoneNumber: user.phoneNumber,
-          password: "********",
         });
-      } catch (error) {
-        console.error("Failed to fetch user info:", error);
-      }
-    };
-
-    const getPreviousVisits = async () => {
-      try {
-        const visits = await fetchPreviousVisits();
-        console.log('Fetched Previous Visits:', visits);
         setPreviousVisits(visits);
-      } catch (error) {
-        console.error("Failed to fetch previous visits:", error);
-      }
-    }
-
-    const getActiveBookings = async () => {
-      try {
-        const bookings = await fetchActiveBookings();
-        console.log('Fetched Active Bookings:', bookings);
         setActiveBookings(bookings);
-      } catch (error) {
-        console.error("Failed to fetch active bookings:", error);
+      } catch (e) {
+        console.error(e);
       }
     }
-
-    getActiveBookings();
-    getPreviousVisits();
-    getUserInfo();
+    loadData();
   }, []);
-
-  const handleCancelBooking = async (id: number) => {
-    try {
-      await cancelBooking(id);
-      setActiveBookings((prevBookings) =>
-        prevBookings.filter((booking) => booking.id !== id)
-      );
-    } catch (error) {
-      console.error('Failed to cancel booking:', error);
-    }
-  };
 
   const handleChangePassword = async () => {
     if (newPassword !== confirmPassword) {
-      setMessage('Nauji slaptažodžiai nesutampa.');
+      setMessage("Nauji slaptažodžiai nesutampa.");
       return;
     }
-
     try {
       await changePassword(currentPassword, newPassword);
-      setMessage('Slaptažodis sėkmingai pakeistas!');
-      setCurrentPassword('');
-      setNewPassword('');
-      setConfirmPassword('');
-
-      setTimeout(() => {
-        handleClosePasswordModal();
-      }, 3000);
-    } catch (error) {
-      setMessage('Nepavyko pakeisti slaptažodžio. Susisiekite su administracija.');
+      setMessage("Slaptažodis sėkmingai pakeistas!");
+      setTimeout(() => closePasswordModal(), 2000);
+    } catch {
+      setMessage(
+        "Nepavyko pakeisti slaptažodžio. Susisiekite su administracija."
+      );
     }
   };
 
-  const handleOpenPasswordModal = () => {
-    setIsPasswordModalOpen(true);
-  };
-
-  const handleClosePasswordModal = () => {
+  const openPasswordModal = () => setIsPasswordModalOpen(true);
+  const closePasswordModal = () => {
     setIsPasswordModalOpen(false);
-    setCurrentPassword('');
-    setNewPassword('');
-    setConfirmPassword('');
-    setMessage('');
+    setCurrentPassword("");
+    setNewPassword("");
+    setConfirmPassword("");
+    setMessage("");
   };
 
-  const handleOpenCancelModal = (id: number) => {
+  const openCancelModal = (id: number) => {
     setSelectedBookingId(id);
     setIsCancelModalOpen(true);
   };
-
-  const handleCloseCancelModal = () => {
-    setSelectedBookingId(null);
+  const closeCancelModal = () => {
     setIsCancelModalOpen(false);
+    setSelectedBookingId(null);
   };
-
-  const handleConfirmCancel = async () => {
+  const confirmCancel = async () => {
     if (selectedBookingId !== null) {
-      await handleCancelBooking(selectedBookingId);
-      handleCloseCancelModal();
+      await cancelBooking(selectedBookingId);
+      setActiveBookings((b) => b.filter((x) => x.id !== selectedBookingId));
+      closeCancelModal();
     }
   };
 
-  const handleOpenInvoiceModal = (invoice: any) => {
-    setSelectedInvoice(invoice);
+  const openInvoiceModal = (inv: any) => {
+    setSelectedInvoice(inv);
     setIsInvoiceModalOpen(true);
   };
-
-  const handleCloseInvoiceModal = () => {
-    setSelectedInvoice(null);
+  const closeInvoiceModal = () => {
     setIsInvoiceModalOpen(false);
+    setSelectedInvoice(null);
   };
 
   return (
     <div className="profile-page">
       <h1 className="profile-title">Sveiki, {userInfo.firstName}!</h1>
       <div className="profile-container">
-      {/* Left Section: User Information */}
-      <div className="profile-left">
-        <h2 className="section-title">Vartotojo informacija</h2>
-        <div className="info-item">
-          <label>Vardas ir Pavardė</label>
-          <div className="info-value">{`${userInfo.firstName} ${userInfo.lastName}`}</div>
-        </div>
-        <div className="info-item">
-          <label>El. paštas</label>
-          <div className="info-value">{userInfo.email}</div>
-        </div>
-        <div className="info-item">
-          <label>Tel. Nr.</label>
-          <div className="info-value-phone">{userInfo.phoneNumber}</div>
-        </div>
-        <div className="info-item">
-          <label>Slaptažodis</label>
-          <div className="info-value">********</div>
-          <button className="change-password-button" onClick={handleOpenPasswordModal}>Keisti slaptažodį</button>
-        </div>
-      </div>
+        <div className="profile-left panel">
+          <h2 className="section-title">Vartotojo informacija</h2>
 
-      {/* Center Section: Previous Visits */}
-      <div className="profile-center">
-        <h2 className="section-title">Senos sąskaitos</h2>
-        {previousVisits.length > 0 ? (
-          previousVisits.map((visit, index) => (
-            <div key={index} className="visit-item">
-              <div className="visit-date">{new Date(visit.bookingDate).toLocaleDateString()}</div>
-              <div className="visit-total">{visit.totalAmount} €</div>
-              <button
-                className="view-invoice-button"
-                onClick={() => handleOpenInvoiceModal(visit)}
-              >
-                Peržiūrėti
-              </button>
+          <div className="info-item">
+            <label>Vardas ir Pavardė</label>
+            <div className="info-value">
+              {userInfo.firstName} {userInfo.lastName}
             </div>
-          ))
-        ) : (
-          <p>Nėra ankstesnių sąskaitų.</p>
-        )}
-      </div>
+          </div>
 
-      {/* Right Section: Upcoming Visits */}
-      <div className="profile-right">
-        <h2 className="section-title">Ateinantis vizitas</h2>
-        {activeBookings.length > 0 ? (
-          activeBookings.map((booking) => (
-            <div key={booking.id} className="booking-item">
-              <div className="booking-date">{new Date(booking.bookingDate).toLocaleDateString()}</div>
-              <div className="booking-time">{booking.bookingTime}</div>
-              <div className="booking-service">{booking.serviceName}</div>
-              <button
-                className="cancel-booking-button"
-                onClick={() => handleOpenCancelModal(booking.id)}
-              >
-                Atšaukti
-              </button>
+          <div className="info-item">
+            <label>El. paštas</label>
+            <div className="info-value">{userInfo.email}</div>
+          </div>
+
+          <div className="info-item">
+            <label>Tel. Nr.</label>
+            <div className="info-value-phone">{userInfo.phoneNumber}</div>
+          </div>
+
+          <div className="info-item info-item--password">
+            <label>Slaptažodis</label>
+            <div className="info-value">********</div>
+            <button
+              className="btn btn--secondary change-password-button"
+              onClick={openPasswordModal}
+            >
+              Keisti slaptažodį
+            </button>
+          </div>
+        </div>
+
+        <div className="profile-center panel">
+          <h2 className="section-title">Senos sąskaitos</h2>
+
+          {previousVisits.length > 0 && (
+            <div className="visit-item visit-item--header">
+              <div className="visit-item__date">Data</div>
+              <div className="visit-item__total">Suma</div>
+              <div className="visit-item__btn" />
             </div>
-          ))
-        ) : (
-          <p>Nėra ateinančių vizitų.</p>
-        )}
+          )}
+
+          {previousVisits.length > 0 ? (
+            previousVisits.map((visit, i) => (
+              <div key={i} className="visit-item">
+                <div className="visit-item__date">
+                  {new Date(visit.bookingDate)
+                    .toISOString()
+                    .split("T")[0]}
+                </div>
+                <div className="visit-item__total">
+                  {visit.totalAmount} €
+                </div>
+                <button
+                  className="btn btn--secondary visit-item__btn"
+                  onClick={() => openInvoiceModal(visit)}
+                >
+                  Peržiūrėti
+                </button>
+              </div>
+            ))
+          ) : (
+            <p>Nėra ankstesnių sąskaitų.</p>
+          )}
+        </div>
+
+        <div className="profile-right panel">
+          <h2 className="section-title">Ateinantis vizitas</h2>
+
+          {activeBookings.length > 0 ? (
+            activeBookings.map((b) => (
+              <div key={b.id} className="booking-item">
+                <div className="booking-item__date">
+                  {new Date(b.bookingDate).toISOString().split("T")[0]}
+                </div>
+                <div className="booking-item__time">{b.bookingTime}</div>
+                <button
+                  className="btn btn--secondary booking-item__cancel"
+                  onClick={() => openCancelModal(b.id)}
+                >
+                  Atšaukti
+                </button>
+              </div>
+            ))
+          ) : (
+            <p>Nėra ateinančių vizitų.</p>
+          )}
+        </div>
       </div>
 
       {isPasswordModalOpen && (
-        <div className="password-modal">
+        <div className="modal-overlay">
           <div className="modal-content">
             <h2>Keisti slaptažodį</h2>
             <input
@@ -231,8 +220,18 @@ export default function Profile() {
               onChange={(e) => setConfirmPassword(e.target.value)}
             />
             <div className="modal-buttons">
-            <button className="close-modal-button" onClick={handleClosePasswordModal}>Uždaryti</button>
-            <button className="confirm-password-change-button" onClick={handleChangePassword}>Atnaujinti slaptažodį</button>
+              <button
+                className="btn btn--secondary close-modal-button"
+                onClick={closePasswordModal}
+              >
+                Uždaryti
+              </button>
+              <button
+                className="btn btn--primary confirm-button"
+                onClick={handleChangePassword}
+              >
+                Atnaujinti slaptažodį
+              </button>
             </div>
             {message && <p>{message}</p>}
           </div>
@@ -240,30 +239,56 @@ export default function Profile() {
       )}
 
       {isCancelModalOpen && (
-        <div className="cancel-modal">
+        <div className="modal-overlay">
           <div className="modal-content">
             <h2>Atšaukti vizitą</h2>
-            <p>Ar jūs esate įsitikinęs, kad norite atšaukti savo vizitą? (Avansas nėra grąžinamas)</p>
+            <p>
+              Ar jūs esate įsitikinęs, kad norite atšaukti savo vizitą? (Avansas
+              nėra grąžinamas)
+            </p>
             <div className="modal-buttons">
-              <button className="cancel-button" onClick={handleCloseCancelModal}>Uždaryti</button>
-              <button className="confirm-button" onClick={handleConfirmCancel}>Atšaukti vizitą</button>
+              <button
+                className="btn btn--secondary cancel-button"
+                onClick={closeCancelModal}
+              >
+                Uždaryti
+              </button>
+              <button
+                className="btn btn--danger confirm-button"
+                onClick={confirmCancel}
+              >
+                Atšaukti vizitą
+              </button>
             </div>
           </div>
         </div>
       )}
-
+      
       {isInvoiceModalOpen && selectedInvoice && (
-        <div className="invoice-modal">
+        <div className="modal-overlay">
           <div className="modal-content">
             <h2>Sąskaitos informacija</h2>
-            <p><strong>Data:</strong> {new Date(selectedInvoice.bookingDate).toLocaleDateString()}</p>
-            <p><strong>Paslauga:</strong> {selectedInvoice.serviceName}</p>
-            <p><strong>Suma:</strong> {selectedInvoice.totalAmount} €</p>
-            <button className="close-modal-button" onClick={handleCloseInvoiceModal}>Uždaryti</button>
+            <p>
+              <strong>Data:</strong>{" "}
+              {new Date(selectedInvoice.bookingDate).toLocaleDateString()}
+            </p>
+            <p>
+              <strong>Paslauga:</strong> {selectedInvoice.serviceName}
+            </p>
+            <p>
+              <strong>Suma:</strong> {selectedInvoice.totalAmount} €
+            </p>
+            <div className="modal-buttons">
+              <button
+                className="btn btn--secondary close-modal-button"
+                onClick={closeInvoiceModal}
+              >
+                Uždaryti
+              </button>
+            </div>
           </div>
         </div>
       )}
-      </div>
     </div>
   );
 }
