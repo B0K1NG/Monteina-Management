@@ -5,6 +5,7 @@ import jwt from 'jsonwebtoken';
 import logger from './utils/logger';
 import checkoutRoutes from './routes/checkout';
 import profileRoutes from './routes/profile';
+import servicesRoutes from './routes/services';
 
 import cors from 'cors';
 import cron from 'node-cron';
@@ -33,6 +34,7 @@ cron.schedule('*/30 * * * *', async () => {
 
 app.use(express.json());
 app.use('/api/profile', profileRoutes);
+app.use('/api/services', servicesRoutes);
 
 app.use((req, res, next) => {
   if (req.user) {
