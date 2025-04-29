@@ -20,6 +20,9 @@ import ManageServices from './features/admin/pages/ManageServices';
 import AdminDashboard from './features/admin/pages/AdminDashboard';
 import ManageUsers from './features/admin/pages/ManageUsers';
 
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 import './styles/main.scss';
 
 function App() {
@@ -95,6 +98,7 @@ function App() {
       </Routes>
 
       <Footer />
+      <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
     </Router>
   );
 }
