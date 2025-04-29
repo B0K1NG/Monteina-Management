@@ -9,3 +9,4 @@ cd server
 npm run dev
 
 npm install node-cron
+npm install react-toastify
