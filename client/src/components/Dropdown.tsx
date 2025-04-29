@@ -2,7 +2,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import '../styles/components/_dropdown.scss';
 
 interface DropdownProps {
-  options: { value: string; label: string }[];
+  options: { value: string; label: string; disabled?: boolean }[];
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
@@ -26,10 +26,11 @@ const Dropdown: React.FC<DropdownProps> = ({
 
   const handleToggle = () => setIsOpen((prev) => !prev);
 
-  const handleOptionClick = (optionValue: string) => {
+  const handleOptionClick = (optionValue: string, isDisabled: boolean) => {
+    if (isDisabled) return;
     onChange(optionValue);
     setIsOpen(false);
-    setSearchTerm(''); // Clear search term when an option is selected
+    setSearchTerm('');
   };
 
   const handleClickOutside = (event: MouseEvent) => {
@@ -63,34 +64,34 @@ const Dropdown: React.FC<DropdownProps> = ({
         {options.find((option) => option.value === value)?.label || placeholder}
       </div>
       {isOpen && !disabled && (
-  <div className="dropdown-list-wrapper">
-    <ul className="dropdown-list">
-      {searchable && ( // Conditionally render the search input
-        <li className="dropdown-item">
-          <input
-            type="text"
-            className="dropdown-search"
-            placeholder="Search..."
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-        </li>
+        <div className="dropdown-list-wrapper">
+          <ul className="dropdown-list">
+            {searchable && (
+              <li className="dropdown-item">
+                <input
+                  type="text"
+                  className="dropdown-search"
+                  placeholder="Search..."
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+              </li>
+            )}
+            {filteredOptions.map((option) => (
+              <li
+                key={option.value}
+                className={`dropdown-item ${option.value === value ? 'selected' : ''} ${option.disabled ? 'disabled' : ''}`}
+                onClick={() => handleOptionClick(option.value, option.disabled || false)}
+              >
+                {option.label}
+              </li>
+            ))}
+            {noResultsMessage && (
+              <li className="dropdown-item no-results">{noResultsMessage}</li>
+            )}
+          </ul>
+        </div>
       )}
-      {filteredOptions.map((option) => (
-        <li
-          key={option.value}
-          className={`dropdown-item ${option.value === value ? 'selected' : ''}`}
-          onClick={() => handleOptionClick(option.value)}
-        >
-          {option.label}
-        </li>
-      ))}
-      {noResultsMessage && (
-        <li className="dropdown-item no-results">{noResultsMessage}</li>
-      )}
-        </ul>
-    </div>
-    )}
     </div>
   );
 };

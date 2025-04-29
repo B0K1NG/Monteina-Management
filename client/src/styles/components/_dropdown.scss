@@ -49,11 +49,15 @@
     &.selected {
       background-color: rgba(255, 255, 255, 0.2);
     }
-  }
 
-  &-disabled {
-    pointer-events: none;
-    opacity: 0.5;
+    &.disabled {
+      background: transparent;
+
+      color: #777;
+      cursor: not-allowed;
+      pointer-events: none;
+      text-decoration: line-through;
+    }
   }
 }
 
