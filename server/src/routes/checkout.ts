@@ -92,6 +92,23 @@ router.get('/bookings', async (req, res) => {
   }
 });
 
+router.get('/all-bookings', async (req, res) => {
+  try {
+    const bookings = await prisma.checkout.findMany({
+      where: {
+        status: { not: 'canceled' },
+      },
+      orderBy: {
+        bookingDate: 'asc',
+      },
+    });
+    res.json(bookings);
+  } catch (error) {
+    console.error('Error in GET /api/checkout/all-bookings:', error);
+    res.status(500).json({ error: 'Failed to fetch all bookings.' });
+  }
+});
+
 router.get('/active', async (req, res) => {
   try {
     const activeBookings = await prisma.checkout.findMany({
