@@ -11,10 +11,11 @@
 @use "client_pages/register";
 @use "client_pages/login";
 @use "client_pages/confirmemail";
-@use "client_pages/dashboard";
 @use "client_pages/notfound";
 @use "client_pages/services";
 @use "client_pages/calendar";
 @use "client_pages/faq";
 @use "client_pages/checkout";
 @use "client_pages/confirmation";
+
+@use "admin_pages/dashboard";
