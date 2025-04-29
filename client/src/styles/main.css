@@ -313,157 +313,31 @@ body {
     text-align: left;
   }
 }
-.profile-page {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  color: #FFFFFF;
-  cursor: default;
-  text-align: center;
-}
-.profile-page .profile-title {
-  font-size: 1.2rem;
-}
-.profile-page .profile-container {
-  display: flex;
-  flex-direction: column;
-  align-items: stretch;
-  width: 100%;
-  max-width: 350px;
-  box-sizing: border-box;
-  padding: 1rem;
-}
-.profile-page .profile-container .profile-left,
-.profile-page .profile-container .profile-center,
-.profile-page .profile-container .profile-right {
-  display: flex;
-  flex-direction: column;
-  background-color: rgba(35, 38, 38, 0.8);
-  margin-bottom: 1rem;
-}
-.profile-page .profile-container .cancel-booking-button,
-.profile-page .profile-container .view-invoice-button,
-.profile-page .profile-container .info-value,
-.profile-page .profile-container .info-value-phone,
-.profile-page .profile-container .profile-left,
-.profile-page .profile-container .profile-center,
-.profile-page .profile-container .profile-right {
-  border-radius: 5px;
-}
-.profile-page .profile-container .section-title {
-  font-size: 1rem;
-  margin: 1rem auto;
-}
-.profile-page .profile-container .info-item {
-  flex-direction: column;
-  gap: 0.5rem;
-  align-self: center;
-}
-.profile-page .profile-container .info-item .info-value,
-.profile-page .profile-container .info-item .info-value-phone {
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  max-width: 300px;
-  padding: 0.4rem 1.7rem;
-}
-.profile-page .profile-container .info-item .info-value-phone {
-  text-decoration: underline;
-  text-decoration-color: rgba(255, 255, 255, 0.2);
-  text-underline-offset: 0.2rem;
-}
-.profile-page .profile-container .visit-item,
-.profile-page .profile-container .booking-item {
-  justify-content: space-between;
-}
-.profile-page .profile-container .info-item,
-.profile-page .profile-container .visit-item,
-.profile-page .profile-container .booking-item,
-.profile-page .profile-container .modal-buttons,
-.profile-page .profile-container .password-modal,
-.profile-page .profile-container .cancel-modal,
-.profile-page .profile-container .invoice-modal {
-  display: flex;
-}
-.profile-page .profile-container .info-item,
-.profile-page .profile-container .visit-item,
-.profile-page .profile-container .booking-item {
+.btn, .profile-right .booking-item__cancel, .profile-center .visit-item--header .visit-item__btn, .profile-center .visit-item__btn, .profile-left .change-password-button {
+  display: inline-block;
   font-size: 0.8rem;
-  margin: 0.6rem 0.7rem;
-}
-.profile-page .profile-container .change-password-button,
-.profile-page .profile-container .cancel-booking-button,
-.profile-page .profile-container .view-invoice-button,
-.profile-page .profile-container .modal-buttons .cancel-button,
-.profile-page .profile-container .confirm-password-change-button {
-  background: transparent;
-}
-.profile-page .profile-container .change-password-button,
-.profile-page .profile-container .modal-buttons .confirm-button,
-.profile-page .profile-container .modal-content button.close-modal-button,
-.profile-page .profile-container .modal-content button {
-  border: none;
-}
-.profile-page .profile-container .change-password-button,
-.profile-page .profile-container .cancel-booking-button,
-.profile-page .profile-container .view-invoice-button,
-.profile-page .profile-container .modal-buttons .cancel-button,
-.profile-page .profile-container .modal-content button,
-.profile-page .profile-container .modal-buttons .confirm-button,
-.profile-page .profile-container .modal-content button.close-modal-button {
+  padding: 0.4rem 0.8rem;
+  border-radius: 5px;
   cursor: pointer;
+  text-align: center;
+  transition: background 0.2s ease, color 0.2s ease;
 }
-.profile-page .profile-container .change-password-button {
-  color: #C7C0C0;
-  transition: all 0.3s ease-in-out;
+
+.btn--primary {
+  background-color: #48ac85;
+  border: none;
+  color: #fff;
 }
-.profile-page .profile-container .change-password-button:hover {
-  color: #3A7EF9;
-}
-.profile-page .profile-container .view-invoice-button {
-  font-size: 0.7rem;
-}
-.profile-page .profile-container .cancel-booking-button,
-.profile-page .profile-container .view-invoice-button {
-  margin-top: -0.3rem;
+
+.btn--secondary, .profile-right .booking-item__cancel, .profile-center .visit-item__btn, .profile-left .change-password-button {
+  background: transparent;
   border: 2px solid rgba(188, 189, 180, 0.5);
   color: #fff;
-  padding: 0.4rem 0.5rem;
-}
-.profile-page .profile-container .modal-buttons {
-  justify-content: flex-end;
-}
-.profile-page .profile-container .modal-buttons .cancel-button,
-.profile-page .profile-container .confirm-password-change-button,
-.profile-page .profile-container .modal-content {
-  color: #000000;
-}
-.profile-page .profile-container .modal-buttons .cancel-button,
-.profile-page .profile-container .confirm-password-change-button {
-  border: 1px solid #BEBEBE;
-}
-.profile-page .profile-container .modal-buttons .cancel-button,
-.profile-page .profile-container .modal-content button {
-  padding: 10px 20px;
-}
-.profile-page .profile-container .modal-buttons .cancel-button,
-.profile-page .profile-container .modal-buttons .confirm-button,
-.profile-page .profile-container .modal-content button.close-modal-button,
-.profile-page .profile-container .modal-content button,
-.profile-page .profile-container .modal-content input {
-  border-radius: 4px;
-}
-.profile-page .profile-container .modal-buttons .cancel-button,
-.profile-page .profile-container .confirm-password-change-button,
-.profile-page .profile-container .cancel-booking-button,
-.profile-page .profile-container .view-invoice-button {
   position: relative;
   overflow: hidden;
   z-index: 1;
 }
-.profile-page .profile-container .modal-buttons .cancel-button::before,
-.profile-page .profile-container .confirm-password-change-button::before,
-.profile-page .profile-container .cancel-booking-button::before,
-.profile-page .profile-container .view-invoice-button::before {
+.btn--secondary::before, .profile-right .booking-item__cancel::before, .profile-center .visit-item__btn::before, .profile-left .change-password-button::before {
   content: "";
   position: absolute;
   top: 0;
@@ -476,58 +350,286 @@ body {
   transform: scaleX(0);
   transition: transform 0.5s ease;
 }
-.profile-page .profile-container .modal-buttons .cancel-button:hover::before,
-.profile-page .profile-container .confirm-password-change-button:hover::before,
-.profile-page .profile-container .cancel-booking-button:hover::before,
-.profile-page .profile-container .view-invoice-button:hover::before {
+.btn--secondary:hover::before, .profile-right .booking-item__cancel:hover::before, .profile-center .visit-item__btn:hover::before, .profile-left .change-password-button:hover::before {
   transform: scaleX(1);
 }
-.profile-page .profile-container .modal-buttons .confirm-button,
-.profile-page .profile-container .modal-content button.close-modal-button {
-  background: #F06A68 !important;
+
+.btn--danger {
+  background-color: #F06A68;
+  border: none;
   color: #fff;
 }
-.profile-page .profile-container .modal-buttons .confirm-button {
-  padding: 0rem 0.6rem;
-}
-.profile-page .profile-container .modal-content button {
-  margin-top: 20px;
-  margin: 5px;
-}
-.profile-page .profile-container .password-modal,
-.profile-page .profile-container .cancel-modal,
-.profile-page .profile-container .invoice-modal {
+
+.modal-overlay {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
+  inset: 0;
   background: rgba(0, 0, 0, 0.5);
-  justify-content: center;
+  display: flex;
   align-items: center;
+  justify-content: center;
   z-index: 1000;
 }
-.profile-page .profile-container .password-modal .modal-content input {
-  width: 100%;
-  padding: 10px;
-  margin-bottom: 10px;
-  border: 1px solid #ccc;
-}
-.profile-page .profile-container .modal-content {
+.modal-content {
   background: #fff;
-  padding: 20px;
+  color: #000000;
+  padding: 1.5rem;
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   width: 90%;
   max-width: 400px;
+  text-align: left;
 }
-.profile-page .profile-container .modal-content h2 {
-  margin-bottom: 20px;
+.modal-content h2 {
+  margin-bottom: 1rem;
 }
-.profile-page .profile-container .modal-content p {
-  margin-bottom: 10px;
+.modal-content p {
+  margin-bottom: 0.5rem;
+}
+.modal-content input {
+  width: 100%;
+  padding: 0.6rem;
+  margin-bottom: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+.modal-content .modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+.modal-content .modal-buttons .close-modal-button,
+.modal-content .modal-buttons .cancel-button {
+  color: #000000;
+  transition: color 0.3s ease-iun-out;
+}
+.modal-content .modal-buttons .close-modal-button:hover,
+.modal-content .modal-buttons .cancel-button:hover {
+  color: white;
+}
+.modal-content .modal-buttons .btn, .modal-content .modal-buttons .profile-right .booking-item__cancel, .profile-right .modal-content .modal-buttons .booking-item__cancel, .modal-content .modal-buttons .profile-center .visit-item__btn, .profile-center .modal-content .modal-buttons .visit-item__btn, .modal-content .modal-buttons .profile-left .change-password-button, .profile-left .modal-content .modal-buttons .change-password-button {
+  padding: 0.5rem 1rem;
 }
 
+.profile-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #333;
+  text-align: center;
+}
+.profile-page .profile-title {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.profile-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 350px;
+  padding: 1rem;
+  box-sizing: border-box;
+  gap: 1rem;
+}
+.profile-container .panel, .profile-container .profile-left,
+.profile-container .profile-center,
+.profile-container .profile-right {
+  background-color: rgba(35, 38, 38, 0.8);
+  border-radius: 5px;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-left {
+  text-align: left;
+}
+.profile-left .section-title {
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+}
+.profile-left .info-item {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+.profile-left .info-item label {
+  font-weight: bold;
+}
+.profile-left .info-item .info-value,
+.profile-left .info-item .info-value-phone {
+  padding: 0.4rem 1.7rem;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 5px;
+}
+.profile-left .info-item--password {
+  display: grid;
+  grid-template-rows: auto auto;
+  grid-template-columns: 1fr auto;
+  grid-template-areas: "label  label" "value  button";
+  -moz-column-gap: 1rem;
+       column-gap: 1rem;
+  row-gap: 0.5rem;
+  align-items: center;
+}
+.profile-left .info-item--password > label {
+  grid-area: label;
+}
+.profile-left .info-item--password .info-value {
+  grid-area: value;
+}
+.profile-left .info-item--password .change-password-button {
+  grid-area: button;
+  align-self: center;
+}
+.profile-left .change-password-button {
+  border: none;
+  background: transparent;
+  padding: 0;
+  color: #C7C0C0;
+}
+.profile-left .change-password-button:hover {
+  color: #3A7EF9;
+}
+
+.profile-center .section-title {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+.profile-center .visit-item, .profile-center .visit-item--header {
+  display: grid;
+  grid-template-columns: 1fr 1fr auto;
+  grid-template-rows: repeat(2, auto);
+  grid-template-areas: "dateLabel totalLabel button" "date      total      button";
+  -moz-column-gap: 1rem;
+       column-gap: 1rem;
+  row-gap: 0.25rem;
+  align-items: start;
+  font-size: 0.8rem;
+  margin: 0.5rem 0;
+}
+.profile-center .visit-item__date {
+  grid-area: date;
+}
+.profile-center .visit-item__total {
+  grid-area: total;
+}
+.profile-center .visit-item__btn {
+  grid-area: button;
+  justify-self: end;
+  align-self: center;
+}
+.profile-center .visit-item--header {
+  grid-template-rows: auto;
+  text-align: start;
+  grid-template-areas: "dateLabel totalLabel button";
+  align-items: center;
+  font-weight: bold;
+  opacity: 0.8;
+}
+.profile-center .visit-item--header .visit-item__date {
+  grid-area: dateLabel;
+  justify-self: flex-start;
+}
+.profile-center .visit-item--header .visit-item__total {
+  grid-area: totalLabel;
+  justify-self: flex-start;
+}
+.profile-center .visit-item--header .visit-item__btn {
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.profile-right .section-title {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  text-align: left;
+}
+.profile-right .booking-item {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  grid-template-rows: repeat(2, auto);
+  grid-template-areas: "date    button" "time    button";
+  -moz-column-gap: 1rem;
+       column-gap: 1rem;
+  row-gap: 0.25rem;
+  align-items: center;
+  font-size: 0.8rem;
+  margin: 0.5rem 0;
+}
+.profile-right .booking-item__date {
+  grid-area: date;
+  font-weight: bold;
+}
+.profile-right .booking-item__time {
+  grid-area: time;
+}
+.profile-right .booking-item__cancel {
+  grid-area: button;
+  justify-self: end;
+}
+
+@media (min-width: 768px) {
+  .profile-page {
+    align-items: flex-start;
+  }
+  .profile-title {
+    font-size: 1.4rem;
+    text-align: left;
+    margin-left: 1rem;
+  }
+  .profile-container {
+    flex-direction: row;
+    gap: 2rem;
+    max-width: 100%;
+  }
+  .profile-container .panel, .profile-container .profile-left,
+  .profile-container .profile-center,
+  .profile-container .profile-right {
+    flex: 1;
+    max-width: 300px;
+  }
+  .profile-container .panel .section-title, .profile-container .profile-left .section-title,
+  .profile-container .profile-center .section-title,
+  .profile-container .profile-right .section-title {
+    font-size: 1.2rem;
+  }
+  .profile-container .visit-item, .profile-container .profile-center .visit-item--header, .profile-center .profile-container .visit-item--header,
+  .profile-container .booking-item {
+    font-size: 0.9rem;
+  }
+}
+@media (min-width: 1024px) {
+  .profile-container {
+    gap: 5rem;
+  }
+  .profile-container .panel, .profile-container .profile-left,
+  .profile-container .profile-center,
+  .profile-container .profile-right {
+    max-width: none;
+  }
+  .profile-container .panel .section-title, .profile-container .profile-left .section-title,
+  .profile-container .profile-center .section-title,
+  .profile-container .profile-right .section-title {
+    font-size: 1.5rem;
+  }
+  .profile-container .visit-item, .profile-container .profile-center .visit-item--header, .profile-center .profile-container .visit-item--header,
+  .profile-container .booking-item {
+    font-size: 1.2rem;
+  }
+  .profile-container .visit-item__btn,
+  .profile-container .booking-item__cancel {
+    font-size: 1rem;
+  }
+  .profile-container .booking-item__date {
+    font-size: 1.5rem;
+  }
+}
 .register-container {
   display: flex;
   flex-direction: column;
