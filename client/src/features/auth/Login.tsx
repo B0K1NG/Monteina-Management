@@ -23,7 +23,7 @@ export default function Login() {
       const response = await axios.post('/auth/login', data);
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('role', response.data.role);
-      window.location.href = response.data.role === 'admin' ? '/dashboard' : '/';
+      window.location.href = response.data.role === 'admin' ? '/admin/dashboard' : '/';
     } catch (error) {
       console.error(error);
       alert('Login failed. Please check your credentials.');
