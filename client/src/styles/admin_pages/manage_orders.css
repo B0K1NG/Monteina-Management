@@ -136,4 +136,15 @@
 }
 .manage-orders-container .close-modal-button:hover {
   color: white;
-}/*# sourceMappingURL=manage_orders.css.map */
+}
+.action-icon {
+    width: 20px;
+    height: 20px;
+    margin: 0 5px;
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.action-icon:hover {
+    transform: scale(1.1);
+}
