@@ -24,6 +24,7 @@ model Service {
   description    String
   price_min      Float
   price_max      Float
+  status         String   @default("active")
 }
 
 model Checkout {
