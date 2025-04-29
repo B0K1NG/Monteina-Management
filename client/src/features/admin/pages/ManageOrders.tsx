@@ -410,9 +410,9 @@ export default function ManageOrders() {
     <label>Statusas</label>
     <Dropdown
         options={[
-            { value: 'Active', label: 'Active' },
-            { value: 'Done', label: 'Done' },
-            { value: 'Canceled', label: 'Canceled' },
+            { value: 'Active', label: 'Aktyvus' },
+            { value: 'Done', label: 'Baigtas' },
+            { value: 'Canceled', label: 'Atšauktas' },
         ]}
         value={selectedStatus}
         onChange={setSelectedStatus}
