@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import axios from '../../api/axios';
-import editIcon from '../../../assets/icons/edit.png';
-import trashIcon from '../../../assets/icons/trash.png';
+import editIcon from '../../assets/icons/edit.png';
+import trashIcon from '../../assets/icons/trash.png';
 import { toast } from 'react-toastify';
 
 interface Service {

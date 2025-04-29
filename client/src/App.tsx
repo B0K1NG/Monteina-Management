@@ -15,10 +15,10 @@ import Checkout from './pages/Checkout';
 import Confirmation from './pages/Confirmation'
 
 import AdminNavBar from './components/AdminNavBar';
-import ManageOrders from './pages/pages/ManageOrders';
-import ManageServices from './pages/pages/ManageServices';
-import AdminDashboard from './pages/pages/AdminDashboard';
-import ManageUsers from './pages/pages/ManageUsers';
+import ManageOrders from './pages/admin-pages/ManageOrders';
+import ManageServices from './pages/admin-pages/ManageServices';
+import AdminDashboard from './pages/admin-pages/AdminDashboard';
+import ManageUsers from './pages/admin-pages/ManageUsers';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
