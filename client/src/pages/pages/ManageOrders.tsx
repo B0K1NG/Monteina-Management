@@ -1,11 +1,11 @@
 import { useState, useEffect } from 'react';
 import { toast } from 'react-toastify';
 
-import axios from '../../../api/axios';
-import { createOrder } from '../../../api/booking';
-import { getAllMakes, getModelsForMake } from '../../../api/vehicles';
+import axios from '../../api/axios';
+import { createOrder } from '../../api/booking';
+import { getAllMakes, getModelsForMake } from '../../api/vehicles';
 
-import Dropdown from '../../../components/Dropdown';
+import Dropdown from '../../components/Dropdown';
 
 export default function ManageOrders() {
     const [isModalOpen, setIsModalOpen] = useState(false);
