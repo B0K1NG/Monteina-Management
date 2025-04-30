@@ -1,48 +1,96 @@
+// Styling for the Admin Dashboard page
 .dashboard-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  min-height: 100vh;
+  gap: 2rem;
+  padding: 2rem;
   background-color: #f9f9f9;
+}
+
+.dashboard-title {
+  font-size: 2rem;
+  font-weight: bold;
   color: #333;
+  text-align: center;
+}
 
-  .dashboard-title {
-    font-size: 2.5rem;
-    font-weight: bold;
-    margin-bottom: 1rem;
-  }
+.date-selector {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  justify-content: center;
+  font-size: 1rem;
+}
 
-  .dashboard-description {
-    font-size: 1.25rem;
-    margin-bottom: 2rem;
-  }
+.date-selector input {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
 
-  .dashboard-actions {
-    display: flex;
-    gap: 1rem;
+.dashboard-boxes {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+}
 
-    .dashboard-button {
-      padding: 0.75rem 1.5rem;
-      border: none;
-      border-radius: 5px;
-      cursor: pointer;
+.box {
+  flex: 1;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-      &.manage-users {
-        background-color: #007bff;
-        color: white;
-        &:hover {
-          background-color: #0056b3;
-        }
-      }
+.box h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #555;
+}
 
-      &.manage-bookings {
-        background-color: #28a745;
-        color: white;
-        &:hover {
-          background-color: #218838;
-        }
-      }
-    }
-  }
+.box p {
+  font-size: 1rem;
+  margin: 0.5rem 0;
+  color: #666;
+}
+
+.upcoming-reservations {
+  margin-top: 2rem;
+}
+
+.upcoming-reservations h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #555;
+}
+
+.upcoming-reservations table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.upcoming-reservations th,
+.upcoming-reservations td {
+  padding: 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.upcoming-reservations th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+  color: #333;
+}
+
+.upcoming-reservations tr:last-child td {
+  border-bottom: none;
+}
+
+.upcoming-reservations td {
+  color: #666;
 }
