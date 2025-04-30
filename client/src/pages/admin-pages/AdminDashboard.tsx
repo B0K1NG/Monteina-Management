@@ -21,7 +21,6 @@ export default function AdminDashboardPage() {
     new Date().toISOString().split('T')[0]
   );
 
-  // only those matching the chosen date
   const filtered = bookings.filter(
     b => normalizeDate(b.bookingDate) === selectedDate
   );
