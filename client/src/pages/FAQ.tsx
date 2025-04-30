@@ -1,5 +1,4 @@
 import React from 'react';
-import '../styles/client_pages/_faq.scss';
 import FAQList from '../faq/components/FAQList';
 
 const FAQPage: React.FC = () => (
