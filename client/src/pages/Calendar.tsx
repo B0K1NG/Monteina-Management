@@ -1,128 +1,58 @@
-import axios from '../api/axios';
-import Dropdown from '../components/Dropdown';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import { availableTimes } from '../calendar/utils/constants';
+import { getWeekDays } from '../calendar/utils/dateUtils';
+import { CarDetails } from '../calendar/types';
+import { useCarMakesModels } from '../calendar/hooks/useCarMakesModels';
+import useServices from '../calendar/hooks/useServices';
+import { useBookedTimes } from '../calendar/hooks/useBookedTimes';
+import CalendarHeader from '../calendar/components/CalendarHeader';
+import WeekDays from '../calendar/components/WeekDays';
+import TimeSlots from '../calendar/components/TimeSlots';
+import CarDetailsForm from '../calendar/components/CarDetailsForm';
+import ServiceOptionsForm from '../calendar/components/ServiceOptionsForm';
 import { toast } from 'react-toastify';
 
-import { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { getAllMakes, getModelsForMake } from '../api/vehicles';
-
-import '../styles/client_pages/_calendar.scss';
-
-const availableTimes = [
-  '09:00', '09:30', '10:00', '10:30', '11:00', '11:30',
-  '12:00', '12:30', '13:00', '13:30', '14:00', '14:30',
-  '15:00', '15:30', '16:00', '16:30', '17:00', '17:30',
-  '18:00', '18:30', '19:00', '19:30',
-];
-
-const tireSizes = [...Array(16)].map((_, i) => `R${i + 10}`);
-const tireQuantity = [...Array(100)].map((_, i) => `${i + 1} vnt.`);
-
-const getWeekDays = (startDate: Date) => {
-  const days: {
-    fullDate: string;
-    dayNumber: number;
-    dayName: string;
-    isPast: boolean;
-  }[] = [];
-  const today = new Date().setHours(0, 0, 0, 0);
-  for (let i = -1; i < 6; i++) {
-    const date = new Date(startDate);
-    date.setDate(startDate.getDate() + i);
-    days.push({
-      fullDate: date.toISOString().split('T')[0],
-      dayNumber: date.getDate(),
-      dayName: date.toLocaleDateString('lt-LT', { weekday: 'short' }),
-      isPast: date.getTime() < today,
-    });
-  }
-  return days;
-};
-
-export default function BookingCalendar() {
-  const [selectedDate, setSelectedDate] = useState('');
-  const [repairOption, setRepairOption] = useState<string | null>(null);
-  const [selectedTime, setSelectedTime] = useState<string | null>(null);
-  const [carDetails, setCarDetails] = useState({
-    make: '',
-    model: '',
-    year: '',
-    tireSize: '',
-    tireQuantity: '',
-  });
-  const [valveChange, setValveChange] = useState(false);
-  const [selectedService, setSelectedService] = useState('');
-  const [services, setServices] = useState<
-    { id: number; name: string; price_min: number; price_max: number }[]
-  >([]);
-  const [carMakes, setCarMakes] = useState<string[]>([]);
-  const [carModels, setCarModels] = useState<{ [key: string]: string[] }>({});
-  const [selectedMake, setSelectedMake] = useState('');
-  const [weekStart, setWeekStart] = useState(new Date());
-  const [bookedTimes, setBookedTimes] = useState<string[]>([]);
+const CalendarPage: React.FC = () => {
   const navigate = useNavigate();
 
-  useEffect(() => {
-    getAllMakes()
-      .then(makes => setCarMakes(makes.map((m: any) => m.Make_Name)))
-      .catch(console.error);
-  }, []);
+  const todayStart = new Date();
+  todayStart.setHours(0, 0, 0, 0);
+  const todayTimestamp = todayStart.getTime();
 
-  useEffect(() => {
-    if (!selectedMake) return;
-    if (carModels[selectedMake]) return;
-    getModelsForMake(selectedMake)
-      .then(models =>
-        setCarModels(prev => ({
-          ...prev,
-          [selectedMake]: models.map((m: any) => m.Model_Name),
-        }))
-      )
-      .catch(console.error);
-  }, [selectedMake, carModels]);
+  const [weekStart, setWeekStart] = useState(new Date());
+  const [selectedDate, setSelectedDate] = useState('');
+  const [selectedTime, setSelectedTime] = useState<string | null>(null);
+  const [selectedService, setSelectedService] = useState<string>('');
+  const [carDetails, setCarDetails] = useState<CarDetails>({
+    make: '', model: '', year: '', tireSize: '', tireQuantity: ''
+  });
+  const [repairOption, setRepairOption] = useState<string | null>(null);
+  const [valveChange, setValveChange] = useState(false);
+
+  const { makes, models, fetchModels } = useCarMakesModels();
+  const { services } = useServices();
+  const bookedTimes = useBookedTimes(selectedDate);
 
   useEffect(() => {
     setSelectedDate(new Date().toISOString().split('T')[0]);
   }, []);
 
-  useEffect(() => {
-    axios.get('/api/services')
-      .then(r => setServices(r.data))
-      .catch(console.error);
-  }, []);
+  const weekDays = getWeekDays(weekStart);
 
-  useEffect(() => {
-    setSelectedTime(null);
-    setRepairOption(null);
-  }, [selectedDate]);
-
-  const normalizeTime = (time: string) => {
-    const [hours, minutes] = time.split(':');
-    return `${hours.padStart(2, '0')}:${minutes}`;
-  };
-
-  useEffect(() => {
-    if (!selectedDate) return;
-
-    axios.get('/api/checkout/bookings', { params: { date: selectedDate } })
-    .then(({ data }) => {
-      console.log("Booking data:", data);
-      const fullyBooked = data
-      .filter((entry: any) => entry.status !== 'canceled' && entry._count?.bookingTime >= 2)
-        .map((entry: any) => normalizeTime(entry.bookingTime));
-      setBookedTimes(fullyBooked);
-    })
-    .catch((error) => {
-      console.error('Failed to fetch bookings:', error);
-    });
-}, [selectedDate]);
-
-  const handleCarDetailChange = (
-    field: keyof typeof carDetails,
-    value: string
-  ) => {
-    setCarDetails(prev => ({ ...prev, [field]: value }));
-  };
+  const times = (() => {
+    const todayStr = new Date().toISOString().split('T')[0];
+    let arr = [...availableTimes];
+    if (selectedDate === todayStr) {
+      const now = new Date();
+      const min = now.getHours() * 60 + now.getMinutes();
+      arr = arr.filter(t => {
+        const [h, m] = t.split(':').map(Number);
+        return h * 60 + m > min;
+      });
+    }
+    return arr;
+  })();
 
   const isBookingValid =
     selectedDate &&
@@ -136,67 +66,38 @@ export default function BookingCalendar() {
     (selectedService !== 'Padangos remontas' || Boolean(repairOption));
 
   const handleConfirm = () => {
-    if (!isBookingValid || (selectedService === 'Padangos remontas' && !repairOption)) {
-        toast.error('Prašome užpildyti visus laukus prieš patvirtinant paslaugą.');
-        return;
+    if (!isBookingValid) {
+      toast.error('Prašome užpildyti visus laukus prieš patvfrtinant paslaugą.');
+      return;
     }
-
     const details = {
-        date: selectedDate,
-        time: selectedTime!,
-        carDetails,
-        selectedService: {
-            name: selectedService,
-            price_min: services.find(s => s.name === selectedService)?.price_min || 0,
-            price_max: services.find(s => s.name === selectedService)?.price_max || 0,
-        },
-        valveChange,
-        tireQuantity: parseInt(carDetails.tireQuantity, 10),
-        repairOption,
+      date: selectedDate,
+      time: selectedTime!,
+      carDetails,
+      selectedService: {
+        name: selectedService!,
+        price_min: services.find(s => s.name === selectedService!)?.price_min || 0,
+        price_max: services.find(s => s.name === selectedService!)?.price_max || 0
+      },
+      valveChange,
+      tireQuantity: parseInt(carDetails.tireQuantity, 10),
+      repairOption
     };
-
     localStorage.setItem('bookingDetails', JSON.stringify(details));
-    toast.success('Paslauga sėkmingai patvirtinta!');
     navigate('/checkout');
-};
-
-  const getFilteredTimes = () => {
-    let times = [...availableTimes];
-    const todayStr = new Date().toISOString().split('T')[0];
-
-    if (selectedDate === todayStr) {
-      const now = new Date();
-      const currentMin = now.getHours() * 60 + now.getMinutes();
-
-      times = times.filter(time => {
-        const [h, m] = time.split(':').map(Number);
-        return h * 60 + m > currentMin;
-      });
-    }
-
-    return times;
-  };
-
-  const times = getFilteredTimes();
-  const weekDays = getWeekDays(weekStart);
-
-  const isTimeSlotBooked = (time: string): boolean => {
-    if (!selectedDate || !bookedTimes.length) return false;
-    return bookedTimes.includes(time);
   };
 
   return (
     <div className="booking-page">
       <section className="calendar-section">
         <h2 className="calendar-title">Pasirinkite laiką ir paslaugą</h2>
-        <div className="calendar-header">
-          <div className="month-label">
-            {new Date(weekStart).toLocaleDateString('lt-LT', {
-              year: 'numeric',
-              month: 'long',
-            })}
-          </div>
-        </div>
+
+        <CalendarHeader
+          monthLabel={new Date(weekStart).toLocaleDateString('lt-LT', {
+            year: 'numeric',
+            month: 'long'
+          })}
+        />
 
         <div className="week-days-wrapper">
           <button
@@ -204,29 +105,18 @@ export default function BookingCalendar() {
             onClick={() => {
               const prev = new Date(weekStart);
               prev.setDate(prev.getDate() - 7);
-              if (prev >= new Date(new Date().setHours(0, 0, 0, 0))) {
-                setWeekStart(prev);
-              }
+              if (prev.getTime() >= todayTimestamp) setWeekStart(prev);
             }}
-            disabled={weekStart <= new Date(new Date().setHours(0, 0, 0, 0))}
+            disabled={weekStart.getTime() <= todayTimestamp}
           >
             &lt;
           </button>
 
-          <div className="week-days">
-            {weekDays.map(day => (
-              <div
-                key={day.fullDate}
-                className={`day-circle ${
-                  selectedDate === day.fullDate ? 'selected' : ''
-                } ${day.isPast ? 'disabled' : ''}`}
-                onClick={() => !day.isPast && setSelectedDate(day.fullDate)}
-              >
-                <div className="day-name">{day.dayName}</div>
-                <div className="day-number">{day.dayNumber}</div>
-              </div>
-            ))}
-          </div>
+          <WeekDays
+            days={weekDays}
+            selectedDate={selectedDate}
+            onSelect={setSelectedDate}
+          />
 
           <button
             className="arrow-btn"
@@ -240,25 +130,12 @@ export default function BookingCalendar() {
           </button>
         </div>
 
-        <div className={`time-slots ${times.length === 0 ? 'empty' : ''}`}>
-          {times.length > 0 ? (
-            times.map(time => (
-              <div
-                key={time}
-                className={`time-slot ${
-                  selectedTime === time ? 'selected' : ''
-                } ${isTimeSlotBooked(time) ? 'disabled' : ''}`}
-                onClick={() =>
-                  !isTimeSlotBooked(time) && setSelectedTime(time)
-                }
-              >
-                {time}
-              </div>
-            ))
-          ) : (
-            <div className="empty">Nėra laisvų laikų</div>
-          )}
-        </div>
+        <TimeSlots
+          times={times}
+          selectedTime={selectedTime}
+          bookedTimes={bookedTimes}
+          onSelect={setSelectedTime}
+        />
 
         <button
           className="confirm-button"
@@ -273,102 +150,32 @@ export default function BookingCalendar() {
         <div className="car-service-box">
           <div className="car-service-box-information-box">
             <h3 className="car-service-title">Automobilio duomenys</h3>
-            <div className="car-service-box-information">
-              <Dropdown
-                options={carMakes.map(m => ({ value: m, label: m }))}
-                value={carDetails.make}
-                onChange={v => {
-                  handleCarDetailChange('make', v);
-                  setSelectedMake(v);
-                }}
-                placeholder="Gamintojas"
-                className="dropdown-make"
-                searchable
-              />
-              <Dropdown
-                options={(carModels[carDetails.make] || []).map(m => ({
-                  value: m,
-                  label: m,
-                }))}
-                value={carDetails.model}
-                onChange={v => handleCarDetailChange('model', v)}
-                placeholder="Modelis"
-                className="dropdown-model"
-                disabled={!carDetails.make}
-                searchable
-              />
-              <Dropdown
-                options={Array.from({ length: 30 }, (_, i) => {
-                  const y = new Date().getFullYear() - i;
-                  return { value: String(y), label: String(y) };
-                })}
-                value={carDetails.year}
-                onChange={v => handleCarDetailChange('year', v)}
-                placeholder="Pagaminimo metai"
-                className="dropdown-year"
-              />
-              <Dropdown
-                options={tireSizes.map(sz => ({ value: sz, label: sz }))}
-                value={carDetails.tireSize}
-                onChange={v => handleCarDetailChange('tireSize', v)}
-                placeholder="Ratų išmatavimai"
-                className="dropdown-tire-size"
-              />
-            </div>
+            <CarDetailsForm
+              carDetails={carDetails}
+              makes={makes}
+              models={models}
+              fetchModels={fetchModels}
+              onChange={(f, v) => setCarDetails(cd => ({ ...cd, [f]: v }))}
+            />
           </div>
 
-          <div className="service-options">
-            <div className="top-options">
-              <div className="service-options-choice">
-                <Dropdown
-                  options={services.map(s => ({ value: s.name, label: s.name }))}
-                  value={selectedService}
-                  onChange={setSelectedService}
-                  placeholder="Pasirinkite paslaugą"
-                  className="dropdown-service"
-                />
-              </div>
-              <div className="service-tire-quantity">
-                <Dropdown
-                  options={tireQuantity.map(q => ({ value: q, label: q }))}
-                  value={carDetails.tireQuantity}
-                  onChange={v => handleCarDetailChange('tireQuantity', v)}
-                  placeholder="Ratų kiekis"
-                  className="dropdown-tire-quantity"
-                />
-              </div>
-            </div>
-            
-            <div className="bottom-options">
-            {selectedService === 'Padangos remontas' && (
-              <div className="repair-options">
-                <Dropdown
-                  options={[
-                    { value: 'ventiliu-keitimas', label: 'Ventilių keitimas' },
-                    { value: 'siulo-iverimas', label: 'Siūlo įvėrimas' },
-                    { value: 'lopas',           label: 'Lopo dėjimas' },
-                  ]}
-                  value={repairOption || ''}
-                  onChange={setRepairOption}
-                  placeholder="Remonto tipas"
-                  className="dropdown-repair"
-                />
-              </div>
-            )}
-              <div className="service-valves-optional">
-                <label>
-                  Ventilių keitimas
-                  <input
-                    type="checkbox"
-                    checked={valveChange}
-                    onChange={e => setValveChange(e.target.checked)}
-                  />
-                </label>
-              </div>
-            </div>
-          </div>
+          <ServiceOptionsForm
+            services={services}
+            selectedService={selectedService}
+            onServiceChange={setSelectedService}
+            tireQuantityVal={carDetails.tireQuantity}
+            onQuantityChange={v =>
+              setCarDetails(cd => ({ ...cd, tireQuantity: v }))
+            }
+            repairOption={repairOption}
+            onRepairChange={setRepairOption}
+            valveChange={valveChange}
+            onValveChange={setValveChange}
+          />
         </div>
       </section>
     </div>
   );
-}
+};
+
+export default CalendarPage;
