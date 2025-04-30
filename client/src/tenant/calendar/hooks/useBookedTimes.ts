@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import axios from '../../api/axios';
+import axios from '../../../api/axios';
 import { normalizeTime } from '../utils/dateUtils';
 import { BookingEntry } from '../types';
 

@@ -1,4 +1,4 @@
-import axios from '../../api/axios';
+import axios from '../../../api/axios';
 import { useNavigate } from 'react-router-dom';
 import { getUserIdFromToken } from '../utils/jwt';
 import { BookingDetails } from '../types';

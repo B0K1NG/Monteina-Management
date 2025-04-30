@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { availableTimes } from '../calendar/utils/constants';
-import { getWeekDays } from '../calendar/utils/dateUtils';
-import { CarDetails } from '../calendar/types';
-import { useCarMakesModels } from '../calendar/hooks/useCarMakesModels';
-import useServices from '../calendar/hooks/useServices';
-import { useBookedTimes } from '../calendar/hooks/useBookedTimes';
-import CalendarHeader from '../calendar/components/CalendarHeader';
-import WeekDays from '../calendar/components/WeekDays';
-import TimeSlots from '../calendar/components/TimeSlots';
-import CarDetailsForm from '../calendar/components/CarDetailsForm';
-import ServiceOptionsForm from '../calendar/components/ServiceOptionsForm';
+import { availableTimes } from '../tenant/calendar/utils/constants';
+import { getWeekDays } from '../tenant/calendar/utils/dateUtils';
+import { CarDetails } from '../tenant/calendar/types';
+import { useCarMakesModels } from '../tenant/calendar/hooks/useCarMakesModels';
+import useServices from '../tenant/calendar/hooks/useServices';
+import { useBookedTimes } from '../tenant/calendar/hooks/useBookedTimes';
+import CalendarHeader from '../tenant/calendar/components/CalendarHeader';
+import WeekDays from '../tenant/calendar/components/WeekDays';
+import TimeSlots from '../tenant/calendar/components/TimeSlots';
+import CarDetailsForm from '../tenant/calendar/components/CarDetailsForm';
+import ServiceOptionsForm from '../tenant/calendar/components/ServiceOptionsForm';
 import { toast } from 'react-toastify';
 
 const CalendarPage: React.FC = () => {

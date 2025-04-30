@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import { fetchUserInfo } from '../../api/auth';
+import { fetchUserInfo } from '../../../api/auth';
 import {
   fetchPreviousVisits,
   fetchActiveBookings,
-} from '../../api/booking';
+} from '../../../api/booking';
 import { UserInfo, Visit, Booking } from '../types';
 
 export function useProfileData() {

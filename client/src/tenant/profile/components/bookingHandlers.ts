@@ -1,4 +1,4 @@
-import { cancelBooking } from '../../api/booking';
+import { cancelBooking } from '../../../api/booking';
 import { toast } from 'react-toastify';
 
 export const handleCancelBooking = async (
