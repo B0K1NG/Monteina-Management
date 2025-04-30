@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { changePassword } from '../../api/auth';
+import { changePassword } from '../../../api/auth';
 import { toast } from 'react-toastify';
 
 interface Props {
