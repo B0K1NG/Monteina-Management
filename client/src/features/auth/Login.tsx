@@ -3,6 +3,7 @@ import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Link } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 import axios from '../../api/axios';
 
@@ -24,9 +25,12 @@ export default function Login() {
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('role', response.data.role);
       window.location.href = response.data.role === 'admin' ? '/admin/dashboard' : '/';
-    } catch (error) {
-      console.error(error);
-      alert('Login failed. Please check your credentials.');
+    } catch (error: any) {
+      if (error.response?.status === 403 && error.response?.data?.error.includes('užblokuota')) {
+        toast.error(error.response.data.error);
+      } else {
+        toast.error('Prisijungti nepavyko. Patikrinkite savo duomenis.');
+      }
     }
   };
 
