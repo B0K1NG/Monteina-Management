@@ -8,17 +8,17 @@
 @use"components/dropdown";
 @use"components/footer";
 
-@use "pages/client_pages/home";
-@use "pages/client_pages/profile";
-@use "pages/client_pages/register";
-@use "pages/client_pages/login";
-@use "pages/client_pages/confirmemail";
-@use "pages/client_pages/notfound";
-@use "pages/client_pages/services";
-@use "pages/client_pages/calendar";
-@use "pages/client_pages/faq";
-@use "pages/client_pages/checkout";
-@use "pages/client_pages/confirmation";
+@use "pages/tenant_pages/home";
+@use "pages/tenant_pages/profile";
+@use "pages/tenant_pages/register";
+@use "pages/tenant_pages/login";
+@use "pages/tenant_pages/confirmemail";
+@use "pages/tenant_pages/notfound";
+@use "pages/tenant_pages/services";
+@use "pages/tenant_pages/calendar";
+@use "pages/tenant_pages/faq";
+@use "pages/tenant_pages/checkout";
+@use "pages/tenant_pages/confirmation";
 
 @use "pages/admin_pages/dashboard";
 @use "pages/admin_pages/manage_orders.scss";
