@@ -36,7 +36,7 @@ cron.schedule('*/30 * * * *', async () => {
 app.use(express.json());
 app.use('/api/profile', profileRoutes);
 app.use('/api/services', servicesRoutes);
-app.use('/users', usersRoutes);
+app.use('/api/users', usersRoutes);
 
 app.use((req, res, next) => {
   if (req.user) {
@@ -235,7 +235,7 @@ app.get('/api/services', async (req, res) => {
 app.get('/api/users', async (req, res) => {
   try {
       const users = await prisma.user.findMany({
-          select: { id: true, firstName: true, lastName: true },
+          select: { id: true, firstName: true, lastName: true, email: true, phoneNumber: true, status: true, role: true },
       });
       res.json(users);
   } catch (error) {
