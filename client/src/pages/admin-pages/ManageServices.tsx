@@ -1,10 +1,10 @@
 import  { useState } from 'react';
 import { toast } from 'react-toastify';
-import useServicesAdmin from '../../admin/manageServices/hooks/useServicesAdmin';
-import ServicesTable from '../../admin/manageServices/components/ServicesTable';
-import ServiceFormModal from '../../admin/manageServices/components/ServiceFormModal';
-import DeleteServiceModal from '../../admin/manageServices/components/DeleteServiceModal';
-import { Service } from '../../admin/manageServices/types';
+import useServicesAdmin from '../../admin/manage-services/hooks/useServicesAdmin';
+import ServicesTable from '../../admin/manage-services/components/ServicesTable';
+import ServiceFormModal from '../../admin/manage-services/components/ServiceFormModal';
+import DeleteServiceModal from '../../admin/manage-services/components/DeleteServiceModal';
+import { Service } from '../../admin/manage-services/types';
 
 export default function ManageServicesPage() {
   const { services, addService, editService, deleteService } = useServicesAdmin();
