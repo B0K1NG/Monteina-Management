@@ -586,24 +586,20 @@ export default function ManageOrders() {
                 />
 
 
-                {selectedBooking.status === 'canceled' ? (
                 <label>Statusas</label>
-                ) : null}
-                {selectedBooking.status === 'canceled' && (
                 <Dropdown
                     options={[
-                    { value: 'active', label: 'Aktyvus' },
-                    { value: 'done', label: 'Baigtas' },
-                    { value: 'canceled', label: 'Atšauktas' },
+                        { value: 'active', label: 'Aktyvus' },
+                        { value: 'done', label: 'Baigtas' },
+                        { value: 'canceled', label: 'Atšauktas' },
                     ]}
                     value={selectedBooking.status}
                     onChange={(value) =>
-                    setSelectedBooking((prev) =>
-                        prev ? { ...prev, status: value } : null
-                    )
+                        setSelectedBooking((prev) =>
+                            prev ? { ...prev, status: value } : null
+                        )
                     }
                 />
-                )}
             </div>
 
             <div className="modal-buttons">
