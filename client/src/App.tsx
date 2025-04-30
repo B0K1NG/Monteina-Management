@@ -15,10 +15,10 @@ import Checkout from './pages/Checkout';
 import Confirmation from './pages/Confirmation'
 
 import AdminNavBar from './components/AdminNavBar';
-import ManageOrders from './pages/admin-pages/ManageOrders';
-import ManageServices from './pages/admin-pages/ManageServices';
-import AdminDashboard from './pages/admin-pages/AdminDashboard';
-import ManageUsers from './pages/admin-pages/ManageUsers';
+import ManageOrdersPage from './pages/admin-pages/ManageOrders';
+import ManageServicesPage from './pages/admin-pages/ManageServices';
+import AdminDashboardPage from './pages/admin-pages/AdminDashboard';
+import ManageUsersPage from './pages/admin-pages/ManageUsers';
 
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -36,7 +36,7 @@ function App() {
         path="/admin/orders"
         element={
           <ProtectedRoute roles={['admin']}>
-            <ManageOrders />
+            <ManageOrdersPage />
           </ProtectedRoute>
         }
       />
@@ -44,7 +44,7 @@ function App() {
         path="/admin/services"
         element={
           <ProtectedRoute roles={['admin']}>
-            <ManageServices />
+            <ManageServicesPage />
           </ProtectedRoute>
         }
       />
@@ -52,7 +52,7 @@ function App() {
         path="/admin/users"
         element={
           <ProtectedRoute roles={['admin']}>
-            <ManageUsers />
+            <ManageUsersPage />
           </ProtectedRoute>
         }
       />
@@ -60,7 +60,7 @@ function App() {
         path="/admin/dashboard"
         element={
           <ProtectedRoute roles={['admin']}>
-            <AdminDashboard />
+            <AdminDashboardPage />
           </ProtectedRoute>
         }
       />
