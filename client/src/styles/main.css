@@ -494,6 +494,9 @@ body {
 .profile-left .change-password-button:hover {
   color: #3A7EF9;
 }
+.profile-left .change-password-button::before {
+  background: none !important;
+}
 
 .profile-center .section-title {
   font-size: 1rem;
