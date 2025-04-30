@@ -1,5 +1,5 @@
-@use "../utilities/variables" as vars;
-@use "../utilities/mixins"  as mixins;
+@use "../../utilities/variables" as vars;
+@use "../../utilities/mixins"  as mixins;
 
 $break-md: 768px;
 $break-lg: 1024px;

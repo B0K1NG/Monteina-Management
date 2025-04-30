@@ -5,20 +5,22 @@
 @use "./utilities/media";
 
 @use "components/navbar";
+@use"components/dropdown";
+@use"components/footer";
 
-@use "client_pages/home";
-@use "client_pages/profile";
-@use "client_pages/register";
-@use "client_pages/login";
-@use "client_pages/confirmemail";
-@use "client_pages/notfound";
-@use "client_pages/services";
-@use "client_pages/calendar";
-@use "client_pages/faq";
-@use "client_pages/checkout";
-@use "client_pages/confirmation";
+@use "pages/client_pages/home";
+@use "pages/client_pages/profile";
+@use "pages/client_pages/register";
+@use "pages/client_pages/login";
+@use "pages/client_pages/confirmemail";
+@use "pages/client_pages/notfound";
+@use "pages/client_pages/services";
+@use "pages/client_pages/calendar";
+@use "pages/client_pages/faq";
+@use "pages/client_pages/checkout";
+@use "pages/client_pages/confirmation";
 
-@use "admin_pages/dashboard";
-@use "admin_pages/manage_orders.scss";
-@use "admin_pages/manage_services.scss";
-@use "admin_pages/manage_users.scss";
+@use "pages/admin_pages/dashboard";
+@use "pages/admin_pages/manage_orders.scss";
+@use "pages/admin_pages/manage_services.scss";
+@use "pages/admin_pages/manage_users.scss";

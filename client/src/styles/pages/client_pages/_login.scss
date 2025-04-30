@@ -1,5 +1,5 @@
-@use "../utilities/variables" as vars;
-@use "../utilities/mixins" as mixins;
+@use "../../utilities/variables" as vars;
+@use "../../utilities/mixins" as mixins;
 
 .login-container {
   @include mixins.flex-center-column;
