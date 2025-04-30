@@ -83,9 +83,17 @@ app.post(
         res.status(401).json({ error: 'Invalid credentials.' });
         return;
       }
+
       const valid = await bcrypt.compare(password, user.password);
       if (!valid) {
         res.status(401).json({ error: 'Invalid credentials.' });
+        return;
+      }
+
+      if (user.status === 'blocked') {
+        res.status(403).json({
+          error: 'Jūsų paskyra buvo užblokuota. Jei manote, kad įvyko klaida, susisiekite el. paštu "monteinasservisas@gmail.com".',
+        });
         return;
       }
 
