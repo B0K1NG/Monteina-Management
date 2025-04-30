@@ -103,6 +103,7 @@ router.get('/all-bookings', async (req, res) => {
         serviceName: true,
         status: true,
         serviceId: true,
+        totalAmount: true,
       },
       orderBy: {
         bookingDate: 'asc',
