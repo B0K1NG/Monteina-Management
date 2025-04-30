@@ -1,5 +1,5 @@
 import React from 'react';
-import FAQList from '../tenant/faq/components/FAQList';
+import FAQList from '../../tenant/faq/components/FAQList';
 
 const FAQPage: React.FC = () => (
   <div className="faq-container">

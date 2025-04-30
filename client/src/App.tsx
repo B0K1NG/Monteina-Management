@@ -3,16 +3,16 @@ import Register from './features/auth/Register';
 import Login from './features/auth/Login';
 import ConfirmEmail from './features/auth/ConfirmEmail';
 import ProtectedRoute from './components/ProtectedRoute';
-import Profile from './pages/Profile';
-import Home from './pages/Home';
+import Profile from './pages/tenant-pages/Profile';
+import Home from './pages/tenant-pages/Home';
 import NavBar from './components/NavBar';
-import NotFound from './pages/NotFound';
-import Services from './pages/Services';
-import Calendar from './pages/Calendar';
+import NotFound from './pages/tenant-pages/NotFound';
+import Services from './pages/tenant-pages/Services';
+import Calendar from './pages/tenant-pages/Calendar';
 import Footer from './components/Footer';
-import FAQ from './pages/FAQ';
-import Checkout from './pages/Checkout';
-import Confirmation from './pages/Confirmation'
+import FAQ from './pages/tenant-pages/FAQ';
+import Checkout from './pages/tenant-pages/Checkout';
+import Confirmation from './pages/tenant-pages/Confirmation'
 
 import AdminNavBar from './components/AdminNavBar';
 import ManageOrdersPage from './pages/admin-pages/ManageOrders';

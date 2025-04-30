@@ -1,12 +1,12 @@
-import { useProfileData } from '../tenant/profile/hooks/userProfileData';
-import { useModal } from '../tenant/profile/hooks/useModal';
-import UserInfoPanel from '../tenant/profile/components/UserInfo';
-import PreviousVisits from '../tenant/profile/components/PreviousVisits';
-import ActiveBookings from '../tenant/profile/components/ActiveBookings';
-import PasswordModal from '../tenant/profile/components/PasswordModal';
-import CancelModal from '../tenant/profile/components/CancelModal';
-import InvoiceModal from '../tenant/profile/components/InvoiceModal';
-import { handleCancelBooking } from '../tenant/profile/components/bookingHandlers';
+import { useProfileData } from '../../tenant/profile/hooks/userProfileData';
+import { useModal } from '../../tenant/profile/hooks/useModal';
+import UserInfoPanel from '../../tenant/profile/components/UserInfo';
+import PreviousVisits from '../../tenant/profile/components/PreviousVisits';
+import ActiveBookings from '../../tenant/profile/components/ActiveBookings';
+import PasswordModal from '../../tenant/profile/components/PasswordModal';
+import CancelModal from '../../tenant/profile/components/CancelModal';
+import InvoiceModal from '../../tenant/profile/components/InvoiceModal';
+import { handleCancelBooking } from '../../tenant/profile/components/bookingHandlers';
 
 export default function ProfilePage() {
   const { userInfo, previousVisits, activeBookings, setActiveBookings } = useProfileData();

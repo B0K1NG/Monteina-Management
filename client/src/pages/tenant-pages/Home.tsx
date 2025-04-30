@@ -1,7 +1,7 @@
 import React from 'react';
-import Header from '../tenant/home/components/Header';
-import Steps from '../tenant/home/components/Steps';
-import useAuthNavigate from '../tenant/home/hooks/useAuthNavigate';
+import Header from '../../tenant/home/components/Header';
+import Steps from '../../tenant/home/components/Steps';
+import useAuthNavigate from '../../tenant/home/hooks/useAuthNavigate';
 
 const HomePage: React.FC = () => {
   const authNavigate = useAuthNavigate();

@@ -1,8 +1,8 @@
 import React from 'react';
 import { useNavigate, Navigate } from 'react-router-dom';
-import { useConfirmationState } from '../tenant/confirmation/hooks/useConfirmationState';
-import SuccessView from '../tenant/confirmation/components/SuccessView';
-import FailureView from '../tenant/confirmation/components/FailureView';
+import { useConfirmationState } from '../../tenant/confirmation/hooks/useConfirmationState';
+import SuccessView from '../../tenant/confirmation/components/SuccessView';
+import FailureView from '../../tenant/confirmation/components/FailureView';
 
 const ConfirmationPage: React.FC = () => {
   const navigate = useNavigate();

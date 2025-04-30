@@ -1,8 +1,8 @@
-import useBookingDetails from '../tenant/checkout/hooks/useBookingDetails';
-import { calculateAmounts } from '../tenant/checkout/utils/pricing';
-import usePayment from '../tenant/checkout/hooks/usePayment';
-import CheckoutDetails from '../tenant/checkout/components/CheckoutDetails';
-import CheckoutSummary from '../tenant/checkout/components/CheckoutSummary';
+import useBookingDetails from '../../tenant/checkout/hooks/useBookingDetails';
+import { calculateAmounts } from '../../tenant/checkout/utils/pricing';
+import usePayment from '../../tenant/checkout/hooks/usePayment';
+import CheckoutDetails from '../../tenant/checkout/components/CheckoutDetails';
+import CheckoutSummary from '../../tenant/checkout/components/CheckoutSummary';
 
 export default function CheckoutPage() {
   const details = useBookingDetails();
