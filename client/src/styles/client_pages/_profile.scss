@@ -182,6 +182,9 @@ $break-lg: 1024px;
     color: #C7C0C0;
     &:hover { color: vars.$hover-color; }
   }
+  .change-password-button::before {
+    background: none !important;
+  }
 }
 
 .profile-center {
