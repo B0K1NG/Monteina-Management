@@ -192,27 +192,11 @@ router.patch('/:id', async (req: Request, res: Response, next: NextFunction): Pr
       return res.status(404).json({ error: 'Booking not found.' });
     }
 
-    if (
-      (bookingDate && bookingDate !== existingBooking.bookingDate.toISOString().split('T')[0]) ||
-      (bookingTime && bookingTime !== existingBooking.bookingTime)
-    ) {
-      const existingCount = await prisma.checkout.count({
-        where: {
-          bookingDate: new Date(existingBooking.bookingDate),
-          bookingTime: existingBooking.bookingTime,
-          status: { not: 'canceled' },
-        },
-      });
-
-      if (existingCount <= 2) {
-      }
-    }
-
-    if (bookingDate && bookingTime) {
+    if ((bookingDate || bookingTime) && (bookingDate !== existingBooking.bookingDate || bookingTime !== existingBooking.bookingTime)) {
       const count = await prisma.checkout.count({
         where: {
-          bookingDate: new Date(bookingDate),
-          bookingTime,
+          bookingDate: bookingDate ? new Date(bookingDate) : existingBooking.bookingDate,
+          bookingTime: bookingTime || existingBooking.bookingTime,
           status: { not: 'canceled' },
         },
       });
