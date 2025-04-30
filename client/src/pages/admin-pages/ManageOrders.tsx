@@ -3,23 +3,23 @@ import { toast } from 'react-toastify';
 import axios from '../../api/axios';
 import { createOrder } from '../../api/booking';
 
-import { useUsers } from '../../admin/manageOrders/hooks/useUsers';
-import { useServices } from '../../admin/manageOrders/hooks/useServices';
-import { useCarMakesModels } from '../../admin/manageOrders/hooks/useCarMakesModels';
-import { useBookingsAdmin } from '../../admin/manageOrders/hooks/useBookingsAdmin';
+import { useUsers } from '../../admin/manage-orders/hooks/useUsers';
+import { useServices } from '../../admin/manage-orders/hooks/useServices';
+import { useCarMakesModels } from '../../admin/manage-orders/hooks/useCarMakesModels';
+import { useBookingsAdmin } from '../../admin/manage-orders/hooks/useBookingsAdmin';
 
-import OrdersFilters from '../../admin/manageOrders/components/OrderFilters';
-import OrdersTable from '../../admin/manageOrders/components/OrdersTable';
-import AddOrderModal from '../../admin/manageOrders/components/AddOrderModal';
-import EditOrderModal from '../../admin/manageOrders/components/EditOrderModal';
-import CancelOrderModal from '../../admin/manageOrders/components/CancelOrderModal';
-import ConfirmChangesModal from '../../admin/manageOrders/components/ConfirmChangesModal';
+import OrdersFilters from '../../admin/manage-orders/components/OrderFilters';
+import OrdersTable from '../../admin/manage-orders/components/OrdersTable';
+import AddOrderModal from '../../admin/manage-orders/components/AddOrderModal';
+import EditOrderModal from '../../admin/manage-orders/components/EditOrderModal';
+import CancelOrderModal from '../../admin/manage-orders/components/CancelOrderModal';
+import ConfirmChangesModal from '../../admin/manage-orders/components/ConfirmChangesModal';
 
 import {
   Booking,
   OrderFormData,
   CreateOrderData,
-} from '../../admin/manageOrders/types';
+} from '../../admin/manage-orders/types';
 
 export default function ManageOrdersPage() {
   const users    = useUsers();
