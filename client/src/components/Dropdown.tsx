@@ -1,5 +1,4 @@
 import React, { useState, useRef, useEffect } from 'react';
-import '../styles/components/_dropdown.scss';
 
 interface DropdownProps {
   options: { value: string; label: string; disabled?: boolean }[];

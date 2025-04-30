@@ -1,4 +1,3 @@
-import '../styles/client_pages/_profile.scss';
 import { useProfileData } from '../tenant/profile/hooks/userProfileData';
 import { useModal } from '../tenant/profile/hooks/useModal';
 import UserInfoPanel from '../tenant/profile/components/UserInfo';
