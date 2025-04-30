@@ -7,10 +7,10 @@ import ActiveBookings from '../profile/components/ActiveBookings';
 import PasswordModal from '../profile/components/PasswordModal';
 import CancelModal from '../profile/components/CancelModal';
 import InvoiceModal from '../profile/components/InvoiceModal';
-import { cancelBooking } from '../api/booking';
+import { handleCancelBooking } from '../profile/components/bookingHandlers';
 
 export default function ProfilePage() {
-  const { userInfo, previousVisits, activeBookings } = useProfileData();
+  const { userInfo, previousVisits, activeBookings, setActiveBookings } = useProfileData();
   const { modal, openPassword, openCancel, openInvoice, close } = useModal();
 
   if (!userInfo) return null;
@@ -31,11 +31,7 @@ export default function ProfilePage() {
       )}
       {modal?.type === 'cancel' && (
         <CancelModal
-          onConfirm={() => {
-            cancelBooking(modal.bookingId).then(() => {
-              close();
-            });
-          }}
+        onConfirm={() => handleCancelBooking(modal.bookingId, setActiveBookings, close)}
           onClose={close}
         />
       )}

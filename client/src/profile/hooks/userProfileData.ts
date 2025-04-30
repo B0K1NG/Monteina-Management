@@ -26,5 +26,5 @@ export function useProfileData() {
       .catch(setError);
   }, []);
 
-  return { userInfo, previousVisits, activeBookings, error };
+  return { userInfo, previousVisits, activeBookings, setActiveBookings, error };
 }
