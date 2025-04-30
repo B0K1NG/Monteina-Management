@@ -141,6 +141,124 @@ body {
     font-size: 1.2rem;
   }
 }
+.dropdown {
+  position: relative;
+  width: 100%;
+  font-family: inherit;
+  font-size: 0.6rem;
+}
+.dropdown-header {
+  background-image: url("../../assets/icons/down-chevron.png");
+  background-color: rgba(35, 38, 38, 0.8);
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 12px 12px;
+  color: #ccc;
+  padding: 0.5rem;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: relative;
+  padding-right: 1.5rem;
+}
+.dropdown-list {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background-color: rgb(35, 38, 38);
+  border-radius: 4px;
+  max-height: 110px;
+  overflow-y: auto;
+  z-index: 1000;
+  margin-top: 0.4rem;
+}
+.dropdown-item {
+  padding: 0.5rem;
+  color: #fff;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.dropdown-item:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.dropdown-item.selected {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+.dropdown-item.disabled {
+  background: transparent;
+  color: #777;
+  cursor: not-allowed;
+  pointer-events: none;
+  text-decoration: line-through;
+}
+
+.dropdown-search {
+  width: 100%;
+  padding: 10px;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  background-color: #fff;
+  color: #333;
+  border-bottom: 1px solid #ccc;
+}
+
+.dropdown-search:hover,
+.dropdown-search:focus {
+  background-color: #f9f9f9;
+}
+
+@media (min-width: 768px) {
+  .dropdown-header {
+    font-size: 0.9rem;
+    padding: 0.75rem;
+  }
+  .dropdown-list {
+    font-size: 0.9rem;
+    margin-top: 0.9rem;
+    max-height: 200px;
+  }
+  .dropdown-item {
+    padding: 0.75rem;
+  }
+}
+@media (min-width: 1024px) {
+  .dropdown-header {
+    font-size: 1rem;
+    padding: 0.8rem 0.3rem;
+  }
+  .dropdown-list {
+    margin-left: -3rem;
+    width: 300px;
+  }
+  .dropdown-item {
+    padding: 1rem;
+  }
+}
+html, body {
+  height: 100%;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.footer {
+  margin-top: auto;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 1rem;
+}
+
 .home-container {
   display: flex;
   flex-direction: column;
@@ -2797,30 +2915,79 @@ body {
   cursor: pointer;
 }
 
+/* Modal Styling */
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  z-index: 1000;
+  width: 90%;
+  max-width: 500px;
+}
+
+.modal h2 {
+  font-size: 20px;
+  margin-bottom: 15px;
+  color: #333;
+}
+
+.modal form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.modal input, .modal select {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  width: 100%;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+}
+
+.modal-actions button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.modal-actions button:first-child {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.modal-actions button:first-child:hover {
+  background-color: #0056b3;
+}
+
+.modal-actions button:last-child {
+  background-color: #ccc;
+  color: #333;
+}
+
+.modal-actions button:last-child:hover {
+  background-color: #999;
+}
+
+/* Modal Overlay */
 .modal-overlay {
   position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.5);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 1000;
-}
-
-.modal-content {
-  background: #fff;
-  color: #000;
-  padding: 1.5rem;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 90%;
-  max-width: 400px;
-  text-align: left;
-}
-
-.modal-buttons {
-  display: flex;
-  justify-content: flex-end;
-  gap: 1rem;
-  margin-top: 1rem;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
 }/*# sourceMappingURL=main.css.map */
