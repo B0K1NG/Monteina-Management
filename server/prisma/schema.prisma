@@ -16,6 +16,7 @@ model User {
   phoneNumber String
   password    String
   role        String  @default("client")
+  status      String @default("active")
   confirmed   Boolean @default(false)
 }
 model Service {
