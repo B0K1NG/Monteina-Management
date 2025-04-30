@@ -60,7 +60,7 @@ export default function Checkout() {
       ? (repairOption === 'lopas'
           ? selectedService.price_max
           : selectedService.price_min)
-      : (carDetails.tireSize.startsWith('R18')
+      : (carDetails.tireSize.startsWith('R16')
           ? selectedService.price_max
           : selectedService.price_min);
           
