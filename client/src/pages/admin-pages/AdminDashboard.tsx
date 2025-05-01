@@ -31,7 +31,8 @@ export default function AdminDashboardPage() {
 
   return (
     <div className="dashboard-container">
-      <h1 className="dashboard-title">Admin Dashboard</h1>
+      <h1 className="dashboard-title">Monteina</h1>
+      <h2 className="dashboard-subtitle">Administratorius skydelis</h2>
 
       <DateSelector
         selectedDate={selectedDate}

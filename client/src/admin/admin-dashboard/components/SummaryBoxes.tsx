@@ -1,6 +1,6 @@
 import reservationIcon from "../../../assets/icons/clock_icon.png"
-import incomeIcon from "../../../assets/icons/clock_icon.png"
-import popularServiceIcon from "../../../assets/icons/clock_icon.png"
+import incomeIcon from "../../../assets/icons/stocks_icon.png"
+import popularServiceIcon from "../../../assets/icons/hammer_icon.png"
 
 interface Props {
   activeAndDoneCount: number;
@@ -21,14 +21,16 @@ export default function SummaryBoxes({
   return (
     <div className="dashboard-boxes">
       <div className="box">
-        <h2>{activeAndDoneCount}</h2>
-        <p>Rezervacijų skaičius</p>
+        <h2>Rezervacijų skaičius</h2>
+        <h3>{activeAndDoneCount}</h3>
+
         <p><img src={reservationIcon} alt="Artimiausios rezervacijos ikona" />Artimiausia rezervacija: {closestReservation}</p>
       </div>
 
       <div className="box">
-        <h2>{totalAmount} €</h2>
-        <p>Pajamos</p>
+        <h2>Pajamos</h2>
+        <h3>{totalAmount} €</h3>
+
         <p><img src={incomeIcon} alt="Artimiausios rezervacijos ikona" />Vidutinė paslaugos kaina: {averagePrice} €</p>
       </div>
 

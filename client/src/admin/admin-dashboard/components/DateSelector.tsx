@@ -18,30 +18,15 @@ export default function DateSelector({ selectedDate, onDateChange }: Props) {
   };
 
   return (
-    <div style={{ position: 'relative', display: 'inline-block' }}>
+    <div className="date-selector">
       <input
         ref={inputRef}
         type="date"
         value={selectedDate}
         onChange={e => onDateChange(e.target.value)}
-        style={{
-          position: 'absolute',
-          top: 0, left: 0, width: '100%', height: '100%',
-          opacity: 0,
-          cursor: 'pointer',
-          zIndex: 1,
-        }}
       />
 
-      <span
-        onClick={openPicker}
-        style={{
-          position: 'relative',
-          zIndex: 2,
-          cursor: 'pointer',
-          userSelect: 'none',
-        }}
-      >
+      <span onClick={openPicker}>
         Peržiūra: {getDateLabel(selectedDate)}
       </span>
     </div>
