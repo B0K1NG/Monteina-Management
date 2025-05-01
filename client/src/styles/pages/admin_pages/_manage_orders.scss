@@ -47,6 +47,7 @@ $img-tablet-margin-right:   1.25rem;
     max-width: $max-container-width;
     margin: $container-margin;
     padding: $container-padding;
+    height: 100vh;
 
     .manage-orders-header {
         display: flex;
