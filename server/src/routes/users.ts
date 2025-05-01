@@ -1,11 +1,10 @@
 import { Router } from 'express'
 import { PrismaClient } from '@prisma/client'
-import bcrypt from 'bcrypt'    // ← also good to hash here
+import bcrypt from 'bcrypt'
 
 const router = Router()
 const prisma = new PrismaClient()
 
-// GET  /api/users
 router.get('/', async (req, res) => {
   try {
     const users = await prisma.user.findMany({ 
@@ -17,7 +16,6 @@ router.get('/', async (req, res) => {
   }
 })
 
-// POST /api/users
 router.post('/', async (req, res): Promise<any> => {
   const { firstName, lastName, email, phoneNumber, role, status, password } = req.body
   if (!firstName || !lastName || !email || !phoneNumber || !role || !status || !password) {
@@ -35,7 +33,6 @@ router.post('/', async (req, res): Promise<any> => {
   }
 })
 
-// PUT /api/users/:id
 router.put('/:id', async (req, res) => {
   const { id } = req.params;
   const { firstName, lastName, email, phoneNumber, role, status } = req.body;
