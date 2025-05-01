@@ -1,4 +1,5 @@
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import { useEffect } from 'react';
 import Register from './features/auth/Register';
 import Login from './features/auth/Login';
 import ConfirmEmail from './features/auth/ConfirmEmail';
@@ -29,6 +30,15 @@ import './styles/main.scss';
 function App() {
   const isAuthenticated = !!localStorage.getItem('token');
   const userRole = localStorage.getItem('role');
+
+  useEffect(() => {
+    const rootElement = document.getElementById('root');
+    if (userRole === 'admin') {
+      rootElement?.classList.add('admin-root');
+    } else {
+      rootElement?.classList.remove('admin-root');
+    }
+  }, [userRole]);
 
   const Nav = userRole === 'admin' ? AdminNavBar : NavBar;
   const FooterComponent = userRole === 'admin' ? AdminFooter : Footer;

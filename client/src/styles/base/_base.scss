@@ -6,6 +6,10 @@
   box-sizing: border-box;
 }
 
+#root.admin-root {
+  background-color: #F9FAFF;
+}
+
 body {
   font-family: $font-family;
   color: $text-color;
