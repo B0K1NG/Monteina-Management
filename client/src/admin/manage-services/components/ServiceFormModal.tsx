@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Service } from '../types';
+import { toast } from 'react-toastify';
 
 interface Props {
   isOpen: boolean;
@@ -30,6 +31,12 @@ export default function ServiceFormModal({ isOpen, service, onCancel, onSave }: 
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
+
+    if (!name.trim() || !description.trim() || priceMin === '' || priceMax === '') {
+      toast.info('Visi laukai turi būti užpildyti!');
+      return;
+    }
+
     onSave({
       name,
       description,
@@ -41,33 +48,40 @@ export default function ServiceFormModal({ isOpen, service, onCancel, onSave }: 
 
   if (!isOpen) return null;
   return (
-    <div className="modal">
-      <div className="modal-content">
-        <h2>{service ? 'Paslaugos redagavimas' : 'Paslaugos pridėjimas'}</h2>
-        <form onSubmit={submit}>
+    <div className="service-modal">
+      <div className="service-modal-content">
+        <h2>{service ? 'Paslaugos Koregavimas' : 'Paslaugos Pridėjimas'}</h2>
+        <form onSubmit={submit} className="service-form">
           <label>Paslaugos pavadinimas</label>
-          <input value={name} onChange={e => setName(e.target.value)} />
+          <input value={name} onChange={e => setName(e.target.value)} className="form-input" />
 
           <label>Aprašymas</label>
-          <textarea value={description} onChange={e => setDescription(e.target.value)} />
+          <textarea value={description} onChange={e => setDescription(e.target.value)} className="form-textarea" />
 
-          <label>Kaina (žemiausia)</label>
+          <label>Žemiausia kaina</label>
           <input
             type="number"
             value={priceMin}
-            onChange={e => setPriceMin(e.target.value === '' ? '' : Number(e.target.value))}
+            onChange={e => {
+              const value = e.target.value === '' ? '' : Math.max(0, Number(e.target.value));
+              setPriceMin(value);
+            }}
+            className="form-input"
           />
 
-          <label>Kaina (aukščiausia)</label>
+          <label>Aukščiausia kaina</label>
           <input
             type="number"
             value={priceMax}
-            onChange={e => setPriceMax(e.target.value === '' ? '' : Number(e.target.value))}
+            onChange={e => {
+              const value = e.target.value === '' ? '' : Math.max(0, Number(e.target.value));
+              setPriceMax(value);
+            }}
           />
 
           <div className="modal-buttons">
-            <button type="button" onClick={onCancel}>Atšaukti</button>
-            <button type="submit">Išsaugoti</button>
+            <button type="button" onClick={onCancel} className="btn btn--secondary cancel-button">Atšaukti</button>
+            <button type="submit" className="btn btn--primary save-button">Išsaugoti</button>
           </div>
         </form>
       </div>

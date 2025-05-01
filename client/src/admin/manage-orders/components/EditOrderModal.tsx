@@ -18,56 +18,76 @@ export default function EditOrderModal({ booking, onCancel, onSave }: Props) {
   }, [booking]);
 
   return (
-    <div className="modal">
-      <div className="modal-content">
-        <h2>Redaguoti Užsakymą</h2>
-        <div className="modal-grid">
-          <label>Data</label>
-          <input
-            type="date"
-            value={edited.bookingDate}
-            onChange={e =>
-              setEdited(b => ({ ...b, bookingDate: e.target.value }))
-            }
-          />
+    <div className="edit-modal">
+      <div className="edit-modal-content">
+        <h2>Užsakymo Koregavimas</h2>
+        <div className="edit-modal-grid">
+          <div className="form-field">
+            <label>Vardas</label>
+            <div className="user-name">
+              {`${edited.userName.split(' ')[0]} ${edited.userName.split(' ')[1][0]}.`}
+            </div>
+          </div>
 
-          <label>Laikas</label>
-          <Dropdown
-            options={Array.from({ length: 22 }, (_, i) => {
-              const h = Math.floor(i / 2) + 9;
-              const m = i % 2 ? '30' : '00';
-              const t = `${h}:${m}`;
-              return {
-                value: t,
-                label: t,
-                disabled:
-                  booked.includes(t) && t !== booking.bookingTime,
-              };
-            })}
-            value={edited.bookingTime}
-            onChange={v => setEdited(b => ({ ...b, bookingTime: v }))}
-            placeholder="Pasirinkite laiką"
-          />
+          <div className="form-field">
+            <label>Data</label>
+            <Dropdown
+              options={Array.from({ length: 31 }, (_, i) => {
+                const date = new Date();
+                date.setDate(date.getDate() + i);
+                const value = date.toISOString().split('T')[0];
+                return {
+                  value,
+                  label: value,
+                };
+              })}
+              value={edited.bookingDate}
+              onChange={v => setEdited(b => ({ ...b, bookingDate: v }))}
+              placeholder="Pasirinkite datą"
+            />
+          </div>
 
-          <label>Statusas</label>
-          <Dropdown
-            options={[
-              { value: 'active', label: 'Aktyvus' },
-              { value: 'done', label: 'Baigtas' },
-              { value: 'canceled', label: 'Atšauktas' },
-            ]}
-            value={edited.status}
-            onChange={v => setEdited(b => ({ ...b, status: v as "active" | "done" | "canceled" }))}
-            placeholder="Pasirinkite statusą"
-          />
+          <div className="form-field">
+            <label>Laikas</label>
+            <Dropdown
+              options={Array.from({ length: 22 }, (_, i) => {
+                const h = Math.floor(i / 2) + 9;
+                const m = i % 2 ? '30' : '00';
+                const t = `${h}:${m}`;
+                return {
+                  value: t,
+                  label: t,
+                  disabled:
+                    booked.includes(t) && t !== booking.bookingTime,
+                };
+              })}
+              value={edited.bookingTime}
+              onChange={v => setEdited(b => ({ ...b, bookingTime: v }))}
+              placeholder="Pasirinkite laiką"
+            />
+          </div>
+
+          <div className="form-field">
+            <label>Statusas</label>
+            <Dropdown
+              options={[
+                { value: 'active', label: 'Aktyvus' },
+                { value: 'done', label: 'Baigtas' },
+                { value: 'canceled', label: 'Atšauktas' },
+              ]}
+              value={edited.status}
+              onChange={v => setEdited(b => ({ ...b, status: v as "active" | "done" | "canceled" }))}
+              placeholder="Pasirinkite statusą"
+            />
+          </div>
         </div>
 
         <div className="modal-buttons">
-          <button className="btn btn--secondary" onClick={onCancel}>
+          <button className="btn btn--secondary cancel-button" onClick={onCancel}>
             Atšaukti
           </button>
           <button
-            className="btn btn--primary"
+            className="btn btn--primary suceed-button"
             onClick={() => onSave(edited)}
           >
             Išsaugoti
