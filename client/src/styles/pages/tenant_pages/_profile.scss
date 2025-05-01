@@ -40,9 +40,11 @@ $break-lg: 1024px;
   color: vars.$text-color;
   text-align: center;
   color: #ffffff;
+  height: 100vh;
 
   .profile-title {
     font-size: 1.2rem;
+    font-weight: 400;
     margin-bottom: vars.$gap-md;
   }
 }
@@ -225,6 +227,9 @@ $break-lg: 1024px;
 }
 
 @media (min-width: $break-lg) {
+  .profile-title {
+    font-size: 2rem !important;
+  }
   .profile-container {
     gap: 5rem;
     .panel {

@@ -7,7 +7,7 @@
   gap: vars.$calendar-gap;
   padding: vars.$calendar-padding;
   color: #fff;
-
+  height: 100vh;
   
   .time-slot.disabled {
     text-decoration: line-through;

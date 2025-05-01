@@ -3,8 +3,8 @@
 
 .login-container {
   @include mixins.flex-center-column;
-  background: vars.$login-bg-gradient;
   color: vars.$login-text-color;
+  height: 100vh;
 
   .login-left {
     width: 100%;

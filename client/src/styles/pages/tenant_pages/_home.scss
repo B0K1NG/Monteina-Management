@@ -8,6 +8,7 @@
   justify-content: space-between;
   color: $white-color;
   padding: $padding-section;
+  height: 100vh;
 
   .home-header {
     text-align: center;
@@ -135,6 +136,7 @@
       padding: 2rem;
       border-radius: 15px;
       margin-top: 5rem !important;
+      max-height: 400px;
 
       .section-title {
         font-size: 1.9rem !important;

@@ -6,8 +6,8 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: vars.$register-bg-gradient;
   color: vars.$register-text-color;
+  height: 100vh;
 
   .register-left {
     text-align: center;
@@ -87,7 +87,7 @@
     .login-register {
       margin-top: vars.$register-gap;
       font-size: vars.$register-input-font-size;
-      color: #C6C6C6;
+      color: #424242;
 
       a {
         color: vars.$login-link-color;
