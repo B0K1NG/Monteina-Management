@@ -1,4 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react';
+import downArrow from '../assets/icons/down_chevron.png'
 
 interface DropdownProps {
   options: { value: string; label: string; disabled?: boolean }[];
@@ -61,6 +62,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     <div className={`dropdown ${className} ${disabled ? 'dropdown-disabled' : ''}`} ref={dropdownRef}>
       <div className="dropdown-header" onClick={handleToggle}>
         {options.find((option) => option.value === value)?.label || placeholder}
+        <span className="dropdown-chevron"><img src={downArrow} alt="Rodyklė žemyn" /></span>
       </div>
       {isOpen && !disabled && (
         <div className="dropdown-list-wrapper">
