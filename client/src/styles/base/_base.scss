@@ -13,8 +13,7 @@
 body {
   font-family: $font-family;
   color: $text-color;
-  background:
-    linear-gradient(90deg, #132D3E 0%, #2C3536 47%, #BCBDB4 84%);
+   background-image: linear-gradient(to left bottom, #232626, #535556, #898a8b, #c2c3c3, #ffffff);
 }
 .dashboard-container {
   background: none;
