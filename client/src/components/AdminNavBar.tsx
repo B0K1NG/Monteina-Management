@@ -20,7 +20,7 @@ export default function AdminNavBar() {
   };
 
   return (
-    <nav className="navbar">
+    <nav className="navbar admin-navbar">
       <div className="navbar-logo">
         <img src={logo} alt="Monteina Logotipas" />
       </div>

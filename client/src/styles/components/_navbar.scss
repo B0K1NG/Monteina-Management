@@ -1,12 +1,18 @@
 @use '../utilities/variables' as *;
 @use '../utilities/_mixins' as *;
 
+.admin-navbar {
+  background-color: #232B36;
+  height: 100px;
+}
+
 .navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem;
   color: white;
+  height: 100px;
 
   .navbar-logo img {
     height: $navbar-height;

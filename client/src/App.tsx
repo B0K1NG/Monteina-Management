@@ -15,6 +15,7 @@ import Checkout from './pages/tenant-pages/Checkout';
 import Confirmation from './pages/tenant-pages/Confirmation'
 
 import AdminNavBar from './components/AdminNavBar';
+import AdminFooter from './components/AdminFooter';
 import ManageOrdersPage from './pages/admin-pages/ManageOrders';
 import ManageServicesPage from './pages/admin-pages/ManageServices';
 import AdminDashboardPage from './pages/admin-pages/AdminDashboard';
@@ -30,6 +31,7 @@ function App() {
   const userRole = localStorage.getItem('role');
 
   const Nav = userRole === 'admin' ? AdminNavBar : NavBar;
+  const FooterComponent = userRole === 'admin' ? AdminFooter : Footer;
   const AdminRoutes = (
     <>
       <Route 
@@ -97,7 +99,7 @@ function App() {
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
 
-      <Footer />
+      <FooterComponent />
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
     </Router>
   );
