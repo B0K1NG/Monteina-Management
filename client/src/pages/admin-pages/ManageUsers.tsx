@@ -56,12 +56,18 @@ export default function ManageUsersPage() {
 
   return (
     <div className="manage-users-container">
-      <h1>Vartotojų valdymas</h1>
+      <div className="manage-users-header">
+        <h1 className="manage-users-title">Vartotojų valdymas</h1>
+        <div className="add-user-button">
+          <button className="btn" onClick={() => { setEditingUser(null); setModalOpen(true); }}>
+            + Pridėti vartotoją
+          </button>
+        </div>
+      </div>
 
       <UsersFilters
         filters={filters}
         onChange={(f, v) => setFilters(sf => ({ ...sf, [f]: v }))}
-        onAdd={() => { setEditingUser(null); setModalOpen(true); }}
       />
 
       <UsersTable

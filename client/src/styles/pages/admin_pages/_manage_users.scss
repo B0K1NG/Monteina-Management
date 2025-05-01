@@ -1,76 +1,319 @@
+// Variables
+
+$max-container-width:       300px;
+$tablet-container-width:    720px;
+$pc-container-width:        1024px;
+$title-font-size:           2.5rem;
+$tablet-title-font-size:    3rem;
+$pc-title-font-size:        3.5rem;
+$max-actions-width:         200px;
+$tablet-actions-width:      800px;
+$container-margin:          0 auto;
+$container-padding:         1rem;
+$tablet-padding:            2rem;
+$vertical-spacing:          2rem;
+$tablet-vertical-spacing:   2.5rem;
+$gap:                       1rem;
+$tablet-gap:                1.5rem;
+$small-gap:                 0.75rem;
+$subtitle-gap:              0.5rem;
+$border-radius:             10px;
+$selector-border-color:     #BFBFBF;
+$list-item-background-active-color: #BEBEBE;
+$list-item-background-hover-color: #8d8d8d;
+$selector-radius:           0.4rem;
+$bg-white:                  #fff;
+$bg-blue-1:                 #4F6BED;
+$bg-blue-2:                 #5A96E4;
+$bg-salmon:                 #FFA07A;
+$text-white:                #FFF;
+$table-border-color:        #ddd;
+$table-header-bg:           #f4f4f4;
+$table-row-even-bg:         #f9f9f9;
+$table-row-hover-bg:        #f1f1f1;
+$img-size:                  30px;
+$img-tablet-size:           35px;
+$img-margin-bottom:         0.5rem;
+$img-tablet-margin-bottom:  0.75rem;
+$img-margin-right:          1rem;
+$img-tablet-margin-right:   1.25rem;
+
 .manage-users-container {
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.manage-users-title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.manage-users-actions {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.manage-users-actions .btn {
-  padding: 10px 15px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.manage-users-actions .btn:hover {
-  background-color: #0056b3;
-}
-
-.manage-users-actions input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  flex: 1;
-}
-
-.manage-users-actions select {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.users-table {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  border-collapse: collapse;
-  background-color: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  max-width: $max-container-width;
+  margin: $container-margin;
+  padding: $container-padding;
+
+  .manage-users-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .manage-users-title {
+      width: 100%;
+      text-align: center;
+      margin: 0 0 $vertical-spacing;
+      font-size: $title-font-size;
+      font-weight: bold;
+    }
+
+    .add-user-button {
+      .btn {
+        background-color: #3A7EF9;
+        color: $text-white;
+        margin-bottom: 1rem;
+        
+      }
+    }
+  }
+
+  .manage-users-actions {
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: $max-actions-width;
+    
+
+    input[type="text"] {
+      position: relative;
+      z-index: 2;
+      width: 100%;
+      text-align: center;
+      user-select: none;
+      text-align: center;
+      border: 1px solid $selector-border-color;
+      border-radius: $selector-radius;
+      padding: 0.5rem 1rem;
+      margin-bottom: 1rem;
+      background: $bg-white;
+    }
+
+    .dropdown {
+      margin-bottom: 1rem;
+      font-size: 0.8rem;
+     
+      .dropdown-header {
+        background-color: #FFF;
+        border-radius: $border-radius;
+        border: 1px solid $selector-border-color;
+        color: #000000;
+      }
+
+      .dropdown-list-wrapper {
+        .dropdown-list {
+          background-color: #FFF;
+          border-radius: $border-radius;
+          border: 1px solid $selector-border-color;
+
+          .dropdown-item {
+            color: #000000;
+
+            &:hover {
+              background-color: $list-item-background-hover-color;
+              color: $text-white;
+            }
+
+            &.selected {
+              background-color: $list-item-background-active-color;
+              color: $text-white;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .users-table {
+    margin-top: $vertical-spacing;
+    width: 100%;
+    overflow-x: auto;
+
+    h2 {
+      margin-bottom: $gap;
+    }
+
+    table {
+      width: 100%;
+      min-width: 300px;
+      border-collapse: collapse;
+
+      .phone-number {
+        text-decoration: underline;
+        text-underline-offset: 0.2rem;
+      }
+
+      td.status--active {
+        background-color: #B6F4C5;
+        color: #36683F;
+      }
+      // not confirmed
+      td.status--not_confirmed {
+        background-color: #E8F5FE;
+        color: #637AA7;
+      }
+      // blocked
+      td.status--blocked {
+        background-color: #F06A68;
+        color: #FFFFFF;
+      }
+
+      th,
+      td {
+        border: 1px solid $table-border-color;
+        padding: 8px;
+        text-align: left;
+      }
+
+      .action-icon {
+        width: 20px;
+        height: 20px;
+        display: flex;
+        margin: 0 auto;
+        cursor: pointer;
+      }
+
+      th {
+        background-color: $table-header-bg;
+        font-weight: bold;
+      }
+
+      tr:nth-child(even) {
+        background-color: $table-row-even-bg;
+      }
+
+      tr:hover {
+        background-color: $table-row-hover-bg;
+      }
+    }
+  }
 }
 
-.users-table th, .users-table td {
-  padding: 12px 15px;
-  text-align: left;
-  border-bottom: 1px solid #ddd;
+// Tablet styles
+@media (min-width: 768px) {
+  .manage-users-container {
+    padding: $tablet-padding;
+    max-width: $tablet-container-width;
+  
+    .manage-users-header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 4rem;
+      margin-bottom: 4rem;
+
+      .manage-users-title {
+        margin: 0 0 $subtitle-gap;
+        text-align: left;
+        font-size: $tablet-title-font-size;
+      }
+
+      .add-user-button {
+        .btn {
+          width: 150px;
+          height: 40px;
+          margin-top: 1rem;
+        }
+      }
+    }
+  
+    .manage-users-actions {
+      max-width: $tablet-actions-width;
+      flex-direction: row;
+      gap: 1rem;
+      align-self: flex-start;
+  
+      input[type="text"] {
+        width: 300px;
+        font-size: 1rem;
+      }
+      
+      .dropdown {
+        .dropdown-header {
+          background-color: #FFF;
+          border-radius: $border-radius;
+          border: 1px solid $selector-border-color;
+          color: #000000;
+          padding: 0.5rem 1rem;
+        }
+  
+        .dropdown-list-wrapper {
+          .dropdown-list {
+            background-color: #FFF;
+            border-radius: $border-radius;
+            border: 1px solid $selector-border-color;
+  
+            .dropdown-item {
+              color: #000000;
+  
+              &:hover {
+                background-color: $list-item-background-hover-color;
+                color: $text-white;
+              }
+  
+              &.selected {
+                background-color: $list-item-background-active-color;
+                color: $text-white;
+              }
+            }
+          }
+        }
+      }
+    }
+  
+    .users-table {
+      table {
+        th,
+        td {
+          padding: 10px;
+        }
+
+        th {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
 }
 
-.users-table th {
-  background-color: #f4f4f4;
-  font-weight: bold;
-}
+// PC Styles
+@media (min-width: 1024px) {
+    .manage-users-container {
+    max-width: $pc-container-width;
+    padding: 3rem 2rem;
 
-.users-table tr:hover {
-  background-color: #f1f1f1;
-}
+    .manage-users-header {
+      gap: 18rem;
 
-.users-table img {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
+      .manage-users-title {
+        margin: 0 0 $subtitle-gap;
+        font-size: $pc-title-font-size;
+      }
+
+      .add-user-button {
+        .btn {
+          width: 150px;
+          height: 40px;
+          margin-top: 1rem;
+        }
+      }
+    }
+
+    .users-table {
+      table {
+        th,
+        td {
+          padding: 12px;
+        }
+
+        th {
+          font-size: 1.1rem;
+        }
+      }
+    }
+  }
 }

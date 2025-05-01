@@ -8,7 +8,8 @@ interface Props {
 
 export default function UsersTable({ users, onEdit }: Props) {
   return (
-    <table className="users-table">
+    <div className='users-table'>
+    <table>
       <thead>
         <tr>
           <th>Vardas</th>
@@ -24,8 +25,8 @@ export default function UsersTable({ users, onEdit }: Props) {
           <tr key={u.id}>
             <td>{`${u.firstName} ${u.lastName.charAt(0)}.`}</td>
             <td>{u.email}</td>
-            <td>{u.phoneNumber}</td>
-            <td>{translateStatus[u.status]}</td>
+            <td className="phone-number">{u.phoneNumber}</td>
+            <td className={`status status--${u.status}`}>{translateStatus[u.status]}</td>
             <td>{translateRole[u.role]}</td>
             <td>
               <img
@@ -39,5 +40,6 @@ export default function UsersTable({ users, onEdit }: Props) {
         ))}
       </tbody>
     </table>
+    </div>
   );
 }
