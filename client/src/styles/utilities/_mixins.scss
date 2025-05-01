@@ -51,21 +51,6 @@
   }
 }
 
-@mixin modal-buttons {
-  display: flex;
-  justify-content: flex-end;
-  align-self: flex-end;
-  gap: vars.$gap-sm;
-  margin-top: vars.$gap-md;
-  color: #000000;
-  transition: color 0.3s ease-in-out;
-  padding: 0.5rem 1rem;
-  background: transparent;
-  border: 2px solid rgba(188, 189, 180, 0.5);
-  cursor: pointer;
-  border-radius: 4px;
-}
-
 
 @mixin transition($properties, $duration: 0.3s, $ease: ease) {
   transition: $properties $duration $ease;
