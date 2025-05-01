@@ -58,6 +58,7 @@ body {
 .navbar .navbar-links.active {
   display: flex;
   opacity: 1;
+  z-index: 2000;
 }
 .navbar .navbar-links a,
 .navbar .navbar-links button {
@@ -3043,6 +3044,7 @@ html, body {
   color: #333333;
 }
 .dashboard-container .date-selector {
+  cursor: pointer;
   position: relative;
   display: inline-flex;
   align-items: center;
@@ -3291,78 +3293,219 @@ html, body {
 }
 
 .manage-users-container {
-  padding: 20px;
-  background-color: #f9f9f9;
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.manage-users-title {
-  font-size: 24px;
-  font-weight: bold;
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.manage-users-actions {
   display: flex;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-.manage-users-actions .btn {
-  padding: 10px 15px;
-  background-color: #007bff;
-  color: #fff;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  transition: background-color 0.3s;
-}
-
-.manage-users-actions .btn:hover {
-  background-color: #0056b3;
-}
-
-.manage-users-actions input {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  flex: 1;
-}
-
-.manage-users-actions select {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.users-table {
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+.manage-users-container .manage-users-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.manage-users-container .manage-users-header .manage-users-title {
+  width: 100%;
+  text-align: center;
+  margin: 0 0 2rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+.manage-users-container .manage-users-header .add-user-button .btn {
+  background-color: #3A7EF9;
+  color: #FFF;
+  margin-bottom: 1rem;
+}
+.manage-users-container .manage-users-actions {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 200px;
+}
+.manage-users-container .manage-users-actions input[type=text] {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  text-align: center;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+          user-select: none;
+  text-align: center;
+  border: 1px solid #BFBFBF;
+  border-radius: 0.4rem;
+  padding: 0.5rem 1rem;
+  margin-bottom: 1rem;
+  background: #fff;
+}
+.manage-users-container .manage-users-actions .dropdown {
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+}
+.manage-users-container .manage-users-actions .dropdown .dropdown-header {
+  background-color: #FFF;
+  border-radius: 10px;
+  border: 1px solid #BFBFBF;
+  color: #000000;
+}
+.manage-users-container .manage-users-actions .dropdown .dropdown-list-wrapper .dropdown-list {
+  background-color: #FFF;
+  border-radius: 10px;
+  border: 1px solid #BFBFBF;
+}
+.manage-users-container .manage-users-actions .dropdown .dropdown-list-wrapper .dropdown-list .dropdown-item {
+  color: #000000;
+}
+.manage-users-container .manage-users-actions .dropdown .dropdown-list-wrapper .dropdown-list .dropdown-item:hover {
+  background-color: #8d8d8d;
+  color: #FFF;
+}
+.manage-users-container .manage-users-actions .dropdown .dropdown-list-wrapper .dropdown-list .dropdown-item.selected {
+  background-color: #BEBEBE;
+  color: #FFF;
+}
+.manage-users-container .users-table {
+  margin-top: 2rem;
+  width: 100%;
+  overflow-x: auto;
+}
+.manage-users-container .users-table h2 {
+  margin-bottom: 1rem;
+}
+.manage-users-container .users-table table {
+  width: 100%;
+  min-width: 300px;
   border-collapse: collapse;
-  background-color: #fff;
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
-
-.users-table th, .users-table td {
-  padding: 12px 15px;
+.manage-users-container .users-table table .phone-number {
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+.manage-users-container .users-table table td.status--active {
+  background-color: #B6F4C5;
+  color: #36683F;
+}
+.manage-users-container .users-table table td.status--not_confirmed {
+  background-color: #E8F5FE;
+  color: #637AA7;
+}
+.manage-users-container .users-table table td.status--blocked {
+  background-color: #F06A68;
+  color: #FFFFFF;
+}
+.manage-users-container .users-table table th,
+.manage-users-container .users-table table td {
+  border: 1px solid #ddd;
+  padding: 8px;
   text-align: left;
-  border-bottom: 1px solid #ddd;
 }
-
-.users-table th {
+.manage-users-container .users-table table .action-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  margin: 0 auto;
+  cursor: pointer;
+}
+.manage-users-container .users-table table th {
   background-color: #f4f4f4;
   font-weight: bold;
 }
-
-.users-table tr:hover {
+.manage-users-container .users-table table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+.manage-users-container .users-table table tr:hover {
   background-color: #f1f1f1;
 }
 
-.users-table img {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
+@media (min-width: 768px) {
+  .manage-users-container {
+    padding: 2rem;
+    max-width: 720px;
+  }
+  .manage-users-container .manage-users-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4rem;
+    margin-bottom: 4rem;
+  }
+  .manage-users-container .manage-users-header .manage-users-title {
+    margin: 0 0 0.5rem;
+    text-align: left;
+    font-size: 3rem;
+  }
+  .manage-users-container .manage-users-header .add-user-button .btn {
+    width: 150px;
+    height: 40px;
+    margin-top: 1rem;
+  }
+  .manage-users-container .manage-users-actions {
+    max-width: 800px;
+    flex-direction: row;
+    gap: 1rem;
+    align-self: flex-start;
+  }
+  .manage-users-container .manage-users-actions input[type=text] {
+    width: 300px;
+    font-size: 1rem;
+  }
+  .manage-users-container .manage-users-actions .dropdown .dropdown-header {
+    background-color: #FFF;
+    border-radius: 10px;
+    border: 1px solid #BFBFBF;
+    color: #000000;
+    padding: 0.5rem 1rem;
+  }
+  .manage-users-container .manage-users-actions .dropdown .dropdown-list-wrapper .dropdown-list {
+    background-color: #FFF;
+    border-radius: 10px;
+    border: 1px solid #BFBFBF;
+  }
+  .manage-users-container .manage-users-actions .dropdown .dropdown-list-wrapper .dropdown-list .dropdown-item {
+    color: #000000;
+  }
+  .manage-users-container .manage-users-actions .dropdown .dropdown-list-wrapper .dropdown-list .dropdown-item:hover {
+    background-color: #8d8d8d;
+    color: #FFF;
+  }
+  .manage-users-container .manage-users-actions .dropdown .dropdown-list-wrapper .dropdown-list .dropdown-item.selected {
+    background-color: #BEBEBE;
+    color: #FFF;
+  }
+  .manage-users-container .users-table table th,
+  .manage-users-container .users-table table td {
+    padding: 10px;
+  }
+  .manage-users-container .users-table table th {
+    font-size: 1rem;
+  }
+}
+@media (min-width: 1024px) {
+  .manage-users-container {
+    max-width: 1024px;
+    padding: 3rem 2rem;
+  }
+  .manage-users-container .manage-users-header {
+    gap: 18rem;
+  }
+  .manage-users-container .manage-users-header .manage-users-title {
+    margin: 0 0 0.5rem;
+    font-size: 3.5rem;
+  }
+  .manage-users-container .manage-users-header .add-user-button .btn {
+    width: 150px;
+    height: 40px;
+    margin-top: 1rem;
+  }
+  .manage-users-container .users-table table th,
+  .manage-users-container .users-table table td {
+    padding: 12px;
+  }
+  .manage-users-container .users-table table th {
+    font-size: 1.1rem;
+  }
 }/*# sourceMappingURL=main.css.map */
