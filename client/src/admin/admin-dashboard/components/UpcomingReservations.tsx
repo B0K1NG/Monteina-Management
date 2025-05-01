@@ -6,6 +6,8 @@ interface Props {
 }
 
 export default function UpcomingReservations({ bookings }: Props) {
+  const activeBookings = bookings.filter(b => b.status === 'active');
+
   return (
     <div className="upcoming-reservations">
       <h2>Artėjančios rezervacijos</h2>
@@ -16,7 +18,7 @@ export default function UpcomingReservations({ bookings }: Props) {
           </tr>
         </thead>
         <tbody>
-          {bookings.slice(0, 6).map(b => (
+          {activeBookings.slice(0, 6).map(b => (
             <tr key={b.id}>
               <td>{normalizeDate(b.bookingDate)}</td>
               <td>{b.bookingTime}</td>
