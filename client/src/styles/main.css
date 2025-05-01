@@ -314,7 +314,8 @@ body {
   margin-bottom: 0.5rem;
 }
 .service-modal .service-form input,
-.service-modal .service-form textarea {
+.service-modal .service-form textarea,
+.service-modal .service-form select {
   font-family: inherit;
   padding: 0.75rem;
   border: 1px solid #ccc;
@@ -323,7 +324,8 @@ body {
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .service-modal .service-form input:focus,
-.service-modal .service-form textarea:focus {
+.service-modal .service-form textarea:focus,
+.service-modal .service-form select:focus {
   border-color: #007bff;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
   outline: none;
@@ -360,8 +362,13 @@ body {
   font-weight: bold;
   margin-bottom: 0.5rem;
 }
+.service-modal .service-form .service-modal .service-modal-content .service-form select {
+  background-color: white !important;
+  background: white !important;
+}
 .service-modal .service-form .service-modal .service-modal-content .service-form input,
-.service-modal .service-form .service-modal .service-modal-content .service-form textarea {
+.service-modal .service-form .service-modal .service-modal-content .service-form textarea,
+.service-modal .service-form .service-modal .service-modal-content .service-form select {
   padding: 0.75rem;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -369,7 +376,8 @@ body {
   transition: border-color 0.3s ease, box-shadow 0.3s ease;
 }
 .service-modal .service-form .service-modal .service-modal-content .service-form input:focus,
-.service-modal .service-form .service-modal .service-modal-content .service-form textarea:focus {
+.service-modal .service-form .service-modal .service-modal-content .service-form textarea:focus,
+.service-modal .service-form .service-modal .service-modal-content .service-form select:focus {
   border-color: #007bff;
   box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
   outline: none;
@@ -3434,59 +3442,164 @@ body {
     font-size: 1.1rem;
   }
 }
-.orders-table {
-  margin-top: 20px;
-}
-.orders-table table {
+.manage-services-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   width: 100%;
-  border-collapse: collapse;
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 1rem;
 }
-.orders-table table th,
-.orders-table table td {
-  border: 1px solid #ddd;
-  padding: 4px;
-  text-align: left;
-  font-size: 0.9rem;
+.manage-services-container .manage-services-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.orders-table table th {
-  background-color: #f4f4f4;
+.manage-services-container .manage-services-header .manage-services-title {
+  width: 100%;
+  text-align: center;
+  margin: 0 0 2rem;
+  font-size: 2.5rem;
   font-weight: bold;
 }
-.orders-table table tr:nth-child(even) {
-  background-color: #f9f9f9;
+.manage-services-container .manage-services-header .add-service-button .btn {
+  background-color: #3A7EF9;
+  color: #FFF;
+  margin-bottom: 1rem;
 }
-.orders-table table tr:hover {
-  background-color: #f1f1f1;
+.manage-services-container .services-table {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
 }
-.orders-table img {
-  width: 16px;
-  height: 16px;
+.manage-services-container .services-table .service-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.5rem 0.6rem;
+  border: 1px solid #BEBEBE;
+  border-radius: 7px;
 }
-
-.add-service-button {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
+.manage-services-container .services-table .service-item .service-details {
+  flex: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.manage-services-container .services-table .service-item .service-details .service-name {
+  font-size: 1.2rem;
+  font-weight: bold;
+}
+.manage-services-container .services-table .service-item .service-details .service-description {
+  font-size: 0.9rem;
+  color: #666;
+}
+.manage-services-container .services-table .service-item .service-pricing {
+  flex: 1;
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #333;
+  text-align: center;
+}
+.manage-services-container .services-table .service-item .service-status {
+  flex: 1;
+  font-size: 0.9rem;
+  font-weight: bold;
+  padding: 0.2rem 0.5rem;
+  border-radius: 10px;
+  text-align: center;
+}
+.manage-services-container .services-table .service-item .service-status.status--active {
+  background-color: #B6F4C5;
+  color: #36683F;
+}
+.manage-services-container .services-table .service-item .service-status.status--disabled {
+  background-color: #F06A68;
+  color: #FFFFFF;
+}
+.manage-services-container .services-table .service-item .service-actions {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+.manage-services-container .services-table .service-item .service-actions .action-icon {
+  width: 20px;
+  height: 20px;
   cursor: pointer;
-  font-size: 1rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  border: 1px solid #EAEAEA;
+  border-radius: 50%;
+  background-color: #EAEAEA;
 }
-.add-service-button:hover {
-  background-color: #0056b3;
-}
-
-.manage-orders-container {
-  padding: 20px;
-}
-.manage-orders-container .manage-orders-title {
-  font-size: 1.8rem;
-  margin-bottom: 20px;
-}
-.manage-orders-container .manage-orders-actions {
-  margin-bottom: 20px;
+.manage-services-container .services-table .service-item .service-actions .action-icon:hover {
+  transform: scale(1.2);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+@media (min-width: 768px) {
+  .manage-services-container {
+    padding: 2rem;
+    max-width: 720px;
+  }
+  .manage-services-container .services-table .service-item {
+    padding: 0.6rem 1rem;
+  }
+  .manage-services-container .services-table .service-item .service-actions .action-icon {
+    width: 25px;
+    height: 25px;
+  }
+  .manage-services-container .manage-services-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4rem;
+    margin-bottom: 4rem;
+  }
+  .manage-services-container .manage-services-header .manage-services-title {
+    margin: 0 0 0.5rem;
+    text-align: left;
+    font-size: 3rem;
+  }
+  .manage-services-container .manage-services-header .add-service-button .btn {
+    width: 150px;
+    height: 40px;
+    margin-top: 1rem;
+  }
+}
+@media (min-width: 1024px) {
+  .manage-services-container {
+    max-width: 1024px;
+    padding: 3rem 2rem;
+  }
+  .manage-services-container .services-table .service-item {
+    padding: 0.8rem 1rem;
+  }
+  .manage-services-container .services-table .service-item .service-status {
+    max-width: 100px;
+  }
+  .manage-services-container .services-table .service-item .service-details .service-name {
+    font-size: 1.4rem;
+  }
+  .manage-services-container .services-table .service-item .service-details .service-description {
+    font-size: 1rem;
+  }
+  .manage-services-container .manage-services-header {
+    gap: 18rem;
+  }
+  .manage-services-container .manage-services-header .manage-services-title {
+    margin: 0 0 0.5rem;
+    font-size: 3.5rem;
+  }
+  .manage-services-container .manage-services-header .add-services-button .btn {
+    width: 150px;
+    height: 40px;
+    margin-top: 1rem;
+  }
+}
 .manage-users-container {
   display: flex;
   flex-direction: column;
