@@ -34,9 +34,9 @@ export default function AdminNavBar() {
         tabIndex={0}
         onKeyDown={e => { if (e.key === 'Enter') setMenuOpen(open => !open); }}
       >
-        <span />
-        <span />
-        <span />
+        <div></div>
+        <div></div>
+        <div></div>
       </div>
 
       <ul className={`navbar-links ${menuOpen ? 'active' : ''}`}>        

@@ -45,6 +45,25 @@
 
   .hamburger {
     @include hamburger-style($hamburger-bar-width, $hamburger-bar-height, $hamburger-gap);
+
+    div {
+      background-color: white;
+      transition: transform 0.3s ease, opacity 0.3s ease;
+    }
+
+    &.active {
+      div:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+      }
+
+      div:nth-child(2) {
+        opacity: 0;
+      }
+
+      div:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+      }
+    }
   }
 }
 
