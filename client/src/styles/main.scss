@@ -7,6 +7,14 @@
 @use "components/navbar";
 @use"components/dropdown";
 @use"components/footer";
+@use "components/modal";
+
+@use 'modal/_manage_services_modal';
+@use 'modal/manage_users_modal';
+@use 'modal/_manage_orders_modal';
+@use 'modal/_buttons_for_modal';
+@use 'modal/_delete_confirm_modal';
+@use 'modal/_confirm_changes_modal';
 
 @use "pages/tenant_pages/home";
 @use "pages/tenant_pages/profile";
