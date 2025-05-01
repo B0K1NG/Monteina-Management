@@ -158,9 +158,18 @@ $img-tablet-margin-right:   1.25rem;
       .action-icon {
         width: 20px;
         height: 20px;
+        cursor: pointer;
+        transition: transform 0.2s ease, box-shadow 0.2s ease;
+        border: 1px solid #EAEAEA;
+        border-radius: 50%;
+        background-color: #EAEAEA;
         display: flex;
         margin: 0 auto;
-        cursor: pointer;
+      }
+
+      .action-icon:hover {
+        transform: scale(1.2);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
       }
 
       th {
@@ -251,6 +260,11 @@ $img-tablet-margin-right:   1.25rem;
           th,
           td {
             padding: 10px;
+          }
+
+          .action-icon {
+            width: 25px;
+            height: 25px;
           }
   
           th {
