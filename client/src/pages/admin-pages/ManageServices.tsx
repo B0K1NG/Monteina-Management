@@ -37,11 +37,13 @@ export default function ManageServicesPage() {
 
   return (
     <div className="manage-services-container">
+      <div className="manage-services-header">
       <h1 className="manage-services-title">Paslaugų valdymas</h1>
-      <div className="manage-services-actions">
-        <button className="add-service-button" onClick={openAdd}>
+      <div className="add-service-button">
+        <button className="btn" onClick={openAdd}>
           + Pridėti paslaugą
         </button>
+      </div>
       </div>
 
       <ServicesTable

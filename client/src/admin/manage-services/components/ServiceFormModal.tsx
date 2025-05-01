@@ -14,6 +14,7 @@ export default function ServiceFormModal({ isOpen, service, onCancel, onSave }: 
   const [description, setDescription] = useState('');
   const [priceMin, setPriceMin] = useState<number | ''>('');
   const [priceMax, setPriceMax] = useState<number | ''>('');
+  const [status, setStatus] = useState<'active' | 'disabled'>(service?.status || 'active');
 
   useEffect(() => {
     if (service) {
@@ -21,6 +22,7 @@ export default function ServiceFormModal({ isOpen, service, onCancel, onSave }: 
       setDescription(service.description);
       setPriceMin(service.price_min);
       setPriceMax(service.price_max);
+      setStatus(service.status);
     } else {
       setName('');
       setDescription('');
@@ -42,7 +44,7 @@ export default function ServiceFormModal({ isOpen, service, onCancel, onSave }: 
       description,
       price_min: Number(priceMin),
       price_max: Number(priceMax),
-      status: service?.status ?? 'active',
+      status,
     });
   };
 
@@ -78,6 +80,16 @@ export default function ServiceFormModal({ isOpen, service, onCancel, onSave }: 
               setPriceMax(value);
             }}
           />
+
+          <label>Statusas</label>
+          <select
+            value={status}
+            onChange={e => setStatus(e.target.value as 'active' | 'disabled')}
+            className="form-input"
+          >
+            <option value="active">Aktyvi</option>
+            <option value="disabled">Išjungta</option>
+          </select>
 
           <div className="modal-buttons">
             <button type="button" onClick={onCancel} className="btn btn--secondary cancel-button">Atšaukti</button>

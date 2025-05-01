@@ -31,7 +31,8 @@
         }
 
         input,
-        textarea {
+        textarea,
+        select {
         font-family: inherit;
         padding: 0.75rem;
         border: 1px solid #ccc;
@@ -77,9 +78,15 @@
                 font-weight: bold;
                 margin-bottom: 0.5rem;
             }
+
+            select {
+                background-color: white !important;
+                background: white !important;
+            }
         
             input,
-            textarea {
+            textarea,
+            select {
                 padding: 0.75rem;
                 border: 1px solid #ccc;
                 border-radius: 5px;

@@ -1,61 +1,246 @@
-.orders-table {
-  margin-top: 20px;
+// Variables
 
-  table {
-    width: 100%;
-    border-collapse: collapse;
+$max-container-width:       300px;
+$tablet-container-width:    720px;
+$pc-container-width:        1024px;
+$title-font-size:           2.5rem;
+$tablet-title-font-size:    3rem;
+$pc-title-font-size:        3.5rem;
+$max-actions-width:         200px;
+$tablet-actions-width:      800px;
+$container-margin:          0 auto;
+$container-padding:         1rem;
+$tablet-padding:            2rem;
+$vertical-spacing:          2rem;
+$tablet-vertical-spacing:   2.5rem;
+$gap:                       1rem;
+$tablet-gap:                1.5rem;
+$small-gap:                 0.75rem;
+$subtitle-gap:              0.5rem;
+$border-radius:             10px;
+$selector-border-color:     #BFBFBF;
+$list-item-background-active-color: #BEBEBE;
+$list-item-background-hover-color: #8d8d8d;
+$selector-radius:           0.4rem;
+$bg-white:                  #fff;
+$bg-blue-1:                 #4F6BED;
+$bg-blue-2:                 #5A96E4;
+$bg-salmon:                 #FFA07A;
+$text-white:                #FFF;
+$table-border-color:        #ddd;
+$table-header-bg:           #f4f4f4;
+$table-row-even-bg:         #f9f9f9;
+$table-row-hover-bg:        #f1f1f1;
+$img-size:                  30px;
+$img-tablet-size:           35px;
+$img-margin-bottom:         0.5rem;
+$img-tablet-margin-bottom:  0.75rem;
+$img-margin-right:          1rem;
+$img-tablet-margin-right:   1.25rem;
 
-    th,
-    td {
-      border: 1px solid #ddd;
-      padding: 4px;
-      text-align: left;
-      font-size: 0.9rem;
-    }
+.manage-services-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: $max-container-width;
+  margin: $container-margin;
+  padding: $container-padding;
 
-    th {
-      background-color: #f4f4f4;
+  .manage-services-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .manage-services-title {
+      width: 100%;
+      text-align: center;
+      margin: 0 0 $vertical-spacing;
+      font-size: $title-font-size;
       font-weight: bold;
     }
 
-    tr:nth-child(even) {
-      background-color: #f9f9f9;
-    }
-
-    tr:hover {
-      background-color: #f1f1f1;
+    .add-service-button {
+      .btn {
+        background-color: #3A7EF9;
+        color: $text-white;
+        margin-bottom: 1rem;
+        
+      }
     }
   }
 
-  img {
-    width: 16px;
-    height: 16px;
+  .services-table {
+    display: flex;
+    flex-direction: column;
+    gap: $vertical-spacing;
+
+    .service-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: $gap;
+      padding: 0.5rem 0.6rem;
+      border: 1px solid #BEBEBE;
+      border-radius: 7px;
+
+      .service-details {
+        flex: 2;
+        display: flex;
+        flex-direction: column;
+        gap: $small-gap;
+
+        .service-name {
+          font-size: 1.2rem;
+          font-weight: bold;
+        }
+
+        .service-description {
+          font-size: 0.9rem;
+          color: #666;
+        }
+      }
+
+      .service-pricing {
+        flex: 1;
+        font-size: 1.1rem;
+        font-weight: bold;
+        color: #333;
+        text-align: center;
+      }
+
+      .service-status {
+        flex: 1;
+        font-size: 0.9rem;
+        font-weight: bold;
+        padding: 0.2rem 0.5rem;
+        border-radius: $border-radius;
+        text-align: center;
+
+        &.status--active {
+          background-color: #B6F4C5;
+          color: #36683F;
+        }
+
+        &.status--disabled {
+          background-color: #F06A68;
+          color: #FFFFFF;
+        }
+      }
+
+      .service-actions {
+        flex: 1;
+        display: flex;
+        justify-content: flex-end;
+        gap: $small-gap;
+
+        .action-icon {
+          width: 20px;
+          height: 20px;
+          cursor: pointer;
+          transition: transform 0.2s ease, box-shadow 0.2s ease;
+          border: 1px solid #EAEAEA;
+          border-radius: 50%;
+          background-color: #EAEAEA;
+        }
+
+        .action-icon:hover {
+          transform: scale(1.2);
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+      }
+    }
   }
 }
 
-.add-service-button {
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 1rem;
+// Tablet styles
+@media (min-width: 768px) {
+  .manage-services-container {
+    padding: $tablet-padding;
+    max-width: $tablet-container-width;
 
-  &:hover {
-    background-color: #0056b3;
+    .services-table {
+  
+      .service-item {
+        padding: 0.6rem 1rem;
+
+        .service-actions {
+  
+          .action-icon {
+            width: 25px;
+            height: 25px;
+          }
+        }
+      }
+    }
+  
+    .manage-services-header {
+      flex-direction: row;
+      justify-content: space-between;
+      align-items: center;
+      gap: 4rem;
+      margin-bottom: 4rem;
+
+      .manage-services-title {
+        margin: 0 0 $subtitle-gap;
+        text-align: left;
+        font-size: $tablet-title-font-size;
+      }
+
+      .add-service-button {
+        .btn {
+          width: 150px;
+          height: 40px;
+          margin-top: 1rem;
+        }
+      }
+    }
   }
 }
 
-.manage-orders-container {
-  padding: 20px;
+// PC Styles
+@media (min-width: 1024px) {
+  .manage-services-container {
+  max-width: $pc-container-width;
+  padding: 3rem 2rem;
 
-  .manage-orders-title {
-    font-size: 1.8rem;
-    margin-bottom: 20px;
+  .services-table {
+  
+    .service-item {
+      padding: 0.8rem 1rem;
+
+      .service-status {
+        max-width: 100px;
+      }
+
+      .service-details {
+
+        .service-name {
+          font-size: 1.4rem;
+        }
+
+        .service-description {
+          font-size: 1rem;
+        }
+      }
+    }
   }
 
-  .manage-orders-actions {
-    margin-bottom: 20px;
+  .manage-services-header {
+    gap: 18rem;
+
+    .manage-services-title {
+      margin: 0 0 $subtitle-gap;
+      font-size: $pc-title-font-size;
+    }
+
+    .add-services-button {
+      .btn {
+        width: 150px;
+        height: 40px;
+        margin-top: 1rem;
+      }
+    }
   }
+}
 }
