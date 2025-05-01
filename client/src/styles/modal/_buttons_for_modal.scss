@@ -15,13 +15,19 @@
   color: #333;
 }
 
-.modal-buttons .cancel-button {
-    border: 1px solid #ccc;
-  }
-
-.modal-buttons .cancel-button:hover {
-    color: #fff
+.modal-buttons {
+    .cancel-button,
+    .suceed-button {
+        border: 1px solid #ccc;
+      }
 }
+
+.modal-buttons {
+    .cancel-button:hover,
+    .suceed-button:hover {
+        color: #fff
+    }
+} 
 
 .modal-buttons .btn--primary {
   background-color: #007bff;

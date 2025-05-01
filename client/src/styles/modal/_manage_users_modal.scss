@@ -1,0 +1,103 @@
+$overlay-bg           : rgba(0, 0, 0, 0.5);
+$overlay-blur         : 5px;
+$modal-z-index        : 1000;
+$modal-bg             : #fff;
+$modal-padding        : 2rem;
+$modal-radius         : 8px;
+$modal-max-width      : 90%;
+$modal-max-height     : 80%;
+$breakpoint-tablet    : 768px;
+$breakpoint-pc        : 1024px;
+
+$grid-gap-row         : 1rem;
+$grid-gap-col         : 1rem;
+
+$input-font-size      : 0.8rem;
+$input-bg             : #f0f0f0;
+$input-border         : #BEBEBE;
+$input-radius         : 6px;
+$input-focus-border   : #007bff;
+$input-focus-shadow   : rgba(0, 123, 255, 0.5);
+
+.user-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: $modal-z-index;
+  background-color: $overlay-bg;
+  backdrop-filter: blur($overlay-blur);
+
+  .user-modal-content {
+    background: $modal-bg;
+    padding: $modal-padding;
+    border-radius: $modal-radius;
+    display: flex;
+    flex-direction: column;
+    gap: $grid-gap-row;
+    max-width: $modal-max-width;
+    max-height: $modal-max-height;
+    overflow-y: auto;
+
+    .user-modal-grid {
+      display: flex;
+      flex-direction: column;
+      gap: $grid-gap-row;
+
+      @media (min-width: $breakpoint-tablet) {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: $grid-gap-row $grid-gap-col;
+      }
+
+      .form-field {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        label {
+          font-weight: bold;
+        }
+
+        input {
+          width: 100%;
+          border: 1px solid $input-border;
+          border-radius: $input-radius;
+          padding: 0.6rem 1.3rem;
+          background-color: $input-bg;
+          font-size: $input-font-size;
+          transition: border-color 0.3s ease, box-shadow 0.3s ease;
+
+          &:focus {
+            border-color: $input-focus-border;
+            box-shadow: 0 0 5px $input-focus-shadow;
+            outline: none;
+          }
+        }
+
+        select {
+          width: 100%;
+          border: 1px solid $input-border;
+          border-radius: $input-radius;
+          padding: 0.6rem 1.3rem;
+          background-color: $input-bg;
+          font-size: $input-font-size;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: $breakpoint-tablet) {
+  .user-modal-content {
+    width: 500px;
+  }
+}
+
+@media (min-width: $breakpoint-pc) {
+  .user-modal-content {
+    width: 600px;
+    max-height: none !important;
+  }
+}
