@@ -117,8 +117,12 @@ export default function ManageOrdersPage() {
 
   return (
     <div className="manage-orders-container">
-      <h1>Užsakymų valdymas</h1>
-      <button onClick={() => setShowAdd(true)}>+ Pridėti užsakymą</button>
+      <div className="manage-orders-header">
+        <h1 className="manage-orders-title">Užsakymų valdymas</h1>
+        <div className="add-order-button">
+          <button className="btn" onClick={() => setShowAdd(true)}>+ Pridėti užsakymą</button>
+        </div>
+      </div>
 
       <OrdersFilters
         users={users}

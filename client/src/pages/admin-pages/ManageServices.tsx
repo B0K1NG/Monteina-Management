@@ -36,9 +36,9 @@ export default function ManageServicesPage() {
   };
 
   return (
-    <div className="manage-orders-container">
-      <h1 className="manage-orders-title">Paslaugų valdymas</h1>
-      <div className="manage-orders-actions">
+    <div className="manage-services-container">
+      <h1 className="manage-services-title">Paslaugų valdymas</h1>
+      <div className="manage-services-actions">
         <button className="add-service-button" onClick={openAdd}>
           + Pridėti paslaugą
         </button>
