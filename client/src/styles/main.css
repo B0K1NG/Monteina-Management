@@ -12,7 +12,7 @@
 body {
   font-family: "Poppins", sans-serif;
   color: #333;
-  background: linear-gradient(90deg, #132D3E 0%, #2C3536 47%, #BCBDB4 84%);
+  background-image: linear-gradient(to left bottom, #232626, #535556, #898a8b, #c2c3c3, #ffffff);
 }
 
 .dashboard-container {
@@ -270,24 +270,11 @@ body {
     padding: 1rem;
   }
 }
-html, body {
-  height: 100%;
-  margin: 0;
-  display: flex;
-  flex-direction: column;
-}
-
-#root {
-  display: flex;
-  flex-direction: column;
-  flex-grow: 1;
-}
-
 .footer {
-  margin-top: auto;
+  margin-top: 2rem;
   color: #FFFFFF;
   text-align: center;
-  padding: 1rem;
+  padding: 2rem;
 }
 
 .admin-footer {
@@ -811,6 +798,7 @@ html, body {
   justify-content: space-between;
   color: #FFFFFF;
   padding: 1rem;
+  height: 100vh;
 }
 .home-container .home-header {
   text-align: center;
@@ -947,6 +935,7 @@ html, body {
     padding: 2rem;
     border-radius: 15px;
     margin-top: 5rem !important;
+    max-height: 400px;
   }
   .home-container .how-it-works .section-title {
     font-size: 1.9rem !important;
@@ -1031,9 +1020,11 @@ html, body {
   color: #333;
   text-align: center;
   color: #ffffff;
+  height: 100vh;
 }
 .profile-page .profile-title {
   font-size: 1.2rem;
+  font-weight: 400;
   margin-bottom: 1rem;
 }
 
@@ -1222,6 +1213,9 @@ html, body {
   }
 }
 @media (min-width: 1024px) {
+  .profile-title {
+    font-size: 2rem !important;
+  }
   .profile-container {
     gap: 5rem;
   }
@@ -1252,8 +1246,8 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(90deg, #132D3E 0%, #2C3536 47%, #BCBDB4 84%);
   color: #FFFFFF;
+  height: 100vh;
 }
 .register-container .register-left {
   text-align: center;
@@ -1342,7 +1336,7 @@ html, body {
 .register-container .register-left .login-register {
   margin-top: 1rem;
   font-size: 0.875rem;
-  color: #C6C6C6;
+  color: #424242;
 }
 .register-container .register-left .login-register a {
   color: #3A7EF9;
@@ -1571,8 +1565,8 @@ html, body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background: linear-gradient(90deg, #132D3E 0%, #2C3536 47%, #BCBDB4 84%);
-  color: #C6C6C6;
+  color: #424242;
+  height: 100vh;
 }
 .login-container .login-left {
   width: 100%;
@@ -1810,6 +1804,7 @@ html, body {
   flex-direction: column;
   padding: 1rem;
   color: #FFFFFF;
+  height: 100vh;
 }
 .notfound-container .notfound-content {
   text-align: left;
@@ -1980,6 +1975,7 @@ html, body {
   gap: 1rem;
   padding: 1rem;
   color: #fff;
+  height: 100vh;
 }
 .booking-page .time-slot.disabled {
   text-decoration: line-through;
@@ -2552,6 +2548,7 @@ html, body {
   padding: 2rem;
   color: #fff;
   text-align: center;
+  height: 100vh;
 }
 .faq-container .faq-title {
   font-size: 2rem;
@@ -3239,6 +3236,204 @@ html, body {
   }
 }
 
+.manage-orders-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 300px;
+  margin: 0 auto;
+  padding: 1rem;
+}
+.manage-orders-container .manage-orders-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.manage-orders-container .manage-orders-header .manage-orders-title {
+  width: 100%;
+  text-align: center;
+  margin: 0 0 2rem;
+  font-size: 2.5rem;
+  font-weight: bold;
+}
+.manage-orders-container .manage-orders-header .add-order-button .btn {
+  background-color: #3A7EF9;
+  color: #FFF;
+  margin-bottom: 1rem;
+}
+.manage-orders-container .filters {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  max-width: 200px;
+}
+.manage-orders-container .filters .dropdown {
+  margin-bottom: 1rem;
+  font-size: 0.8rem;
+}
+.manage-orders-container .filters .dropdown .dropdown-header {
+  background-color: #FFF;
+  border-radius: 10px;
+  border: 1px solid #BFBFBF;
+  color: #000000;
+}
+.manage-orders-container .filters .dropdown .dropdown-list-wrapper .dropdown-list {
+  background-color: #FFF;
+  border-radius: 10px;
+  border: 1px solid #BFBFBF;
+}
+.manage-orders-container .filters .dropdown .dropdown-list-wrapper .dropdown-list .dropdown-item {
+  color: #000000;
+}
+.manage-orders-container .filters .dropdown .dropdown-list-wrapper .dropdown-list .dropdown-item:hover {
+  background-color: #8d8d8d;
+  color: #FFF;
+}
+.manage-orders-container .filters .dropdown .dropdown-list-wrapper .dropdown-list .dropdown-item.selected {
+  background-color: #BEBEBE;
+  color: #FFF;
+}
+.manage-orders-container .orders-table {
+  margin-top: 2rem;
+  width: 100%;
+  overflow-x: auto;
+}
+.manage-orders-container .orders-table h2 {
+  margin-bottom: 1rem;
+}
+.manage-orders-container .orders-table table {
+  width: 100%;
+  min-width: 300px;
+  border-collapse: collapse;
+}
+.manage-orders-container .orders-table table .phone-number {
+  text-decoration: underline;
+  text-underline-offset: 0.2rem;
+}
+.manage-orders-container .orders-table table td.status--active {
+  background-color: #B6F4C5;
+  color: #36683F;
+}
+.manage-orders-container .orders-table table td.status--done {
+  background-color: #E8F5FE;
+  color: #637AA7;
+}
+.manage-orders-container .orders-table table td.status--canceled {
+  background-color: #F06A68;
+  color: #FFFFFF;
+}
+.manage-orders-container .orders-table table th,
+.manage-orders-container .orders-table table td {
+  border: 1px solid #ddd;
+  padding: 8px;
+  text-align: left;
+}
+.manage-orders-container .orders-table table .action-icon {
+  width: 20px;
+  height: 20px;
+  display: flex;
+  margin: 0 auto;
+  cursor: pointer;
+}
+.manage-orders-container .orders-table table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+.manage-orders-container .orders-table table tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+.manage-orders-container .orders-table table tr:hover {
+  background-color: #f1f1f1;
+}
+
+@media (min-width: 768px) {
+  .manage-orders-container {
+    padding: 2rem;
+    max-width: 720px;
+  }
+  .manage-orders-container .manage-orders-header {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: 4rem;
+    margin-bottom: 4rem;
+  }
+  .manage-orders-container .manage-orders-header .manage-orders-title {
+    margin: 0 0 0.5rem;
+    text-align: left;
+    font-size: 3rem;
+  }
+  .manage-orders-container .manage-orders-header .add-order-button .btn {
+    width: 150px;
+    height: 40px;
+    margin-top: 1rem;
+  }
+  .manage-orders-container .filters {
+    max-width: 800px;
+    flex-direction: row;
+    gap: 1rem;
+    align-self: flex-start;
+  }
+  .manage-orders-container .filters .dropdown .dropdown-header {
+    background-color: #FFF;
+    border-radius: 10px;
+    border: 1px solid #BFBFBF;
+    color: #000000;
+    padding: 0.5rem 1rem;
+  }
+  .manage-orders-container .filters .dropdown .dropdown-list-wrapper .dropdown-list {
+    background-color: #FFF;
+    border-radius: 10px;
+    border: 1px solid #BFBFBF;
+  }
+  .manage-orders-container .filters .dropdown .dropdown-list-wrapper .dropdown-list .dropdown-item {
+    color: #000000;
+  }
+  .manage-orders-container .filters .dropdown .dropdown-list-wrapper .dropdown-list .dropdown-item:hover {
+    background-color: #8d8d8d;
+    color: #FFF;
+  }
+  .manage-orders-container .filters .dropdown .dropdown-list-wrapper .dropdown-list .dropdown-item.selected {
+    background-color: #BEBEBE;
+    color: #FFF;
+  }
+  .manage-orders-container .orders-table table th,
+  .manage-orders-container .orders-table table td {
+    padding: 10px;
+  }
+  .manage-orders-container .orders-table table th {
+    font-size: 1rem;
+  }
+}
+@media (min-width: 1024px) {
+  .manage-orders-container {
+    max-width: 1024px;
+    padding: 3rem 2rem;
+  }
+  .manage-orders-container .manage-orders-header {
+    gap: 16rem;
+  }
+  .manage-orders-container .manage-orders-header .manage-orders-title {
+    margin: 0 0 0.5rem;
+    font-size: 3.5rem;
+  }
+  .manage-orders-container .manage-orders-header .add-order-button .btn {
+    width: 150px;
+    height: 40px;
+    margin-top: 1rem;
+  }
+  .manage-orders-container .orders-table table th,
+  .manage-orders-container .orders-table table td {
+    padding: 12px;
+  }
+  .manage-orders-container .orders-table table th {
+    font-size: 1.1rem;
+  }
+}
 .orders-table {
   margin-top: 20px;
 }
