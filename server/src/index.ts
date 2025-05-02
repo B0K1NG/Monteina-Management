@@ -28,8 +28,14 @@ app.use(cors({
   credentials: true,
 }));
 
-cron.schedule('*/30 * * * *', async () => {
-  console.log('Running scheduled task: Updating booking statuses...');
+
+updateBookingStatuses().then(() => {
+  console.log('Initial booking status update completed');
+});
+
+cron.schedule('*/10 * * * *', async () => {
+  const timestamp = new Date().toISOString();
+  console.log(`[${timestamp}] Running scheduled task: Updating booking statuses...`);
   await updateBookingStatuses();
 });
 
