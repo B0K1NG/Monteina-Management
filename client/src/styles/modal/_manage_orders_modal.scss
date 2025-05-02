@@ -62,6 +62,20 @@ $dropdown-item-disabled-fg : #6c757d;
         font-weight: bold !important;
       }
 
+      input {
+        background-color: $dropdown-header-bg;
+        color: $dropdown-header-fg;
+        border: none;
+        padding: 0.6rem;
+        width: 100%;
+        border-radius: $dropdown-radius;
+        border: 1px solid $dropdown-border;
+        background-repeat: no-repeat;
+        background-position: right 0.5rem center;
+        background-size: 12px 12px;
+        padding-right: 1.5rem;
+      }
+
       .dropdown {
         font-size: $dropdown-font-size;
         background-color: $dropdown-bg;
