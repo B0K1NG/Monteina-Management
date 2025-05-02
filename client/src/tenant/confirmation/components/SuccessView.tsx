@@ -9,7 +9,7 @@ interface Props {
 
 const SuccessView: React.FC<Props> = ({ state, onBack }) => {
   const { serviceId, bookingDate, bookingTime, totalAmount, advanceAmount } = state;
-
+  const remaining = (totalAmount ?? 0) - (advanceAmount ?? 0);
   return (
     <>
       <img src={successImage} alt="Sėkmingai!" className="confirmation-image" />
@@ -28,6 +28,9 @@ const SuccessView: React.FC<Props> = ({ state, onBack }) => {
       </p>
       <p className="confirmation-detail">
         Apmokėtas avansas <span>{advanceAmount} €</span>
+      </p>
+      <p className="confirmation-detail">
+        Liko sumokėti <span>{remaining} €</span>
       </p>
       <button className="confirmation-button" onClick={onBack}>
         Grįžti į pagrindinį puslapį
