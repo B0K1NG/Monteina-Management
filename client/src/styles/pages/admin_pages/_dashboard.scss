@@ -44,7 +44,7 @@ $img-tablet-margin-right:   1.25rem;
   max-width: $max-container-width;
   margin: $container-margin;
   padding: $container-padding;
-  height: 100vh;
+
 
   .dashboard-title {
     width: 100%;
@@ -221,6 +221,9 @@ $img-tablet-margin-right:   1.25rem;
 
     .upcoming-reservations {
       margin-top: 3rem;
+      height: auto;
+      overflow: visible;
+      width: 100%;
 
       table {
         th,
@@ -272,9 +275,13 @@ $img-tablet-margin-right:   1.25rem;
       margin-top: 4rem;
 
       table {
+        width: 100%;
+        table-layout: fixed;
+        
         th,
         td {
           padding: 12px;
+          word-wrap: break-word;
         }
 
         th {
