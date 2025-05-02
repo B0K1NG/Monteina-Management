@@ -28,7 +28,11 @@ export default function Login() {
     } catch (error: any) {
       if (error.response?.status === 403 && error.response?.data?.error.includes('užblokuota')) {
         toast.error(error.response.data.error);
-      } else {
+      } else if (error.response?.status === 403 && error.response?.data?.error.includes('nepatvirtinta')) {
+        toast.error(error.response.data.error);
+      }
+
+      else {
         toast.error('Prisijungti nepavyko. Patikrinkite savo duomenis.');
       }
     }
