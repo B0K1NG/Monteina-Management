@@ -41,7 +41,7 @@ body {
   display: none;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   position: absolute;
   top: 80px;
   right: 0;
@@ -137,12 +137,6 @@ body {
     background: none;
     transform: none;
     opacity: 1;
-  }
-  .navbar .navbar-links .navbar-center {
-    display: flex;
-    justify-content: center;
-    gap: 2rem;
-    flex: 1;
   }
   .navbar .navbar-links .navbar-right {
     display: flex;
@@ -271,7 +265,7 @@ body {
   }
 }
 .footer {
-  margin-top: 2rem;
+  margin-top: 10rem;
   color: #FFFFFF;
   text-align: center;
   padding: 2rem;
@@ -511,6 +505,19 @@ body {
 .add-modal .add-modal-content .add-modal-grid label {
   font-weight: bold !important;
 }
+.add-modal .add-modal-content .add-modal-grid input {
+  background-color: #fff;
+  color: #000000;
+  border: none;
+  padding: 0.6rem;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid #BEBEBE;
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 12px 12px;
+  padding-right: 1.5rem;
+}
 .add-modal .add-modal-content .add-modal-grid .dropdown {
   font-size: 0.8rem;
   background-color: #f0f0f0;
@@ -669,6 +676,10 @@ body {
     width: 180px;
     height: 80px;
   }
+  .add-modal-grid .dropdown .dropdown-list-wrapper .dropdown-list {
+    max-height: 200px;
+    height: auto;
+  }
 }
 @media (min-width: 1024px) {
   .edit-modal-content {
@@ -798,6 +809,174 @@ body {
 @media (min-width: 1024px) {
   .confirm-modal-content {
     width: 100%;
+  }
+}
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+  color: #000000;
+}
+.modal-overlay .modal-content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 90%;
+  max-height: 80%;
+  overflow-y: auto;
+}
+.modal-overlay .modal-content label {
+  font-weight: bold !important;
+}
+.modal-overlay .modal-content input {
+  background-color: #fff;
+  color: #000000;
+  border: none;
+  padding: 0.6rem;
+  width: 100%;
+  border-radius: 6px;
+  border: 1px solid #BEBEBE;
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 12px 12px;
+  padding-right: 1.5rem;
+}
+
+.edit-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.5);
+  -webkit-backdrop-filter: blur(5px);
+          backdrop-filter: blur(5px);
+}
+
+.edit-modal-content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 90%;
+  max-height: 80%;
+  overflow-y: auto;
+}
+
+.edit-modal-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.edit-modal-grid .form-field label {
+  font-weight: bold !important;
+}
+.edit-modal-grid .dropdown {
+  font-size: 0.8rem;
+  background-color: #f0f0f0;
+  border: 1px solid #BEBEBE;
+  border-radius: 6px;
+  width: 100%;
+}
+.edit-modal-grid .dropdown-header {
+  background-color: #fff;
+  color: #000000;
+  border: none;
+  padding: 0.6rem;
+  border-radius: 6px;
+  background-repeat: no-repeat;
+  background-position: right 0.5rem center;
+  background-size: 12px 12px;
+  padding-right: 1.5rem;
+}
+.edit-modal-grid .dropdown-list {
+  background-color: #e9ecef;
+  border: 1px solid #BEBEBE;
+  border-radius: 6px;
+  max-height: 300px;
+  margin-left: 0rem;
+}
+.edit-modal-grid .dropdown-item {
+  color: #000000;
+  padding: 0.6rem;
+  transition: background-color 0.2s;
+}
+.edit-modal-grid .dropdown-item.selected {
+  background-color: #919191;
+  color: #fff;
+}
+.edit-modal-grid .dropdown-item.disabled {
+  color: #6c757d;
+  cursor: not-allowed;
+}
+.edit-modal-grid .dropdown-item:hover:not(.disabled) {
+  background-color: #BEBEBE;
+  color: #fff;
+}
+
+.edit-modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .add-modal-content {
+    width: 500px;
+  }
+}
+@media (min-width: 1024px) {
+  .add-modal-content {
+    width: 600px;
+    max-height: none !important;
+  }
+}
+@media (min-width: 768px) {
+  .add-modal-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem 1rem;
+    align-items: start;
+  }
+}
+@media (min-width: 1024px) {
+  .dropdown-list {
+    width: 180px;
+    height: 80px;
+  }
+  .add-modal-grid .dropdown .dropdown-list-wrapper .dropdown-list {
+    max-height: 200px;
+    height: auto;
+  }
+}
+@media (min-width: 1024px) {
+  .edit-modal-content {
+    width: 500px;
+  }
+  .edit-modal-content .edit-modal-grid {
+    margin-bottom: 2rem;
+  }
+}
+@media (min-width: 768px) {
+  .edit-modal-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+  }
+  .edit-modal-grid .form-field {
+    max-width: 180px;
   }
 }
 .home-container {
@@ -2505,6 +2684,10 @@ body {
     max-width: 800px;
     width: 430px;
   }
+  .car-service-box .car-service-box-information .dropdown-list {
+    max-height: 200px;
+    height: auto;
+  }
   .car-service-box .service-options {
     display: grid !important;
     grid-template-columns: 200px 200px;
@@ -2514,6 +2697,9 @@ body {
     -moz-column-gap: none;
          column-gap: none;
     row-gap: 0rem;
+  }
+  .car-service-box .service-options .dropdown-list {
+    height: 200px;
   }
   .car-service-box .service-options .top-options {
     grid-column: 1/span 2;
@@ -3033,7 +3219,6 @@ body {
   max-width: 300px;
   margin: 0 auto;
   padding: 1rem;
-  height: 100vh;
 }
 .dashboard-container .dashboard-title {
   width: 100%;
@@ -3047,7 +3232,7 @@ body {
   text-align: center;
   margin: 0 0 2rem;
   font-weight: normal;
-  color: #333333;
+  color: adjust(#FFF, 80%);
 }
 .dashboard-container .date-selector {
   cursor: pointer;
@@ -3196,6 +3381,9 @@ body {
   }
   .dashboard-container .upcoming-reservations {
     margin-top: 3rem;
+    height: auto;
+    overflow: visible;
+    width: 100%;
   }
   .dashboard-container .upcoming-reservations table th,
   .dashboard-container .upcoming-reservations table td {
@@ -3236,9 +3424,14 @@ body {
   .dashboard-container .upcoming-reservations {
     margin-top: 4rem;
   }
+  .dashboard-container .upcoming-reservations table {
+    width: 100%;
+    table-layout: fixed;
+  }
   .dashboard-container .upcoming-reservations table th,
   .dashboard-container .upcoming-reservations table td {
     padding: 12px;
+    word-wrap: break-word;
   }
   .dashboard-container .upcoming-reservations table th {
     font-size: 1.1rem;
@@ -3435,6 +3628,10 @@ body {
   .manage-orders-container {
     max-width: 1024px;
     padding: 3rem 2rem;
+  }
+  .manage-orders-container .filters .dropdown .dropdown-list {
+    max-height: 200px;
+    height: auto;
   }
   .manage-orders-container .manage-orders-header {
     gap: 16rem;
@@ -3796,6 +3993,8 @@ body {
     background-color: #FFF;
     border-radius: 10px;
     border: 1px solid #BFBFBF;
+    max-height: 200px;
+    height: auto;
   }
   .manage-users-container .manage-users-actions .dropdown .dropdown-list-wrapper .dropdown-list .dropdown-item {
     color: #000000;
