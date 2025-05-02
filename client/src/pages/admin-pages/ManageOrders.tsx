@@ -51,11 +51,20 @@ export default function ManageOrdersPage() {
   }), [bookings, filters, users]);
 
   const handleAdd = async (form: OrderFormData) => {
+    if (!form.bookingDate) {
+      toast.error('Pasirinkite datą');
+      return;
+    }
 
     const svc = services.find(s => s.id === form.serviceId);
     if (!svc) {
       toast.error('Paslauga nerasta');
       return;
+    }
+
+    let formattedDate = form.bookingDate;
+    if (form.bookingDate.includes('T')) {
+      formattedDate = form.bookingDate.split('T')[0];
     }
 
     const advanceAmount = 0;
@@ -66,14 +75,16 @@ export default function ManageOrdersPage() {
     }
 
     const valvePrice = form.valveChange ? 5 : 0;
-    const totalAmount     = mainPrice * form.tireQuantity + valvePrice;
+    const totalAmount = mainPrice * form.tireQuantity + valvePrice;
     const remainingAmount = totalAmount - advanceAmount;
 
     const payload: CreateOrderData = {
       ...form,
+      bookingDate: formattedDate,
+      bookingTime: form.bookingTime || '',
       paymentStatus: 'success',
       selectedService: {
-        name:      svc.name,
+        name: svc.name,
         price_min: svc.price_min ?? 0,
         price_max: svc.price_max ?? undefined
       },
@@ -83,11 +94,13 @@ export default function ManageOrdersPage() {
     };
 
     try {
+      console.log('Sending order data:', payload);
       await createOrder(payload);
       toast.success('Užsakymas pridėtas');
       refresh();
       setShowAdd(false);
-    } catch {
+    } catch (error) {
+      console.error('Order creation error:', error);
       toast.error('Nepavyko pridėti užsakymo');
     }
   };

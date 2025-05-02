@@ -9,8 +9,8 @@ export function useBookedTimes(date: string) {
     axios.get('/api/checkout/bookings', { params: { date } })
       .then(r => {
         const times = r.data
-          .filter((e:any)=>e._count?.bookingTime >= 2)
-          .map((e:any)=>normalizeTime(e.bookingTime));
+          .filter((e:any) => e._count?.bookingTime >= 2)
+          .map((e:any) => normalizeTime(e.bookingTime));
         set(times);
       })
       .catch(console.error);

@@ -11,7 +11,7 @@ export function useBookedTimes(date: string) {
       .get<BookingEntry[]>('/api/checkout/bookings', { params: { date } })
       .then(r => {
         const fully = r.data
-          .filter(e => e.status !== 'canceled' && (e._count?.bookingTime ?? 0) >= 2)
+          .filter(e => (e._count?.bookingTime ?? 0) >= 2)
           .map(e => normalizeTime(e.bookingTime));
         setBookedTimes(fully);
       })

@@ -32,18 +32,31 @@ export default function EditOrderModal({ booking, onCancel, onSave }: Props) {
           <div className="form-field">
             <label>Data</label>
             <Dropdown
-              options={Array.from({ length: 31 }, (_, i) => {
-                const date = new Date();
-                date.setDate(date.getDate() + i);
-                const value = date.toISOString().split('T')[0];
-                return {
-                  value,
-                  label: value,
-                };
-              })}
+              options={(() => {
+
+                const dates = [];
+                const today = new Date();
+
+                for (let i = 30; i >= 1; i--) {
+                  const pastDate = new Date();
+                  pastDate.setDate(today.getDate() - i);
+                  const dateStr = pastDate.toISOString().split('T')[0];
+                  dates.push({ value: dateStr, label: dateStr });
+                }
+
+                for (let i = 0; i <= 30; i++) {
+                  const futureDate = new Date();
+                  futureDate.setDate(today.getDate() + i);
+                  const dateStr = futureDate.toISOString().split('T')[0];
+                  dates.push({ value: dateStr, label: dateStr });
+                }
+                
+                return dates;
+              })()}
               value={edited.bookingDate}
               onChange={v => setEdited(b => ({ ...b, bookingDate: v }))}
               placeholder="Pasirinkite datą"
+              searchable
             />
           </div>
 
@@ -54,11 +67,28 @@ export default function EditOrderModal({ booking, onCancel, onSave }: Props) {
                 const h = Math.floor(i / 2) + 9;
                 const m = i % 2 ? '30' : '00';
                 const t = `${h}:${m}`;
+
+                const selectedDate = new Date(edited.bookingDate);
+                const now = new Date();
+
+                const selectedDateOnly = new Date(selectedDate.setHours(0,0,0,0));
+                const nowDateOnly = new Date(now.setHours(0,0,0,0));
+
+                const isTodayAndPastTime = 
+                  selectedDate.toDateString() === now.toDateString() && 
+                  (h < now.getHours() || (h === now.getHours() && parseInt(m) < now.getMinutes()));
+
+                const isPastTimeSlot = (selectedDateOnly < nowDateOnly) || isTodayAndPastTime;
+
+                const isDisabled = isPastTimeSlot 
+                  ? edited.status !== 'done' 
+                  : (booked.includes(t) && t !== booking.bookingTime);
+                
                 return {
                   value: t,
                   label: t,
-                  disabled:
-                    booked.includes(t) && t !== booking.bookingTime,
+                  disabled: isDisabled,
+                  className: isDisabled ? 'time-slot disabled' : 'time-slot'
                 };
               })}
               value={edited.bookingTime}
@@ -76,7 +106,27 @@ export default function EditOrderModal({ booking, onCancel, onSave }: Props) {
                 { value: 'canceled', label: 'Atšauktas' },
               ]}
               value={edited.status}
-              onChange={v => setEdited(b => ({ ...b, status: v as "active" | "done" | "canceled" }))}
+              onChange={v => {
+                const newStatus = v as "active" | "done" | "canceled";
+                setEdited(b => ({ ...b, status: newStatus }));
+
+                if (newStatus === 'active') {
+                  const selectedDate = new Date(edited.bookingDate);
+                  const selectedTime = edited.bookingTime.split(':').map(Number);
+                  const now = new Date();
+                  
+                  const isPastTime = (
+                    selectedDate < now || 
+                    (selectedDate.toDateString() === now.toDateString() && 
+                     selectedTime[0] < now.getHours() || 
+                     (selectedTime[0] === now.getHours() && selectedTime[1] < now.getMinutes()))
+                  );
+                  
+                  if (isPastTime) {
+                    setEdited(b => ({ ...b, bookingTime: '' }));
+                  }
+                }
+              }}
               placeholder="Pasirinkite statusą"
             />
           </div>
@@ -89,6 +139,7 @@ export default function EditOrderModal({ booking, onCancel, onSave }: Props) {
           <button
             className="btn btn--primary suceed-button"
             onClick={() => onSave(edited)}
+            disabled={edited.status === 'active' && edited.bookingTime === ''}
           >
             Išsaugoti
           </button>

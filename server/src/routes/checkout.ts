@@ -17,7 +17,9 @@ router.post(
         paymentStatus,
         userId,
         date,
+        bookingDate,
         time,
+        bookingTime,
         carDetails,
         selectedService,
         valveChange,
@@ -26,6 +28,8 @@ router.post(
         totalAmount,
         advanceAmount,
         remaining,
+        remainingAmount,
+        status = 'active',
       } = req.body;
 
       if (paymentStatus !== 'success') {
@@ -33,16 +37,56 @@ router.post(
         return;
       }
 
+      const dateValue = date || bookingDate;
+      const timeValue = time || bookingTime;
 
-      const slotDate = new Date(date);
+      if (!dateValue) {
+        res.status(400).json({ error: 'A valid booking date is required' });
+        return;
+      }
 
-      const existing = await prisma.checkout.count({
-        where: {
-          bookingDate: slotDate,
-          bookingTime: time,
-          status: { not: 'canceled' },
-        },
-      });
+      if (!timeValue && status === 'active') {
+        res.status(400).json({ error: 'Booking time is required for active bookings' });
+        return;
+      }
+
+      let slotDate: Date;
+      try {
+        if (typeof dateValue === 'string') {
+          if (dateValue.match(/^\d{4}-\d{2}-\d{2}$/)) {
+            slotDate = new Date(dateValue);
+          } 
+          else if (dateValue.includes('T')) {
+            slotDate = new Date(dateValue.split('T')[0]);
+          } 
+          else {
+            throw new Error('Invalid date format');
+          }
+        } else if (dateValue instanceof Date) {
+          slotDate = dateValue;
+        } else {
+          throw new Error('Invalid date type');
+        }
+
+        if (isNaN(slotDate.getTime())) {
+          throw new Error('Invalid date value');
+        }
+      } catch (error) {
+        console.error('Date parsing error:', error, 'Provided date:', dateValue);
+        res.status(400).json({ error: 'Invalid booking date format. Please use YYYY-MM-DD format.' });
+        return;
+      }
+
+      let existing = 0;
+      if (timeValue) {
+        existing = await prisma.checkout.count({
+          where: {
+            bookingDate: slotDate,
+            bookingTime: timeValue,
+            status: 'active',
+          },
+        });
+      }
 
       if (existing >= 2) {
         res.status(400).json({ error: 'This time slot is fully booked.' });
@@ -53,18 +97,18 @@ router.post(
         data: {
           userId,
           bookingDate: slotDate,
-          bookingTime: time,
-          carBrand: carDetails.make,
-          carModel: carDetails.model,
-          tireSize: carDetails.tireSize,
-          serviceName: selectedService.name,
-          valveChange,
-          tireQuantity,
-          serviceId,
-          totalAmount,
-          advanceAmount,
-          remainingAmount: remaining,
-          status: 'active',
+          bookingTime: timeValue || '',
+          carBrand: carDetails?.make || '',
+          carModel: carDetails?.model || '',
+          tireSize: carDetails?.tireSize || '',
+          serviceName: selectedService?.name || '',
+          valveChange: !!valveChange,
+          tireQuantity: Number(tireQuantity) || 0,
+          serviceId: String(serviceId),
+          totalAmount: Number(totalAmount) || 0,
+          advanceAmount: Number(advanceAmount) || 0,
+          remainingAmount: Number(remaining || remainingAmount) || 0,
+          status: status,
         },
       });
 
@@ -83,7 +127,7 @@ router.get('/bookings', async (req, res) => {
       by: ['bookingTime'],
       where: {
         bookingDate: new Date(date as string),
-        status: { not: 'canceled' },
+        status: 'active',
       },
       _count: {
         bookingTime: true,
@@ -213,7 +257,8 @@ router.patch('/:id', async (req: Request, res: Response, next: NextFunction): Pr
         where: {
           bookingDate: bookingDate ? new Date(bookingDate) : existingBooking.bookingDate,
           bookingTime: bookingTime || existingBooking.bookingTime,
-          status: { not: 'canceled' },
+          status: 'active',
+          id: { not: parseInt(id) },
         },
       });
 

@@ -58,20 +58,43 @@ export default function AddOrderModal({
   }, [isOpen]);
 
   const handleSave = () => {
-    if (!userId || !serviceId || !bookingDate || !bookingTime || !status) {
+    if (!userId || !serviceId || !status) {
       toast.info('Prašome užpildyti visus laukus!');
       return;
     }
 
+    if (!bookingDate) {
+      toast.info('Pasirinkite datą!');
+      return;
+    }
+
+    if (status === 'active' && !bookingTime) {
+      toast.info('Aktyviam užsakymui pasirinkite laiką!');
+      return;
+    }
+
+    if (!tireSize) {
+      toast.info('Pasirinkite ratų išmatavimus!');
+      return;
+    }
+
+    const dateToValidate = new Date(bookingDate);
+    if (isNaN(dateToValidate.getTime())) {
+      toast.error('Netinkamas datos formatas!');
+      return;
+    }
+
+    const formattedDate = bookingDate.split('T')[0];
+
     onSave({
       userId,
       serviceId,
-      bookingDate,
-      bookingTime,
+      bookingDate: formattedDate,
+      bookingTime: bookingTime || '',
       status,
       repairOption,
       valveChange,
-      tireQuantity: Number(tireQuantity),
+      tireQuantity: Number(tireQuantity) || 0,
       tireSize,
       carDetails,
     });
@@ -196,16 +219,30 @@ export default function AddOrderModal({
           <div>
             <label>Data</label>
             <Dropdown
-              options={Array.from({ length: 31 }, (_, i) => {
-                const day = String(i + 1).padStart(2, '0');
-                const month = String(new Date().getMonth() + 1).padStart(2, '0');
-                const year = String(new Date().getFullYear());
-                const date = `${year}-${month}-${day}`;
-                return { value: date, label: date };
-              })}
+              options={(() => {
+                const dates = [];
+                const today = new Date();
+
+                for (let i = 30; i >= 1; i--) {
+                  const pastDate = new Date();
+                  pastDate.setDate(today.getDate() - i);
+                  const dateStr = pastDate.toISOString().split('T')[0];
+                  dates.push({ value: dateStr, label: dateStr });
+                }
+
+                for (let i = 0; i <= 30; i++) {
+                  const futureDate = new Date();
+                  futureDate.setDate(today.getDate() + i);
+                  const dateStr = futureDate.toISOString().split('T')[0];
+                  dates.push({ value: dateStr, label: dateStr });
+                }
+                
+                return dates;
+              })()}
               value={bookingDate}
               onChange={setBookingDate}
               placeholder="Pasirinkite datą"
+              searchable
             />
           </div>
 
@@ -216,13 +253,30 @@ export default function AddOrderModal({
                 const h = Math.floor(i / 2) + 9;
                 const m = i % 2 ? '30' : '00';
                 const t = `${h}:${m}`;
+
+                const selectedDate = new Date(bookingDate);
+                const now = new Date();
+
+                const selectedDateOnly = new Date(selectedDate);
+                selectedDateOnly.setHours(0,0,0,0);
+                const nowDateOnly = new Date(now);
+                nowDateOnly.setHours(0,0,0,0);
+
+                const isTodayAndPastTime = 
+                  selectedDate.toDateString() === now.toDateString() && 
+                  (h < now.getHours() || (h === now.getHours() && Number(m) < now.getMinutes()));
+
+                const isPastTimeSlot = selectedDateOnly < nowDateOnly || isTodayAndPastTime;
+
+                const isDisabled = isPastTimeSlot 
+                  ? status !== 'done' 
+                  : booked.includes(t);
+                
                 return {
                   value: t,
                   label: t,
-                  disabled: booked.includes(t),
-                  className: booked.includes(t)
-                    ? 'time-slot disabled'
-                    : 'time-slot'
+                  disabled: isDisabled,
+                  className: isDisabled ? 'time-slot disabled' : 'time-slot'
                 };
               })}
               value={bookingTime}
@@ -240,7 +294,27 @@ export default function AddOrderModal({
                 { value: 'canceled', label: 'Atšauktas' },
               ]}
               value={status}
-              onChange={(value) => setStatus(value as 'active' | 'done' | 'canceled')}
+              onChange={(value) => {
+                const newStatus = value as 'active' | 'done' | 'canceled';
+                setStatus(newStatus);
+
+                const selectedDate = new Date(bookingDate);
+                const selectedTime = bookingTime.split(':').map(Number);
+                const now = new Date();
+                
+                if (newStatus === 'active') {
+                  const isPastTime = (
+                    selectedDate < now || 
+                    (selectedDate.toDateString() === now.toDateString() && 
+                     selectedTime[0] < now.getHours() || 
+                     (selectedTime[0] === now.getHours() && selectedTime[1] < now.getMinutes()))
+                  );
+                  
+                  if (isPastTime) {
+                    setBookingTime('');
+                  }
+                }
+              }}
               placeholder="Pasirinkite statusą"
             />
           </div>
