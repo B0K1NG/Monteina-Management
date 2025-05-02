@@ -1,5 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
 import downArrow from '../assets/icons/down_chevron.png'
+import downArrowWhite from '../assets/icons/down-chevron-white.png'
 
 interface DropdownProps {
   options: { value: string; label: string; disabled?: boolean }[];
@@ -25,6 +28,8 @@ const Dropdown: React.FC<DropdownProps> = ({
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   const handleToggle = () => setIsOpen((prev) => !prev);
+  const location = useLocation();
+  const isCalendarPage = location.pathname === '/calendar';
 
   const handleOptionClick = (optionValue: string, isDisabled: boolean) => {
     if (isDisabled) return;
@@ -62,7 +67,7 @@ const Dropdown: React.FC<DropdownProps> = ({
     <div className={`dropdown ${className} ${disabled ? 'dropdown-disabled' : ''}`} ref={dropdownRef}>
       <div className="dropdown-header" onClick={handleToggle}>
         {options.find((option) => option.value === value)?.label || placeholder}
-        <span className="dropdown-chevron"><img src={downArrow} alt="Rodyklė žemyn" /></span>
+        <span className="dropdown-chevron"><img src={isCalendarPage ? downArrowWhite : downArrow} alt="Rodyklė žemyn" /></span>
       </div>
       {isOpen && !disabled && (
         <div className="dropdown-list-wrapper">
