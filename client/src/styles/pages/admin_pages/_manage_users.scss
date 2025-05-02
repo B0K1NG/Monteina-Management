@@ -256,6 +256,8 @@ $img-tablet-margin-right:   1.25rem;
             background-color: #FFF;
             border-radius: $border-radius;
             border: 1px solid $selector-border-color;
+            max-height: 200px;
+            height: auto;
   
             .dropdown-item {
               color: #000000;

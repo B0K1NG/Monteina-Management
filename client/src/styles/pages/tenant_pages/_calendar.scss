@@ -570,6 +570,10 @@
       padding: 1rem;
       max-width: 800px;
       width: 430px;
+
+      .dropdown-list {
+        height: 200px;
+      }
     }
 
     .service-options {
@@ -580,6 +584,10 @@
       align-items: center;
       column-gap: none;
       row-gap: 0rem;
+
+      .dropdown-list {
+        height: 200px;
+      }
 
       .top-options {
         grid-column: 1 / span 2;

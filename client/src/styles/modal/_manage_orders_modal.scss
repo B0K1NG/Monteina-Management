@@ -237,6 +237,17 @@ $dropdown-item-disabled-fg : #6c757d;
     width: 180px;
     height: 80px;
   }
+
+  .add-modal-grid {
+    .dropdown {
+      .dropdown-list-wrapper {
+        .dropdown-list {
+          max-height: 200px;
+          height: auto;
+        }
+      }
+    }
+  }
 }
 
 @media (min-width: $breakpoint-pc) {

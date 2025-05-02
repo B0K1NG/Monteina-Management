@@ -280,6 +280,15 @@ $img-tablet-margin-right:   1.25rem;
       .manage-orders-container {
       max-width: $pc-container-width;
       padding: 3rem 2rem;
+
+      .filters {
+        .dropdown {
+          .dropdown-list {
+            max-height: 200px;
+            height: auto;
+          }
+        }
+      }
   
       .manage-orders-header {
         gap: 16rem;
