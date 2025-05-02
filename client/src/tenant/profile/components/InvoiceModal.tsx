@@ -11,6 +11,7 @@ export default function InvoiceModal({ invoice, onClose }: Props) {
     <div className="modal-overlay">
       <div className="modal-content">
         <h2>Sąskaitos informacija</h2>
+        <div className="modal-grid">
         <p>
           <strong>Data:</strong> {formatISODate(invoice.bookingDate)}
         </p>
@@ -22,11 +23,12 @@ export default function InvoiceModal({ invoice, onClose }: Props) {
         </p>
         <div className="modal-buttons">
           <button
-            className="btn btn--secondary close-modal-button"
+            className="btn btn--secondary cancel-button"
             onClick={onClose}
           >
             Uždaryti
           </button>
+        </div>
         </div>
       </div>
     </div>

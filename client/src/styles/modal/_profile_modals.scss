@@ -1,0 +1,220 @@
+$overlay-bg           : rgba(0, 0, 0, 0.5);
+$overlay-blur         : 5px;
+$modal-z-index        : 1000;
+$modal-bg             : #fff;
+$modal-padding        : 2rem;
+$modal-radius         : 8px;
+$modal-max-width      : 90%;
+$modal-max-height     : 80%;
+$breakpoint-tablet    : 768px;
+$breakpoint-pc        : 1024px;
+
+$grid-gap-row         : 1rem;
+$grid-gap-col         : 1rem;
+
+$dropdown-font-size   : 0.8rem;
+$dropdown-bg          : #f0f0f0;
+$dropdown-border      : #BEBEBE;
+$dropdown-radius      : 6px;
+$dropdown-header-bg   : #fff;
+$dropdown-header-fg   : #000000;
+$dropdown-list-bg     : #e9ecef;
+$dropdown-item-fg     : #000000;
+$dropdown-item-hover-bg : #BEBEBE;
+$dropdown-item-hover-fg : #fff;
+$dropdown-item-selected-bg : #919191;
+$dropdown-item-selected-fg : #fff;
+$dropdown-item-disabled-fg : #6c757d;
+
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: $modal-z-index;
+  background-color: $overlay-bg;
+  backdrop-filter: blur($overlay-blur);
+  color: #000000;
+
+  .modal-content {
+    background: $modal-bg;
+    padding: $modal-padding;
+    border-radius: $modal-radius;
+    display: flex;
+    flex-direction: column;
+    gap: $grid-gap-row;
+    max-width: $modal-max-width;
+    max-height: $modal-max-height;
+    overflow-y: auto;
+
+
+      label {
+        font-weight: bold !important;
+      }
+
+      input {
+        background-color: $dropdown-header-bg;
+        color: $dropdown-header-fg;
+        border: none;
+        padding: 0.6rem;
+        width: 100%;
+        border-radius: $dropdown-radius;
+        border: 1px solid $dropdown-border;
+        background-repeat: no-repeat;
+        background-position: right 0.5rem center;
+        background-size: 12px 12px;
+        padding-right: 1.5rem;
+      }
+    }
+}
+
+.edit-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+}
+
+.edit-modal-content {
+  background: #fff;
+  padding: 2rem;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 90%;
+  max-height: 80%;
+  overflow-y: auto;
+}
+
+.edit-modal-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+
+  .form-field {
+    label {
+        font-weight: bold !important;
+    }
+  }
+
+  .dropdown {
+    font-size: $dropdown-font-size;
+    background-color: $dropdown-bg;
+    border: 1px solid $dropdown-border;
+    border-radius: $dropdown-radius;
+    width: 100%;
+  }
+
+  .dropdown-header {
+    background-color: $dropdown-header-bg;
+    color: $dropdown-header-fg;
+    border: none;
+    padding: 0.6rem;
+    border-radius: $dropdown-radius;
+    background-repeat: no-repeat;
+    background-position: right 0.5rem center;
+    background-size: 12px 12px;
+    padding-right: 1.5rem;
+  }
+
+  .dropdown-list {
+    background-color: $dropdown-list-bg;
+    border: 1px solid $dropdown-border;
+    border-radius: $dropdown-radius;
+    max-height: 300px;
+    margin-left: 0rem;
+  }
+
+  .dropdown-item {
+    color: $dropdown-item-fg;
+    padding: 0.6rem;
+    transition: background-color 0.2s;
+
+    &.selected {
+      background-color: $dropdown-item-selected-bg;
+      color: $dropdown-item-selected-fg;
+    }
+    &.disabled {
+      color: $dropdown-item-disabled-fg;
+      cursor: not-allowed;
+    }
+    &:hover:not(.disabled) {
+      background-color: $dropdown-item-hover-bg;
+      color: $dropdown-item-hover-fg;
+    }
+  }
+}
+
+.edit-modal-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+@media (min-width: $breakpoint-tablet) {
+  .add-modal-content {
+    width: 500px;
+  }
+}
+
+@media (min-width: $breakpoint-pc) {
+  .add-modal-content {
+    width: 600px;
+    max-height: none !important;
+  }
+}
+
+@media (min-width: $breakpoint-tablet) {
+  .add-modal-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: $grid-gap-row $grid-gap-col;
+    align-items: start;
+  }
+}
+
+@media (min-width: 1024px) {
+  .dropdown-list {
+    width: 180px;
+    height: 80px;
+  }
+
+  .add-modal-grid {
+    .dropdown {
+      .dropdown-list-wrapper {
+        .dropdown-list {
+          max-height: 200px;
+          height: auto;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: $breakpoint-pc) {
+  .edit-modal-content {
+    width: 500px;
+
+    .edit-modal-grid {
+      margin-bottom: 2rem;
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .edit-modal-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+
+    .form-field {
+        max-width: 180px;
+    }
+  }
+}
