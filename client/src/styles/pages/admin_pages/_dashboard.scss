@@ -59,7 +59,7 @@ $img-tablet-margin-right:   1.25rem;
     text-align: center;
     margin: 0 0 $vertical-spacing;
     font-weight: normal;
-    color: darken($text-white, 80%);
+    color: adjust($text-white, 80%);
   }
 
   .date-selector {
