@@ -57,18 +57,6 @@ export default function Register() {
           <p className="register-error">{errors.password?.message}</p>
           <button type="submit" className="register-button">Sukurti Paskyrą</button>
         </form>
-        <div className="register-social">
-          <div className="separator">
-            <img src="/src/assets/icons/Separator.png" alt="Separator Line" />
-            <span>Arba prisijunkite su</span>
-            <img src="/src/assets/icons/Separator.png" alt="Separator Line" />
-          </div>
-          <div className="social-icons">
-            <img src="/src/assets/icons/gmail_logo.png" alt="Gmail" />
-            <img src="/src/assets/icons/facebook_logo.png" alt="Facebook" />
-            <img src="/src/assets/icons/apple_logo.png" alt="Apple" />
-          </div>
-        </div>
         <p className="login-register">
           Jau turite paskyrą? <Link to="/login">Prisijungti</Link>
         </p>

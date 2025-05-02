@@ -52,35 +52,6 @@
       }
     }
 
-    .login-social {
-      margin-top: vars.$login-gap;
-      text-align: center;
-
-      .separator {
-        @include mixins.flex-center-row(0.5rem);
-        margin-bottom: vars.$login-gap;
-
-        img {
-          width: vars.$login-separator-width;
-          height: vars.$login-separator-height;
-        }
-
-        span {
-          font-size: vars.$login-link-font-size;
-          color: vars.$login-title-color;
-        }
-      }
-
-      .social-icons {
-        @include mixins.flex-center-row(0.5rem);
-
-        img {
-          width: vars.$login-icon-width;
-          height: vars.$login-icon-height;
-          cursor: pointer;
-        }
-      }
-    }
 
     .login-register {
       margin-top: vars.$login-gap;
@@ -138,13 +109,6 @@
         }
       }
 
-      .login-social {
-        .social-icons img {
-          width: 35px;
-          height: 35px;
-        }
-      }
-
       .login-register {
         font-size: 1rem;
       }
@@ -193,19 +157,6 @@
 
         .login-button {
           font-size: 1.125rem;
-        }
-      }
-
-      .login-social {
-        margin-top: 1.5rem;
-
-        span {
-          font-size: 1rem;
-        }
-
-        .social-icons img {
-          width: 40px;
-          height: 40px;
         }
       }
 

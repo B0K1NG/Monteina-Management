@@ -54,36 +54,6 @@
       }
     }
 
-    .register-social {
-      margin-top: vars.$register-gap;
-      text-align: center;
-
-      .separator {
-        @include mixins.flex-center-row(0.5rem);
-        margin-bottom: vars.$register-gap;
-
-        img {
-          width: vars.$login-separator-width;
-          height: vars.$login-separator-height;
-        }
-
-        span {
-          font-size: vars.$register-input-font-size;
-          color: vars.$register-text-color;
-        }
-      }
-
-      .social-icons {
-        @include mixins.flex-center-row(0.5rem);
-
-        img {
-          width: vars.$register-icon-size;
-          height: vars.$register-icon-size;
-          cursor: pointer;
-        }
-      }
-    }
-
     .login-register {
       margin-top: vars.$register-gap;
       font-size: vars.$register-input-font-size;
@@ -215,13 +185,6 @@
       .login-register {
         font-size: 1rem;
       }
-
-      .register-social {
-        .social-icons img {
-          width: 35px;
-          height: 35px;
-        }
-      }
     }
 
     .register-right {
@@ -315,19 +278,6 @@
 
         .register-button {
           font-size: 1.125rem;
-        }
-      }
-
-      .register-social {
-        margin-top: 1.5rem;
-
-        span {
-          font-size: 1rem;
-        }
-
-        .social-icons img {
-          width: 40px;
-          height: 40px;
         }
       }
     }

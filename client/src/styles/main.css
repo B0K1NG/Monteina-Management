@@ -1490,36 +1490,6 @@ body {
 .register-container .register-left .register-form .register-button:hover {
   background-color: #333;
 }
-.register-container .register-left .register-social {
-  margin-top: 1rem;
-  text-align: center;
-}
-.register-container .register-left .register-social .separator {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-.register-container .register-left .register-social .separator img {
-  width: 100px;
-  height: 2px;
-}
-.register-container .register-left .register-social .separator span {
-  font-size: 0.875rem;
-  color: #FFFFFF;
-}
-.register-container .register-left .register-social .social-icons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-.register-container .register-left .register-social .social-icons img {
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-}
 .register-container .register-left .login-register {
   margin-top: 1rem;
   font-size: 0.875rem;
@@ -1630,10 +1600,6 @@ body {
   .register-container .register-left .login-register {
     font-size: 1rem;
   }
-  .register-container .register-left .register-social .social-icons img {
-    width: 35px;
-    height: 35px;
-  }
   .register-container .register-right {
     flex: 1;
     display: flex;
@@ -1707,16 +1673,6 @@ body {
   }
   .register-container .register-left .register-form .register-button {
     font-size: 1.125rem;
-  }
-  .register-container .register-left .register-social {
-    margin-top: 1.5rem;
-  }
-  .register-container .register-left .register-social span {
-    font-size: 1rem;
-  }
-  .register-container .register-left .register-social .social-icons img {
-    width: 40px;
-    height: 40px;
   }
   .register-container .register-right {
     flex: 1;
@@ -1810,36 +1766,6 @@ body {
 .login-container .login-left .login-form .login-button:hover {
   background-color: #333;
 }
-.login-container .login-left .login-social {
-  margin-top: 1rem;
-  text-align: center;
-}
-.login-container .login-left .login-social .separator {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-  margin-bottom: 1rem;
-}
-.login-container .login-left .login-social .separator img {
-  width: 100px;
-  height: 2px;
-}
-.login-container .login-left .login-social .separator span {
-  font-size: 0.875rem;
-  color: #FFFFFF;
-}
-.login-container .login-left .login-social .social-icons {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.5rem;
-}
-.login-container .login-left .login-social .social-icons img {
-  width: 30px;
-  height: 30px;
-  cursor: pointer;
-}
 .login-container .login-left .login-register {
   margin-top: 1rem;
   font-size: 0.875rem;
@@ -1885,10 +1811,6 @@ body {
   .login-container .login-left .login-form .login-button {
     font-size: 1rem;
   }
-  .login-container .login-left .login-social .social-icons img {
-    width: 35px;
-    height: 35px;
-  }
   .login-container .login-left .login-register {
     font-size: 1rem;
   }
@@ -1927,16 +1849,6 @@ body {
   }
   .login-container .login-left .login-form .login-button {
     font-size: 1.125rem;
-  }
-  .login-container .login-left .login-social {
-    margin-top: 1.5rem;
-  }
-  .login-container .login-left .login-social span {
-    font-size: 1rem;
-  }
-  .login-container .login-left .login-social .social-icons img {
-    width: 40px;
-    height: 40px;
   }
   .login-container .login-left .login-register {
     font-size: 1.125rem;

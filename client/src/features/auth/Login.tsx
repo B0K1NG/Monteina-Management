@@ -67,18 +67,6 @@ export default function Login() {
           <p className="login-error">{errors.password?.message}</p>
           <button type="submit" className="login-button">Prisijungti</button>
         </form>
-        <div className="login-social">
-          <div className="separator">
-            <img src="/src/assets/icons/Separator.png" alt="Separator Line" />
-            <span>Arba prisijunkite su</span>
-            <img src="/src/assets/icons/Separator.png" alt="Separator Line" />
-          </div>
-          <div className="social-icons">
-            <img src="/src/assets/icons/gmail_logo.png" alt="Gmail" />
-            <img src="/src/assets/icons/facebook_logo.png" alt="Facebook" />
-            <img src="/src/assets/icons/apple_logo.png" alt="Apple" />
-          </div>
-        </div>
         <p className="login-register">
           Dar neturite paskyros? <Link to="/register">Sukurkite paskyrą</Link>
         </p>
