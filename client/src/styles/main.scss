@@ -14,6 +14,7 @@
 @use 'modal/_buttons_for_modal';
 @use 'modal/_delete_confirm_modal';
 @use 'modal/_confirm_changes_modal';
+@use 'modal/_profile_modals';
 
 @use "pages/tenant_pages/home";
 @use "pages/tenant_pages/profile";
