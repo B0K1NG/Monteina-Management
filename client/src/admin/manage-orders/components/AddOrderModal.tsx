@@ -32,6 +32,7 @@ export default function AddOrderModal({
   const [bookingDate, setBookingDate] = useState('');
   const [bookingTime, setBookingTime] = useState('');
   const [status, setStatus] = useState<'active'|'done'|'canceled'>('active');
+  const [manualTotalAmount, setManualTotalAmount] = useState('');
   const [carDetails, setCarDetails] = useState({
     make: '',
     model: '',
@@ -53,12 +54,19 @@ export default function AddOrderModal({
       setBookingDate('');
       setBookingTime('');
       setStatus('active');
+      setManualTotalAmount('');
       setCarDetails({ make: '', model: '', year: '', tireSize: '' });
     }
   }, [isOpen]);
 
+  useEffect(() => {
+    if (tireSize) {
+      setCarDetails(cd => ({ ...cd, tireSize }));
+    }
+  }, [tireSize]);
+
   const handleSave = () => {
-    if (!userId || !serviceId || !status) {
+    if (!userId || !serviceId || !status ) {
       toast.info('Prašome užpildyti visus laukus!');
       return;
     }
@@ -86,6 +94,11 @@ export default function AddOrderModal({
 
     const formattedDate = bookingDate.split('T')[0];
 
+    const updatedCarDetails = {
+      ...carDetails,
+      tireSize: tireSize
+    };
+
     onSave({
       userId,
       serviceId,
@@ -96,7 +109,8 @@ export default function AddOrderModal({
       valveChange,
       tireQuantity: Number(tireQuantity) || 0,
       tireSize,
-      carDetails,
+      manualTotalAmount: manualTotalAmount ? parseFloat(manualTotalAmount) : undefined,
+      carDetails: updatedCarDetails,
     });
   };
 
@@ -329,6 +343,16 @@ export default function AddOrderModal({
               value={valveChange ? 'yes' : 'no'}
               onChange={(value) => setValveChange(value === 'yes')}
               placeholder="Pasirinkite"
+            />
+          </div>
+
+          <div>
+            <label>Bendra suma</label>
+            <input
+              type="text"
+              value={manualTotalAmount}
+              onChange={(e) => setManualTotalAmount(e.target.value)}
+              placeholder="Įveskite bendrą sumą"
             />
           </div>
         </div>

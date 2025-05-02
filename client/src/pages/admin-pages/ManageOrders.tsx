@@ -51,6 +51,7 @@ export default function ManageOrdersPage() {
   }), [bookings, filters, users]);
 
   const handleAdd = async (form: OrderFormData) => {
+
     if (!form.bookingDate) {
       toast.error('Pasirinkite datą');
       return;
@@ -67,19 +68,27 @@ export default function ManageOrdersPage() {
       formattedDate = form.bookingDate.split('T')[0];
     }
 
+    const formattedServiceId = `MONT-${formattedDate.replace(/-/g, '.')}-${form.serviceId}`;
+    
     const advanceAmount = 0;
 
-    let mainPrice = svc.price_min ?? 0;
-    if (svc.name === 'Padangos remontas' && form.repairOption === 'lopas' && svc.price_max != null) {
-      mainPrice = svc.price_max;
+    let totalAmount = 0;
+    if (form.manualTotalAmount !== undefined) {
+      totalAmount = form.manualTotalAmount;
+    } else {
+      let mainPrice = svc.price_min ?? 0;
+      if (svc.name === 'Padangos remontas' && form.repairOption === 'lopas' && svc.price_max != null) {
+        mainPrice = svc.price_max;
+      }
+      const valvePrice = form.valveChange ? 5 : 0;
+      totalAmount = mainPrice * form.tireQuantity + valvePrice;
     }
-
-    const valvePrice = form.valveChange ? 5 : 0;
-    const totalAmount = mainPrice * form.tireQuantity + valvePrice;
+    
     const remainingAmount = totalAmount - advanceAmount;
 
     const payload: CreateOrderData = {
       ...form,
+      serviceId: formattedServiceId,
       bookingDate: formattedDate,
       bookingTime: form.bookingTime || '',
       paymentStatus: 'success',

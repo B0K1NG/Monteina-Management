@@ -31,6 +31,7 @@ export interface User {
     valveChange: boolean;
     tireQuantity: number;
     tireSize: string;
+    manualTotalAmount?: number;
     carDetails: {
       make: string;
       model: string;
