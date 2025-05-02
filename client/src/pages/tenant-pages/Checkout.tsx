@@ -6,14 +6,16 @@ import CheckoutSummary from '../../tenant/checkout/components/CheckoutSummary';
 
 export default function CheckoutPage() {
   const details = useBookingDetails();
-  if (!details) return null;
+  const pay = usePayment();
+
+  if (!details) {
+    return <div>Kraunasi...</div>;
+  }
 
   const {
     mainSvc, valvePrice, advanceAmount,
     totalAmount, remaining, serviceId
   } = calculateAmounts(details);
-
-  const pay = usePayment();
 
   return (
     <div className="checkout-page">

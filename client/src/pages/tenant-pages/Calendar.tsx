@@ -38,6 +38,13 @@ const CalendarPage: React.FC = () => {
     setSelectedDate(new Date().toISOString().split('T')[0]);
   }, []);
 
+  const handleDateSelect = (date: string) => {
+    if (date !== selectedDate) {
+      setSelectedTime(null);
+    }
+    setSelectedDate(date);
+  };
+
   const weekDays = getWeekDays(weekStart);
 
   const times = (() => {
@@ -115,7 +122,7 @@ const CalendarPage: React.FC = () => {
           <WeekDays
             days={weekDays}
             selectedDate={selectedDate}
-            onSelect={setSelectedDate}
+            onSelect={handleDateSelect}
           />
 
           <button

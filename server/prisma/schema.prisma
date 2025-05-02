@@ -41,7 +41,7 @@ model Checkout {
   totalAmount    Float
   advanceAmount  Float
   remainingAmount Float
-  bookingDate    DateTime
+  bookingDate    DateTime @db.Date
   bookingTime    String
   createdAt      DateTime @default(now())
   status          String   @default("active")

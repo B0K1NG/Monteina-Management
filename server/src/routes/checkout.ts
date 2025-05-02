@@ -1,5 +1,6 @@
 import { Router, Request, Response, NextFunction } from 'express';
 import { PrismaClient } from '@prisma/client';
+import { authenticateToken } from '../middleware/auth';
 
 const router = Router();
 const prisma = new PrismaClient();
@@ -15,8 +16,8 @@ router.post(
       const {
         paymentStatus,
         userId,
-        bookingDate,
-        bookingTime,
+        date,
+        time,
         carDetails,
         selectedService,
         valveChange,
@@ -24,7 +25,7 @@ router.post(
         serviceId,
         totalAmount,
         advanceAmount,
-        remainingAmount,
+        remaining,
       } = req.body;
 
       if (paymentStatus !== 'success') {
@@ -32,12 +33,13 @@ router.post(
         return;
       }
 
-      const slotDate = new Date(bookingDate);
+
+      const slotDate = new Date(date);
 
       const existing = await prisma.checkout.count({
         where: {
           bookingDate: slotDate,
-          bookingTime,
+          bookingTime: time,
           status: { not: 'canceled' },
         },
       });
@@ -51,7 +53,7 @@ router.post(
         data: {
           userId,
           bookingDate: slotDate,
-          bookingTime,
+          bookingTime: time,
           carBrand: carDetails.make,
           carModel: carDetails.model,
           tireSize: carDetails.tireSize,
@@ -61,13 +63,14 @@ router.post(
           serviceId,
           totalAmount,
           advanceAmount,
-          remainingAmount,
+          remainingAmount: remaining,
           status: 'active',
         },
       });
 
       res.status(200).json(newCheckout);
     } catch (err) {
+      console.error('Error in POST /api/checkout:', err);
       next(err);
     }
   }
@@ -134,10 +137,14 @@ router.get('/all-bookings', async (req, res) => {
   }
 });
 
-router.get('/active', async (req, res) => {
+router.get('/active', authenticateToken, async (req, res) => {
   try {
+    const userId = req.user.id;
     const activeBookings = await prisma.checkout.findMany({
-      where: { status: 'active' },
+      where: { 
+        status: 'active',
+        userId: userId
+      },
     });
     res.json(activeBookings);
   } catch (error) {
@@ -145,10 +152,14 @@ router.get('/active', async (req, res) => {
   }
 });
 
-router.get('/done', async (req, res) => {
+router.get('/done', authenticateToken, async (req, res) => {
   try {
+    const userId = req.user.id;
     const doneBookings = await prisma.checkout.findMany({
-      where: { status: 'done' },
+      where: { 
+        status: 'done',
+        userId: userId
+      },
     });
     res.json(doneBookings);
   } catch (error) {
@@ -156,10 +167,14 @@ router.get('/done', async (req, res) => {
   }
 });
 
-router.get('/canceled', async (req, res) => {
+router.get('/canceled', authenticateToken, async (req, res) => {
   try {
+    const userId = req.user.id;
     const canceledBookings = await prisma.checkout.findMany({
-      where: { status: 'canceled' },
+      where: { 
+        status: 'canceled',
+        userId: userId
+      },
     });
     res.json(canceledBookings);
   } catch (error) {

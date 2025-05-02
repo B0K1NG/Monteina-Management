@@ -17,9 +17,12 @@ export default function usePayment() {
       return navigate('/confirmation', { state: { success: false } });
     }
 
+    const bookingDate = new Date(details.date);
+
     try {
       const res = await axios.post('/api/checkout', {
         ...details,
+        date: bookingDate.toISOString().split('T')[0],
         userId,
         paymentStatus: 'success',
       });
@@ -31,7 +34,7 @@ export default function usePayment() {
             serviceId: details.serviceId,
             totalAmount: details.totalAmount,
             advanceAmount: details.advanceAmount,
-            bookingDate: details.date,
+            bookingDate: bookingDate.toISOString().split('T')[0],
             bookingTime: details.time,
           }
         });
