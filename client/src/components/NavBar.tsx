@@ -30,7 +30,7 @@ export default function NavBar() {
                 <div></div>
             </div>
             <ul className={`navbar-links ${menuOpen ? 'active' : ''}`}>
-                <div className="navbar-center">
+            <div className="navbar-right">
                     <li><NavLink to="/services" className={({ isActive }) => isActive ? "active" : ""} onClick={handleLinkClick}>Paslaugos</NavLink></li>
                     <li><NavLink to="/faq" className={({ isActive }) => isActive ? "active" : ""} onClick={handleLinkClick}>D.U.K.</NavLink></li>
                     {token && (
@@ -39,8 +39,7 @@ export default function NavBar() {
                             <li><NavLink to="/profile" className={({ isActive }) => isActive ? "active" : ""} onClick={handleLinkClick}>Valdymo skydelis</NavLink></li>
                         </>
                     )}
-                </div>
-                <div className="navbar-right">
+
                     {token ? (
                         <li><button onClick={handleSignOut} className="btn-logout">Atsijungti</button></li>
                     ) : (

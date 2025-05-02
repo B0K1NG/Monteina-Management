@@ -40,7 +40,7 @@ export default function AdminNavBar() {
       </div>
 
       <ul className={`navbar-links ${menuOpen ? 'active' : ''}`}>        
-        <li className="navbar-center">
+        <li className="navbar-right">
           <NavLink
             to="/admin/orders"
             className={({ isActive }) => (isActive ? 'active' : '')}
@@ -49,7 +49,7 @@ export default function AdminNavBar() {
             Užsakymų valdymas
           </NavLink>
         </li>
-        <li className="navbar-center">
+        <li className="navbar-right">
           <NavLink
             to="/admin/services"
             className={({ isActive }) => (isActive ? 'active' : '')}
@@ -60,7 +60,7 @@ export default function AdminNavBar() {
         </li>
         {token && (
           <>
-            <li className="navbar-center">
+            <li className="navbar-right">
               <NavLink
                 to="/admin/users"
                 className={({ isActive }) => (isActive ? 'active' : '')}
@@ -69,7 +69,7 @@ export default function AdminNavBar() {
                 Vartotojų valdymas
               </NavLink>
             </li>
-            <li className="navbar-center">
+            <li className="navbar-right">
               <NavLink
                 to="/admin/dashboard"
                 className={({ isActive }) => (isActive ? 'active' : '')}

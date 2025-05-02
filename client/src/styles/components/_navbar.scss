@@ -24,7 +24,7 @@
     display: none;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-end;
     position: absolute;
     top: 80px;
     right: 0;
@@ -91,13 +91,6 @@
       background: none;
       transform: none;
       opacity: 1;
-
-      .navbar-center {
-        display: flex;
-        justify-content: center;
-        gap: 2rem;
-        flex: 1;
-      }
 
       .navbar-right {
         display: flex;
