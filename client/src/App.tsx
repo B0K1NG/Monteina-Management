@@ -12,8 +12,9 @@ import Services from './pages/tenant-pages/Services';
 import Calendar from './pages/tenant-pages/Calendar';
 import Footer from './components/Footer';
 import FAQ from './pages/tenant-pages/FAQ';
+import Terms from './pages/tenant-pages/Terms';
 import Checkout from './pages/tenant-pages/Checkout';
-import Confirmation from './pages/tenant-pages/Confirmation'
+import Confirmation from './pages/tenant-pages/Confirmation';
 
 import AdminNavBar from './components/AdminNavBar';
 import AdminFooter from './components/AdminFooter';
@@ -87,6 +88,7 @@ function App() {
         <Route path="/services" element={<Services />} />
         <Route path="/calendar" element={<Calendar />} />
         <Route path="/faq" element={<FAQ />} />
+        <Route path="/terms" element={<Terms />} />
         <Route path="/checkout" element={<Checkout />} />
         <Route path="/confirmation" element={<Confirmation />} />
         
