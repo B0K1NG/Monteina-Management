@@ -7,9 +7,11 @@ Monteina Management System is a comprehensive platform for managing services, bo
 - **Admin Panel**: Manage services, users, and bookings with ease.
 - **Booking System**: Allow users to book services with a calendar interface.
 - **User Dashboard**: View bookings, invoices, and profile details.
+- **Invoice Management**: View customer invoices directly from the admin order management interface.
 - **Responsive Design**: Optimized for desktop, tablet, and mobile devices.
 - **Authentication**: Secure login and role-based access control.
 - **Notifications**: Toast notifications for user feedback.
+- **Terms and Conditions**: Detailed service terms page for legal compliance and transparency.
 
 ---
 
@@ -74,6 +76,7 @@ Monteina Management System is a comprehensive platform for managing services, bo
   - `/api/auth/login` - User login
   - `/api/services` - Manage services
   - `/api/bookings` - Manage bookings
+  - `/api/checkout` - Handle order checkout and status updates
 
 ---
 
@@ -81,10 +84,10 @@ Monteina Management System is a comprehensive platform for managing services, bo
 
 ### Frontend (`client/`)
 - **`src/components/`**: Reusable UI components (e.g., `NavBar`, `Footer`).
-- **`src/pages/`**: Page-level components for routing (e.g., `Home`, `Profile`).
+- **`src/pages/`**: Page-level components for routing (e.g., `Home`, `Profile`, `Terms`).
 - **`src/styles/`**: SCSS and CSS files for styling.
-- **`src/tenant/`**: Tenant-specific features like booking and profile management.
-- **`src/admin/`**: Admin-specific features like managing users and services.
+- **`src/tenant/`**: Tenant-specific features like booking, profile management, and terms.
+- **`src/admin/`**: Admin-specific features like managing users, services, and viewing invoices.
 
 ### Backend (`server/`)
 - **`src/routes/`**: API routes for authentication, services, and bookings.
@@ -137,6 +140,13 @@ Monteina Management System is a comprehensive platform for managing services, bo
 ## 🧪 Testing
 - **Frontend**: Use React Testing Library for component testing.
 - **Backend**: Use Jest for API endpoint testing.
+
+---
+
+## 🔄 Recent Updates
+- **May 2025**: Added invoice viewing functionality for administrators
+- **May 2025**: Added comprehensive Terms and Conditions page
+- **April 2025**: Enhanced user booking flow with improved validation
 
 ---
 
