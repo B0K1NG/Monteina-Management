@@ -42,8 +42,11 @@ Monteina Management System is a comprehensive platform for managing services, bo
 3. Set up the database:
    - Create a `.env` file in the `server/` directory with the following:
      ```
+     PORT=your_port
      DATABASE_URL=postgresql://<username>:<password>@<host>:<port>/<database>
      JWT_SECRET=your_secret_key
+     EMAIL_USER=your_email_user
+     EMAIL_PASS=your_email_pass
      ```
    - Run Prisma migrations:
      ```bash
@@ -143,10 +146,31 @@ Monteina Management System is a comprehensive platform for managing services, bo
 
 ---
 
-## 🔄 Recent Updates
-- **May 2025**: Added invoice viewing functionality for administrators
-- **May 2025**: Added comprehensive Terms and Conditions page
-- **April 2025**: Enhanced user booking flow with improved validation
+## 🔄 Development History & Roadmap
+
+### 🚀 Phase 1: Project Inception (March 2025)
+- **UI/UX Design**: Established the initial user interface and experience layouts using Figma, focusing on intuitive navigation and user-centric design.
+- **Navigation Structure**: Outlined the primary navigation flow to ensure seamless user interaction across the platform.
+
+### 🛠️ Phase 2: Technical Foundation (April 2025)
+- **Frontend Setup**: Initialized the frontend using React with Vite for efficient development and optimized performance.
+- **Backend Architecture**: Configured the backend with Node.js, Express, and Prisma ORM to manage server-side operations and database interactions.
+- **Database Integration**: Established a robust database schema to support dynamic data handling and scalability.
+
+### 🌐 Phase 3: Full Website Development (May 2025)
+- **Responsive Design Implementation**: Translated Figma designs into a responsive web application, ensuring compatibility across devices.
+- **Admin Panel Development**: Created an administrative interface for managing services, users, and bookings efficiently.
+- **Booking System Integration**: Implemented a calendar-based booking system allowing users to schedule services seamlessly.
+- **User Dashboard Creation**: Developed a personalized dashboard for users to view and manage bookings, invoices, and profile information.
+- **Invoice Management**: Enabled administrators to access and manage customer invoices directly from the order management interface.
+- **Authentication Mechanism**: Established secure login and registration processes with role-based access control.
+- **Notification System**: Integrated real-time toast notifications to enhance user feedback.
+- **Terms and Conditions Page**: Added a comprehensive service terms section to inform users about policies and legalities.
+
+### 🔮 Phase 4: Planned Updates
+- **Invoice PDF Generation**: Develop functionality to generate and download invoices in PDF format for user convenience.
+- **Multi-language Support**: Implement localization features to support multiple languages.
+- **Enhanced Analytics Dashboard**: Build an advanced dashboard to help administrators analyze user behavior, bookings, and service performance.
 
 ---
 
