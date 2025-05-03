@@ -10,6 +10,7 @@ const schema = z.object({
   firstName: z.string().min(1, 'Vardas yra privalomas'),
   lastName: z.string().min(1, 'Pavardė yra privaloma'),
   email: z.string().email('Neteisingas el. pašto formatas'),
+  phoneNumber: z.string().min(1, 'Telefono numeris yra privalomas'),
   password: z.string().min(8, 'Slaptažodis turi būti bent 8 simbolių ilgio'),
 });
 
@@ -36,10 +37,14 @@ export default function Register() {
       <div className="register-left">
         <h1 className="register-title">Sukurti Paskyrą</h1>
         <form onSubmit={handleSubmit(onSubmit)} className="register-form">
-          <input {...register('firstName')} type="text" placeholder="Vardas ir Pavardė" className="register-input" />
+          <input {...register('firstName')} type="text" placeholder="Vardas" className="register-input" />
           <p className="register-error">{errors.firstName?.message}</p>
+          <input {...register('lastName')} type="text" placeholder="Pavardė" className="register-input" />
+          <p className="register-error">{errors.lastName?.message}</p>
           <input {...register('email')} type="email" placeholder="El. paštas" className="register-input" />
           <p className="register-error">{errors.email?.message}</p>
+          <input {...register('phoneNumber')} type="tel" placeholder="Telefono numeris" className="register-input" />
+          <p className="register-error">{errors.phoneNumber?.message}</p>
           <div className="password-container">
             <input
               {...register('password')}
