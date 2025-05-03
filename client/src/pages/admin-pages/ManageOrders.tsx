@@ -14,6 +14,7 @@ import AddOrderModal from '../../admin/manage-orders/components/AddOrderModal';
 import EditOrderModal from '../../admin/manage-orders/components/EditOrderModal';
 import CancelOrderModal from '../../admin/manage-orders/components/CancelOrderModal';
 import ConfirmChangesModal from '../../admin/manage-orders/components/ConfirmChangesModal';
+import InvoiceModal from '../../admin/manage-orders/components/InvoiceModal';
 
 import {
   Booking,
@@ -38,6 +39,7 @@ export default function ManageOrdersPage() {
   const [editBooking,   setEditBooking]   = useState<Booking|null>(null);
   const [cancelBooking, setCancelBooking] = useState<Booking|null>(null);
   const [confirmBooking,setConfirmBooking]= useState<Booking|null>(null);
+  const [invoiceBooking,setInvoiceBooking]= useState<Booking|null>(null);
 
   const filtered = useMemo(() => bookings.filter(b => {
 
@@ -158,6 +160,7 @@ export default function ManageOrdersPage() {
       <OrdersTable
         bookings={filtered}
         onEdit={b => setEditBooking(b)}
+        onViewInvoice={b => setInvoiceBooking(b)}
       />
 
       <AddOrderModal
@@ -192,6 +195,13 @@ export default function ManageOrdersPage() {
           booking={confirmBooking}
           onClose={() => setConfirmBooking(null)}
           onConfirm={() => handleSave(confirmBooking)}
+        />
+      )}
+
+      {invoiceBooking && (
+        <InvoiceModal
+          booking={invoiceBooking}
+          onClose={() => setInvoiceBooking(null)}
         />
       )}
     </div>

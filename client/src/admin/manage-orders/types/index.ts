@@ -19,6 +19,7 @@ export interface User {
     serviceName: string;
     status: 'active' | 'done' | 'canceled';
     serviceId: string;
+    totalAmount?: number;
   }
   
   export interface OrderFormData {
