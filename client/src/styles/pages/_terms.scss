@@ -1,0 +1,122 @@
+.terms-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #FFFFFF;
+  padding: 2rem 1rem;
+  min-height: 100vh;
+  
+  .terms-container {
+    width: 100%;
+    max-width: 800px;
+    background-color: rgba(35, 38, 38, 0.8);
+    border-radius: 8px;
+    padding: 2rem 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .terms-content {
+    h1 {
+      font-size: 1.8rem;
+      font-weight: 500;
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #FFFFFF;
+    }
+
+    .terms-section {
+      margin-bottom: 2rem;
+      
+      h2 {
+        font-size: 1.4rem;
+        font-weight: 400;
+        margin-bottom: 1rem;
+        color: #3A7EF9;
+      }
+
+      p {
+        font-size: 0.9rem;
+        line-height: 1.6;
+        margin-bottom: 0.8rem;
+        color: #e0e0e0;
+      }
+
+      ul {
+        margin-left: 1.5rem;
+        margin-bottom: 1rem;
+        
+        li {
+          font-size: 0.9rem;
+          line-height: 1.6;
+          margin-bottom: 0.5rem;
+          color: #e0e0e0;
+        }
+      }
+    }
+
+    .terms-footer {
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
+      margin-top: 2rem;
+      padding-top: 1rem;
+      font-size: 0.8rem;
+      color: #a0a0a0;
+      text-align: center;
+
+      p {
+        margin-bottom: 0.5rem;
+      }
+    }
+  }
+}
+
+@media (min-width: 768px) {
+  .terms-page {
+    padding: 3rem 2rem;
+    
+    .terms-container {
+      padding: 3rem;
+    }
+    
+    .terms-content {
+      h1 {
+        font-size: 2.2rem;
+      }
+      
+      .terms-section {
+        h2 {
+          font-size: 1.6rem;
+        }
+        
+        p, ul li {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+}
+
+@media (min-width: 1024px) {
+  .terms-page {
+    padding: 4rem 3rem;
+    
+    .terms-content {
+      h1 {
+        font-size: 2.5rem;
+      }
+      
+      .terms-section {
+        h2 {
+          font-size: 1.8rem;
+        }
+        
+        p, ul li {
+          font-size: 1.1rem;
+        }
+      }
+      
+      .terms-footer {
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
