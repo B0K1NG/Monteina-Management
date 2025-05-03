@@ -12,7 +12,7 @@
 body {
   font-family: "Poppins", sans-serif;
   color: #333;
-  background-image: linear-gradient(to left bottom, #232626, #535556, #898a8b, #c2c3c3, #ffffff);
+  background-image: linear-gradient(to bottom, #232626, #535556);
 }
 
 .dashboard-container {
@@ -3122,6 +3122,100 @@ body {
     padding: 0.4rem 5rem;
   }
 }
+.terms-page {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: #FFFFFF;
+  padding: 2rem 1rem;
+  min-height: 100vh;
+}
+.terms-page .terms-container {
+  width: 100%;
+  max-width: 800px;
+  background-color: rgba(35, 38, 38, 0.8);
+  border-radius: 8px;
+  padding: 2rem 1.5rem;
+  margin-bottom: 2rem;
+}
+.terms-page .terms-content h1 {
+  font-size: 1.8rem;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #FFFFFF;
+}
+.terms-page .terms-content .terms-section {
+  margin-bottom: 2rem;
+}
+.terms-page .terms-content .terms-section h2 {
+  font-size: 1.4rem;
+  font-weight: 400;
+  margin-bottom: 1rem;
+  color: #3A7EF9;
+}
+.terms-page .terms-content .terms-section p {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 0.8rem;
+  color: #e0e0e0;
+}
+.terms-page .terms-content .terms-section ul {
+  margin-left: 1.5rem;
+  margin-bottom: 1rem;
+}
+.terms-page .terms-content .terms-section ul li {
+  font-size: 0.9rem;
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
+  color: #e0e0e0;
+}
+.terms-page .terms-content .terms-footer {
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  margin-top: 2rem;
+  padding-top: 1rem;
+  font-size: 0.8rem;
+  color: #a0a0a0;
+  text-align: center;
+}
+.terms-page .terms-content .terms-footer p {
+  margin-bottom: 0.5rem;
+}
+
+@media (min-width: 768px) {
+  .terms-page {
+    padding: 3rem 2rem;
+  }
+  .terms-page .terms-container {
+    padding: 3rem;
+  }
+  .terms-page .terms-content h1 {
+    font-size: 2.2rem;
+  }
+  .terms-page .terms-content .terms-section h2 {
+    font-size: 1.6rem;
+  }
+  .terms-page .terms-content .terms-section p, .terms-page .terms-content .terms-section ul li {
+    font-size: 1rem;
+  }
+}
+@media (min-width: 1024px) {
+  .terms-page {
+    padding: 4rem 3rem;
+  }
+  .terms-page .terms-content h1 {
+    font-size: 2.5rem;
+  }
+  .terms-page .terms-content .terms-section h2 {
+    font-size: 1.8rem;
+  }
+  .terms-page .terms-content .terms-section p, .terms-page .terms-content .terms-section ul li {
+    font-size: 1.1rem;
+  }
+  .terms-page .terms-content .terms-footer {
+    font-size: 0.9rem;
+  }
+}
 .dashboard-container {
   display: flex;
   flex-direction: column;
@@ -3424,6 +3518,11 @@ body {
   width: 100%;
   min-width: 300px;
   border-collapse: collapse;
+}
+.manage-orders-container .orders-table table .actions-column {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
 }
 .manage-orders-container .orders-table table .phone-number {
   text-decoration: underline;
