@@ -26,7 +26,7 @@
 - Done
 
 ## 🧪 Testing & Debugging
-- Done
+- Undergoing
 
 ## 🚀 Deployment
 - [ ] Deploy frontend to Vercel / Netlify
