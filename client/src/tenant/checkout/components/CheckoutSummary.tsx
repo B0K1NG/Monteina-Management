@@ -49,6 +49,7 @@ const CheckoutSummary: React.FC<Props> = ({
         Paspaudę "Apmokėti" sutinkate su mūsų <a href="/terms">paslaugų teikimo sąlygomis.</a>
       </p>
       <p>Automobiliai kurių varžtų nebus įmanoma atsukti nebus aptarnaujami</p>
+      <p>Jei nepavyks atvykti pasirinktu laiku, jūs būsite įrašyti į gyvąją eilę.</p>
     </div>
   </div>
 );
