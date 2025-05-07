@@ -556,6 +556,11 @@
         &-header {
           padding: 0.8rem 0.7rem;
         }
+        .dropdown-list-wrapper {
+          .dropdown-list {
+            height: auto;
+          }
+        }
       }
     }
 

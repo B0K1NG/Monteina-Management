@@ -2585,6 +2585,9 @@ body {
   .car-service-box .repair-options .dropdown-header {
     padding: 0.8rem 0.7rem;
   }
+  .car-service-box .repair-options .dropdown .dropdown-list-wrapper .dropdown-list {
+    height: auto;
+  }
   .car-service-box .service-valves-optional label {
     padding: 0.8rem 0.7rem !important;
     width: 190px;
