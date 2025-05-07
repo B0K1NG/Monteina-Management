@@ -1493,7 +1493,7 @@ body {
 .register-container .register-left .login-register {
   margin-top: 1rem;
   font-size: 0.875rem;
-  color: #424242;
+  color: #fff;
 }
 .register-container .register-left .login-register a {
   color: #3A7EF9;
@@ -1769,6 +1769,7 @@ body {
 .login-container .login-left .login-register {
   margin-top: 1rem;
   font-size: 0.875rem;
+  color: #fff;
 }
 .login-container .login-left .login-register a {
   color: #3A7EF9;
