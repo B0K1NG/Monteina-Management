@@ -38,9 +38,11 @@ router.put('/:id', async (req, res) => {
   const { firstName, lastName, email, phoneNumber, role, status } = req.body;
 
   try {
+    const confirmed = status !== 'not_confirmed' ? true : false
+
     const updatedUser = await prisma.user.update({
       where: { id: parseInt(id) },
-      data: { firstName, lastName, email, phoneNumber, role, status },
+      data: { firstName, lastName, email, phoneNumber, role, status, confirmed },
     });
 
     res.status(200).json(updatedUser);
