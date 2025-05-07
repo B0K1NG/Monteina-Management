@@ -103,6 +103,13 @@ app.post(
         return;
       }
 
+      if (user.status === 'not_confirmed') {
+        res.status(403).json({
+          error: 'Jūsų paskyra dar nepatvirtinta.',
+        });
+        return;
+      }
+
       if (!user.confirmed) {
         res.status(403).json({ error: 'Please confirm your email address.' });
         return;
