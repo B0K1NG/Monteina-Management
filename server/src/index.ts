@@ -7,6 +7,7 @@ import checkoutRoutes from './routes/checkout';
 import profileRoutes from './routes/profile';
 import servicesRoutes from './routes/services';
 import usersRoutes from './routes/users';
+import authRoutes from './routes/auth';
 
 import cors from 'cors';
 import cron from 'node-cron';
@@ -43,6 +44,7 @@ app.use(express.json());
 app.use('/api/profile', profileRoutes);
 app.use('/api/services', servicesRoutes);
 app.use('/api/users', usersRoutes);
+app.use('/auth', authRoutes);
 
 app.use((req, res, next) => {
   if (req.user) {

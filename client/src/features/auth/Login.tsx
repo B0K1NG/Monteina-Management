@@ -66,6 +66,9 @@ export default function Login() {
           </div>
           <p className="login-error">{errors.password?.message}</p>
           <button type="submit" className="login-button">Prisijungti</button>
+          <div className='forgot-password'>
+            <Link to="/forgot-password">Pamiršote slaptažodį?</Link>
+          </div>
         </form>
         <p className="login-register">
           Dar neturite paskyros? <Link to="/register">Sukurkite paskyrą</Link>

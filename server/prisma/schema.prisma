@@ -18,6 +18,7 @@ model User {
   role        String  @default("client")
   status      String @default("active")
   confirmed   Boolean @default(false)
+  passwordReset PasswordReset?
 }
 model Service {
   id             Int      @id @default(autoincrement())
@@ -45,4 +46,13 @@ model Checkout {
   bookingTime    String
   createdAt      DateTime @default(now())
   status          String   @default("active")
+}
+
+model PasswordReset {
+  id        Int      @id @default(autoincrement())
+  userId    Int      @unique
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  token     String   
+  expiresAt DateTime
+  createdAt DateTime @default(now())
 }

@@ -50,6 +50,21 @@
       .login-button {
         @include mixins.button-style-login(vars.$login-button-bg, vars.$login-button-font-size, vars.$login-button-border-radius, vars.$login-button-hover-bg);
       }
+
+      .forgot-password {
+        margin-top: 0.5rem;
+        text-align: right;
+        font-size: vars.$login-link-font-size;
+        
+        a {
+          color: vars.$login-link-color;
+          text-decoration: none;
+          
+          &:hover {
+            text-decoration: underline;
+          }
+        }
+      }
     }
 
 
@@ -78,6 +93,23 @@
       height: auto;
     }
   }
+}
+
+.forgot-instructions {
+  color: #fff;
+  margin-bottom: vars.$login-gap;
+  font-size: vars.$login-link-font-size;
+}
+
+.success-message {
+  color: #fff;
+  margin-bottom: vars.$login-gap;
+  font-size: vars.$login-link-font-size;
+  line-height: 1.5;
+}
+
+.login-error {
+  color: #fff;
 }
 
 @media (min-width: 768px) {

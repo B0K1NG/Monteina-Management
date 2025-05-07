@@ -3,6 +3,8 @@ import { useEffect } from 'react';
 import Register from './features/auth/Register';
 import Login from './features/auth/Login';
 import ConfirmEmail from './features/auth/ConfirmEmail';
+import ForgotPassword from './features/auth/ForgotPassword';
+import ResetPassword from './features/auth/ResetPassword';
 import ProtectedRoute from './components/ProtectedRoute';
 import Profile from './pages/tenant-pages/Profile';
 import Home from './pages/tenant-pages/Home';
@@ -15,6 +17,7 @@ import FAQ from './pages/tenant-pages/FAQ';
 import Terms from './pages/tenant-pages/Terms';
 import Checkout from './pages/tenant-pages/Checkout';
 import Confirmation from './pages/tenant-pages/Confirmation';
+
 
 import AdminNavBar from './components/AdminNavBar';
 import AdminFooter from './components/AdminFooter';
@@ -105,6 +108,8 @@ function App() {
         <Route path="/login" 
         element={isAuthenticated ? <Navigate to="/" /> : <Login />}/>
         <Route path="/confirm" element={<ConfirmEmail />} />
+        <Route path="/forgot-password" element={<ForgotPassword />} />
+        <Route path="/reset-password" element={<ResetPassword />} />
         
         {userRole === "admin" && AdminRoutes}
 
