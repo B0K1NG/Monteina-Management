@@ -53,7 +53,7 @@ export default function Register() {
               className="register-input"
             />
             <img
-              src={showPassword ? "/src/assets/icons/view.png" : "/src/assets/icons/hide.png"}
+              src={showPassword ? "/assets/icons/view.png" : "/assets/icons/hide.png"}
               alt={showPassword ? "Hide Password" : "Show Password"}
               className="eye-icon"
               onClick={() => setShowPassword(!showPassword)}
@@ -73,11 +73,11 @@ export default function Register() {
           <p>Rinkis kokybę ir pasiruošk kiekvienam posūkiui – tiek mieste, tiek trasoje.</p>
         </div>
         <div className="reviewers">
-          <img src="/src/assets/icons/Reviewers.png" alt="Reviewers" className="reviewers-image" />
+          <img src="/assets/icons/Reviewers.png" alt="Reviewers" className="reviewers-image" />
           <div className="reviewers-info">
             <div className="stars">
               {[...Array(5)].map((_, i) => (
-                <img key={i} src="/src/assets/icons/star.png" alt="Star" />
+                <img key={i} src="/assets/icons/star.png" alt="Star" />
               ))}
               <span>5.0</span>
             </div>

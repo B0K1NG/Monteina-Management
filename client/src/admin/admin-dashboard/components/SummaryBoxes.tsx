@@ -1,6 +1,6 @@
-import reservationIcon from "../../../assets/icons/clock_icon.png"
-import incomeIcon from "../../../assets/icons/stocks_icon.png"
-import popularServiceIcon from "../../../assets/icons/hammer_icon.png"
+import reservationIcon from "../../../../public/assets/icons/clock_icon.png"
+import incomeIcon from "../../../../public/assets/icons/stocks_icon.png"
+import popularServiceIcon from "../../../../public/assets/icons/hammer_icon.png"
 
 interface Props {
   activeAndDoneCount: number;

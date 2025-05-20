@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import '../../assets/icons/not_found_icon.png';
+import '/assets/icons/not_found_icon.png';
 
 export default function NotFound() {
   return (
@@ -12,7 +12,7 @@ export default function NotFound() {
         </Link>
       </div>
       <div className="notfound-image">
-      <img src="/src/assets/icons/not_found_icon.png" alt="Padangų Montavimas" />
+      <img src="/assets/icons/not_found_icon.png" alt="Padangų Montavimas" />
       </div>
     </div>
   );

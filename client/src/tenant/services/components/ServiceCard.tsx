@@ -8,12 +8,12 @@ interface Props {
 }
 
 const icons = [
-  '/src/assets/icons/tire_install_icon.png',
-  '/src/assets/icons/balancing_icon.png',
-  '/src/assets/icons/flat_tire_icon.png',
-  '/src/assets/icons/rim_icon.png',
-  '/src/assets/icons/tires__icon.png',
-  '/src/assets/icons/tire_icon.png',
+  '/assets/icons/tire_install_icon.png',
+  '/assets/icons/balancing_icon.png',
+  '/assets/icons/flat_tire_icon.png',
+  '/assets/icons/rim_icon.png',
+  '/assets/icons/tires__icon.png',
+  '/assets/icons/tire_icon.png',
 ];
 
 const ServiceCard: React.FC<Props> = ({ service, index, onBook }) => (

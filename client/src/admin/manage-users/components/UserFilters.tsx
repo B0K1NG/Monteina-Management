@@ -1,6 +1,6 @@
 import Dropdown from '../../../components/Dropdown';
 import { UserFilters } from '../types';
-import searchIcon from '../../../assets/icons/search_interface_symbol.png';
+import searchIcon from '/assets/icons/search_interface_symbol.png';
 
 interface Props {
   filters: UserFilters;

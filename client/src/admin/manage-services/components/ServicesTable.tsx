@@ -1,6 +1,6 @@
 import { Service } from '../types';
-import editIcon from '../../../assets/icons/edit.png';
-import trashIcon from '../../../assets/icons/trash.png';
+import editIcon from '/assets/icons/edit.png';
+import trashIcon from '/assets/icons/trash.png';
 
 interface Props {
   services: Service[];

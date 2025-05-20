@@ -60,7 +60,7 @@ export default function ResetPassword() {
           </p>
         </div>
         <div className="login-right">
-          <img src="/src/assets/icons/not_found_icon.png" alt="Padangų Montavimas" />
+          <img src="/assets/icons/not_found_icon.png" alt="Padangų Montavimas" />
         </div>
       </div>
     );
@@ -79,7 +79,7 @@ export default function ResetPassword() {
               className="login-input"
             />
             <img
-              src={showPassword ? "/src/assets/icons/view.png" : "/src/assets/icons/hide.png"}
+              src={showPassword ? "/assets/icons/view.png" : "/assets/icons/hide.png"}
               alt={showPassword ? "Hide Password" : "Show Password"}
               className="eye-icon"
               onClick={() => setShowPassword(!showPassword)}
@@ -95,7 +95,7 @@ export default function ResetPassword() {
               className="login-input"
             />
             <img
-              src={showConfirmPassword ? "/src/assets/icons/view.png" : "/src/assets/icons/hide.png"}
+              src={showConfirmPassword ? "/assets/icons/view.png" : "/assets/icons/hide.png"}
               alt={showConfirmPassword ? "Hide Password" : "Show Password"}
               className="eye-icon"
               onClick={() => setShowConfirmPassword(!showConfirmPassword)}
@@ -111,7 +111,7 @@ export default function ResetPassword() {
         </p>
       </div>
       <div className="login-right">
-        <img src="/src/assets/icons/not_found_icon.png" alt="Padangų Montavimas" />
+        <img src="/assets/icons/not_found_icon.png" alt="Padangų Montavimas" />
       </div>
     </div>
   );

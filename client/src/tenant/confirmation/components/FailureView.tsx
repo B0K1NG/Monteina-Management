@@ -1,5 +1,5 @@
 import React from 'react';
-import unsuccessImage from '../../../assets/icons/unsuccess.png';
+import unsuccessImage from '/assets/icons/unsuccess.png';
 
 interface Props {
   onRetry: () => void;

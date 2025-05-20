@@ -64,7 +64,7 @@ export default function ForgotPassword() {
         </p>
       </div>
       <div className="login-right">
-        <img src="/src/assets/icons/not_found_icon.png" alt="Padangų Montavimas" />
+        <img src="/assets/icons/not_found_icon.png" alt="Padangų Montavimas" />
       </div>
     </div>
   );

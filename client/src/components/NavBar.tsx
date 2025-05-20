@@ -21,7 +21,7 @@ export default function NavBar() {
         <nav className="navbar">
             <div className="navbar-logo">
                 <NavLink to="/">
-                    <img src="../src/assets/logo_monteina.png" alt="Monteina Logotipas" />
+                    <img src="/assets/logo_monteina.png" alt="Monteina Logotipas" />
                 </NavLink>
             </div>
             <div className={`hamburger ${menuOpen ? 'active' : ''}`} onClick={() => setMenuOpen(!menuOpen)}>

@@ -1,8 +1,8 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
-import downArrow from '../assets/icons/down_chevron.png'
-import downArrowWhite from '../assets/icons/down-chevron-white.png'
+import downArrow from '/assets/icons/down_chevron.png'
+import downArrowWhite from '/assets/icons/down-chevron-white.png'
 
 interface DropdownProps {
   options: { value: string; label: string; disabled?: boolean }[];

@@ -30,7 +30,7 @@ export default function UsersTable({ users, onEdit }: Props) {
             <td>{translateRole[u.role]}</td>
             <td>
               <img
-                src="/src/assets/icons/edit.png"
+                src="/assets/icons/edit.png"
                 alt="Edit"
                 className="action-icon"
                 onClick={() => onEdit(u)}

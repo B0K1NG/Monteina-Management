@@ -28,14 +28,14 @@ export default function OrdersTable({ bookings, onEdit, onViewInvoice }: Props) 
               <td className={`status status--${b.status}`}>{labels[b.status]||b.status}</td>
               <td className="actions-column">
                 <img
-                  src="/src/assets/icons/edit.png"
+                  src="/assets/icons/edit.png"
                   alt="Edit"
                   className="action-icon"
                   onClick={() => onEdit(b)}
                 />
                 {b.status === 'done' && onViewInvoice && (
                   <img
-                    src="/src/assets/icons/invoice.png"
+                    src="/assets/icons/invoice.png"
                     alt="Peržiūrėti sąskaitą"
                     className="action-icon invoice-icon"
                     onClick={() => onViewInvoice(b)}

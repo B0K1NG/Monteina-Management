@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
-import logo from '../assets/logo_monteina.png';
+import logo from '../../public/assets/logo_monteina.png';
 
 export default function AdminNavBar() {
   const [menuOpen, setMenuOpen] = useState(false);

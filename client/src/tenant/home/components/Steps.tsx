@@ -3,17 +3,17 @@ import Step from './Step';
 
 const stepsData = [
   {
-    iconSrc: '/src/assets/icons/car_icon.png',
+    iconSrc: '/assets/icons/car_icon.png',
     title: 'Pasirinkite laiką',
     description: 'Išsirinkite jums tinkamą datą ir laiką mūsų sistemoje.',
   },
   {
-    iconSrc: '/src/assets/icons/euro_icon.png',
+    iconSrc: '/assets/icons/euro_icon.png',
     title: 'Sumokėkite avansą',
     description: 'Rezervacijai patvirtinti užtenka simbolinio avanso.',
   },
   {
-    iconSrc: '/src/assets/icons/calendar_icon.png',
+    iconSrc: '/assets/icons/calendar_icon.png',
     title: 'Atvykite į servisą',
     description: 'Atvykite laiku – viskuo pasirūpinsime.',
   },

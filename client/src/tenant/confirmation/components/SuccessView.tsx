@@ -1,5 +1,5 @@
 import React from 'react';
-import successImage from '../../../assets/icons/success.png';
+import successImage from '/assets/icons/success.png';
 import { ConfirmationState } from '../types';
 
 interface Props {
