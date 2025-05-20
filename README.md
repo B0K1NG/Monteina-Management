@@ -2,6 +2,21 @@
 
 Monteina Management System is a comprehensive platform for managing services, bookings, and user interactions. It includes both a **frontend** built with React + Vite and a **backend** powered by Node.js + Express + Prisma.
 
+## 🌐 Production Deployment
+
+### **Frontend**
+- Deployed on **Netlify**: [Monteina Management Frontend](https://monteina.netlify.app)
+- The frontend is built using React and Vite, providing a fast and responsive user interface.
+
+### **Backend**
+- Deployed on **Render**
+- The backend is powered by Node.js and Express, handling API requests and business logic.
+
+### **Database**
+- Hosted on **Supabase**: A PostgreSQL database is used to store all application data, including users, services, bookings, and more.
+
+---
+
 ## Features
 
 - **Admin Panel**: Manage services, users, and bookings with ease.
