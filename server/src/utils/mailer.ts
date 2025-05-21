@@ -36,19 +36,17 @@ export const sendPasswordResetEmail = async (email: string, resetUrl: string) =>
       to: email,
       subject: 'Slaptažodžio atkūrimas',
       html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 5px;">
-          <h2 style="color: #333; text-align: center;">Slaptažodžio atkūrimas</h2>
-          <p>Gavome užklausą atkurti jūsų slaptažodį sistemoje Monteina Management.</p>
-          <p>Norėdami sukurti naują slaptažodį, spauskite šią nuorodą:</p>
-          <div style="text-align: center; margin: 30px 0;">
-            <a href="${resetUrl}" style="background-color: #3A7EF9; color: white; padding: 12px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">Atkurti slaptažodį</a>
-          </div>
-          <p>Nuoroda galios 1 valandą nuo šio laiško išsiuntimo.</p>
-          <p>Jei jūs neprašėte atkurti slaptažodžio, ignoruokite šį laišką.</p>
-          <hr style="border: none; border-top: 1px solid #e0e0e0; margin: 20px 0;">
-          <p style="color: #777; font-size: 12px; text-align: center;">Šis laiškas sugeneruotas automatiškai, prašome į jį neatsakyti.</p>
+      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 5px;">
+        <h2 style="color: #333; text-align: center;">Confirm Your Email</h2>
+        <p style="text-align: center;">Thank you for signing up! Please confirm your account by clicking the button below:</p>
+        <div style="text-align: center; margin: 30px 0;">
+          <a href="${resetUrl}" style="background-color: #3A7EF9; color: white; padding: 12px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">Confirm Account</a>
         </div>
-      `
+        <p style="text-align: center;">If you did not sign up for this account, you can safely ignore this email.</p>
+        <hr style="border: none; border-top: 1px solid #e0e0e0; margin: 20px 0;">
+        <p style="color: #777; font-size: 12px; text-align: center;">This email was generated automatically. Please do not reply.</p>
+      </div>
+    `
     });
     logger.info(`Password reset email sent to ${email}`);
   } catch (error) {
