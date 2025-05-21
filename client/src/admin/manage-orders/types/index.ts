@@ -20,6 +20,10 @@ export interface User {
     status: 'active' | 'done' | 'canceled';
     serviceId: string;
     totalAmount?: number;
+    carBrand: string;
+    carModel: string;
+    valveChange: boolean;
+    tireQuantity: number;
   }
   
   export interface OrderFormData {
@@ -52,4 +56,3 @@ export interface User {
     totalAmount: number;
     remainingAmount: number;
   }
-  

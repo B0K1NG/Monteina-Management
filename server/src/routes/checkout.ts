@@ -98,7 +98,7 @@ router.post(
           userId,
           bookingDate: slotDate,
           bookingTime: timeValue || '',
-          carBrand: carDetails?.make || '',
+          carBrand: carDetails?.make,
           carModel: carDetails?.model || '',
           tireSize: carDetails?.tireSize || '',
           serviceName: selectedService?.name || '',
@@ -151,6 +151,10 @@ router.get('/all-bookings', async (req, res) => {
         status: true,
         serviceId: true,
         totalAmount: true,
+        carBrand: true,
+        carModel: true,
+        valveChange: true,
+        tireQuantity: true,
       },
       orderBy: {
         bookingDate: 'asc',
@@ -166,12 +170,12 @@ router.get('/all-bookings', async (req, res) => {
     const userMap: Record<number, string> = users.reduce((acc: Record<number, string>, user) => {
       acc[user.id] = `${user.firstName || ''} ${user.lastName || ''}`.trim();
       return acc;
-    }, {} as Record<number, string>);
+    }, {});
 
     const formattedBookings = bookings.map((booking) => ({
       ...booking,
-      userName: userMap[booking.userId] || 'Unknown',
       bookingDate: booking.bookingDate.toISOString().split('T')[0],
+      userName: userMap[booking.userId] || 'Unknown',
     }));
 
     res.json(formattedBookings);

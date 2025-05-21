@@ -14,8 +14,16 @@ export default function OrdersTable({ bookings, onEdit, onViewInvoice }: Props) 
       <table>
         <thead>
           <tr>
-            <th>Data</th><th>Laikas</th><th>Klientas</th>
-            <th>Paslauga</th><th>Statusas</th><th>Veiksmai</th>
+            <th>Data</th>
+            <th>Laikas</th>
+            <th>Klientas</th>
+            <th>Paslauga</th>
+            <th>Automobilio Markė</th>
+            <th>Automobilio Modelis</th>
+            <th>Ventilių Keitimas</th>
+            <th>Ratų Kiekis</th>
+            <th>Statusas</th>
+            <th>Veiksmai</th>
           </tr>
         </thead>
         <tbody>
@@ -25,6 +33,10 @@ export default function OrdersTable({ bookings, onEdit, onViewInvoice }: Props) 
               <td>{b.bookingTime}</td>
               <td>{b.userName}</td>
               <td>{b.serviceName}</td>
+              <td>{b.carBrand}</td>
+              <td>{b.carModel}</td>
+              <td>{b.valveChange ? 'Taip' : 'Ne'}</td>
+              <td>{b.tireQuantity}</td>
               <td className={`status status--${b.status}`}>{labels[b.status]||b.status}</td>
               <td className="actions-column">
                 <img
