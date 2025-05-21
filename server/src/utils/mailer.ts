@@ -9,18 +9,62 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+const styledEmailTemplate = (
+  title: string,
+  message: string,
+  ctaText: string,
+  ctaLink: string
+) => `
+  <div style="background-color: #f5f5f5; padding: 20px;">
+    <table cellpadding="0" cellspacing="0" width="100%" style="max-width: 600px; margin: auto; background: white; border-radius: 10px; overflow: hidden; font-family: Arial, sans-serif;">
+      <tr>
+        <td style="background-color: #3A7EF9; padding: 20px; text-align: center;">
+          <h1 style="color: white; margin: 0;">Monteina Management</h1>
+        </td>
+      </tr>
+      <tr>
+        <td style="padding: 30px;">
+          <h2 style="color: #333;">${title}</h2>
+          <p style="color: #555; line-height: 1.6;">${message}</p>
+          <div style="text-align: center; margin: 30px 0;">
+            <a href="${ctaLink}" style="background-color: #3A7EF9; color: white; padding: 14px 24px; text-decoration: none; font-weight: bold; border-radius: 5px; display: inline-block;">
+              ${ctaText}
+            </a>
+          </div>
+          <p style="color: #999; font-size: 12px; text-align: center;">
+            Jei šio el. laiško nelaukėte - galite jį ignoruoti.
+          </p>
+        </td>
+      </tr>
+      <tr>
+        <td style="background-color: #f0f0f0; padding: 15px; text-align: center; font-size: 12px; color: #888;">
+          © ${new Date().getFullYear()} Monteina. Visos teisės saugomos.
+        </td>
+      </tr>
+    </table>
+  </div>
+`;
+
 export const sendConfirmationEmail = async (email: string, token: string) => {
   const confirmationUrl = `${
     process.env.NODE_ENV === 'production'
       ? 'https://monteina.netlify.app'
       : 'http://localhost:5173'
   }/confirm?token=${token}`;
+
+  const html = styledEmailTemplate(
+    'Patvirtinkite el. paštą',
+    'Dėkojame, kad prisiregistravote. Paspauskite mygtuką, kad patvirtintumėte savo el. pašto adresą.',
+    'Patvirtinti paskyrą',
+    confirmationUrl
+  );
+
   try {
     await transporter.sendMail({
       from: '"Monteina Management" <no-reply@monteina.com>',
       to: email,
-      subject: 'Confirm Your Email',
-      html: `<p>Click <a href="${confirmationUrl}">here</a> to confirm your email.</p>`
+      subject: 'Patvirtinkite savo el. paštą',
+      html,
     });
     logger.info(`Confirmation email sent to ${email}`);
   } catch (error) {
@@ -30,23 +74,19 @@ export const sendConfirmationEmail = async (email: string, token: string) => {
 };
 
 export const sendPasswordResetEmail = async (email: string, resetUrl: string) => {
+  const html = styledEmailTemplate(
+    'Slaptažodžio atkūrimas',
+    'Panašu, kad pamiršote slaptažodį. Paspauskite mygtuką žemiau, kad nustatytumėte naują slaptažodį.',
+    'Atkurti slaptažodį',
+    resetUrl
+  );
+
   try {
     await transporter.sendMail({
       from: '"Monteina Management" <no-reply@monteina.com>',
       to: email,
-      subject: 'Slaptažodžio atkūrimas',
-      html: `
-      <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #e0e0e0; border-radius: 5px;">
-        <h2 style="color: #333; text-align: center;">Confirm Your Email</h2>
-        <p style="text-align: center;">Thank you for signing up! Please confirm your account by clicking the button below:</p>
-        <div style="text-align: center; margin: 30px 0;">
-          <a href="${resetUrl}" style="background-color: #3A7EF9; color: white; padding: 12px 20px; text-decoration: none; border-radius: 4px; font-weight: bold;">Confirm Account</a>
-        </div>
-        <p style="text-align: center;">If you did not sign up for this account, you can safely ignore this email.</p>
-        <hr style="border: none; border-top: 1px solid #e0e0e0; margin: 20px 0;">
-        <p style="color: #777; font-size: 12px; text-align: center;">This email was generated automatically. Please do not reply.</p>
-      </div>
-    `
+      subject: 'Slaptažodžio atkūrimo nuoroda',
+      html,
     });
     logger.info(`Password reset email sent to ${email}`);
   } catch (error) {
