@@ -1766,6 +1766,18 @@ body {
 .login-container .login-left .login-form .login-button:hover {
   background-color: #333;
 }
+.login-container .login-left .login-form .forgot-password {
+  margin-top: 0.5rem;
+  text-align: right;
+  font-size: 0.875rem;
+}
+.login-container .login-left .login-form .forgot-password a {
+  color: #3A7EF9;
+  text-decoration: none;
+}
+.login-container .login-left .login-form .forgot-password a:hover {
+  text-decoration: underline;
+}
 .login-container .login-left .login-register {
   margin-top: 1rem;
   font-size: 0.875rem;
@@ -1785,6 +1797,23 @@ body {
   width: 100%;
   max-width: 300px;
   height: auto;
+}
+
+.forgot-instructions {
+  color: #fff;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+}
+
+.success-message {
+  color: #fff;
+  margin-bottom: 1rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.login-error {
+  color: #fff;
 }
 
 @media (min-width: 768px) {
@@ -1879,6 +1908,7 @@ body {
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 1rem;
+  color: white;
 }
 .confirmemail-container .confirmemail-button {
   padding: 0.75rem 1.5rem;
@@ -3522,11 +3552,6 @@ body {
   width: 100%;
   min-width: 300px;
   border-collapse: collapse;
-}
-.manage-orders-container .orders-table table .actions-column {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
 }
 .manage-orders-container .orders-table table .phone-number {
   text-decoration: underline;
