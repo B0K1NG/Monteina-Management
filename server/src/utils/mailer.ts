@@ -10,7 +10,11 @@ const transporter = nodemailer.createTransport({
 });
 
 export const sendConfirmationEmail = async (email: string, token: string) => {
-  const confirmationUrl = `http://localhost:5173/confirm?token=${token}`;
+  const confirmationUrl = `${
+    process.env.NODE_ENV === 'production'
+      ? 'https://monteina.netlify.app'
+      : 'http://localhost:5173'
+  }/confirm?token=${token}`;
   try {
     await transporter.sendMail({
       from: '"Monteina Management" <no-reply@monteina.com>',
