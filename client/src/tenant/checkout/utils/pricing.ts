@@ -12,7 +12,7 @@ export function calculateAmounts(details: BookingDetails) {
         : selectedService.price_min);
 
   const groupRepairCount = repairOption ? Math.ceil(tireQuantity / 4) : tireQuantity;
-  const valvePrice = valveChange ? 5 : 0;
+  const valvePrice = valveChange ? Math.ceil(tireQuantity /4) * 5 : 0;
   const advanceAmount = 5;
   const totalAmount = repairOption
     ? mainSvc * groupRepairCount + valvePrice
