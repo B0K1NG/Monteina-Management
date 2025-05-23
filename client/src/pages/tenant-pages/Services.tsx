@@ -1,13 +1,13 @@
 import React from 'react';
+
 import useServices from '../../tenant/services/hooks/useServices';
 import useBookingNavigate from '../../tenant/services//hooks/useBookingNavigate';
 import ServicesGrid from '../../tenant/services/components/ServicesGrid';
 
 const ServicesPage: React.FC = () => {
-  const { services, loading, error } = useServices();
+  const { services, error } = useServices();
   const book = useBookingNavigate();
 
-  if (loading) return <p>Kraunama</p>;
   if (error)   return <p>Nepavyko užkrauti paslaugų</p>;
 
   return (

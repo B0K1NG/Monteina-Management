@@ -1,14 +1,17 @@
-import { useState, useEffect } from 'react';
 import axios from '../../../api/axios';
+
+import { useState, useEffect } from 'react';
 import { Service } from '../types';
+import { useLoading } from '../../../contexts/LoadingContext';
 
 export default function useServices() {
   const [services, setServices] = useState<Service[]>([]);
-  const [loading, setLoading] = useState(true);
+  const  { setLoading } = useLoading();
   const [error, setError] = useState<Error | null>(null);
 
   useEffect(() => {
     const fetchServices = async () => {
+      setLoading(true);
       try {
         const resp = await axios.get<Service[]>('/api/services');
         setServices(resp.data);
@@ -20,7 +23,7 @@ export default function useServices() {
       }
     };
     fetchServices();
-  }, []);
+  }, [setLoading]);
 
-  return { services, loading, error };
+  return { services, error };
 }

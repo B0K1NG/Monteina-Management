@@ -1,18 +1,23 @@
 import { useState, useEffect, useCallback } from 'react';
 import axios from '../../../api/axios';
 import { Service } from '../types';
+import { useLoading } from '../../../contexts/LoadingContext';
 
 export default function useServicesAdmin() {
   const [services, setServices] = useState<Service[]>([]);
+  const { setLoading } = useLoading();
 
   const fetchServices = useCallback(async () => {
+    setLoading(true);
     try {
       const res = await axios.get<Service[]>('/api/services/admin');
       setServices(res.data);
     } catch (e) {
       console.error('Failed to fetch services:', e);
+    } finally {
+      setLoading(false);
     }
-  }, []);
+  }, [setLoading]);
 
   useEffect(() => {
     fetchServices();
