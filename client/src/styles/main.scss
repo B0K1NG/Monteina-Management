@@ -7,6 +7,7 @@
 @use "components/navbar";
 @use"components/dropdown";
 @use"components/footer";
+@use "components/loading_overlay";
 
 @use 'modal/_manage_services_modal';
 @use 'modal/manage_users_modal';
