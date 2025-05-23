@@ -5,7 +5,7 @@ Monteina Management System is a comprehensive platform for managing services, bo
 ## 🌐 Production Deployment
 
 ### **Frontend**
-- Deployed on **Netlify**: [Monteina Management Frontend](https://monteina.netlify.app)
+- Deployed on **Netlify**: [Monteina Management](https://monteina.netlify.app)
 - The frontend is built using React and Vite, providing a fast and responsive user interface.
 
 ### **Backend**
