@@ -6,6 +6,9 @@ import ConfirmEmail from './features/auth/ConfirmEmail';
 import ForgotPassword from './features/auth/ForgotPassword';
 import ResetPassword from './features/auth/ResetPassword';
 import ProtectedRoute from './components/ProtectedRoute';
+import { LoadingProvider } from './contexts/LoadingContext';
+import LoadingOverlay from './components/LoadingOverlay';
+
 import Profile from './pages/tenant-pages/Profile';
 import Home from './pages/tenant-pages/Home';
 import NavBar from './components/NavBar';
@@ -84,8 +87,12 @@ function App() {
   );
 
   return (
+    <LoadingProvider>
     <Router>
+      <div className='app-container'>
+      <LoadingOverlay />
       <Nav />
+      <div className='content'>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/services" element={<Services />} />
@@ -115,10 +122,13 @@ function App() {
 
         <Route path="*" element={<NotFound />}></Route>
       </Routes>
+      </div>
 
       <FooterComponent />
+      </div>
       <ToastContainer position="top-right" autoClose={3000} hideProgressBar={false} newestOnTop={false} closeOnClick rtl={false} pauseOnFocusLoss draggable pauseOnHover />
     </Router>
+    </LoadingProvider>
   );
 }
 
