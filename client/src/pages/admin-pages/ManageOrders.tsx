@@ -141,6 +141,7 @@ export default function ManageOrdersPage() {
 
   return (
     <div className="manage-orders-container">
+            <div className="manage-orders-top-section">
       <div className="manage-orders-header">
         <h1 className="manage-orders-title">Užsakymų valdymas</h1>
         <div className="add-order-button">
@@ -156,6 +157,7 @@ export default function ManageOrdersPage() {
           setFilters(fs => ({ ...fs, [field]: v }))
         }
       />
+      </div>
 
       <OrdersTable
         bookings={filtered}

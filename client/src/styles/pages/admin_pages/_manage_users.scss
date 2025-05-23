@@ -130,9 +130,24 @@ $img-tablet-margin-right:   1.25rem;
   }
 
   .users-table {
-    margin-top: $vertical-spacing;
-    width: 100%;
-    overflow-x: auto;
+  margin-top: 2rem;
+  width: 100%;
+  overflow-x: auto;
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  &::before {
+    content: "No users available";
+    display: none;
+    font-size: 1.2rem;
+    color: #666;
+  }
+
+  &:empty::before {
+    display: block;
+  }
 
     h2 {
       margin-bottom: $gap;
