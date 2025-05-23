@@ -19,6 +19,18 @@ body {
   background: none;
 }
 
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
 .admin-navbar {
   background-color: #232B36;
   height: 100px;
@@ -276,6 +288,42 @@ body {
   color: #333;
 }
 
+.loading-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+.loading-overlay .spinner {
+  border: 4px solid #f3f3f3;
+  border-top: 4px solid #1a73e8;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  animation: spin 1s linear infinite;
+}
+.loading-overlay .loading-text {
+  margin-top: 1rem;
+  color: #fff;
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
 .service-modal {
   position: fixed;
   inset: 0;
@@ -1767,9 +1815,8 @@ body {
   background-color: #333;
 }
 .login-container .login-left .login-form .forgot-password {
-  margin-top: 0.5rem;
   text-align: right;
-  font-size: 0.875rem;
+  font-size: 1rem;
 }
 .login-container .login-left .login-form .forgot-password a {
   color: #3A7EF9;
@@ -3482,7 +3529,7 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-start;
   width: 100%;
   max-width: 300px;
   margin: 0 auto;
@@ -3544,6 +3591,7 @@ body {
   margin-top: 2rem;
   width: 100%;
   overflow-x: auto;
+  min-height: 300px;
 }
 .manage-orders-container .orders-table h2 {
   margin-bottom: 1rem;
@@ -3933,6 +3981,19 @@ body {
   margin-top: 2rem;
   width: 100%;
   overflow-x: auto;
+  min-height: 300px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.manage-users-container .users-table::before {
+  content: "No users available";
+  display: none;
+  font-size: 1.2rem;
+  color: #666;
+}
+.manage-users-container .users-table:empty::before {
+  display: block;
 }
 .manage-users-container .users-table h2 {
   margin-bottom: 1rem;
