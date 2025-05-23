@@ -35,7 +35,7 @@
 [X] FIX "Džipai" to "Visuregiai ir Krosoveriai"
 [ ] Fix Automobilis and Modelis to be all relevant models of cars that are most commonly used and approved by the company.
 [X] FIX "Užsakymo suvestinę - Automobilis part make it so that it would expand if it takes more space
-[ ] UPDATE Add loading states create something interesting
+[X] UPDATE Add loading states create something interesting
 
 ## 🚀 Deployment
 - Done
