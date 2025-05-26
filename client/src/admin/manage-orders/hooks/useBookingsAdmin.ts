@@ -21,7 +21,7 @@ export function useBookingsAdmin() {
         );
       })
       .catch(console.error)
-      .finally(() => setLoading(false)); 
+      .then(() => setLoading(false)); 
   }, [setLoading]);
 
   useEffect(fetchAll, [fetchAll]);

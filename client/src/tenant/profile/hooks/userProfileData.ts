@@ -24,8 +24,8 @@ export function useProfileData() {
           fetchActiveBookings(),
         ]);
         setUserInfo(user);
-        setPreviousVisits(visits);
-        setActiveBookings(bookings);
+        setPreviousVisits(visits as Visit[]);
+        setActiveBookings(bookings as Booking[]);
       } catch (err) {
         setError(err as Error);
         console.error('Failed to fetch profile data:', err);

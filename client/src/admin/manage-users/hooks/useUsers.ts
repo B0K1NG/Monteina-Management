@@ -13,7 +13,7 @@ export function useUsers() {
       .get<User[]>('/api/users')
       .then((response) => setUsers(response.data))
       .catch(console.error)
-      .finally(() => setLoading(false));
+      .then(() => setLoading(false));
   }, [setLoading]);
 
   useEffect(() => {

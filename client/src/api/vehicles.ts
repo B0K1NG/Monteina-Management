@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-const BASE_URL = `${import.meta.env.VITE_BACKEND_URL}/api/carquery`;
+const BASE_URL = `${import.meta.env.VITE_BACKEND_URL.replace(/\/$/, '')}/api/carquery`;
 
 export const getAllMakes = async () => {
     const response = await axios.get(`${BASE_URL}?callback=?&cmd=getMakes`);

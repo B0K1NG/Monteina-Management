@@ -19,9 +19,14 @@ export default function Login() {
 
   const [showPassword, setShowPassword] = useState(false);
 
+  interface LoginResponse {
+    token: string;
+    role: string;
+  }
+
   const onSubmit = async (data: any) => {
     try {
-      const response = await axios.post('/auth/login', data);
+      const response = await axios.post<LoginResponse>('/auth/login', data);
       localStorage.setItem('token', response.data.token);
       localStorage.setItem('role', response.data.role);
       window.location.href = response.data.role === 'admin' ? '/admin/dashboard' : '/';
