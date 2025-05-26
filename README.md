@@ -55,14 +55,28 @@ Monteina Management System is a comprehensive platform for managing services, bo
    ```
 
 3. Set up the database:
-   - Create a `.env` file in the `server/` directory with the following:
-     ```
-     PORT=your_port
-     DATABASE_URL=postgresql://<username>:<password>@<host>:<port>/<database>
-     JWT_SECRET=your_secret_key
-     EMAIL_USER=your_email_user
-     EMAIL_PASS=your_email_pass
-     ```
+   - Create a `.env` file in the `server/` directory with the following.
+    - Local:
+      ```
+      PORT=your_port
+      NODE_ENV=development
+
+      DATABASE_URL=postgresql://<username>:<password>@<host>:<port>/<database>
+      JWT_SECRET=your_secret_key
+
+      EMAIL_USER=your_email_user
+      EMAIL_PASS=your_email_pass
+
+      CARQUERY_API_URL=your_car_query_api_url
+      ```
+
+    - Production:
+      - Everything stays the same as in local development only `NODE_ENV` changes and addition of `VITE_BACKEND_URL` is needed:
+        ```
+        NODE_ENV=production
+        VITE_BACKEND_URL=your_backend_url
+        ```
+
    - Run Prisma migrations:
      ```bash
      npx prisma migrate dev --name init
@@ -95,14 +109,18 @@ Monteina Management System is a comprehensive platform for managing services, bo
   - `/api/services` - Manage services
   - `/api/bookings` - Manage bookings
   - `/api/checkout` - Handle order checkout and status updates
+  - `/api/carquery?callback=?&cmd=getMakes` - Handle car makes
 
 ---
 
 ## 📂 Project Structure
 
 ### Frontend (`client/`)
+- **`src/api/`**: API-specific features like fetching, information from server folder or other endpoints.
 - **`src/components/`**: Reusable UI components (e.g., `NavBar`, `Footer`).
-- **`src/pages/`**: Page-level components for routing (e.g., `Home`, `Profile`, `Terms`).
+- **`src/context/`**: Reusable Loading context.
+- **`src/features/auth`**: User Authentication (e.g., `Login` `ResetPassword`).
+- **`src/pages/`**: Page-level components for admins and tenants (e.g., `Home`, `Profile`, `AdminDashboard`).
 - **`src/styles/`**: SCSS and CSS files for styling.
 - **`src/tenant/`**: Tenant-specific features like booking, profile management, and terms.
 - **`src/admin/`**: Admin-specific features like managing users, services, and viewing invoices.
@@ -112,6 +130,13 @@ Monteina Management System is a comprehensive platform for managing services, bo
 - **`src/middleware/`**: Middleware for authentication and role-based access.
 - **`src/utils/`**: Utility functions (e.g., email notifications, logging).
 - **`prisma/`**: Database schema and migrations.
+- **`logs/`**: Stores server logs, including API access logs, error logs, and debug info. Useful for monitoring and troubleshooting production environments.
+- **`env`**: Environment variables file. Contains sensitive or environment-specific configurations like database URLs, API keys, and ports. Should not be committed to version control.
+
+### Root
+- **`README.md`**: Project overview and usage instructions. Typically includes setup steps, features, environment configuration, and contact or contribution guidelines.
+- **`ToDo.md`**: A running checklist or backlog of tasks, features, or bugs to be addressed. Helps with planning and tracking project progress.
+- **`.gitignore`**: Specifies files and directories to be ignored by Git. Commonly includes node_modules, environment files, and build outputs.
 
 ---
 
@@ -151,6 +176,7 @@ Monteina Management System is a comprehensive platform for managing services, bo
 
 ## 🌟 Features in Development
 - Invoice generation for bookings.
+- Multi-language Support.
 - Enhanced admin analytics dashboard.
 
 ---
