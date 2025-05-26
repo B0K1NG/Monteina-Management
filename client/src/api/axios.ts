@@ -11,7 +11,7 @@ instance.interceptors.request.use((config) => {
     if (!config.headers) {
       config.headers = {};
     }
-    config.headers.Authorization = `Bearer ${token}`;
+    (config.headers as Record<string, string>).Authorization = `Bearer ${token}`;
   }
   return config;
 });
