@@ -31,7 +31,7 @@ export default function AddOrderModal({
   const [tireSize, setTireSize] = useState('');
   const [bookingDate, setBookingDate] = useState('');
   const [bookingTime, setBookingTime] = useState('');
-  const [status, setStatus] = useState<'active'|'done'|'canceled'>('active');
+  const [status, setStatus] = useState<'active' | 'done' | 'canceled'>('active');
   const [manualTotalAmount, setManualTotalAmount] = useState('');
   const [carDetails, setCarDetails] = useState({
     make: '',
@@ -39,8 +39,9 @@ export default function AddOrderModal({
     year: '',
     tireSize: '',
   });
-
+  const [customModel, setCustomModel] = useState('');
   const { makes, models, fetchModels } = useCarMakesModels();
+
   const booked = useBookedTimes(bookingDate);
 
   useEffect(() => {
@@ -56,6 +57,7 @@ export default function AddOrderModal({
       setStatus('active');
       setManualTotalAmount('');
       setCarDetails({ make: '', model: '', year: '', tireSize: '' });
+      setCustomModel('');
     }
   }, [isOpen]);
 
@@ -72,7 +74,7 @@ export default function AddOrderModal({
   }, [makes]);
 
   const handleSave = () => {
-    if (!userId || !serviceId || !status ) {
+    if (!userId || !serviceId || !status) {
       toast.info('Prašome užpildyti visus laukus!');
       return;
     }
@@ -102,7 +104,7 @@ export default function AddOrderModal({
 
     const updatedCarDetails = {
       ...carDetails,
-      tireSize: tireSize
+      model: carDetails.make === 'Kita' ? customModel : carDetails.model,
     };
 
     onSave({
@@ -115,12 +117,15 @@ export default function AddOrderModal({
       valveChange,
       tireQuantity: Number(tireQuantity) || 0,
       tireSize,
-      manualTotalAmount: manualTotalAmount ? parseFloat(manualTotalAmount) : undefined,
+      manualTotalAmount: manualTotalAmount
+        ? parseFloat(manualTotalAmount)
+        : undefined,
       carDetails: updatedCarDetails,
     });
   };
 
   if (!isOpen) return null;
+
   return (
     <div className="add-modal">
       <div className="add-modal-content">
@@ -129,9 +134,9 @@ export default function AddOrderModal({
           <div>
             <label>Klientas</label>
             <Dropdown
-              options={users.map(u => ({
+              options={users.map((u) => ({
                 value: u.id,
-                label: `${u.firstName} ${u.lastName}`
+                label: `${u.firstName} ${u.lastName}`,
               }))}
               value={userId}
               onChange={setUserId}
@@ -171,31 +176,52 @@ export default function AddOrderModal({
           <div>
             <label>Gamintojas</label>
             <Dropdown
-              options={makes.map(m => ({ value: m, label: m }))}
+              options={[
+                ...makes.map((m) => ({ value: m, label: m })),
+                { value: 'Kita', label: 'Kita' },
+              ]}
               value={carDetails.make}
-              onChange={make => {
-                setCarDetails(cd => ({ ...cd, make }));
-                fetchModels(make);
+              onChange={(make) => {
+                setCarDetails((cd) => ({ ...cd, make }));
+                if (make !== 'Kita') {
+                  fetchModels(make);
+                  setCustomModel('');
+                }
               }}
               placeholder="Pasirinkite gamintoją"
               searchable
             />
           </div>
 
-          <div>
-            <label>Modelis</label>
-            <Dropdown
-              options={(models[carDetails.make] || []).map(m => ({
-                value: m,
-                label: m
-              }))}
-              value={carDetails.model}
-              onChange={model => setCarDetails(cd => ({ ...cd, model }))}
-              placeholder="Pasirinkite modelį"
-              disabled={!carDetails.make}
-              searchable
-            />
-          </div>
+          {carDetails.make === 'Kita' ? (
+            <div>
+              <label>Modelis</label>
+              <input
+                type="text"
+                value={customModel}
+                onChange={(e) => setCustomModel(e.target.value)}
+                placeholder="Įveskite modelį"
+                className="input-model"
+              />
+            </div>
+          ) : (
+            <div>
+              <label>Modelis</label>
+              <Dropdown
+                options={(models[carDetails.make] || []).map((m) => ({
+                  value: m,
+                  label: m,
+                }))}
+                value={carDetails.model}
+                onChange={(model) =>
+                  setCarDetails((cd) => ({ ...cd, model }))
+                }
+                placeholder="Pasirinkite modelį"
+                disabled={!carDetails.make}
+                searchable
+              />
+            </div>
+          )}
 
           <div>
             <label>Pagaminimo metai</label>

@@ -47,6 +47,15 @@ $dropdown-item-disabled-fg : #6c757d;
     max-height: $modal-max-height;
     overflow-y: auto;
 
+    .input-model {
+        width: 100%;
+        padding: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 1rem;
+        margin-top: 0.5rem;
+    }
+
     .add-modal-grid {
       display: flex;
       flex-direction: column;

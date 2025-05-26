@@ -6,7 +6,7 @@ import { tireSizes } from '../utils/constants';
 interface Props {
   carDetails: CarDetails;
   makes: string[];
-  models: Record<string,string[]>;
+  models: Record<string, string[]>;
   fetchModels(make: string): void;
   onChange(field: keyof CarDetails, value: string): void;
 }
@@ -16,32 +16,45 @@ const CarDetailsForm: React.FC<Props> = ({
   makes,
   models,
   fetchModels,
-  onChange
+  onChange,
 }) => (
   <div className="car-service-box-information">
     <Dropdown
-      options={makes.map(m => ({ value: m, label: m }))}
+      options={[...makes.map(m => ({ value: m, label: m })), { value: 'Kita', label: 'Kita' }]}
       value={carDetails.make}
       onChange={v => {
         onChange('make', v);
-        fetchModels(v);
+        if (v !== 'Kita') {
+          fetchModels(v);
+          onChange('model', '');
+        }
       }}
       placeholder="Gamintojas"
       className="dropdown-make"
       searchable
     />
-    <Dropdown
-      options={(models[carDetails.make] || []).map(m => ({
-        value: m,
-        label: m
-      }))}
-      value={carDetails.model}
-      onChange={v => onChange('model', v)}
-      placeholder="Modelis"
-      className="dropdown-model"
-      disabled={!carDetails.make}
-      searchable
-    />
+    {carDetails.make === 'Kita' ? (
+      <input
+        type="text"
+        value={carDetails.model}
+        onChange={e => onChange('model', e.target.value)}
+        placeholder="Įveskite modelį"
+        className="input-model"
+      />
+    ) : (
+      <Dropdown
+        options={(models[carDetails.make] || []).map(m => ({
+          value: m,
+          label: m,
+        }))}
+        value={carDetails.model}
+        onChange={v => onChange('model', v)}
+        placeholder="Modelis"
+        className="dropdown-model"
+        disabled={!carDetails.make}
+        searchable
+      />
+    )}
     <Dropdown
       options={Array.from({ length: 30 }, (_, i) => {
         const y = new Date().getFullYear() - i;

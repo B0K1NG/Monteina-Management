@@ -74,22 +74,27 @@ const CalendarPage: React.FC = () => {
 
   const handleConfirm = () => {
     if (!isBookingValid) {
-      toast.error('Prašome užpildyti visus laukus prieš patvfrtinant paslaugą.');
+      toast.error('Prašome užpildyti visus laukus prieš patvirtinant paslaugą.');
       return;
     }
+
     const details = {
       date: selectedDate,
       time: selectedTime!,
-      carDetails,
+      carDetails: {
+        ...carDetails,
+        model: carDetails.make === 'Kita' ? carDetails.model : carDetails.model,
+      },
       selectedService: {
         name: selectedService!,
         price_min: services.find(s => s.name === selectedService!)?.price_min || 0,
-        price_max: services.find(s => s.name === selectedService!)?.price_max || 0
+        price_max: services.find(s => s.name === selectedService!)?.price_max || 0,
       },
       valveChange,
       tireQuantity: parseInt(carDetails.tireQuantity, 10),
-      repairOption
+      repairOption,
     };
+
     localStorage.setItem('bookingDetails', JSON.stringify(details));
     navigate('/checkout');
   };

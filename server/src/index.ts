@@ -276,6 +276,27 @@ app.get('/api/services', async (req, res) => {
   }
 });
 
+app.post('/api/bookings', async (req, res) => {
+  const { carDetails, ...otherDetails } = req.body;
+
+  try {
+    const booking = await prisma.checkout.create({
+      data: {
+        ...otherDetails,
+        carMake: carDetails.make,
+        carModel: carDetails.model,
+        carYear: carDetails.year,
+        tireSize: carDetails.tireSize,
+      },
+    });
+
+    res.status(201).json(booking);
+  } catch (error) {
+    console.error('Error creating booking:', error);
+    res.status(500).json({ error: 'Failed to create booking' });
+  }
+});
+
 app.get('/api/users', async (req, res) => {
   try {
       const users = await prisma.user.findMany({
