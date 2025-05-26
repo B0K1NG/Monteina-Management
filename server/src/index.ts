@@ -2,15 +2,16 @@ import express from 'express';
 import dotenv from 'dotenv';
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import axios from 'axios';
+import cors from 'cors';
+import cron from 'node-cron';
+
 import logger from './utils/logger';
 import checkoutRoutes from './routes/checkout';
 import profileRoutes from './routes/profile';
 import servicesRoutes from './routes/services';
 import usersRoutes from './routes/users';
 import authRoutes from './routes/auth';
-
-import cors from 'cors';
-import cron from 'node-cron';
 
 import { updateBookingStatuses } from './utils/updateBookingStatuses';
 import { Request, Response, NextFunction } from 'express';
@@ -151,6 +152,25 @@ app.post('/auth/resend-confirmation', async (req: Request, res: Response): Promi
     console.error(error);
     res.status(500).json({ error: 'Failed to resend confirmation email.' });
   }
+});
+
+app.get('/api/carquery', async (req, res) => {
+    const { cmd, make } = req.query;
+
+    if (!process.env.CARQUERY_API_URL) {
+        throw new Error('CARQUERY_API_URL is not defined in the environment variables.');
+    }
+
+    const baseUrl = process.env.CARQUERY_API_URL;
+    const url = `${baseUrl}?callback=?&cmd=${cmd}${make ? `&make=${make}` : ''}`;
+    try {
+        const response = await axios.get(url);
+        res.set('Access-Control-Allow-Origin', '*');
+        res.send(response.data);
+    } catch (error) {
+        console.error('Error fetching data from CarQuery API:', error);
+        res.status(500).send('Error fetching data from CarQuery API');
+    }
 });
 
 app.get('/auth/confirm', async (req: Request, res: Response): Promise<void> => {
