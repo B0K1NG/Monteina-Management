@@ -538,6 +538,14 @@ body {
   max-height: 80%;
   overflow-y: auto;
 }
+.add-modal .add-modal-content .input-model {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
 .add-modal .add-modal-content .add-modal-grid {
   display: flex;
   flex-direction: column;
@@ -2401,6 +2409,14 @@ body {
 .booking-page .car-service-box .optional-service input {
   transform: scale(1.2);
   accent-color: #1a73e8;
+}
+.booking-page .car-service-box .input-model {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 1rem;
+  margin-top: 0.5rem;
 }
 .booking-page .booking-section {
   padding: 20px;
