@@ -245,7 +245,7 @@ $dropdown-item-disabled-fg : #6c757d;
     width: 500px;
 
     .input-model {
-        font-size: 0.9rem;
+        font-size: 0.9rem !important;
     }
   }
 }
@@ -256,7 +256,7 @@ $dropdown-item-disabled-fg : #6c757d;
     max-height: none !important;
 
     .input-model {
-        font-size: 1rem;
+        font-size: 1rem !important;
     }
   }
 }
