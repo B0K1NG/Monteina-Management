@@ -39,3 +39,6 @@ seed.ts
 *.njsproj
 *.sln
 *.sw?
+
+# Test files
+*.test.ts
