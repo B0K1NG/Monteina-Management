@@ -48,12 +48,19 @@ $dropdown-item-disabled-fg : #6c757d;
     overflow-y: auto;
 
     .input-model {
+        position: relative;
         width: 100%;
+        font-family: inherit;
+        font-size: 0.6rem;
+        color: #ccc;
         padding: 0.5rem;
-        border: 1px solid #ccc;
+        border: 2px solid #ccc;
         border-radius: 4px;
-        font-size: 1rem;
-        margin-top: 0.5rem;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+        padding-right: 1.5rem;
     }
 
     .add-modal-grid {
@@ -236,6 +243,10 @@ $dropdown-item-disabled-fg : #6c757d;
 @media (min-width: $breakpoint-tablet) {
   .add-modal-content {
     width: 500px;
+
+    .input-model {
+        font-size: 0.9rem;
+    }
   }
 }
 
@@ -243,6 +254,10 @@ $dropdown-item-disabled-fg : #6c757d;
   .add-modal-content {
     width: 600px;
     max-height: none !important;
+
+    .input-model {
+        font-size: 1rem;
+    }
   }
 }
 
