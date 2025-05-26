@@ -154,11 +154,17 @@ app.post('/auth/resend-confirmation', async (req: Request, res: Response): Promi
   }
 });
 
-app.get('/api/carquery', async (req, res) => {
+app.get('/api/carquery', async (req: Request, res: Response): Promise<void> => {
     const { cmd, make } = req.query;
 
+    if (!cmd) {
+        res.status(400).json({ error: 'Missing cmd parameter.' });
+        return;
+    }
+
     if (!process.env.CARQUERY_API_URL) {
-        throw new Error('CARQUERY_API_URL is not defined in the environment variables.');
+        res.status(500).json({ error: 'CARQUERY_API_URL is not defined in the environment variables.' });
+        return;
     }
 
     const baseUrl = process.env.CARQUERY_API_URL;
