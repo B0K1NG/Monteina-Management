@@ -72,6 +72,7 @@ Monteina Management System is a comprehensive platform for managing services, bo
 
     - Production:
       - Everything stays the same as in local development only `NODE_ENV` changes and addition of `VITE_BACKEND_URL` is needed:
+      
         ```
         NODE_ENV=production
         VITE_BACKEND_URL=your_backend_url
