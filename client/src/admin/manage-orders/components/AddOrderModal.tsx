@@ -65,6 +65,12 @@ export default function AddOrderModal({
     }
   }, [tireSize]);
 
+  useEffect(() => {
+    if (makes.length > 0) {
+      fetchModels(makes[0]);
+    }
+  }, [makes]);
+
   const handleSave = () => {
     if (!userId || !serviceId || !status ) {
       toast.info('Prašome užpildyti visus laukus!');
