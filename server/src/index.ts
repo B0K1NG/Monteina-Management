@@ -168,8 +168,8 @@ app.get('/api/carquery', async (req: Request, res: Response): Promise<void> => {
     }
 
     const baseUrl = process.env.CARQUERY_API_URL;
-    const url = `${baseUrl}?callback=?&cmd=${cmd}${make ? `&make=${make}` : ''}`;
-    console.log(`Fetching data from CarQuery API: ${url}`);
+    const url = `${baseUrl}?cmd=${cmd}${make ? `&make=${make}` : ''}&sold_in_us=1`;
+  
     try {
         const response = await axios.get(url);
         res.set('Access-Control-Allow-Origin', '*');
