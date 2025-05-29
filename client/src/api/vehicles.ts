@@ -12,15 +12,15 @@ export const getAllMakes = async () => {
 };
 
 export const getModelsForMake = async (make: string) => {
-    const response = await axios.get(`${BASE_URL}?callback=?&cmd=getModels&make=${make}`);
-    const jsonpData = (response.data as string).trim();
-
-    if (!jsonpData.startsWith('?(') || !jsonpData.endsWith(');')) {
-        throw new Error('Invalid JSONP response format');
+    const response = await axios.get(`${BASE_URL}?callback=?&cmd=getModels&make=${make}&sold_in_us=1`);
+    const data = response.data as { Models?: any[] };
+    if (
+        !data ||
+        typeof data !== 'object' ||
+        !Array.isArray(data.Models)
+    ) {
+        throw new Error('Invalid response format: "Models" is not an array');
     }
-
-    const jsonString = jsonpData.slice(2, -2);
-    const data = JSON.parse(jsonString);
 
     return data.Models.map((model: any) => ({
         model_name: model.model_name,
