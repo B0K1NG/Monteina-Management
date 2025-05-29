@@ -155,7 +155,7 @@ app.post('/auth/resend-confirmation', async (req: Request, res: Response): Promi
 });
 
 app.get('/api/carquery', async (req: Request, res: Response): Promise<void> => {
-    const { cmd, make } = req.query;
+    const { cmd, make, year } = req.query;
 
     if (!cmd) {
         res.status(400).json({ error: 'Missing cmd parameter.' });
@@ -168,11 +168,12 @@ app.get('/api/carquery', async (req: Request, res: Response): Promise<void> => {
     }
 
     const baseUrl = process.env.CARQUERY_API_URL;
-    const url = `${baseUrl}?callback=?&cmd=${cmd}${make ? `&make=${make}` : ''}`;
+    const url = `${baseUrl}?cmd=${cmd}${make ? `&make=${make}` : ''}&sold_in_us=1`;
+    console.log(`Fetching data from CarQuery API: ${url}`);
     try {
         const response = await axios.get(url);
         res.set('Access-Control-Allow-Origin', '*');
-        res.send(response.data);
+        res.json(response.data);
     } catch (error) {
         console.error('Error fetching data from CarQuery API:', error);
         res.status(500).send('Error fetching data from CarQuery API');
