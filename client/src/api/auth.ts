@@ -2,7 +2,6 @@ import axios from './axios';
 
 export const fetchUserInfo = async () => {
   const response = await axios.get('/profile');
-  console.log('API Response:', response.data);
   const data = response.data as { user: any };
   return data.user;
 };
