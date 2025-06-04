@@ -29,9 +29,9 @@ export default function SummaryBoxes({
 
       <div className="box">
         <h2>Pajamos</h2>
-        <h3>{totalAmount} €</h3>
+        <h3>{Number(totalAmount)} €</h3>
 
-        <p><img src={incomeIcon} alt="Artimiausios rezervacijos ikona" />Vidutinė paslaugos kaina: {averagePrice} €</p>
+        <p><img src={incomeIcon} alt="Artimiausios rezervacijos ikona" />Vidutinė paslaugos kaina: {Number(averagePrice)} €</p>
       </div>
 
       <div className="box">
