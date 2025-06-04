@@ -32,6 +32,27 @@ router.get('/user-info', authenticateToken, async (req, res) => {
   }
 });
 
+router.patch('/update-phone', authenticateToken, async (req: Request, res: Response, next: NextFunction): Promise<void> => { 
+  const { phoneNumber } = req.body;
+
+  if (!phoneNumber || !/^\+?[0-9]{7,15}$/.test(phoneNumber)) {
+        res.status(400).json({ error: 'Invalid phone number format.' });
+        return;
+  }
+
+  try {
+    const user = await prisma.user.update({
+      where: { id: req.user.id },
+      data: { phoneNumber },
+    });
+
+    res.json({ message: 'Phone number updated successfully.', user });
+  } catch (error) {
+    console.error('Error updating phone number:', error);
+    res.status(500).json({ error: 'Failed to update phone number.' });
+  }
+})
+
 router.patch(
   '/change-password',
   authenticateToken,

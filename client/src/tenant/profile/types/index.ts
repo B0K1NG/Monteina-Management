@@ -20,5 +20,6 @@ export interface UserInfo {
   
   export type ModalType = 
     | { type: 'password' }
+    | { type: 'phone' }
     | { type: 'cancel'; bookingId: number }
     | { type: 'invoice'; invoice: Visit };

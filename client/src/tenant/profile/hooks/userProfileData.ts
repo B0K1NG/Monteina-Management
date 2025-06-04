@@ -6,6 +6,7 @@ import {
 } from '../../../api/booking';
 import { UserInfo, Visit, Booking } from '../types';
 import { useLoading } from '../../../contexts/LoadingContext';
+import axios from '../../../api/axios';
 
 export function useProfileData() {
   const [userInfo, setUserInfo] = useState<UserInfo | null>(null);
@@ -13,6 +14,17 @@ export function useProfileData() {
   const [activeBookings, setActiveBookings] = useState<Booking[]>([]);
   const [error, setError] = useState<Error | null>(null);
   const { setLoading } = useLoading();
+
+  const updatePhoneNumber = async (newPhone: string) => {
+    try {
+      await axios.patch('/api/profile/update-phone', { phoneNumber: newPhone });
+      setUserInfo(prev => prev ? { ...prev, phoneNumber: newPhone } : null);
+      return true;
+    } catch (error) {
+      setError(error as Error);
+      return false;
+    }
+  };
 
   useEffect(() => {
     const fetchData = async () => {
@@ -37,5 +49,5 @@ export function useProfileData() {
     fetchData();
   }, [setLoading]);
 
-  return { userInfo, previousVisits, activeBookings, setActiveBookings, error };
+  return { userInfo, previousVisits, activeBookings, setActiveBookings, updatePhoneNumber, error };
 }
