@@ -64,6 +64,7 @@ const ServiceOptionsForm: React.FC<Props> = ({
           />
         </div>
       )}
+      {selectedService !== 'Padangos remontas' && (
       <div className="service-valves-optional">
         <label>
           Ventilių keitimas
@@ -74,6 +75,7 @@ const ServiceOptionsForm: React.FC<Props> = ({
           />
         </label>
       </div>
+      )}
     </div>
   </div>
 );
